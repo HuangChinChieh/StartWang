@@ -1,0 +1,23 @@
+{
+  "選擇錢包": "Mangyaring pumili ng wallet",
+  "錯誤": "Mensahe ng System",
+  "成功": "Mensahe ng System",
+  "請輸入要求提款金額": "Mangyaring ipasok ang halaga ng cash-out",
+  "要求取款金額超過錢包餘額": "Ang halaga ng cash-out ay hindi maaaring lumampas sa halaga ng iyong balanse",
+  "確認要求提款": "Kahilingan ng Cash-out",
+  "將會預先從您的錢包保管額度並通知您的代理處理提款要求": "Ang halaga ay itinago. Hiniling namin sa iyong upline na iproseso ang kahilingan",
+  "已保存您的額度並通知代理要求取款": "Ang halaga ay itinago. Hiniling namin sa iyong upline na iproseso ang kahilingan",
+  "要求取款失敗:": "Nabigong humiling ng cash-out",
+  "網路異常, 請重新操作": "Pagbubukod sa network, pakisubukang muli",
+  "備註": "Puna",
+  "申請出款": "Aplikasyon ng Cash-Out",
+  "出款金額": "Halaga",
+  "確定": "okay",
+  "返回": "bumalik",
+  "單位": "yunit",
+  "取消": "Kanselahin",
+  "是否確定進行?": "Gusto mo bang magpatuloy?",
+  "額度不正確": "Mali ang halaga, pakisuri",
+  "現金錢包": "Cash Wallet",
+  "信用錢包": "Credit Wallet"
+}

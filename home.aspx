@@ -55,7 +55,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>
 <!-- Swiper JS -->
@@ -394,6 +394,10 @@
         elementdiv.classList.toggle("dropdownDiv-down")
         elementbtn.classList.toggle("dropdownDiv-btn-press")
     }
+
+    function OpenBonusDepositShow() {
+        window.top.API_LoadPage("Activity/OpenBonusDeposit_03312022/index.html");
+    }
 </script>
 <script>
     var c = new common();
@@ -445,19 +449,7 @@
                 <div class="swiper-slide">
                     <div class="swiper-tit"></div>
                     <div class="swiper-zoom-container">
-                        <img src="images/banner/sliderBanner-01.png" alt="">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-tit"></div>
-                    <div class="swiper-zoom-container">
-                        <img src="images/banner/sliderBanner-01.png" alt="">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-tit"></div>
-                    <div class="swiper-zoom-container">
-                        <img src="images/banner/sliderBanner-01.png" alt="">
+                        <img onclick="OpenBonusDepositShow()" src="images/banner/OpenBonusDeposit-20220331.jpg" />
                     </div>
                 </div>
             </div>

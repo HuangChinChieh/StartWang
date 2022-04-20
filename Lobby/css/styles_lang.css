@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*    英文版    */
+
+.enStyleA{ /* 桌台控制換行效果   */
+	margin-top: 20px;
+	line-height: 20px;
+}
+
+.enStyleBtnGap > .comdPupUp_btn_next{
+	right: 140px;
+}
+
+
+/*    韓文版    */
+.korStyleA{ /* 莊閒問路按鈕文字縮小   */
+	font-size: 0.8em;
+	-webkit-transform:scale(0.8); 
+	transform:scale(0.8);
+	white-space:nowrap;
+
+}
+
+.historyCon .betsizeAdj{/*       投注歷史紀錄莊閒和換行問題           */
+	display:inline-table;
+}

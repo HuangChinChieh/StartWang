@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" %>
+
 <%
     string Token;
     int RValue;
@@ -143,11 +144,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
     <style>
-      iframe {
-        width: 1px;
-        min-width: 100%;
-      }
-</style></head>
+        iframe {
+            width: 1px;
+            min-width: 100%;
+        }
+    </style>
+</head>
 <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
 <script type="text/javascript" src="/Scripts/Common.js"></script>
 <script type="text/javascript" src="/Scripts/UIControl.js"></script>
@@ -182,15 +184,6 @@
             ]
         });
     });
-</script>
-<!-- Dropdown NAV MENU-->
-<script type="text/javascript">
-    function dropdownFunction() {
-        var elementdiv = document.getElementById("dropdownDiv");
-        var elementbtn = document.getElementById("dropdownDiv-btn");
-        elementdiv.classList.toggle("dropdownDiv-down");
-        elementbtn.classList.toggle("dropdownDiv-btn-press");
-    }
 </script>
 <script>
     var c = new common();
@@ -534,7 +527,7 @@
         return pi;
     }
 
-    function API_GetSelCurrencyType() {       
+    function API_GetSelCurrencyType() {
         return API_GetCurrencyType(document.getElementById("idCurrencyType").innerText);
     }
 
@@ -558,18 +551,18 @@
     }
 
     function API_LoadPage(url) {
-        var idDivContent = document.getElementById("idDivContent");
+        var IFramePage = document.getElementById("IFramePage");
         var iFrame = document.createElement("IFRAME");
 
-        iFrame.scrolling="auto";
+        iFrame.scrolling = "auto";
         iFrame.border = "0";
         iFrame.frameBorder = "0";
         iFrame.marginWidth = "0";
         iFrame.marginHeight = "0";
         iFrame.src = url;
 
-        c.clearChildren(idDivContent);
-        idDivContent.appendChild(iFrame);
+        c.clearChildren(IFramePage);
+        IFramePage.appendChild(iFrame);
 
         //mobile remove
         document.getElementById("dropdownDiv").classList.remove("dropdownDiv-down");
@@ -587,15 +580,15 @@
             //    return "test";
             //};
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("餘額不足進行遊戲，請至充值提款進行充值。"), null);
-        }        
+            API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("餘額不足進行遊戲，請至充值提款進行充值。"), null);
+        }
     }
 
     function API_OpenPayment(Url) {
         var paymentWindow = window.open("OpenPayment.aspx?Url=" + encodeURIComponent(Url));
     }
 
-    function API_LogoutGame(GameCode, CurrencyType) {       
+    function API_LogoutGame(GameCode, CurrencyType) {
         var common = window.top.c;
         var postData = {
             GameCode: GameCode,
@@ -608,48 +601,54 @@
                 var obj = c.getJSON(text);
 
                 if (obj.ResultCode == 0) {
-                   
+
                 }
-            } 
+            }
         });
 
     }
 
-    //回收所有在遊戲方的點數
-    function API_ReceiveAllPoint() {
-        window.top.API_ShowMessageOK(mlp.getLanguageKey("刷新"), mlp.getLanguageKey("是否要刷新點數"), function () {
-            var common = window.top.c;
-            var postData = {
-                Token: GWebInfo.Token,
-                SID: GWebInfo.SID
-            };
-            common.callService("<%=Web.GPlatformURL %>/LoginBySID.aspx/ReceiveAllPointBySID", postData, function (success, text) {
-                if (success == true) {
-                    var obj = c.getJSON(text);
-                    if (obj.ResultCode == 0) {
-                        API_ShowMessageOK(mlp.getLanguageKey("訊息"), mlp.getLanguageKey("點數已成功刷新"), function () {
-                        });
-                    } else {
-                        API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常，點數稍後刷新"));
-                    }
-                } else {
-                    API_ShowMessageOK(mlp.getLanguageKey("錯誤"), text);
-                }
-            });
-        });
-    }
+    //function notifyWindowEvent(eventName, o) {
+    //    var iFrameList = document.getElementsByTagName("IFRAME");
+
+    //    for (i = 0; i < iFrameList.length; i++) {
+    //        var divInnerFrame = iFrameList[i];
+
+    //        if (divInnerFrame) {
+    //            if (divInnerFrame.contentWindow) {
+    //                if (divInnerFrame.contentWindow.GWebEventNotify) {
+    //                    try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
+    //                    catch (ex) { }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     function notifyWindowEvent(eventName, o) {
-        var iFrameList = document.getElementsByTagName("IFRAME");
+        var IFramePage = document.getElementById("IFramePage");
 
-        for (i = 0; i < iFrameList.length; i++) {
-            var divInnerFrame = iFrameList[i];
+        if (IFramePage != null) {
+            if (IFramePage.children.length > 0) {
+                for (var _i = 0; _i < IFramePage.children.length; _i++) {
+                    var el = IFramePage.children[_i];
 
-            if (divInnerFrame) {
-                if (divInnerFrame.contentWindow) {
-                    if (divInnerFrame.contentWindow.GWebEventNotify) {
-                        try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
-                        catch (ex) { }
+                    if (el != null) {
+                        if (el.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+                            if (el.contentWindow) {
+                                if (el.contentWindow.EWinEventNotify) {
+                                    var isDisplay = false;
+
+                                    if ((el.style.display.toUpperCase() == "block".toUpperCase()) ||
+                                        (el.style.display.toUpperCase() == "inline".toUpperCase()) ||
+                                        (el.style.display.toUpperCase() == "inline-block".toUpperCase()))
+                                        isDisplay = true;
+
+                                    try { el.contentWindow.EWinEventNotify(eventName, isDisplay, o); }
+                                    catch (ex) { }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -734,7 +733,7 @@
     function showMessage(title, msg, cbOK, cbCancel) {
         var idMessageBox = document.getElementById("idMessageBox");
         var idMessageTitle = document.getElementById("idMessageTitle");
-        var idMessageText = document.getElementById("idMessageText");      
+        var idMessageText = document.getElementById("idMessageText");
         var idMessageWrapper = document.getElementById("idMessageWrapper");
 
         var tempBtns = idMessageBox.getElementsByClassName("tempMessageBtn")
@@ -1087,14 +1086,14 @@
     }
 
     function resize() {
-        var idDivContent = document.getElementById("idDivContent");
+        var IFramePage = document.getElementById("IFramePage");
         var idFrameContent = null;
 
         // resize iframe
-        if (idDivContent != null) {
-            if (idDivContent.children.length > 0) {
-                for (var i = 0; i < idDivContent.children.length; i++) {
-                    var el = idDivContent.children[i];
+        if (IFramePage != null) {
+            if (IFramePage.children.length > 0) {
+                for (var i = 0; i < IFramePage.children.length; i++) {
+                    var el = IFramePage.children[i];
 
                     if (el.tagName.toUpperCase() == "IFRAME") {
                         idFrameContent = el;
@@ -1124,9 +1123,8 @@
         }
     }
 
-
-    function openSelLanguage(){
-        document.getElementById("idSelLang").style.display = "block";              
+    function openSelLanguage() {
+        document.getElementById("idSelLang").style.display = "block";
     }
 
     function closeSelLanguage() {
@@ -1138,7 +1136,7 @@
         var selLang;
         for (var i = 0; i < opts.length; i++) {
             var opt = opts[i];
-            
+
             if (opt.checked) {
                 selLang = opt.dataset.lang;
                 break;
@@ -1182,7 +1180,7 @@
                     switchLang.classList.add("ico-before-flag-in");
                     break;
             }
-        }        
+        }
     }
 
     function selectLanguage(selLang) {
@@ -1194,15 +1192,13 @@
         });
     }
 
-    //function MessageListener(e) {
-    //    if (e.origin == location.origin) {
-    //        if (e.data.Message.toUpperCase() == "LogoutGame".toLocaleUpperCase()) {
-    //            API_LogoutGame(e.data.GameCode, e.data.CurrencyType);
-    //        }
-    //    }
-    //};
+    function dropdownFunction() {
+        var elementdiv = document.getElementById("dropdownDiv");
+        var elementbtn = document.getElementById("dropdownDiv-btn");
+        elementdiv.classList.toggle("dropdownDiv-down");
+        elementbtn.classList.toggle("dropdownDiv-btn-press");
+    }
 
-    //window.addEventListener("message", MessageListener, false);
     window.onload = init;
 </script>
 <script>
@@ -1340,8 +1336,8 @@
                     if (o.ResultCode == 0) {
                         var expires = new Date('31 Dec 2038 00:00:00 PDT').toUTCString();
 
-                        document.cookie =   "DeviceGUID=" + o.DeviceGUID + ";" + expires + ";path=/";
-                        document.cookie =   "RecoverToken=" + o.RecoverToken + ";" + expires + ";path=/";
+                        document.cookie = "DeviceGUID=" + o.DeviceGUID + ";" + expires + ";path=/";
+                        document.cookie = "RecoverToken=" + o.RecoverToken + ";" + expires + ";path=/";
 
                         window.localStorage.setItem("SID", o.SID);
                         window.location.reload();
@@ -1363,6 +1359,88 @@
         }
     }
 
+    function openServiceChat() {
+        var idChatDivE = document.getElementById("idChatDiv");
+        var idChatFrameParent = document.getElementById("idChatFrameParent");
+        var idChatFrame = document.createElement("IFRAME");
+
+        if (idChatDivE.classList.contains("show")) {
+            idChatDivE.classList.remove("show");
+            idChatFrameParent.style.display = "none";
+        }
+        else {
+            //<iframe id="idChatFrame" name="idChatFrame" class="ChatFrame" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="no" scrolling="no"></iframe>
+            if (idChatDivE.getAttribute("isLoad") != "1") {
+                idChatDivE.setAttribute("isLoad", "1");
+                idChatFrame.id = "idChatFrame";
+                idChatFrame.name = "idChatFrame";
+                idChatFrame.className = "ChatFrame";
+                idChatFrame.border = "0";
+                idChatFrame.frameBorder = "0";
+                idChatFrame.marginWidth = "0";
+                idChatFrame.marginHeight = "0";
+                idChatFrame.allowTransparency = "no";
+                idChatFrame.scrolling = "no";
+
+                idChatFrameParent.appendChild(idChatFrame);
+
+                //idChatFrame.src = EWinWebInfo.EWinUrl + "/Game/ChatMain.aspx?SID=" + EWinWebInfo.SID + "&Acc=" + EWinWebInfo.UserInfo.LoginAccount;
+                //alert(EWinWebInfo.LoginURL);
+                idChatFrame.src = EWinWebInfo.LoginURL + "?CT=" + encodeURIComponent(EWinWebInfo.CT) + "&Lang=" + EWinWebInfo.Lang + "&Action=Chat";
+
+            }
+
+            idChatFrameParent.style.display = "";
+            c.addClassName(idChatDivE, "show");
+
+        }
+
+    }
+
+    // 存款
+    function openPaymentDeposit(dt) {
+        var retPage = "";
+        //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
+        switch (dt) {
+            case 0:
+                window.open(EWinWebInfo.EWinUrl + "/Payment/VPay/VPayDeposit.aspx?SID=" + EWinWebInfo.SID, "_blank");
+                break;
+            case 1:
+                //openBitCoinAddress();
+                break;
+            case 2:
+                retPage = "iType=BackCardIN&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+                API_LoadPage("/Payment/BankCard/BankCard_In.aspx?" + retPage);
+                break;
+                case 4:
+                 window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency , "_blank");
+                break;
+
+        }
+    }
+
+    // 提款
+    function openPaymentWithdrawal(wt) {
+        //wt = 0: 四方/1=區塊鏈
+        switch (wt) {
+            case 0:
+                window.open(EWinWebInfo.EWinUrl + "/Payment/GPay/GPayWithdraw.aspx?SID=" + EWinWebInfo.SID);
+                break;
+            case 1:
+                //openBitCoinAddress();
+                break;
+            case 2:
+                retPage = "iType=BackCardOut&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+          
+                API_LoadPage("/Payment/BankCard/BankCard_Out.aspx?" + retPage);
+                break;
+            case 3:
+                openParentOut();
+                break;
+
+
+        }
+    }
 </script>
 <body>
     <!-- HTML START -->
@@ -1370,7 +1448,7 @@
         <!-- wrapper -->
         <div class="header-con" id="header-con">
             <div class="header">
-                <!--  未登入版頭 -->                
+                <!--  未登入版頭 -->
                 <div id="idUserNotLogin" class="header-tit_none">
                     <div class="header-tit-con">
                         <div class="box btnTypeA loginBrn_div">
@@ -1385,9 +1463,9 @@
                                 6.越南文：ico-before-flag-vn
                                 7.印度文：ico-before-flag-in
                          -->
-                         <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button> 
+                            <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
                             <%--<button type="button" class="btn btn-customerservice btn-icon-round icon-service" id="" role="button" data-toggle="modal" data-target="" onclick="">客服</button>--%>
-                            <button type="button" class="box btn btn-gradient-golden" id="tryitBtn" role="button" data-toggle="modal" data-target="" onclick="onBtnTryIt();" ><i class="icon icon12one-ico-poker icon-large" aria-hidden="true"></i><span class="language_replace">搶先試玩</span></button>
+                            <button type="button" class="box btn btn-gradient-golden" id="tryitBtn" role="button" data-toggle="modal" data-target="" onclick="onBtnTryIt();"><i class="icon icon12one-ico-poker icon-large" aria-hidden="true"></i><span class="language_replace">搶先試玩</span></button>
                             <button type="button" class="box btn btn-default" id="loginBtn" role="button" data-toggle="modal" data-target="#idLoginImage" onclick="onBtnLoginShow();"><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i><span class="language_replace">登入</span></button>
                             <button type="button" class="btn btn-info" id="signinBtn" role="button" data-toggle="modal" data-target="#myModal" onclick="onBtnUserRegisterShow();"><i class="fa fa-address-card fa-1x" aria-hidden="true"></i><span class="language_replace">註冊</span></button>
                         </div>
@@ -1406,11 +1484,7 @@
                                 <div id="idBalance" class="box user-pointV">[Balance]</div>
                                 <div onclick="API_ShowCurrencyWindow('可選幣別');" class="box user-pointTypeSwitch"><a class="language_replace">切換</a></div>
                             </div>
-                            <button onclick="API_ReceiveAllPoint()" class="btn-pointRefresh btn btn-icon-round icon12one-ico-cycle"><span class="language_replace tooltip">刷新錢包點數</span></button>
-
                         </div>
-                       
-                       
                     </div>
 
                     <!-- Header 右上角 -->
@@ -1427,51 +1501,63 @@
                                 6.越南文：ico-before-flag-vn
                                 7.印度文：ico-before-flag-in
                          -->
-                        <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang"  role="button" data-toggle="modal" data-target="">語系</button>
-                         <button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button> 
+                        <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
+                        <button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>
 
 
-                        <div onclick="btnConfirmLogout();" class="box btn-logout btnTypeA">                       
-                            <button class="btn-default"><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i><span class="language_replace">登出</span></button></div>
-                        <!--<div class="box user-email"><a><span class="fa fa-envelope" aria-hidden="true"></span> 信箱<i>10</i></a></div>-->                        
+                        <div onclick="btnConfirmLogout();" class="box btn-logout btnTypeA">
+                            <button class="btn-default"><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i><span class="language_replace">登出</span></button>
+                        </div>
+                        <!--<div class="box user-email"><a><span class="fa fa-envelope" aria-hidden="true"></span> 信箱<i>10</i></a></div>-->
                     </div>
-                  
+
                 </div>
                 <div class="header-nav clearfix">
                     <div class="box header-nav-logo">
-                        <img src="images/logo.png" alt="99play_logo"></div>
+                        <img src="images/logo.png" alt="99play_logo">
+                    </div>
                     <div class="box header-nav-menu" id="dropdownDiv">
                         <div onclick="dropdownFunction()" id="dropdownDiv-btn" class="dropdown-btn"><a class="fa fa-bars" aria-hidden="true"></a></div>
                         <ol>
                             <li><a onclick="API_LoadPage('home.aspx')"><span class="fa fa-home" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">回首頁</div></a></li>
+                                <div class="language_replace">回首頁</div>
+                            </a></li>
                             <li><a onclick="API_LoadPage('gameLobby.aspx')"><span class="icon icon-icon-poker" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">遊戲大廳</div></a></li>
-                            <li><a onclick="onBtnPaymentDeposit();"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                                <div class="language_replace">遊戲大廳</div>
+                            </a></li>
+                            <li><a onclick="openPaymentDeposit(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">充值取款</div></a></li>
+                                <div class="language_replace">充值</div>
+                            </a></li>
+                            <li><a onclick="openPaymentWithdrawal(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                                <br>
+                                <div class="language_replace">取款</div>
+                            </a></li>
                             <li><a onclick="onBtnHistory();"><span class="icon icon-icon-map" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">紀錄查詢</div></a></li>
-                            <li><a><span class="icon icon-icon-priceoff" aria-hidden="true"></span>
+                                <div class="language_replace">紀錄查詢</div>
+                            </a></li>
+                            <%--<li><a><span class="icon icon-icon-priceoff" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">最新優惠</div></a></li>
-<%--                            <li><a><span class="icon icon-icon-map" aria-hidden="true"></span>
+                                <div class="language_replace">最新優惠</div>
+                            </a></li>
+                            <li><a><span class="icon icon-icon-map" aria-hidden="true"></span>
                                 <br>
                                 新手教學</a></li>--%>
                             <li><a onclick="onBtnMemberCenter();"><span class="icon icon-icon-logo" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">會員中心</div></a></li>
+                                <div class="language_replace">會員中心</div>
+                            </a></li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Content -->
-        <div id="idDivContent" class="DivContent">
-            <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginWidth="0" marginHeight="0"></iframe>
+        <div id="IFramePage" class="DivContent">
+            <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>
         <!-- 頁尾 -->
         <div class="main-footer">.</div>
@@ -1582,7 +1668,7 @@
                 <div id="templateDropdownItem">
                     <div class="radioBoxDiv">
                         <label>
-                            <input class="inputRadio" type="radio" name="select" data-value="#" checked/>
+                            <input class="inputRadio" type="radio" name="select" data-value="#" checked />
                             <!--div class="radioBoxBtn">
                                 <div class="radioBoxicon title">[Title]</div>
                                 <div class="radioBoxText desc">[Desc]</div>
@@ -1623,73 +1709,73 @@
             </div>
         </div>
     </div>
-     <!-- 跳出語言視窗 -->
-     <div id="idSelLang" class="popup" style="display: none;">
+    <!-- 跳出語言視窗 -->
+    <div id="idSelLang" class="popup" style="display: none;">
         <div class="popupWrapper">
             <div class="popupHeader">
                 <div class="popuptit"><span class="language_replace">選擇語系</span></div>
                 <div onclick="closeSelLanguage()" class="popupBtn_close"><span class="fa fa-close fa-1x"></span></div>
             </div>
             <!--  -->
-            <div class="popupText">                
+            <div class="popupText">
                 <div class="form-group popup-lang">
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="CHS" name="button-langExchange" class="custom-control-input-hidden">
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">简体中文</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="CHS" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">简体中文</span></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="CHT" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">繁體中文</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="CHT" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">繁體中文</span></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="EN" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">English</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="EN" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">English</span></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="JPN" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">にほんご</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="JPN" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">にほんご</span></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="KOR" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">한국어</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="KOR" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">한국어</span></span>
+                            </div>
+                        </label>
                     </div>
-                    <div class="custom-control custom-radioValue-button custom-control-inline"> 
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
                         <label class="custom-label">
-                          <input type="radio" data-lang="VN" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">Việt Ngữ</span></span>
-                          </div>
-                         </label>                        
-                    </div>     
-                     <div class="custom-control custom-radioValue-button custom-control-inline"> 
-                        <label class="custom-label">
-                          <input type="radio" data-lang="IND" name="button-langExchange" class="custom-control-input-hidden" >
-                          <div class="custom-input radio-button">
-                            <span class="iconCheck"><span class="language_replace">भारतीय</span></span>
-                          </div>
-                         </label>                        
+                            <input type="radio" data-lang="VN" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">Việt Ngữ</span></span>
+                            </div>
+                        </label>
                     </div>
-                  </div>
+                    <div class="custom-control custom-radioValue-button custom-control-inline">
+                        <label class="custom-label">
+                            <input type="radio" data-lang="IND" name="button-langExchange" class="custom-control-input-hidden">
+                            <div class="custom-input radio-button">
+                                <span class="iconCheck"><span class="language_replace">भारतीय</span></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
                 <div onclick="confirmSelLanguage()" class="popupBtn_red"><span>OK</span></div>
             </div>
