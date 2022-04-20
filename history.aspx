@@ -44,324 +44,66 @@
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script>
     var c = new common();
-    var GWebInfo;
-    var p;
+    var ui = new uiControl();
+    var apiURL = "/history.aspx";
     var mlp;
-    var lang;
-    var nowTag;
-
-
-    function switchTagBtn(tag) {
-        var target = event.currentTarget;
-        var targets = document.getElementsByClassName("switchTagBtn");
-        for (var i = 0; i < targets.length; i++) {
-            if (target == targets[i]) {
-                targets[i].classList.add("active");
-            } else {
-                targets[i].classList.remove("active");
-            }
-        }
-
-        showHistory(tag);
-    }
-
-    function showHistory(tag) {
-        nowTag = tag;
-        var pageMainCons = document.getElementsByClassName("pageMainCon");
-
-        for (var i = 0; i < pageMainCons.length; i++) {
-            pageMainCons[i].style.display = "none";
-        }
-        
-        if (tag == 'Deposit') {
-            document.getElementById("MainDeposit").style.display = "block";            
-            getPaymentDeposit();
-        } else if (tag == 'Withdraw') {
-            document.getElementById("MainWithdraw").style.display = "block";
-            getPaymentWithdraw();
-        } else if (tag == 'GameOrder') {
-            document.getElementById("MainGameOrder").style.display = "block";
-            getGameOrderSummary();
-        }
-    }
-
-    function getPaymentDeposit() {
-        p.GetPaymentHistory(
-            GWebInfo.SID,
-            Math.uuid(),
-            document.getElementById("searchStartDate").value,
-            document.getElementById("searchEndDate").value,
-            function (success, o) {
-                if (success) {
-                    if (o != null) {
-                        var ParentMain = document.getElementById("MainDeposit").getElementsByClassName("rowOne")[0];
-                        ParentMain.innerHTML = "";
-
-                        if (o.PaymentDetailList && o.PaymentDetailList.length > 0) {
-                            var datas = o.PaymentDetailList.filter(function (item, index, array) {
-                                return item.PaymentType == 0 && item.PaymentFlowType != -1;
-                            }).sort(function (x, y) {
-                                var Date1 = new Date(x.CreateDate + " " + x.CreateTime);
-                                var Date2 = new Date(x.CreateDate + " " + x.CreateTime);
-
-                                return Date1.getTime() < Date2.getTime()
-                            });
-                           
-                            var QueryDate;
-                            
-                            for (var i = 0; i < datas.length; i++) {
-                                var paymentDetail = datas[i];
-                                var createDate = new Date(paymentDetail.CreateDate)
-
-                                if (QueryDate == null || QueryDate != createDate) {
-                                    QueryDate = createDate;
-                                    var DateDom = c.getTemplate("templateRowTitle");
-                                    c.setClassText(DateDom, "rowDate", null, QueryDate.toISOString().substring(0, 10));
-                                    ParentMain.appendChild(DateDom);
-                                }
-
-                                var paymentDetailDom = c.getTemplate("templateDepositRow");
-                                var statusDom = paymentDetailDom.getElementsByClassName("Status")[0];
-
-                                c.setClassText(paymentDetailDom, "CreateTime", null, paymentDetail.CreateTime);
-                                c.setClassText(paymentDetailDom, "ChannelCode", null, paymentDetail.ChannelCode);
-                                c.setClassText(paymentDetailDom, "CurrencyType", null, paymentDetail.CurrencyType);
-                                c.setClassText(paymentDetailDom, "Amount", null, paymentDetail.Amount);
-                                c.setClassText(paymentDetailDom, "PaymentSerial", null, paymentDetail.PaymentSerial);
-                                c.setClassText(paymentDetailDom, "BankName", null, paymentDetail.BankName);
-                                c.setClassText(paymentDetailDom, "AccountName", null, paymentDetail.AccountName);
-
-
-
-                                switch (paymentDetail.PaymentFlowType) {
-                                    case -1:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null,mlp.getLanguageKey("尚未建立完成"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 0:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("訂單完成(尚未審核)"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 1:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易開始"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 2:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易完成"));
-                                        statusDom.classList.add("rowStatusSucc");
-                                        break;
-                                    case 3:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null,mlp.getLanguageKey("結算完成"));
-                                        statusDom.classList.add("rowStatusSucc");
-                                        break;
-                                    case 98:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易完成，扣捕點失敗"));
-                                        statusDom.classList.add("rowStatusGray");
-                                        break;
-                                    case 99:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易失敗"));
-                                        statusDom.classList.add("rowStatusGray");
-                                        break;
-                                }
-
-                                ParentMain.appendChild(paymentDetailDom);
-                            }
-                        }
-                    }
-                }
-            });
-    }
-
-    function getPaymentWithdraw() {
-        p.GetPaymentHistory(
-            GWebInfo.SID,
-            Math.uuid(),
-            document.getElementById("searchStartDate").value,
-            document.getElementById("searchEndDate").value,
-            function (success, o) {
-                if (success) {
-                    if (o != null) {
-                        var ParentMain = document.getElementById("MainWithdraw").getElementsByClassName("rowOne")[0];
-                        ParentMain.innerHTML = "";
-
-                        if (o.PaymentDetailList && o.PaymentDetailList.length > 0) {
-                            var datas = o.PaymentDetailList.filter(function (item, index, array) {
-                                return item.PaymentType == 1 && item.PaymentFlowType != -1;
-                            }).sort(function (x, y) {
-                                var Date1 = new Date(x.CreateDate + " " + x.CreateTime);
-                                var Date2 = new Date(x.CreateDate + " " + x.CreateTime);
-
-                                return Date1.getTime() < Date2.getTime()
-                            });
-                            
-                            var QueryDate;
-
-                            for (var i = 0; i < datas.length; i++) {
-                                var paymentDetail = datas[i];
-                                var createDate = new Date(paymentDetail.CreateDate)
-
-                                if (QueryDate == null || QueryDate != createDate) {
-                                    QueryDate = createDate;
-                                    var DateDom = c.getTemplate("templateRowTitle");
-                                    c.setClassText(DateDom, "rowDate", null, QueryDate.toISOString().substring(0, 10));
-                                    ParentMain.appendChild(DateDom);
-                                }
-
-                                var paymentDetailDom = c.getTemplate("templateWithdrawRow");
-                                var statusDom = paymentDetailDom.getElementsByClassName("Status")[0];
-
-                                c.setClassText(paymentDetailDom, "CreateTime", null, paymentDetail.CreateTime);
-                                c.setClassText(paymentDetailDom, "ChannelCode", null, paymentDetail.ChannelCode);
-                                c.setClassText(paymentDetailDom, "CurrencyType", null, paymentDetail.CurrencyType);
-                                c.setClassText(paymentDetailDom, "Amount", null, paymentDetail.Amount);
-                                c.setClassText(paymentDetailDom, "PaymentSerial", null, paymentDetail.PaymentSerial);
-                                c.setClassText(paymentDetailDom, "BankName", null, paymentDetail.BankName);
-                                c.setClassText(paymentDetailDom, "AccountName", null, paymentDetail.AccountName);
-
-
-
-                                switch (paymentDetail.PaymentFlowType) {
-                                    case -1:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("尚未建立完成"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 0:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null,mlp.getLanguageKey("訂單完成(尚未審核)"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 1:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易開始"));
-                                        statusDom.classList.add("rowStatusCheck");
-                                        break;
-                                    case 2:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易完成"));
-                                        statusDom.classList.add("rowStatusSucc");
-                                        break;
-                                    case 3:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null,mlp.getLanguageKey("結算完成"));
-                                        statusDom.classList.add("rowStatusSucc");
-                                        break;
-                                    case 98:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易完成，扣捕點失敗"));
-                                        statusDom.classList.add("rowStatusGray");
-                                        break;
-                                    case 99:
-                                        c.setClassText(paymentDetailDom, "PaymentFlowType", null, mlp.getLanguageKey("交易失敗"));
-                                        statusDom.classList.add("rowStatusGray");
-                                        break;
-                                }
-
-                                ParentMain.appendChild(paymentDetailDom);
-                            }
-                        }
-                    }
-                }
-            });
-    }
-
-    function getGameOrderSummary() {
-        p.GetOrderSummaryByUserAccount(
-                  GWebInfo.SID,
-                  Math.uuid(),
-                  document.getElementById("searchStartDate").value,
-                  document.getElementById("searchEndDate").value,
-                  function (success, o) {
-                      if (success) {
-                          if (o != null) {
-                              var ParentMain = document.getElementById("MainGameOrder").getElementsByClassName("rowOne")[0];
-                              var TotalOrderValue = new BigNumber(0);
-                              var TotalValiBet = new BigNumber(0);
-                              var TotalRewardValue = new BigNumber(0);
-                              ParentMain.innerHTML = "";
-
-                              if (o.SummaryList && o.SummaryList.length > 0) {
-                                  var datas = o.SummaryList;                                  
-                                  var QueryDate;
-
-                                  for (var i = 0; i < datas.length; i++) {
-                                      var orderSummary = datas[i];
-                                      var createDate = new Date(orderSummary.SummaryDate)
-                                      TotalOrderValue = TotalOrderValue.plus(orderSummary.OrderValue);
-                                      TotalValiBet = TotalValiBet.plus(orderSummary.ValidBetValue);
-                                      TotalRewardValue = TotalRewardValue.plus(orderSummary.RewardValue);
-
-
-                                      if (QueryDate == null || QueryDate != createDate) {
-                                          QueryDate = createDate;
-                                          var DateDom = c.getTemplate("templateRowTitle");
-                                          c.setClassText(DateDom, "rowDate", null, QueryDate.toISOString().substring(0, 10));
-                                          ParentMain.appendChild(DateDom);
-                                      }
-
-                                      var orderSummaryDom = c.getTemplate("templateGameOrderRow");
-                                      var statusDom = orderSummaryDom.getElementsByClassName("Status")[0];
-
-                                      c.setClassText(orderSummaryDom, "GameName", null, orderSummary.GameName);
-                                      c.setClassText(orderSummaryDom, "WebTagName", null, orderSummary.WebTagName);
-                                      c.setClassText(orderSummaryDom, "CurrencyType", null, orderSummary.CurrencyType);
-                                      c.setClassText(orderSummaryDom, "RewardValue", null, orderSummary.RewardValue);
-                                      c.setClassText(orderSummaryDom, "OrderValue", null, orderSummary.OrderValue);
-                                      c.setClassText(orderSummaryDom, "ValidBetValue", null, orderSummary.ValidBetValue);
-
-                                      if (orderSummary.RewardValue > 0) {
-                                          statusDom.classList.add("win");
-                                      } else if (orderSummary.RewardValue < 0) {
-                                          statusDom.classList.add("lose");
-                                      }
-
-                                      ParentMain.appendChild(orderSummaryDom);
-                                  }
-                              }
-
-                              document.getElementById("TotalOrderValue").innerText = TotalOrderValue;
-                              document.getElementById("TotalValiBet").innerText = TotalValiBet;
-                              document.getElementById("TotalRewardValue").innerText = TotalRewardValue;
-                          }
-                      }
-                  });
-    }
-
-    function searchHistory(){
-        showHistory(nowTag);
-    }
-
-    function setSearchDate(type) {
-        var BeginDate = new Date();
-        var EndDate = new Date();
-        switch (type) {
-            case 0:
-                //本日
-
-                break;
-            case 1:
-                //前日
-                BeginDate.setDate(BeginDate.getDate() - 1);
-                EndDate.setDate(EndDate.getDate() - 1);                
-                break;
-            case 2:
-                BeginDate.setDate(BeginDate.getDate() - 7);               
-                break;
-            default:
-        }
-
-        document.getElementById("searchStartDate").valueAsDate = new Date(Date.UTC(BeginDate.getFullYear(), BeginDate.getMonth(), BeginDate.getDate()));
-        document.getElementById("searchEndDate").valueAsDate = new Date(Date.UTC(EndDate.getFullYear(), EndDate.getMonth(), EndDate.getDate()));
-        searchHistory();
-    }
+    var p;
+    var EWinWebInfo;
+    var postObj;
 
     function init() {
-        lang = window.top.API_GetLang();
+        EWinWebInfo = window.parent.API_GetWebInfo();
+        p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
-        mlp.loadLanguage(lang, function () {
-            GWebInfo = window.parent.API_GetWebInfo();
-            p = window.parent.API_GetGWebHubAPI();
-            nowTag = 'Deposit';
+        mlp.loadLanguage(EWinWebInfo.Lang, function () {
+            window.parent.checkUserLogin(EWinWebInfo.SID, function () {
+                //updateBaseInfo();
+                var date = new Date();
+                document.getElementById('idPageStartData').value = getDateString(date);
+                document.getElementById('idPageEndData').value = getDateString(date);
 
+            });
+        });
 
-            if (p != null) {
-                setSearchDate(0);
+        document.body.addEventListener('change', function (e) {
+            let target = e.target;
+
+            switch (target.id) {
+                case 'radioToday':
+                    var date = new Date();
+                    document.getElementById('idPageStartData').value = getDateString(date);
+                    document.getElementById('idPageEndData').value = getDateString(date);
+                    break;
+                case 'radioYesterday':
+                    var yesterday = new Date();
+                    yesterday = new Date(yesterday.setDate(yesterday.getDate() - 1));
+                    document.getElementById('idPageStartData').value = getDateString(yesterday);
+                    document.getElementById('idPageEndData').value = getDateString(yesterday);
+                    break;
+                case 'radioWeek':
+                    var startdate = new Date();
+                    var enddate = new Date();
+                    startdate = new Date(startdate.setDate(startdate.getDate() - 7));
+                    document.getElementById('idPageStartData').value = getDateString(startdate);
+                    document.getElementById('idPageEndData').value = getDateString(enddate);
+                    break;
             }
         });
+    }
+
+    function updateBaseInfo() {
+
+    }
+
+    function getDateString(date) {
+
+        var mm = date.getMonth() + 1; // getMonth() is zero-based
+        var dd = date.getDate();
+
+        return [date.getFullYear(),
+        (mm > 9 ? '' : '0') + mm,
+        (dd > 9 ? '' : '0') + dd
+        ].join('-');
     }
 
     function GWebEventNotify(eventName, isDisplay, o) {
@@ -373,6 +115,294 @@
         }
     }
 
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "LoginState":
+                updateBaseInfo();
+
+                break;
+            case "BalanceChange":
+                break;
+            case "SetLanguage":
+                var lang = param;
+
+                mlp.loadLanguage(lang);
+                break;
+        }
+    }
+
+    function changeSwitchTag(eventName) {
+        switch (eventName) {
+            case "PaymentHistory":
+                var element = document.getElementsByClassName("switchTagBtn");
+                for (var i = 0; i < element.length; i++) {
+                    element[i].classList.remove("active");
+                }
+
+                var activeElement = document.getElementById("TagPaymentHistory");
+                activeElement.classList.add("active");
+                document.getElementById("PaymentHistoryPageMainCon").style.display = "block";
+                document.getElementById("gamePageMainCon").style.display = "none";
+                break;
+            case "Game":
+                var element = document.getElementsByClassName("switchTagBtn");
+                for (var i = 0; i < element.length; i++) {
+                    element[i].classList.remove("active");
+                }
+                var activeElement = document.getElementById("TagGameHistory");
+                activeElement.classList.add("active");
+                document.getElementById("PaymentHistoryPageMainCon").style.display = "none";
+                document.getElementById("gamePageMainCon").style.display = "block";
+                break;
+            default:
+                break;
+        }
+    }
+
+    function getHistory() {
+        var tagID = document.getElementsByClassName('switchTagBtn active')[0].id;
+        switch (tagID) {
+            case 'TagGameHistory':
+                var startDate = document.getElementById('idPageStartData').value;
+                var endDate = document.getElementById('idPageEndData').value;
+                var ParentMain = document.getElementById("gamePageMainCon").getElementsByClassName("rowOne")[0];
+
+                ParentMain.innerHTML = "";
+                document.getElementById('gameTotalRewardValue').style.color = "#999"
+
+                postObj = {
+                    SID: EWinWebInfo.SID,
+                    GUID: Math.uuid(),
+                    BeginDate: startDate,
+                    EndDate: endDate
+                }
+
+                p.GetGameOrderDetailHistoryBySummaryDate(postObj, function (success, o) {
+                    if (success) {
+                        if (o.Result == 0) {
+                            if (o.DetailList.length > 0) {
+                                var numGameTotalValidBetValue = new BigNumber(0);
+                                var numGameTotalRewardValue = new BigNumber(0);
+                                var ParentMain = document.getElementById("gamePageMainCon").getElementsByClassName("rowOne")[0];
+
+                                //排序
+                                o.DetailList.sort(function (a, b) {
+                                    var GameDateA = a.GameDate;
+                                    var GameDateB = b.GameDate;
+                                    var GameTimeA = a.GameTime;
+                                    var GameTimeB = b.GameTime;
+
+                                    if (GameDateA > GameDateB) {
+                                        return -1;
+                                    }
+                                    if (GameDateA < GameDateB) {
+                                        return 1;
+                                    }
+
+                                    if (GameTimeA > GameTimeB) {
+                                        return -1;
+                                    }
+                                    if (GameTimeA < GameTimeB) {
+                                        return 1;
+                                    }
+
+                                    return 0;
+                                });
+
+                                for (var i = 0; i < o.DetailList.length; i++) {
+                                    var status = "lose";
+
+                                    numGameTotalValidBetValue = numGameTotalValidBetValue.plus(o.DetailList[i].ValidBetValue);
+                                    numGameTotalRewardValue = numGameTotalRewardValue.plus(o.DetailList[i].RewardValue);
+
+                                    if (o.DetailList[i].RewardValue >= 0) {
+                                        status = "win";
+                                    }
+
+                                    var DateDom = c.getTemplate("templateRowTitle");
+                                    c.setClassText(DateDom, "rowDate", null, o.DetailList[i].GameDate + " " + o.DetailList[i].GameTime);
+                                    ParentMain.appendChild(DateDom);
+
+                                    var gameRowOneDom = c.getTemplate("templateGameOrderRow");
+                                    var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
+                                    var GameName;
+
+                                    switch (o.DetailList[i].GameAccountingCode) {
+                                        case "EWin.BAC.0":
+                                            GameName = "傳統電投";
+                                            break;
+                                        case "EWin.BAC.1":
+                                            GameName = "快速電投";
+                                            break;
+                                        case "EWin.BAC.2":
+                                            GameName = "網投";
+                                            break;
+                                        default:
+                                            GameName = o.DetailList[i].GameAccountingCode;
+                                            break;
+                                    }
+
+                                    c.setClassText(gameRowOneDom, "GameName", null, "<sapn class='language_replace'>" + GameName + "</span>");
+                                    c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);
+                                    c.setClassText(gameRowOneDom, "RewardValue", null, o.DetailList[i].RewardValue);
+
+                                    c.setClassText(gameRowOneDom, "ValidBetValue", null, o.DetailList[i].ValidBetValue);
+
+                                    if (o.DetailList[i].RewardValue >= 0) {
+                                        statusDom.classList.add("win");
+                                    } else if (o.DetailList[i].RewardValue < 0) {
+                                        statusDom.classList.add("lose");
+                                    }
+
+                                    ParentMain.appendChild(gameRowOneDom);
+
+                                }
+
+                                document.getElementById('gameTotalValidBetValue').textContent = numGameTotalValidBetValue;
+                                document.getElementById('gameTotalRewardValue').textContent = numGameTotalRewardValue;
+                                if (numGameTotalRewardValue < 0) {
+                                    document.getElementById('gameTotalRewardValue').style.color = "#FF0000";
+                                }
+                                else {
+                                    document.getElementById('gameTotalRewardValue').style.color = "#999"
+                                }
+
+                                mlp.loadLanguage(EWinWebInfo.Lang);
+
+                            } else {
+
+                                window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("沒有資料"));
+                                document.getElementById('gameTotalValidBetValue').textContent = 0;
+                                document.getElementById('gameTotalRewardValue').textContent = 0;
+                            }
+                        } else {
+                            window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("取得資料失敗"));
+                            document.getElementById('gameTotalValidBetValue').textContent = 0;
+                            document.getElementById('gameTotalRewardValue').textContent = 0;
+                        }
+                    }
+                });
+
+                break;
+            case 'TagPaymentHistory':
+
+                var startDate = document.getElementById('idPageStartData').value;
+                var endDate = document.getElementById('idPageEndData').value;
+                var ParentMain = document.getElementById("PaymentHistoryPageMainCon").getElementsByClassName("rowOne")[0];
+
+                ParentMain.innerHTML = "";
+                document.getElementById('gameTotalRewardValue').style.color = "#999"
+
+                postObj = {
+                    SID: EWinWebInfo.SID,
+                    GUID: Math.uuid(),
+                    BeginDate: startDate,
+                    EndDate: endDate
+                }
+                p.GetPaymentHistory(postObj, function (success, o) {
+                    if (success) {
+                        if (o.Result == 0) {
+                            if (o.DetailList.length > 0) {
+                                var ParentMain = document.getElementById("PaymentHistoryPageMainCon").getElementsByClassName("rowOne")[0];
+                                let nowDate = "";
+                                for (var i = 0; i < o.DetailList.length; i++) {
+                                    let CreateDate = o.DetailList[i].CreateDate.substr(0, 10);
+                                    if (nowDate != CreateDate) {
+                                        nowDate = CreateDate;
+                                        var DateDom = c.getTemplate("templateRowTitle");
+                                        c.setClassText(DateDom, "rowDate", null, nowDate);
+                                        ParentMain.appendChild(DateDom);
+                                    }
+
+
+                                    var gameRowOneDom = c.getTemplate("templatePaymentRow");
+                                    var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
+                                    var PaymentProviderCode = "";
+
+                                    switch (o.DetailList[i].PaymentType) {
+                                        case 1:
+                                            PaymentProviderCode = "銀行卡";
+                                            break;
+                                        case 2:
+                                            PaymentProviderCode = "區塊鏈";
+                                            break;
+                                        default:
+                                            PaymentProviderCode = "銀行卡";
+                                            break;
+                                    }
+
+                                    c.setClassText(gameRowOneDom, "PaymentType", null, o.DetailList[i].PaymentType == 0 ? "<sapn class='language_replace'>存款</span>" : "<sapn class='language_replace'>取款</span>");
+                                    c.setClassText(gameRowOneDom, "FinishedDate", null, o.DetailList[i].FinishedDate.split(" ")[1]);
+                                    c.setClassText(gameRowOneDom, "PaymentProviderCode", null, "<sapn class='language_replace'>" + PaymentProviderCode + "</span>");
+                                    c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);
+                                    c.setClassText(gameRowOneDom, "Amount", null, o.DetailList[i].Amount);
+                                    c.setClassText(gameRowOneDom, "PaymentSerial", null, o.DetailList[i].PaymentSerial);
+
+                                    switch (o.DetailList[i].PaymentType) {
+                                        case 1:
+                                            switch (o.DetailList[i].Status) {
+                                                //-1= 尚未建立完成 / 0=訂單完成 / 1=交易開始 / 2=交易完成 / 3=結算完成 / 98=交易完成但扣捕點失敗 / 99=失敗
+                                                case -1:
+                                                    paymentState = "<sapn class='language_replace'>處理中</span>";
+                                                    paymentStateClass = "rowStatusCheck";
+                                                    break;
+                                                case 0:
+                                                    paymentState = "<sapn class='language_replace'>處理中</span>";
+                                                    paymentStateClass = "rowStatusCheck";
+                                                    break;
+                                                case 1:
+                                                    paymentState = "<sapn class='language_replace'>完成</span>";
+                                                    paymentStateClass = "rowStatusSucc";
+                                                    break;
+                                                case 2:
+                                                    paymentState = "<sapn class='language_replace'>失敗</span>";
+                                                    paymentStateClass = "rowStatusFail";
+                                                    break;
+                                                case 3:
+                                                    paymentState = "<sapn class='language_replace'>失敗</span>";
+                                                    paymentStateClass = "rowStatusFail";
+                                                    break;
+                                                default:
+                                                    paymentState = "<sapn class='language_replace'>失敗</span>";
+                                                    paymentStateClass = "rowStatusFail";
+
+                                                    break;
+                                            }
+                                            break;
+                                    }
+
+                                    c.setClassText(gameRowOneDom, "Status", null, paymentState);
+                                    statusDom.parentElement.classList.add(paymentStateClass);
+
+                                    ParentMain.appendChild(gameRowOneDom);
+                                    mlp.loadLanguage(EWinWebInfo.Lang);
+                                }
+
+
+                            } else {
+
+                                window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("沒有資料"));
+
+                            }
+                        } else {
+                            window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("取得資料失敗"));
+
+                        }
+                    }
+                });
+
+                //window.parent.lobbyClient.GetPaymentHistory(guid, startDate, endDate, function (success, o) {
+                //    if (success) {
+                //    } else {
+                //        // 忽略 timeout 
+                //    }
+                //});
+                break;
+            default:
+                break;
+        }
+    }
+
     window.onload = init;
 </script>
 <body>
@@ -380,47 +410,29 @@
         <div id="templateRowTitle">
             <div class="rowTitle"><span class="rowDate">2020/01/26</span></div>
         </div>
-        <div id="templateDepositRow">
-            <!-- 狀態樣式 成功"rowStatusSucc" 失敗"rowStatusFail" 處理中"rowStatusCheck" 取消/不可用"rowStatusGray" -->
-            <div class="rowElm2L">
-                <div class="clearfix">
-                    <div class="row3XL1A"><span class="CreateTime language_replace">下午04:33</span></div>
-                    <div class="row3XL1B"><span class="ChannelCode">支付寶</span></div>
-                </div>
-                <div class="row3XL1C"><span class="CurrencyType">CNY</span><span class="Amount">1,000,000</span></div>
-                <div class="row3XL2A"><span class="language_replace">交易序號</span>:<span class="PaymentSerial">XD20200430125813AC</span></div>
-                <div class="row3XL2B"><span class="language_replace">匯款銀行</span>:<span class="BankName">上海浦東發展銀行</span></div>
-                <div class="row3XL2C"><span class="language_replace">匯款人</span>:<span class="AccountName">司徒浩南</span></div>
-                <div class="Status"><span class="PaymentFlowType language_replace">處理中</span></div>
-            </div>
-            <!-- -->
-        </div>
-        <div id="templateWithdrawRow">
-            <!-- 狀態樣式 成功"rowStatusSucc" 失敗"rowStatusFail" 處理中"rowStatusCheck" 取消/不可用"rowStatusGray" -->
-            <div class="rowElm2L">
-                <div class="clearfix">
-                    <div class="row3XL1A"><span class="CreateTime">下午04:33</span></div>
-                    <div class="row3XL1B"><span class="ChannelCode language_replace">支付寶</span></div>
-                </div>               
-                <div class="row3XL1C"><span class="CurrencyType">CNY</span><span class="Amount">1,000,000</span></div>
-                <div class="row3XL2A"><span class="language_replace">交易序號</span>:<span class="PaymentSerial">XD20200430125813AC</span></div>
-                <div class="row3XL2B"><span class="language_replace">匯款銀行</span>:<span class="BankName">上海浦東發展銀行</span></div>
-                <div class="row3XL2C"><span class="language_replace">匯款人</span>:<span class="AccountName">司徒浩南</span></div>
-                <div class="Status"><span class="PaymentFlowType language_replace">處理中</span></div>
-            </div>
-            <!-- -->
-        </div>
+
         <div id="templateGameOrderRow">
             <!-- 狀態樣式 客上贏錢"win" 客下輸錢"lose" -->
             <div class="rowElm2L">
-                <div class="row3XL1A"><span class="GameName">99Play</span></div>
-                <div class="row3XL1B"><span class="WebTagName language_replace">真人百家樂</span></div>
-                <div class="Status row3XL1C win"><span class="CurrencyType">CNY</span><span class="RewardValue">6,523</span></div>
-                <div class="row3XL2A"><span class="language_replace">下注金額</span>:<span class="OrderValue">12,300</span></div>
+                <div class="row3XL1A"><span class="GameName language_replace">99Play</span></div>
+                <div class="row3XL1B"><span class="CurrencyType" style="color: black; margin-right: 5px">CNY</span></div>
+                <div class="Status row3XL1C win"><span class="language_replace">上下數</span> : <span class="RewardValue">6,523</span></div>
                 <div class="row3XL2B"><span class="language_replace">有效投注</span>:<span class="ValidBetValue">7,300</span></div>
                 <div class="row3XL2C"><span></span></div>
             </div>
             <!-- -->
+        </div>
+
+        <div id="templatePaymentRow">
+            <div class="rowElm2L">
+                <div class="row3XL1A"><span class="FinishedDate">下午04:33</span></div>
+                <div class="row3XL1B"><span class="PaymentProviderCode language_replace">支付寶</span></div>
+                <div class="row3XL1C"><span class="" style="color: black; margin-right: 5px">CNY</span><span class="Amount">1,000,000</span></div>
+                <div class="row3XL2A"><span class="PaymentType language_replace"></span></div>
+                <div class="row3XL2B"><span class="PaymentSerial">-</span></div>
+                <div class=""><span class="Status"></span></div>
+            </div>
+
         </div>
     </div>
     <div class="pageWrapper">
@@ -431,51 +443,47 @@
             </div>
             <div>
                 <div class="switchTagDiv">
-                    <!-- 使用中頁籤加上"active"-->
-                    <div onclick="switchTagBtn('Deposit')" class="switchTagBtn active"><span class="language_replace">存款紀錄</span></div>
-                    <div onclick="switchTagBtn('Withdraw')" class="switchTagBtn"><span class="language_replace">取款紀錄</span></div>
-                    <%--<div style="display:none" class="switchTagBtn"><span>活動紀錄</span></div>--%>
-                    <div onclick="switchTagBtn('GameOrder')" class="switchTagBtn"><span class="language_replace">遊戲紀錄</span></div>
+                    <div class="switchTagBtn active" id="TagGameHistory" onclick="changeSwitchTag('Game')"><span class="language_replace">遊戲紀錄</span></div>
+                    <div class="switchTagBtn" id="TagPaymentHistory" onclick="changeSwitchTag('PaymentHistory')"><span class="language_replace">存取款紀錄</span></div>
                 </div>
                 <!-- 搜尋列 -->
                 <div class="pageDataBar">
                     <form>
                         <div class="pageStartData">
                             <span class="language_replace">起始日期</span>
-                            <input id="searchStartDate" type="date">
+                            <input id="idPageStartData" type="date">
                         </div>
                         <div class="pageEndData">
                             <span class="language_replace">結束日期</span>
-                            <input id="searchEndDate" type="date">
+                            <input id="idPageEndData" type="date">
                         </div>
                     </form>
-                    <div class="pageDSreachBtn" onclick="searchHistory()">
+                    <div class="pageDSreachBtn" onclick="getHistory()">
                         <span class="language_replace">搜尋</span>
                     </div>
                     <div class="pageDDataSwitchBar">
                         <form>
                             <label class="">
-                                <input checked type="radio" name="DData" onclick="setSearchDate(0)">
+                                <input type="radio" name="DData" id="radioToday">
                                 <div class="pageDDataBtn"><span class="language_replace">本日</span></div>
                             </label>
                             <label class="">
-                                <input type="radio" name="DData" onclick="setSearchDate(1)">
+                                <input type="radio" name="DData" id="radioYesterday">
                                 <div class="pageDDataBtn"><span class="language_replace">前日</span></div>
                             </label>
                             <label class="">
-                                <input type="radio" name="DData" onclick="setSearchDate(2)">
+                                <input type="radio" name="DData" id="radioWeek">
                                 <div class="pageDDataBtn"><span class="language_replace">本週</span></div>
                             </label>
                         </form>
                     </div>
                 </div>
                 <!-- 存款紀錄 -->
-                <div id="MainDeposit" class="pageMainCon">
+                <div id="PaymentHistoryPageMainCon" class="pageMainCon" style="display: none;">
                     <!---->
                     <div class="rowOne">
-
                     </div>
-                    <div class="pageFooter">
+                    <%--<div class="pageFooter">
                         <div class="rowTitle"><span class="language_replace">注意事項</span></div>
                         <div class="rowList">
                             <ol>
@@ -483,157 +491,25 @@
                                 <li class="language_replace">提款時需達到存款總金額的100%有效投注量才可提出申請。(PS:如利用本平臺進行任何洗錢詐騙行為，本公司保留權利審核會員帳戶或停權終止會員服務)</li>
                             </ol>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
-                <!---->
-                <!-- 取款紀錄 -->
-                <div id="MainWithdraw" class="pageMainCon" style="display: none;">
-                    <!---->
-                    <div class="rowOne">
-
-                    </div>
-                    <div class="pageFooter">
-                        <div class="rowTitle"><span class="language_replace">注意事項</span></div>
-                        <div class="rowList">
-                            <ol>
-                                <li class="language_replace">每次提款最少點數為1000點以上，請務必確認填寫之帳號，若提供的帳號錯誤，恕本公司無法負責。</li>
-                                <li class="language_replace">提款時需達到存款總金額的100%有效投注量才可提出申請。(PS:如利用本平臺進行任何洗錢詐騙行為，本公司保留權利審核會員帳戶或停權終止會員服務)</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!---->
-                <!-- 活動紀錄 -->
-                <%--<div class="pageMainCon">
-                    <!---->
-                    <div class="rowOne">
-                        <!-- -->
-                        <div class="rowTitle"><span>2020/01/26</span></div>
-                        <!-- -->
-                        <!-- 狀態樣式 成功"rowStatusSucc" 失敗"rowStatusFail" 審核中"rowStatusCheck" 取消/不可用"rowStatusGray" -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span>下午04:33</span></div>
-                            <div class="row3XL1B"><span>活動返點</span></div>
-                            <div class="row3XL1C"><span>CNY</span><span>500</span></div>
-                            <div class="row3XL2A">真人百家30%返水活動</span></div>
-                            <div class="row3XL2B"><span>提款倍率</span>:<span>0.5</span></div>
-                            <div class="row3XL2C"><span>領取期限</span>:<span>2020/01/16</span></div>
-                            <div class="rowStatusCheck"><span>審核中</span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span>下午04:33</span></div>
-                            <div class="row3XL1B"><span>儲值贈點</span></div>
-                            <div class="row3XL1C"><span>CNY</span><span>500</span></div>
-                            <div class="row3XL2A">真人百家30%返水活動</span></div>
-                            <div class="row3XL2B"><span>提款倍率</span>:<span>5</span></div>
-                            <div class="row3XL2C"><span>領取期限</span>:<span>2020/01/16</span></div>
-                            <div class="rowStatusBtn"><span>領取</span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowTitle"><span>2020/01/26</span></div>
-                        <!-- -->
-                        <!-- 狀態樣式 成功"rowStatusSucc" 失敗"rowStatusFail" 審核中"rowStatusCheck" 取消/不可用"rowStatusGray" -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span>下午04:33</span></div>
-                            <div class="row3XL1B"><span>活動返點</span></div>
-                            <div class="row3XL1C"><span>CNY</span><span>500</span></div>
-                            <div class="row3XL2A">真人百家30%返水活動</span></div>
-                            <div class="row3XL2B"><span>提款倍率</span>:<span>0.5</span></div>
-                            <div class="row3XL2C"><span>領取期限</span>:<span>2020/01/16</span></div>
-                            <div class="rowStatusSucc"><span>已領取</span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span>下午04:33</span></div>
-                            <div class="row3XL1B"><span>儲值贈點</span></div>
-                            <div class="row3XL1C"><span>CNY</span><span>500</span></div>
-                            <div class="row3XL2A">真人百家30%返水活動</span></div>
-                            <div class="row3XL2B"><span>提款倍率</span>:<span>5</span></div>
-                            <div class="row3XL2C"><span>領取期限</span>:<span>2020/01/16</span></div>
-                            <div class="rowStatusGray"><span>已過期</span></div>
-                        </div>
-                        <!-- -->
-
-
-
-                    </div>
-                    <div class="pageFooter">
-                        <div class="rowTitle"><span>注意事項</span></div>
-                        <div class="rowList">
-                            <ol>
-                                <li>每次提款最少點數為1000點以上，請務必確認填寫之帳號，若提供的帳號錯誤，恕本公司無法負責。</li>
-                                <li>提款時需達到存款總金額的100%有效投注量才可提出申請。(PS:如利用本平臺進行任何洗錢詐騙行為，本公司保留權利審核會員帳戶或停權終止會員服務)</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>--%>
                 <!---->
                 <!-- 遊戲紀錄 -->
-                <div id="MainGameOrder" class="pageMainCon" style="display: none;">
+                <div id="gamePageMainCon" class="pageMainCon" style="display: none;">
                     <!-- -->
                     <div class="infoBar">
-                        <div class="infoDiv"><span class="language_replace">期間總下注金額</span>:<span  id="TotalOrderValue">0</span></div>
-                        <div class="infoDiv"><span class="language_replace">期間總有效投注</span>:<span  id="TotalValiBet">0</span></div>
-                        <div class="infoDiv"><span class="language_replace">期間總派彩</span>:<span  id="TotalRewardValue">0</span></div>
+                        <%--<div class="infoDiv"><span class="language_replace">期間總下注金額</span>:<span  id="TotalOrderValue">0</span></div>--%>
+                        <div class="infoDiv"><span class="language_replace">期間總有效投注</span>:<span id="gameTotalValidBetValue">0</span></div>
+                        <div class="infoDiv"><span class="language_replace">期間總派彩</span>:<span id="gameTotalRewardValue">0</span></div>
                     </div>
                     <!---->
-                    <div class="rowOne">
+                    <div class="rowOne" id="gameRowOne">
+                        <!-- -->
+                        <div class="rowNoRessult"><span class="language_replace">無資料</span></div>
+                        <!-- -->
                         <!-- -->
                         <div class="rowTitle"><span>2020/01/26</span></div>
                         <!-- -->
-                        <!-- 狀態樣式 客上贏錢"win" 客下輸錢"lose" -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span >99Play</span></div>
-                            <div class="row3XL1B"><span class="language_replace">真人百家樂</span></div>
-                            <div class="row3XL1C win"><span>CNY</span><span>6,523</span></div>
-                            <div class="row3XL2A"><span class="language_replace">下注金額</span>:<span>12,300</span></div>
-                            <div class="row3XL2B"><span class="language_replace">有效投注</span>:<span>7,300</span></div>
-                            <div class="row3XL2C"><span></span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span class="language_replace">99電子</span></div>
-                            <div class="row3XL1B"><span class="language_replace">電子娛樂</span></div>
-                            <div class="row3XL1C lose"><span>CNY</span><span>-1,458</span></div>
-                            <div class="row3XL2A language_replace"><span class="language_replace">下注金額</span>:<span>5,800</span></div>
-                            <div class="row3XL2B language_replace"><span class="language_replace">有效投注</span>:<span>5,800</span></div>
-                            <div class="row3XL2C"><span></span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowTitle"><span>2020/01/25</span></div>
-                        <!-- -->
-                        <!-- 狀態樣式 客上贏錢"win" 客下輸錢"lose" -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span>99Play</span></div>
-                            <div class="row3XL1B"><span class="language_replace">真人百家樂</span></div>
-                            <div class="row3XL1C win"><span>CNY</span><span>6,523</span></div>
-                            <div class="row3XL2A"><span class="language_replace">下注金額</span>:<span>12,300</span></div>
-                            <div class="row3XL2B"><span class="language_replace">有效投注</span>:<span>7,300</span></div>
-                            <div class="row3XL2C"><span></span></div>
-                        </div>
-                        <!-- -->
-                        <div class="rowElm2L">
-                            <div class="row3XL1A"><span class="language_replace">99電子</span></div>
-                            <div class="row3XL1B"><span class="language_replace">電子娛樂</span></div>
-                            <div class="row3XL1C lose"><span>CNY</span><span>-1,458</span></div>
-                            <div class="row3XL2A"><span class="language_replace">下注金額</span>:<span>5,800</span></div>
-                            <div class="row3XL2B"><span class="language_replace">有效投注</span>:<span>5,800</span></div>
-                            <div class="row3XL2C"><span></span></div>
-                        </div>
-                        <!-- -->
-
-
-
-                    </div>
-                    <div class="pageFooter">
-                        <div class="rowTitle"><span class="language_replace">注意事項</span></div>
-                        <div class="rowList">
-                            <ol>
-                                <li class="language_replace">每次提款最少點數為1000點以上，請務必確認填寫之帳號，若提供的帳號錯誤，恕本公司無法負責。</li>
-                                <li class="language_replace">提款時需達到存款總金額的100%有效投注量才可提出申請。(PS:如利用本平臺進行任何洗錢詐騙行為，本公司保留權利審核會員帳戶或停權終止會員服務)</li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
                 <!---->

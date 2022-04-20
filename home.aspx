@@ -55,7 +55,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>
 <!-- Swiper JS -->

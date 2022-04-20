@@ -1,0 +1,1316 @@
+@charset "utf-8";
+/* CSS Document */
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu, i, span, div {
+    margin: 0;
+    padding: 0;
+    touch-action: manipulation;
+}
+
+html, body { -webkit-text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none; text-size-adjust: none;}
+
+
+.mainBgCube{
+    background: #373b4e;
+}
+
+/*版頭樣式-----------------------------  */
+.lob_headerLeft{
+    z-index: 8;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    animation-name: lob_header;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+.lob_headerRight{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    padding: 0px 30px;
+    animation-name: lob_header;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+@keyframes lob_header{
+    0%{opacity: 0;padding-top: 10px;}
+    100%{opacity: 1;padding-top: 0px;}
+}
+
+.lob_NavDivBtn{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: rgba(0,0,0,0.15);
+    border: 3px solid rgba(185,161,121,0.0);
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    cursor: pointer;
+    -wibkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+	-webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.lob_NavDivBtn:active{
+    background: rgba(255,255,255,0.2);
+    border: 3px solid rgba(185,161,121,0.8);
+    -wibkit-transition: all 0.05s ease-in;
+    -moz-transition: all 0.05s ease-in;
+    transition: all 0.05s ease-in;
+}
+
+.lob_headerLeft .lob_NavDivIcon,.lob_headerLeft .lob_NavDivIcon2{
+    position: absolute;
+    top:-2;
+    left: -2;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    -wibkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+.lob_headerRight .lob_NavDivIcon,.lob_headerRight .lob_NavDivIcon2{
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    -wibkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+.lob_NavDivIcon2{opacity: 0;}
+.lob_NavDivIcon img,.lob_NavDivIcon2 img{
+    width: 20px;
+    height: 20px;
+}
+
+.lob_NavSwitch .lob_headerLeft .lob_NavDivIcon{opacity: 0;
+    animation-name: lob_NavSwitch;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+.lob_NavSwitch .lob_headerLeft .lob_NavDivIcon2{opacity: 1;
+    animation-name: lob_NavSwitch;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+@keyframes lob_NavSwitch{
+    0%{ transform: rotate(-90deg);}
+    100%{transform: rotate(0deg);}
+}
+
+.lob_memberInfo{
+    width: auto;
+    height: 40px;
+    border-radius: 40px;
+    background: rgba(0,0,0,0.15);
+    border: 3px solid rgba(185,161,121,0.0);
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    padding: 3px;
+    /*margin-left: 20px;*/
+}
+.lob_InfoDivIcon{
+    margin-right: 6px;
+    width: 25px;
+    height: 25px;
+    border-radius: 32px;
+    background: rgba(185,161,121,1.0);
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.lob_InfoDivIcon img{
+    width: 20px;
+    height: 20px;
+}
+
+.lob_UserCoinDiv,.lob_UserIdDiv{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    color: #fff;    
+}
+.lob_UserIdDiv{
+    margin-right: 30px;
+}
+.lob_UserCoinDiv{
+    padding-right: 30px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.lob_UserCoinDiv:hover{
+    background: linear-gradient(90deg,rgba(0,0,0,0.0),rgba(0,0,0,0.3));
+}
+
+.lob_InfoDivNub{
+    position: relative;
+}
+.lob_InfoDivNub::after{
+    position: absolute;
+    right: -20px;
+    top:4px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 0px 4px 7px;
+    border-style: solid;
+    border-color: transparent transparent #b9a179; 
+    transform: rotate(180deg);
+}
+.lob_InfoDivNub::before{
+    position: absolute;
+    right: -25px;
+    top:-2px;
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.3);     
+}
+.lob_UserCoinDiv:hover .lob_InfoDivNub::after{border-color: transparent transparent #fff;}
+.lob_UserCoinDiv:hover .lob_InfoDivNub::before{background: rgba(185,161,121,0.0);}
+
+.lob_InfoDivNub span:first-child{
+    color: rgba(185,161,121,1.0);
+}
+.lob_UserCoinDiv:hover .lob_InfoDivNub span:first-child{
+    color: rgba(255,255,255,1.0);
+}
+
+.lob_LogoDiv{
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top:0px;
+    width: 100%;
+    height: 1px;
+    text-align: center;
+}
+.lob_LogoImg{
+    margin: 49px auto;
+    width: auto;
+    display: table;
+}
+.lob_LogoImg img{
+    height: 20px;
+    width: auto;
+}
+
+.lob_mainMenu{
+    position: fixed;  
+    z-index: 10;
+
+    -wibkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;  
+
+}
+.lob_mainMenu:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.65);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+.lob_MenuOption{
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    border-bottom: 0.5px solid rgba(255,255,255,0.15); 
+    color: #fff;
+}
+.lob_mainMenu .lob_MenuOption:last-child{
+    border-bottom: 0px solid rgba(255,255,255,0.0); 
+}
+
+.lob_OptionIcon{
+    width: 40px;
+    height: 40px;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.lob_OptionIcon img{
+    width: 25px;
+    height: 25px;
+}
+
+/*內容樣式----------------------------- */
+/*.lob_gameTypeWrapper{
+    position: relative;
+    width: 100%;
+    height: 25px;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.lob_gameTypeDiv{
+    position: relative;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;}
+.lob_gameTypeBtn{
+    box-sizing: border-box;
+}
+
+
+
+
+.lob_gameTypeIcon img{
+    height: 25px;
+    width: auto;   
+}
+input[type="radio"] + label .lob_gameTypeIcon,
+.lob_gameTypeBtn .lob_gameTypeIcon{
+    opacity: 0.3
+}
+input[type="radio"]:checked + label .lob_gameTypeIcon,
+.lob_gameTypeBtn.lobActive .lob_gameTypeIcon{
+    opacity: 1.0
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+input[type="radio"] + label,
+.lob_gameTypeBtn{
+	position: relative;
+    box-sizing: border-box;
+    padding: 7px 15px 3px 15px;
+    background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.0)); 
+    border-radius: 10px 10px 0px 0px;
+    border-color:rgba(190,164,119,1); 
+    border-style: solid;
+    padding: 8px 17px 3px 17px;
+    border-width: 0px 0px 2px 0px;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    font-size: 10px;
+}
+.lob_gameTypeBtn::after{
+	content: "";
+	position: absolute;
+	right: -1px;
+	bottom: 0px;
+	width: 1px;
+
+	background: linear-gradient(0deg,rgba(255,255,255,0.2),rgba(255,255,255,0.02),rgba(255,255,255,0));
+	height: 100%;
+	
+}
+.lob_gameTypeDiv .lob_gameTypeBtn:last-child::after{
+	background: none;
+}
+
+
+input[type="radio"] + label:hover,
+.lob_gameTypeBtn:hover{
+        color: rgba(255,255,255,0.6);
+}
+
+input[type="radio"]:checked + label,
+.lob_gameTypeBtn.lobActive{
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.0));
+    border-width: 2px 2px 0px 2px;
+    color: rgba(255,255,255,1);
+}*/
+
+/*新內容樣式----------------------------- */
+.lob_gameTypeWrapper{
+    position: relative;
+    width: 100%;
+    height: 25px;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.lob_gameTypeDiv{
+    position: relative;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+
+
+
+.lob_gameTypeBtn.lobActive{
+
+}
+
+
+
+.lob_gameTypeIcon img{
+    height: 25px;
+    width: auto;   
+}
+input[type="radio"] + label .lob_gameTypeIcon,
+.lob_gameTypeBtn .lob_gameTypeIcon{
+    opacity: 0.3;
+	/*background: rgba(35,37,49,1.0);*/
+	background: #000;
+    border-radius: 50px;
+    padding: 5px 6px;
+	position: relative;
+    margin-top: 0px;
+	z-index: 3;
+	transition:all linear 0.2s;
+	
+}
+
+input[type="radio"] + label:hover .lob_gameTypeIcon,
+.lob_gameTypeBtn:hover .lob_gameTypeIcon{
+	opacity: .6;
+    margin-top: 0px;
+	transform: rotate(360deg);
+}
+
+input[type="radio"]:checked + label .lob_gameTypeIcon,
+.lob_gameTypeBtn.lobActive .lob_gameTypeIcon{
+	position: relative;
+    margin-top: 0px;
+	opacity: 1.0;
+    background: #4568dc;
+    background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+    background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+	/*border-top: 1px solid rgba(255,225,155,0.6);*/
+    border-bottom: 1px solid rgba(105,155,255,0.4);
+	box-shadow:0px 0px 10px 5px rgb(40 60 150 / 90%);
+	z-index: 1;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+input[type="radio"] + label,
+.lob_gameTypeBtn{
+	position: relative;
+    box-sizing: border-box;
+    padding: 7px 15px 3px 15px;
+    background: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.0)); 
+    border-radius: 80px;;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    font-size: 10px;
+	width: 60px;
+	/*height: 60px;*/
+	height: 100px;
+	white-space: nowrap;
+	margin: 8px;
+	transition:all linear 0.2s;
+	z-index: 1;
+	-webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+
+/*input[type="radio"] + label .lob_gameTypeIcon::after,
+.lob_gameTypeBtn .lob_gameTypeIcon::after{
+    position: absolute;
+	content: "";
+	width:calc(100% + 4px);
+	height: calc(100% + 4px);
+	left: -2px;
+	top: -2px;
+	background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+    background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+	z-index: -1;
+	border-radius: 100%;
+}*/
+
+
+/*input[type="radio"]:hover + label .lob_gameTypeIcon::after,
+.lob_gameTypeBtn:hover .lob_gameTypeIcon::after{
+    position: absolute;
+	content: "";
+	width:calc(100% + 4px);
+	height: calc(100% + 4px);
+	left: -2px;
+	top: -2px;
+	background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+    background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+	z-index: -1;
+	border-radius: 100%;
+}*/
+
+
+input[type="radio"]:checked + label .lob_gameTypeIcon::after,
+.lob_gameTypeBtn.lobActive .lob_gameTypeIcon::after{
+    position: absolute;
+	content: "";
+	width:calc(100% + 4px);
+	height: calc(100% + 4px);
+	left: -2px;
+	top: -2px;
+	background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+    background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+	z-index: -1;
+	border-radius: 100%;
+}
+
+
+/*.lob_gameTypeBtn::after{
+	content: "";
+	position: absolute;
+	right: -1px;
+	bottom: 0px;
+	width: 1px;
+	background: linear-gradient(0deg,rgba(255,255,255,0.2),rgba(255,255,255,0.02),rgba(255,255,255,0));
+	height: 100%;
+	
+}*/
+.lob_gameTypeDiv .lob_gameTypeBtn:last-child::after{
+	background: none;
+}
+
+
+input[type="radio"] + label:hover,
+.lob_gameTypeBtn:hover{
+	background: linear-gradient(rgba(113,153,253,0.3),rgba(0,0,0,0.0)); 
+    color: rgba(255,255,255,0.6);
+	height: 100px;
+}
+
+input[type="radio"]:checked + label,
+.lob_gameTypeBtn.lobActive{
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.0));
+    color: rgba(255,255,255,1);
+	height: 100px;
+}
+
+
+/* 類別名 樣式 */
+/*.lob_gameTypeName{
+	padding: 4px 10px;
+    position: relative;
+    top: -10px;
+	border-radius: 10px;
+	opacity: 0;
+	transition:all linear 0.2s;
+}
+input[type="radio"] + label:hover .lob_gameTypeName,
+.lob_gameTypeBtn:hover .lob_gameTypeName{
+    color: rgba(255,255,255,0.6);
+	opacity: 1;
+}
+
+input[type="radio"]:checked + label .lob_gameTypeName,
+.lob_gameTypeBtn.lobActive .lob_gameTypeName{
+	background: linear-gradient(145deg,rgba(255,255,255,0.1),rgba(105,155,255,0.3));
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+	opacity: 1;
+}*/
+/* */
+.lob_gameTypeName{
+	padding: 4px 10px;
+    position: relative;
+    top: -10px;
+	border-radius: 10px;
+	opacity: 1;
+	transition:all linear 0.2s;
+}
+input[type="radio"] + label:hover .lob_gameTypeName,
+.lob_gameTypeBtn:hover .lob_gameTypeName{
+    color: rgba(255,255,255,0.6);
+	opacity: 1;
+}
+
+input[type="radio"]:checked + label .lob_gameTypeName,
+.lob_gameTypeBtn.lobActive .lob_gameTypeName{
+    /*background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.0));
+    color: rgba(255,255,255,1);*/
+	background: linear-gradient(145deg,rgba(255,255,255,0.1),rgba(105,155,255,0.3));
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+	opacity: 1;
+}
+
+
+
+
+/*品牌樣式----------------------------- */
+
+.lob_gameBrandWrapper{
+    box-sizing: border-box;
+    width: auto;
+    margin: 20px auto;
+}
+.lob_gameBrandDiv{cursor: pointer;}
+.lob_gameBrandName{
+    color: #fff;
+}
+
+/*遊戲列表----------------------------- */
+.lob_gameListName{
+    margin: 5px auto;
+    overflow: hidden;
+    max-width: 85%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 18px;
+}
+.lob_gameListBrand{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    z-index: 5;
+}
+.lob_gameListBackBtn{
+    position: relative;
+    width: auto;height: 40px;margin-right: 0px;background: rgba(0,0,0,0.15);padding-left: 10px;border-radius: 50px 0px 0px 50px;
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    color: aliceblue;
+	cursor: pointer;
+}
+.lob_gameListBackBtn:hove{background: rgba(0,0,0,0.3);} 
+.lob_gameListBackBtn img{width: 30px; height: 30px;opacity: 0.5;}
+.lob_gameListBackBtn:hover img{opacity: 1;}
+.lob_gameListTit{display: inline-block;background: linear-gradient(90deg,rgba(0,0,0,0.15),rgba(0,0,0,0));padding: 0px 60px 0px 10px;text-align: left;}
+
+.lob_gameListBtn{cursor: pointer;}
+
+.lob_gameListBtn img{
+	position: relative;
+	transition: all 0.2s;
+	top:0px;
+	box-shadow: 0px 0px 0px 0px rgba(255,255,255,0.0),0px 00px 00px 0px rgba(0,0,0,0.0);	
+}
+.lob_gameListBtn:hover img{
+	top: -3px;
+	box-shadow: 0px 0px 0px 3px rgba(255,255,255,0.8),0px 10px 30px 0px rgba(0,0,0,0.5);
+}
+
+/*<!-- 向上划動畫 -->  */
+
+.EntryMaskAniDiv{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.EntryMaskAniDiv2{
+    margin-top: 320px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+}
+.EntryMaskAniSkip{
+    width: 100%;   
+}
+.EntryMaskAniSkipTit{
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;  
+    font-size: 20px;
+}
+.EntryMaskAniSkipBtn{
+    display: table;
+    padding: 10px 20px;
+    border:2px solid #c1a678;
+    margin: 10px auto;
+    margin-top: 20px;
+    background: rgba(0,0,0,0.8);
+    color: #c1a678;
+    border-radius: 100px;
+    font-size: 16px;
+}
+
+
+.EntryMaskAniEl{
+    position: relative;
+    display: block;
+    width: 30px;    
+    height: 30px;
+    border-radius: 30px;
+    border: 5px solid rgba(255,255,255,0.0);
+    animation: MaskAniDiv;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes MaskAniDiv{
+    0%{height: 30px;top: 40px;border:5px solid rgba(255,255,255,0.0); }
+    28%{height: 30px;top: 40px;border:5px solid rgba(255,255,255,0.0);}
+    29%{height: 30px;top: 40px;border:5px solid rgba(255,255,255,1.0);}
+    30%{height: 30px;top: 40px;border:5px solid rgba(255,255,255,1.0);}
+    65%{height: 120px;top: 0px;border:5px solid rgba(255,255,255,1.0);}
+    77%{height: 75px;top: -23px;border:5px solid rgba(255,255,255,1.0);}
+    90%{height: 30px;top: -46px;border:5px solid rgba(255,255,255,0.0);}
+    100%{height: 30px;top: 40px;border:5px solid rgba(255,255,255,0.0);}
+}
+.EntryMaskAniEl::after{
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 80px;
+    height: 80px;
+    background: url("../images/entryHandIcon.svg") center center no-repeat;
+    animation: MaskAniDivHand;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: rotate(15deg);
+ 
+}
+@keyframes MaskAniDivHand{
+    0%{transform: rotate(20deg);}
+    24%{transform: rotate(20deg);}
+    26%{transform: rotate(0deg);}
+    29%{transform: rotate(0deg);}
+    30%{transform: rotate(0deg);}
+    65%{transform: rotate(0deg);}
+    77%{transform: rotate(0deg);}
+    90%{transform: rotate(20deg);}
+    100%{transform: rotate(20deg);}
+}
+
+
+/*<!-- 向上划動畫相關調整 -->  */
+
+#idEntryMask{
+    background: rgba(0,0,0,0.8);
+}
+
+#idEntryMaskText,#idEntryMaskText2{
+   
+}
+
+@media screen and (orientation: landscape) {
+/*針對水平向 css撰寫*/
+/*<!-- 向上划動畫 -->  */
+
+	.EntryMaskAniSkipBtn{
+		position: fixed;
+		right: 15px;
+		bottom: 10px;
+	}
+	.EntryMaskAniSkipTit{
+		margin-top: -35px;
+	}
+}
+
+.iFrameWrapper{
+	position: fixed;
+	top:0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+.iFrameWrapper iframe{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* */
+.itsTheEnd{
+    display: none;
+}
+
+
+/* */
+.displayType_switch{
+margin-right: 5px;
+}
+.displayType_switch_Div{}
+
+.displayType_switch_Tit{
+    position: relative;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+}
+
+.displayType_switch_Tit::after{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    content: "";
+    width: 100%;  
+    height: 1px;
+    background:rgba(255,255,255,0.4);
+}
+
+
+.displayType_switch_Tit{
+    color: var(--main-color);
+}
+.displayType_switch_Tit_icon{
+    width: 20px;
+    height: 20px;
+    background: url("../images/icon_displayType_R.svg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 3px;
+}
+.displayType_switch_Btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.displayType_switch_Btn_G{
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 13px;
+    background: rgba(255,255,255,0.2);
+    margin: 2px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: rgba(0,0,0,0.5);
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+    
+}
+.displayType_switch_Btn_G:hover{
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 3px 13px 0px rgba(0,0,0,0.05);
+}
+
+.displayType_switch_Btn_G.Active{
+    background: var(--main-color);
+    color: #fff;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.1);
+}
+
+.displayType_switch_Btn_icon{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    background: rgba(0,0,0,0.02);
+    margin-right: 3px;
+}
+.displayType_switch_Btn_icon::after{
+    content: "";
+    position: absolute;
+    /*width: 2px;
+    height: 12px;
+    top: 4px;
+    left: 9px;*/
+    width: 2px;
+    height: 5px;
+    top: 9px;
+    left: 6px;
+    background: rgba(0,0,0,0.06);
+    transform: rotate(-45deg);
+    border-radius: 10px;
+}
+.displayType_switch_Btn_icon::before{
+    content: "";
+    position: absolute;
+    /*width: 2px;
+    height: 12px;
+    top: 4px;
+    left: 9px;*/
+    width: 2px;
+    height: 9px;
+    top: 6px;
+    left: 11px;
+    background: rgba(0,0,0,0.06);
+    transform: rotate(45deg);
+    border-radius: 10px;
+
+}
+
+.displayType_switch_Btn_G:hover .displayType_switch_Btn_icon::after,
+.displayType_switch_Btn_G:hover .displayType_switch_Btn_icon::before{
+    background: #fff;
+}
+
+
+.displayType_switch_Btn_G.Active .displayType_switch_Btn_icon{
+    background: #fff;
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+}
+.displayType_switch_Btn_G.Active .displayType_switch_Btn_icon::after{
+    background: var(--main-color);
+}
+.displayType_switch_Btn_G.Active .displayType_switch_Btn_icon::before{
+    background: var(--main-color);
+}
+
+
+
+/*  遊戲歷程  */
+
+.myLastPlayed{
+    position: fixed;
+    top: 110px;
+    right: 0px;
+    height:calc(100% - 110px);
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: visible;
+}
+
+.myLastPlayedDIv{
+    margin-right: 15px;
+    padding: 15px 8px 10px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+    -webkit-backdrop-filter:blur(15px);
+    backdrop-filter:blur(15px);
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.02);
+    
+}
+
+.myLastPlayedHeader{
+    text-align: center;
+    border-bottom: 0.5px solid rgba(255,255,255,0.2);
+    padding-bottom: 5px;
+    color: rgba(0,0,0,0.5);
+}
+.myLastPlayedHeader img{
+    opacity: 0.5;
+    width: 55%;
+}
+
+.myLastPlayedItem{
+    box-sizing: border-box;
+    position: relative;
+    left: 0px;
+    width: 68px;
+    height: 68px;
+    margin: 5px auto;
+    transition: all 0.10s ease-out;
+    cursor: pointer;
+    opacity: 0.8;
+    padding: 4px;
+    
+} 
+
+.myLastPlayedItem img{
+    border-radius: 12px;
+    width: 52px;
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.1);
+    border:4px solid rgba(255,255,255,0.3);
+    transition: all 0.10s ease-out;
+    
+}
+.myLastPlayedItem:hover{
+    left: 0px;
+    opacity: 1;
+    padding: 0px;
+    
+}
+
+.myLastPlayedItem:hover img{
+    width: 68px;
+    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.2);
+    border:0px solid rgba(255,255,255,0.3);
+}
+
+/* 新增遊戲分類顯示樣式 */
+
+/*.lob_gamesListHeader{
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: row;
+    flex-flow: row nowrap;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content:safe center;
+    margin: 40px auto 10px;
+}*/
+
+.lob_gamesListHeader{
+    box-sizing: border-box;
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    margin: 40px auto 10px;
+}
+
+
+
+.lob_gamesListBtn{
+    display: inline-flex;
+    padding: 1px 5px 5px 7px;
+    /*background: rgba(255,255,255,0.3);*/
+    color: rgba(0,0,0,0.6);
+    /*margin: 0px 8px;*/
+    /*border-radius: 30px;*/
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 1px solid #7199fd;
+    white-space: nowrap;
+}
+.lob_gamesListBtn.Active{
+    /*background: #7199fd;*/
+    color: #7199fd;
+    border-bottom: 4px solid #7199fd;
+}
+
+.lob_gamesListBtn:first-child {
+    margin-left: auto;
+}
+.lob_gamesListBtn:last-child {
+    margin-right: auto;
+}
+
+
+@media (max-width: 899px){
+    .lob_gamesListHeader .lob_gamesListBtn:first-child{
+        margin-left: 5px;
+    }
+    .lob_gamesListHeader .lob_gamesListBtn:last-child{
+        margin-right: 5px;
+    }
+}
+
+
+.displayType_switch_Btn_icon2{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    background: rgba(0,0,0,0.02);
+    margin-right: 3px;
+}
+.displayType_switch_Btn_icon2::after{
+    content: "";
+    position: absolute;
+    /*width: 2px;
+    height: 12px;
+    top: 4px;
+    left: 9px;*/
+    width: 2px;
+    height: 5px;
+    top: 9px;
+    left: 6px;
+    background: rgba(0,0,0,0.06);
+    transform: rotate(-45deg);
+    border-radius: 10px;
+}
+.displayType_switch_Btn_icon2::before{
+    content: "";
+    position: absolute;
+    /*width: 2px;
+    height: 12px;
+    top: 4px;
+    left: 9px;*/
+    width: 2px;
+    height: 10px;
+    top: 6px;
+    left: 11px;
+    background: rgba(0,0,0,0.06);
+    transform: rotate(45deg);
+    border-radius: 10px;
+
+}
+
+.lob_gamesListBtn:hover .displayType_switch_Btn_icon2::after,
+.lob_gamesListBtn:hover .displayType_switch_Btn_icon2::before{
+    background: #fff;
+}
+
+
+.lob_gamesListBtn.Active .displayType_switch_Btn_icon2{
+    background: rgba(255,255,255,0.3);
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
+}
+.lob_gamesListBtn.Active .displayType_switch_Btn_icon2::after{
+    background: #7199fd;
+}
+.lob_gamesListBtn.Active .displayType_switch_Btn_icon2::before{
+    background: #7199fd;
+}
+
+.lob_gamesListHeader2{
+    position: absolute;
+    right: 10px;
+    font-size:12px;
+    display:inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height:20px;
+}
+
+
+
+
+/* */
+
+
+
+
+.lob_gamesListCon{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.lob_gamesListCon .lob_gameListDiv{
+    position: relative;
+    /*float: left;*/
+    margin-right:-3px;
+    
+}
+.lob_gameListImg{
+    position: relative;   
+}
+.myFavorBtn{
+    position: absolute;
+    bottom: 36px;
+    background: rgba(255,255,255,0.3);
+    width: 29px;
+    height: 29px;
+    border-radius: 29px;
+    z-index: 2;
+    /*-webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);*/
+    transition: all 0.10s ease-out;
+    cursor: pointer;
+}
+
+
+
+
+.myFavorBtn::after{
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 15px;
+    height: 9px;
+    background: #aaa;
+    border-radius: 12px 0px 0px 12px;  
+    transform: rotate(45deg);
+    transition: all 0.10s ease-out;
+}
+.myFavorBtn::before{
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    width: 15px;
+    height: 9px;
+    background: #aaa;
+    border-radius: 0px 12px 12px 0px; 
+    transform: rotate(-45deg);
+    transition: all 0.10s ease-out;
+}
+
+
+
+
+
+.myFavorBtn:hover{
+    background: rgba(255,255,255,0.7);
+}
+
+.myFavorBtn:hover::after{
+    content: "";
+    position: absolute;
+    /*top: 9px;
+    left: 3px;
+    width: 18px;
+    height: 11px;*/
+    background: var(--main-color);
+    border-radius: 12px 0px 0px 12px;  
+    transform: rotate(45deg);
+}
+.myFavorBtn:hover::before{
+    content: "";
+    position: absolute;
+    /*top: 9px;
+    left: 8px;
+    width: 18px;
+    height: 11px;*/
+    background: var(--main-color);
+    border-radius: 0px 12px 12px 0px; 
+    transform: rotate(-45deg);
+}
+
+.myFavor .myFavorBtn{
+    background: var(--main-color);
+}
+.myFavor .myFavorBtn::after{
+    background: #fff;
+}
+.myFavor .myFavorBtn::before{
+    background: #fff;;
+} 
+ 
+.myFavor .myFavorBtn:hover{
+    background: var(--main-color);
+    box-shadow:inset 0px 0px 0px 2px rgba(255,255,255,0.3);
+}
+
+/* 愛心轉XX效果 */
+/*.myFavor .myFavorBtn:hover::after{
+    top: 14px;
+    left: 8px;
+    width: 15px;
+    height: 2px;
+    border-radius: 0px 0px 0px 0px;
+    transform: rotate(-45deg);
+}
+.myFavor .myFavorBtn:hover::before{
+    top: 14px;
+    left: 8px;
+    width: 15px;
+    height: 2px;
+    border-radius: 0px 0px 0px 0px;
+    transform: rotate(-135deg);
+} */
+
+.lob_gamesListNote{
+    width: 100%;
+    line-height: 20px;
+    padding: 20px 0px;
+    text-align: center;
+    color: #333;
+}
+

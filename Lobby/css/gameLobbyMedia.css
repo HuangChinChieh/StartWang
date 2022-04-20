@@ -1,0 +1,1830 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* 背景 */
+@media (min-width: 900px) {
+    .mainBgCube{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    .mainBgCube1{
+        position: absolute;
+        bottom: -350px;
+        left: -200px;
+        border-radius: 100%;
+        width: 800px;
+        height: 800px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1)); 
+        animation-name: cubeAni01;
+        animation-direction: alternate;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube2{
+        position: absolute;
+        bottom: 100px;
+        right: -150px;
+        border-radius: 100%;
+        width: 600px;
+        height: 600px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70));
+        background: linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70)); 
+        animation-name: cubeAni02;
+        animation-direction: alternate;
+        animation-duration: 6.3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube3{
+        position: absolute;
+        bottom: 250px;
+        left: 400px;
+        border-radius: 100%;
+        width: 200px;
+        height: 200px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        animation-name: cubeAni03;
+        animation-direction: alternate;
+        animation-duration: 4.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+}
+@keyframes cubeAni01{
+    0%{bottom: -350px;}
+    100%{bottom: -310px;}
+}
+@keyframes cubeAni02{
+    0%{bottom: 120px;}
+    100%{bottom: 80px;}
+}
+@keyframes cubeAni03{
+    0%{bottom: 250px;}
+    100%{bottom: 270px;}
+}
+
+/* 背景移動端 */
+@media screen and (max-width: 899px) and (orientation: portrait) {
+    .mainBgCube{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    .mainBgCube1{
+        position: absolute;
+        bottom: -175px;
+        left: -270px;
+        border-radius: 100%;
+        width: 500px;
+        height: 500px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1)); 
+        animation-name: cubeAni01A;
+        animation-direction: alternate;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube2{
+        position: absolute;
+        bottom: 250px;
+        right: -140px;
+        border-radius: 100%;
+        width: 300px;
+        height: 300px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70));
+        background: linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70)); 
+        animation-name: cubeAni02A;
+        animation-direction: alternate;
+        animation-duration: 6.3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube3{
+        position: absolute;
+        bottom: 225px;
+        left: 30px;
+        border-radius: 100%;
+        width: 150px;
+        height: 150px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        animation-name: cubeAni03A;
+        animation-direction: alternate;
+        animation-duration: 4.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+}
+@keyframes cubeAni01A{
+    0%{bottom: -155px;}
+    100%{bottom: -195px;}
+}
+@keyframes cubeAni02A{
+    0%{bottom: 230px;}
+    100%{bottom: 270px;}
+}
+@keyframes cubeAni03A{
+    0%{bottom: 200px;}
+    100%{bottom: 240px;}
+}
+
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+	.mainBgCube{
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+    .mainBgCube1{
+        position: absolute;
+        bottom: -175px;
+        left: -270px;
+        border-radius: 100%;
+        width: 500px;
+        height: 500px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1)); 
+        animation-name: cubeAni01B;
+        animation-direction: alternate;
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube2{
+        position: absolute;
+        bottom: 110px;
+        right: -140px;
+        border-radius: 100%;
+        width: 300px;
+        height: 300px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70));
+        background: linear-gradient(212deg, rgb(251,43,192,0.70), rgba(255,191,32, 0.70)); 
+        animation-name: cubeAni02B;
+        animation-direction: alternate;
+        animation-duration: 6.3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+    .mainBgCube3{
+        position: absolute;
+        bottom: 225px;
+        left: 30px;
+        border-radius: 100%;
+        width: 150px;
+        height: 150px;
+        background: #4568dc;
+        background: -webkit-linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        background: linear-gradient(145deg, rgba(113,211,253,0.5), rgba(98,95,225,0.1));
+        animation-name: cubeAni03B;
+        animation-direction: alternate;
+        animation-duration: 4.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+}
+@keyframes cubeAni01B{
+    0%{bottom: -155px;}
+    100%{bottom: -195px;}
+}
+@keyframes cubeAni02B{
+    0%{bottom: 120px;}
+    100%{bottom: 90px;}
+}
+@keyframes cubeAni03B{
+    0%{bottom: 200px;}
+    100%{bottom: 240px;}
+}
+
+
+/*版頭樣式-----------------------------  */
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+    .lob_headerLeft{width: auto;padding: 0px 30px;height: 120px;z-index: 1;}
+    .lob_headerRight .lob_NavDivBtn{margin-left: 20px;
+    }
+    .lob_NavDivBtn:hover{
+    background: rgba(0,0,0,0.5);
+    border: 3px solid rgba(185,161,121,0.5);}
+    .lob_headerRight{
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        box-sizing: border-box;
+        width: auto;
+        height: 120px;
+        -webkit-justify-content: flex-end;
+        -moz-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+    .lob_mainMenu{top:90px;left: -160px;width: 150px; }
+    .lob_NavSwitch .lob_mainMenu{left: 30px;}
+}
+
+/*   PC端樣式    */
+@media (max-width: 920px) {
+    .lob_LogoDiv{display: none;}
+}
+
+
+/*   移動端樣式    */
+@media (max-width: 767px) {
+   
+}
+
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {
+    .lob_headerLeft{width: 100%;justify-content: space-between;padding: 0px 5px;    height: 50px;background: rgba(55,59,78,1);box-sizing: border-box;}
+    .lob_UserIdDiv { margin-right: 15px;display: none;}
+    .lob_headerLeft .lob_NavDivBtn{background: none;}
+    .lob_headerLeft .lob_memberInfo{background: none;}
+    .lob_mainMenu{
+        top:50px;
+        left: -110%;
+        width: 100%; 
+        height: calc(100% - 50px);
+    }
+    .lob_NavSwitch .lob_mainMenu{left: 0px;}
+    /*.lob_headerRight{width: 100%;justify-content: space-around;padding: 0px 0px;margin: 20px auto;}
+    .lob_headerRight .lob_NavDivBtn{
+    margin-left: 0px;    
+    }*/
+    .lob_headerRight{height: 50px;padding: 0px 10px;}
+    .lob_headerRight{
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        box-sizing: border-box;
+        -webkit-justify-content: flex-end;
+        -moz-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+    .lob_headerRight .lob_NavDivBtn{
+        margin-left: 10px;    
+    }
+    /* */
+    
+}
+
+
+
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+    .lob_headerLeft{width: 100%;padding: 0px 10px;height: 80px;box-sizing: border-box;}
+    .lob_headerRight{height: 80px;padding: 0px 10px;}
+    .lob_headerRight{
+        position: fixed;
+        right: 0px;
+        top: 0px;
+        box-sizing: border-box;
+        -webkit-justify-content: flex-end;
+        -moz-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+    .lob_headerRight .lob_NavDivBtn{
+        margin-left: 10px;    
+    }
+    .lob_mainMenu{top:70px;left: -210px;width: 150px;height: calc(100% - 80px); }
+    .lob_NavSwitch .lob_mainMenu{left: 10px;}
+}
+
+/*內容樣式----------------------------- */
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+	.lob_gameTypeMain{
+		position: relative;
+		z-index: 9;
+		
+	}
+    .lob_gameTypeWrapper{margin-top:160px;
+    }
+    .lob_gameTypeBtn{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+    
+    /*.lob_gameTypeDiv::after{
+    content: "";
+    position: absolute;
+    left: -30px;
+    bottom: 0px;
+    width: 30px;
+    height: 2px; 
+    background: linear-gradient(-90deg,rgba(190,164,119,1),rgba(190,164,119,0));
+	}
+	.lob_gameTypeDiv::before{
+		content: "";
+		position: absolute;
+		right: -30px;
+		bottom: 0px;
+		width: 30px;
+		height: 2px;
+		background: linear-gradient(90deg,rgba(190,164,119,1),rgba(190,164,119,0));     
+	}*/
+}
+
+
+
+
+/*   移動端樣式    */
+@media (max-width: 767px) { }
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {
+	::-webkit-scrollbar
+	{
+		background-color: #222;
+		width: 0px;
+		height: 0px;
+	}
+    .lob_gameTypeMain{
+        
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 5;
+    }
+	
+    .lob_gameTypeWrapper{
+        height: 115px;
+    }
+	.lob_gameTypeDiv{
+		width: 100vw;
+		overflow: auto;	
+        background: linear-gradient(rgba(55,59,78,1),70%,rgba(55,59,78,0));
+	}
+	
+    .lob_gameTypeBtn{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    -webkit-backdrop-filter:blur(10px);
+    -moz-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    }
+
+	
+	
+}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+	
+	.lob_headerLeft {
+		height: 80px;
+        z-index: 1;
+	}
+	.lob_headerRight {height: 80px;}
+	
+	
+	.lob_gameTypeMain{
+        width: 100%;
+		position: fixed;
+        top: 0px;
+        left: 0px;
+        z-index: 9;
+		
+	}
+    .lob_gameTypeWrapper{
+    }
+    .lob_gameTypeBtn{
+    display: -wibkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -wibkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -wibkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+}
+
+/*新內容樣式----------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+/*品牌樣式----------------------------- */
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+	.lob_gameLobbyMain{
+		display: -wibkit-flex;
+        display: -moz-flex;
+        display: flex;
+        -wibkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -wibkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        justify-content:space-around;
+		/*margin-top: 30px;*/
+		margin-top: 8px;
+		min-height: 320px;
+		/*max-height: calc(100vh - 190px);*/
+		max-height: calc(100vh - 168px);
+		width: auto;
+		max-width: 100vw;
+		overflow: auto;
+        -webkit-overflow-scrolling:touch;
+	}
+    /*.lob_gameBrandWrapper{
+        height: calc(100vh - 350px);
+        max-height: 500px;
+        min-height: 200px;
+        display: -wibkit-flex;
+        display: -moz-flex;
+        display: flex;
+        -wibkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -wibkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        justify-content:space-around;
+		-webkit-flex-wrap: wrap;
+		-moz-flex-wrap: wrap;
+		flex-wrap: wrap;
+    }*/
+	.lob_gameBrandWrapper{
+        -webkit-overflow-scrolling:touch;
+		width: auto;
+		max-width: 900px;
+		/*display: -webkit-flex;
+		display: -moz-flex;
+		display: flex;
+    	flex-wrap: -webkit-wrap;
+    	flex-wrap: -moz-wrap;
+    	flex-wrap: wrap;*/
+    }
+	
+	.lob_gameBrandWrapper{
+		
+    }
+	
+	
+	
+    .lob_gameBrandDiv{
+		text-align: center;
+		display: inline-block;
+		margin: 20px auto;
+	}
+	
+	.lob_gameBrandDiv.BrandShow{
+		max-width: 299px;
+		animation-name: BrandShowAni;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+		animation-iteration-count:1;
+		animation-duration: 2s;
+	}
+	
+	.lob_gameBrandDiv.BrandHidden{width: 0px;margin: 0px;}
+	
+    .lob_gameBrandImg{display: block;height: 100%}
+    .lob_gameBrandImg_M{}
+    .lob_gameBrandImg img{width:auto; height:80%;margin: 0px auto;}
+    .lob_gameBrandImg_M img{}	
+}
+
+	@keyframes BrandShowAni {
+		0%{}
+		100%{}
+	}
+
+/*   PC端樣式微調    */
+@media (min-width: 1600px) {
+	.lob_gameBrandWrapper{
+		max-width: 1500px;
+    }
+	.lob_gameBrandDiv.BrandShow{
+		max-width: 374px;
+	}
+}
+
+/*新品牌樣式----------------------------- */
+/*   PC端樣式    */
+@media (min-width: 900px) {
+	.lob_gameLobbyMain{
+		display: -wibkit-flex;
+        display: -moz-flex;
+        display: flex;
+        -wibkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -wibkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        justify-content:space-around;
+		/*margin-top: 30px;*/
+		margin-top: 8px;
+		min-height: 320px;
+		/*max-height: calc(100vh - 190px);*/
+		max-height: calc(100vh - 194px);
+		width: auto;
+		max-width: 100vw;
+		overflow: auto;
+        -webkit-overflow-scrolling:touch;
+	}
+
+	.lob_gameBrandWrapper{
+		width: auto;
+		max-width: 900px;
+        -webkit-overflow-scrolling:touch;
+    }
+	
+	.lob_gameBrandWrapper{
+		
+    }
+
+    .lob_gameBrandDiv{
+        position: relative;
+		text-align: center;
+		display: inline-block;
+		margin: 40px auto 5px;
+
+	}
+	
+	.lob_gameBrandDiv.BrandShow{
+        position: relative;
+		max-width: 299px;
+		/*width: 33%;*/
+        width: calc(100vw / 3);
+        height: 180px;
+		animation-name: BrandShowAni;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+		animation-iteration-count:1;
+		animation-duration: 2s;
+	}
+	
+	.lob_gameBrandDiv.BrandShow::after{
+        content: "";
+        opacity: 0;
+        position: absolute;
+        height: 0px;
+        width: 30px;
+        left: calc((100% - 30px) / 2);
+        bottom: 0px;
+        background: rgba(150,250,255,1.0);
+        box-shadow: 0px -30px 50px 10px rgba(100,150,255,0.8),
+                    0px 0px 5px 0px rgba(100,150,255,1.3),
+                    0px 0px 10px 0px rgba(100,150,255,1.3),
+                    0px 0px 15px 0px rgba(100,150,255,1.3);
+        z-index: -1;
+        border-radius: 80%;
+        transition: all ease-in 0.3s;
+    }
+    .lob_gameBrandDiv.BrandShow:hover::after{
+        height: 8px;
+        opacity: .8;
+        bottom: 0px;
+        width: 220px;
+        left: calc((100% - 230px) / 2);
+    }
+	
+    
+   .lob_gameBrandDiv.BrandShow::before{
+        content: "";
+        opacity: 0;
+        position: absolute;
+        height: 1px;
+        width: 30px;
+        left: calc((100% - 30px) / 2);
+        top: 60px;
+        background: rgba(150,250,255,1.0);
+        box-shadow: 0px 30px 50px 10px rgba(100,150,255,0.8),
+                    0px 0px 5px 0px rgba(100,150,255,1.3),
+                    0px 0px 10px 0px rgba(100,150,255,1.3),
+                    0px 0px 15px 0px rgba(100,150,255,1.3);
+        z-index: -1;
+        border-radius: 80%;
+        transition: all ease-in 0.3s;
+    }
+    .lob_gameBrandDiv.BrandShow:hover::before{
+        height: 8px;
+        opacity: 0.5;
+        top: 60px;
+        width: 220px;
+        left: calc((100% - 230px) / 2);
+    }
+    
+    
+    .lob_gameBrandPanel{
+        position: absolute;
+        bottom:0px;left: 0px;
+        width: 95%;
+        height: 120px;
+        border-radius: 20px;
+        background: linear-gradient(145deg,rgba(255,255,255,0.05),rgba(105,155,255,0.3));
+        -webkit-backdrop-filter:blur(8px);
+        backdrop-filter:blur(8px);
+        box-shadow: 0px 10px 20px 0px rgba(40,60,150,0.6);
+        border-top:1px solid rgba(255,225,155,0.6);
+        border-bottom:1px solid rgba(105,155,255,0.4);
+		transform-style: preserve-3d;
+    }
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandPanel{
+        background: linear-gradient(145deg,rgba(255,255,255,0.2),rgba(105,155,255,0.5));
+    }
+	
+	.lob_gameBrandDiv.BrandHidden{width: 0px;margin: 0px;height: 0px;overflow: hidden;}
+	
+    .lob_gameBrandImg{position: absolute;bottom: 55px;right: -10px;  display: block;height: 100%;}
+    .lob_gameBrandImg_M{
+		box-sizing: border-box;
+		position: absolute;
+		top: 15px;
+		left: 30px;
+		width: 50px;
+		height: 50px;	
+		border-radius: 15px;
+		/*overflow: hidden;*/
+		/*background: linear-gradient(145deg,rgba(0,0,0,0.5),rgba(50,40,50,0.9));*/
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-top: 1px solid rgba(255,255,255,0.3);
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		box-shadow: 0px 5px 20px 0px rgba(100,150,250,0.5);		
+	}
+	.lob_gameBrandImg_M::after{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		z-index: -1;
+		border-radius: 18px;
+		transform: rotate(-16deg);
+	}
+	.lob_gameBrandImg_M::before{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		background:linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		z-index: -1;
+		border-radius: 18px;
+	}
+	
+	
+	
+	
+	
+	
+    .lob_gameBrandImg img{width:auto; height:160%;margin: 0px auto;transition: all 0.3s;}
+    .lob_gameBrandImg_M img{width:100%; height:auto;}
+    
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg{}
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg img{height:168%;}
+	.lob_gameBrandName {
+		position: absolute;
+		color: #fff;
+		text-align: left;
+		font-weight: bolder;
+		font-size: 18px;
+		text-shadow: 4px 2px 10px rgba(0,20,80,0.8);
+		bottom: 14px;
+    	left: 0px;
+		padding: 5px 0px;
+		width: 100%;
+		text-indent: 15px;
+		/*background: rgba(10,10,10,0.5);
+		backdrop-filter: blur(8px);*/
+	}
+	.lob_gameBrandStart{
+		opacity: 0;
+		position: absolute;
+		right: 10px;
+		bottom: 0px;
+		display: table;
+		padding: 10px 20px;
+		border-radius: 50px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.8), rgba(98,95,225,0.6));
+		color: #fff;
+		-webkit-backdrop-filter:blur(15px);
+		backdrop-filter:blur(15px);
+		transition: all ease-in 0.2s;
+	}
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandStart{
+		opacity: 1;
+		right: 10px;
+		bottom: 10px;
+		box-shadow: 0px 5px 20px 0px rgba(0,50,100,0.5);
+	}
+		
+}
+
+	@keyframes BrandShowAni {
+		0%{}
+		100%{}
+	}
+
+/*   PC端樣式微調    */
+@media (min-width: 1600px) {
+	.lob_gameBrandWrapper{
+		max-width: 1500px;
+    }
+	.lob_gameBrandDiv.BrandShow{
+		max-width: 374px;
+        margin: 60px auto 20px;
+	}
+	.lob_gameBrandName{font-size: 24px;}
+    .lob_gameBrandPanel{height: 160px;}
+    .lob_gameBrandImg{position: absolute;bottom: 48px;right: -12px;  display: block;height: 100%}
+    .lob_gameBrandImg_M{top: 20px;left: 35px;width: 70px;height: 70px;border-radius: 20px;}
+	.lob_gameBrandImg_M::after,.lob_gameBrandImg_M::before{border-radius: 23px;}
+    .lob_gameBrandImg img{width:auto; height:143%;margin: 0px auto;}
+    .lob_gameBrandImg_M img{width:100%; height:auto;}
+    .lob_gameBrandDiv.BrandShow:hover::after{
+        width: 300px;
+        left: calc((100% - 310px) / 2);
+    }
+    .lob_gameBrandDiv.BrandShow::before{
+        width: 30px;
+        left: calc((100% - 30px) / 2);
+        top: 20px;
+    }
+    .lob_gameBrandDiv.BrandShow:hover::before{
+        width: 300px;
+        top: 20px;
+        left: calc((100% - 310px) / 2);
+    }
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg img{height:148%;}
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandStart{
+		bottom: 15px;
+	}
+}
+
+
+
+
+
+/*   移動端樣式    */
+@media (max-width: 767px) { }
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {
+	.lob_gameTypeDiv{
+		position: absolute;
+		top:50px;
+        left: 0px;
+	}
+	
+	.lob_wrapper,.lob_gameLobbyMain{
+        position: relative;width: 100%;height: 100%;
+    }
+    .lob_gameLobbyMain{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        
+    }
+	/*.lob_gameTypeMain::after{
+		content: "";
+		position: absolute;
+		top: -1px;
+		left: 0px;
+		right: 0px;
+		width: 100%;
+		height: 30px;
+		background: rgb(55 59 78);
+		background:linear-gradient( rgba(55,59,78,1) 0%,rgba(55,59,78,1) 3%,rgba(55,59,78,0) 100%);
+		
+	}*/
+	
+	
+	
+    	.lob_gameBrandWrapper {
+            position: relative;
+			/*height: -webkit-calc(100% - 160px);
+			height: -moz-calc(100% - 160px);
+			height: calc(100% - 160px);*/
+            height: 100%;
+			
+			overflow: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling:touch;
+            /*padding-bottom: calc(env(safe-area-inset-bottom) +  env(safe-area-inset-top));
+            padding-bottom: calc(constant(safe-area-inset-bottom) +  constant(safe-area-inset-top));*/
+            padding-top: 130px;
+            margin: 0px
+		}
+    
+    .itsTheEnd{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        color: rgba(255,255,255,0.3);
+        left: 0;
+        right: 0;
+        bottom: 100px;
+        font-size: 0.8em;
+    }
+    
+    .lob_gameBrandDiv{
+        box-sizing: border-box;
+        width:calc(100% - 30px);
+        max-width: 540px;
+        margin: 20px auto;
+        /*padding: 10px 15px;*/
+        border-radius: 15px;
+        /*background: rgba(0,0,0,0.15);*/
+    }
+	
+	
+    /*.lob_gameBrandDiv{text-align: center;}
+    .lob_gameBrandImg{display: none;}
+    .lob_gameBrandImg_M{display: block;}
+    .lob_gameBrandImg img{display: none;}
+    .lob_gameBrandImg_M img{height: auto; width: 100%;}
+    .lob_gameBrandName{
+        padding: 5px 0px;
+        
+    }*/
+	
+	/*新樣式 */
+	 .lob_gameBrandDiv{
+        position: relative;
+		text-align: center;
+		display: inline-block;
+		margin: 50px auto 5px;
+
+	}
+	
+	.lob_gameBrandDiv.BrandShow{
+        position: relative;
+		max-width: none;
+		width: 100%;
+        /*height: 180px;*/
+		animation-name: BrandShowAni;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+		animation-iteration-count:1;
+		animation-duration: 2s;
+	}
+	
+	.lob_gameBrandDiv.BrandShow::after{
+        content: "";
+        opacity: 0;
+        position: absolute;
+        height: 0px;
+        width: 30px;
+        left: calc((100% - 30px) / 2);
+        bottom: 0px;
+        background: rgba(150,250,255,1.0);
+        box-shadow: 0px -30px 50px 10px rgba(100,150,255,0.8),
+                    0px 0px 5px 0px rgba(100,150,255,1.3),
+                    0px 0px 10px 0px rgba(100,150,255,1.3),
+                    0px 0px 15px 0px rgba(100,150,255,1.3);
+        z-index: -1;
+        border-radius: 80%;
+        transition: all ease-in 0.3s;
+    }
+    .lob_gameBrandDiv.BrandShow:hover::after{
+        height: 8px;
+        opacity: .8;
+        bottom: 0px;
+        width: 220px;
+        left: calc((100% - 230px) / 2);
+    }
+	
+    
+   .lob_gameBrandDiv.BrandShow::before{
+        content: "";
+        opacity: 0;
+        position: absolute;
+        height: 1px;
+        width: 30px;
+        left: calc((100% - 30px) / 2);
+        top: 2px;
+        background: rgba(150,250,255,1.0);
+        box-shadow: 0px 30px 50px 10px rgba(100,150,255,0.8),
+                    0px 0px 5px 0px rgba(100,150,255,1.3),
+                    0px 0px 10px 0px rgba(100,150,255,1.3),
+                    0px 0px 15px 0px rgba(100,150,255,1.3);
+        z-index: -1;
+        border-radius: 80%;
+        transition: all ease-in 0.3s;
+    }
+    .lob_gameBrandDiv.BrandShow:hover::before{
+        height: 8px;
+        opacity: 0.5;
+        top: 2px;
+        width: 220px;
+        left: calc((100% - 230px) / 2);
+    }
+    
+    
+    .lob_gameBrandPanel{
+        position: relative;
+        width:calc(100% - 30px);
+		margin: 0px 15px;
+        height: 120px;
+        border-radius: 20px;
+        background: linear-gradient(145deg,rgba(255,255,255,0.05),rgba(105,155,255,0.3));
+        -webkit-backdrop-filter:blur(8px);
+        backdrop-filter:blur(8px);
+        box-shadow: 0px 10px 20px 0px rgba(40,60,150,0.6);
+        border-top:1px solid rgba(255,225,155,0.6);
+        border-bottom:1px solid rgba(105,155,255,0.4);
+		transform-style: preserve-3d;
+    }
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandPanel{
+        background: linear-gradient(145deg,rgba(255,255,255,0.2),rgba(105,155,255,0.5));
+    }
+	
+	.lob_gameBrandDiv.BrandHidden{width: 0px;margin: 0px;height: 0px;overflow: hidden;}
+	
+    .lob_gameBrandImg{position: absolute;bottom: 55px;right: 15px;  display: block;height: 100%;}
+    .lob_gameBrandImg_M{
+		box-sizing: border-box;
+		position: absolute;
+		top: 15px;
+		left: 40px;
+		width: 50px;
+		height: 50px;	
+		border-radius: 15px;
+		/*overflow: hidden;*/
+		/*background: linear-gradient(145deg,rgba(0,0,0,0.5),rgba(50,40,50,0.9));*/
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-top: 1px solid rgba(255,255,255,0.3);
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		box-shadow: 0px 5px 20px 0px rgba(100,150,250,0.5);		
+	}
+	.lob_gameBrandImg_M::after{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		z-index: -1;
+		border-radius: 18px;
+		transform: rotate(-16deg);
+	}
+	.lob_gameBrandImg_M::before{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		background:linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		z-index: -1;
+		border-radius: 18px;
+	}
+	
+	
+	
+	
+	
+	
+    .lob_gameBrandImg img{width:auto; height:185px;margin: 0px auto;transition: all 0.3s;}
+    .lob_gameBrandImg_M img{width:100%; height:auto;}
+    
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg{}
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg img{height:195px;}
+	.lob_gameBrandName {
+		position: absolute;
+		color: #fff;
+		text-align: left;
+		font-weight: bolder;
+		font-size: 18px;
+		text-shadow: 4px 2px 10px rgba(0,20,80,0.8);
+		bottom: 14px;
+    	left: 0px;
+		padding: 5px 0px;
+		width: 100%;
+		text-indent: 30px;
+		/*background: rgba(10,10,10,0.5);
+		backdrop-filter: blur(8px);*/
+	}
+	.lob_gameBrandStart{
+		opacity: 1;
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		display: table;
+		padding: 10px 20px;
+		border-radius: 50px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.8), rgba(98,95,225,0.6));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.8), rgba(98,95,225,0.6));
+		color: #fff;
+		-webkit-backdrop-filter:blur(15px);
+		backdrop-filter:blur(15px);
+		transition: all ease-in 0.2s;
+		box-shadow: 0px 5px 20px 0px rgba(0,50,100,0.5);
+	}
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandStart{
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.9));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.9));
+	}
+	
+	
+	
+}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+    body{
+        /*height: 100% !important;*/
+        
+    }
+	.lob_gameTypeDiv{
+		position: absolute;
+		top:47px;		
+	}
+	.lob_wrapper,.lob_gameLobbyMain{
+        position: relative;width: 100%;height: 100%;
+    }
+    .lob_gameLobbyMain{
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        max-height: none;
+        margin: 0px;
+		z-index: 5;
+    }
+    
+    
+	/*.lob_gameLobbyMain{
+		
+		display: -wibkit-flex;
+		display: -moz-flex;
+		display: flex;
+		-webkit-align-items: center;
+		-moz-align-items: center;
+		align-items: center;
+		-webkit-justify-content: space-around;
+		-moz-justify-content: space-around;
+		justify-content: space-around;
+        -webkit-overflow-scrolling:touch;
+		margin-top: 8px;
+		min-height: 320px;
+		max-height: calc(100vh - 168px);
+		width: auto;
+		max-width: 100vw;
+		overflow: hidden;
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+		box-sizing: border-box;
+		width: 100vw;
+		display: -wibkit-flex;
+        display: -moz-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -webkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        justify-content:space-around;
+		min-height: none;
+		
+		
+	}*/
+	
+	
+    /*.lob_gameBrandWrapper{
+		margin-top: 8px;
+        height: calc(100vh - 113px);
+        display: -wibkit-flex;
+        display: -moz-flex;
+        display: flex;
+        -wibkit-align-items: center;
+        -moz-align-items: center;
+        align-items: center;
+        -wibkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        justify-content:space-around;
+		flex-wrap: wrap;
+		overflow: auto;
+    }*/
+	.lob_gameBrandWrapper{
+		
+		padding: 10px;
+		height: 100%;
+		width: auto;
+		max-width: 100vw;
+		/*overflow: auto;*/
+		overflow: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling:touch;
+        margin: 0px;
+        padding-top: 120px;
+    }
+	
+	
+		
+	.lob_gameBrandDiv{
+		text-align: center;
+		display: inline-block;
+		margin: 10px auto 0px;
+	}
+	
+	
+	
+	.lob_gameBrandDiv.BrandShow{
+		position: relative;
+		/* width: 33%; */
+		height: 150px;
+		width:calc((100vw - 40px) / 3);
+		max-width: 299px;
+		animation-name: BrandShowAni;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+		animation-iteration-count:1;
+		animation-duration: 2s;
+	}
+	
+	.lob_gameBrandDiv.BrandHidden{width: 0px;margin: 0px;}	
+	
+	
+	.lob_gameBrandPanel{
+        position: absolute;
+        bottom:0px;left: 0px;
+        width: 95%;
+        height: 100px;
+        border-radius: 20px;
+        background: linear-gradient(145deg,rgba(255,255,255,0.05),rgba(105,155,255,0.3));
+        -webkit-backdrop-filter:blur(8px);
+        backdrop-filter:blur(8px);
+        box-shadow: 0px 10px 20px 0px rgba(40,60,150,0.6);
+        border-top:1px solid rgba(255,225,155,0.6);
+        border-bottom:1px solid rgba(105,155,255,0.4);
+		transform-style: preserve-3d;
+    }
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandPanel{
+        background: linear-gradient(145deg,rgba(255,255,255,0.2),rgba(105,155,255,0.5));
+    }
+	
+	.lob_gameBrandDiv.BrandHidden{width: 0px;margin: 0px;height: 0px;overflow: hidden;}
+	
+    .lob_gameBrandImg{position: absolute;bottom: 36px;right: -10px;  display: block;height: 100%;}
+    .lob_gameBrandImg_M{
+		box-sizing: border-box;
+		position: absolute;
+		top: 10px;
+		left: 20px;
+		width: 50px;
+		height: 50px;	
+		border-radius: 15px;
+		/*overflow: hidden;*/
+		/*background: linear-gradient(145deg,rgba(0,0,0,0.5),rgba(50,40,50,0.9));*/
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-top: 1px solid rgba(255,255,255,0.3);
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		box-shadow: 0px 5px 20px 0px rgba(100,150,250,0.5);		
+	}
+	.lob_gameBrandImg img{width:auto; height:150%;margin: 0px auto;transition: all 0.3s;}
+    .lob_gameBrandImg_M img{width:100%; height:auto;}
+    
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg{}
+    .lob_gameBrandDiv.BrandShow:hover .lob_gameBrandImg img{height:155%;}
+	.lob_gameBrandStart{
+		opacity: 1;
+		position: absolute;
+		right: 10px;
+		bottom: 7px;
+		display: table;
+		padding: 5px 12px;
+		border-radius: 50px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.8), rgba(98,95,225,0.6));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.8), rgba(98,95,225,0.6));
+		color: #fff;
+		-webkit-backdrop-filter:blur(15px);
+		backdrop-filter:blur(15px);
+		transition: all ease-in 0.2s;
+		box-shadow: 0px 5px 20px 0px rgba(0,50,100,0.5);
+	}
+	.lob_gameBrandDiv.BrandShow:hover .lob_gameBrandStart{
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.9));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.9));
+	}
+	.lob_gameBrandImg_M::after{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		background: linear-gradient( 145deg, rgba(113,153,253,0.9), rgba(98,95,225,0.1));
+		z-index: -1;
+		border-radius: 18px;
+		transform: rotate(-16deg);
+	}
+	.lob_gameBrandImg_M::before{
+	    position: absolute;
+		content: "";
+		width: calc(100% + 6px);
+		height: calc(100% + 3px);
+		left: -3px;
+		top: -2px;
+		background: -webkit-linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		background:linear-gradient( 145deg, rgb(193 113 253 / 90%), hsl(266deg 68% 63% / 10%));
+		z-index: -1;
+		border-radius: 18px;
+	}
+	.lob_gameBrandName {
+		position: absolute;
+		color: #fff;
+		text-align: left;
+		font-weight: bolder;
+		font-size: 14px;
+		text-shadow: 4px 2px 10px rgba(0,20,80,0.8);
+		bottom: 7px;
+    	left: 0px;
+		padding: 5px 0px;
+		width: 100%;
+		text-indent: 15px;
+		/*background: rgba(10,10,10,0.5);
+		backdrop-filter: blur(8px);*/
+	}
+	
+}
+
+/*遊戲列表----------------------------- */
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+    .lob_gameListWrapper{
+        position: relative;
+        box-sizing: border-box;
+        height: calc(100vh - 110px);
+        /*margin-top: -60px;*/
+    }
+    .lob_gameListBrand{
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        padding: 15px 30px;
+        height: 52px;
+        line-height: 40px;
+        font-size: 20px;
+        color: var(--main-color);
+        padding-bottom: 10px;
+        background:linear-gradient(180deg,rgba(55,59,78,1),rgba(55,59,78,0.8));
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 5px 15px 2px rgba(55,59,78,1);
+    }
+    .lob_gameListMain{
+        box-sizing: border-box;
+        height: calc(100vh - 220px);
+        padding: 60px 30px 30px 30px;
+        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        
+    }
+    .lob_gameListDiv{
+        position: relative;
+        /*float: left;*/
+		display: inline-block;
+        box-sizing: content-box;
+        margin-bottom: 40px;
+    }
+    .lob_gameListBtn{
+
+    }
+    .lob_gameListImg{
+        margin: 0 auto;
+        height: auto;
+        text-align: center;
+    }
+    .lob_gameListImg img{
+        width: 85%;
+        margin: 0 auto;
+        height: auto;
+    }
+    .myFavorBtn{
+        right:10%;
+    }
+    .lob_gameListName{
+        text-align: center;
+        color: #fff;
+		font-size: 14px;
+    }
+	.lob_gameListBackBtn{}
+}
+
+
+
+
+/*   移動端樣式    */
+@media (max-width: 767px) { }
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {
+    .lob_gameListWrapper{
+        position: relative;
+        box-sizing: border-box;
+        height: calc(100vh - 80px);
+        /*margin-top: -20px;*/
+    }
+    .lob_gameListBrand{
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        padding: 15px 0px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        color:var(--main-color);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background:linear-gradient(180deg,rgba(55,59,78,1),rgba(55,59,78,0.8));
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 5px 15px 2px rgba(55,59,78,1);
+    }
+    .lob_gameListMain{
+        box-sizing: border-box;
+        height: calc(100vh - 80px);
+        padding: 50px 15px 30px 15px;
+        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        
+    }
+    .lob_gameListDiv{
+        position: relative;
+        /*float: left;*/
+		display: inline-block;
+        box-sizing: content-box;
+        margin-bottom: 10px;
+    }
+    .lob_gameListBtn{
+
+    }
+
+	
+    .lob_gameListImg{
+        margin: 0 auto;
+        height: auto;
+        text-align: center;
+    }
+    .lob_gameListImg img{
+        width: 95%;
+        margin: 0 auto;
+        height: auto;
+    }
+    .myFavorBtn{
+        right:5%;
+    }
+    .lob_gameListName{
+        text-align: center;
+        color: #fff;
+		font-size: 12px;
+    }
+    .lob_gameListBackBtn{
+		width: 35px;
+        border-radius: 0px;     
+    }
+	.lob_gameListTit{
+		width: calc(100% - 35px);
+	}
+}
+
+/*針對移動端垂直向 iphone SE*/
+@media screen and (max-width: 340px) and (orientation: portrait) {
+	.lob_gameListWrapper {/*margin-top: -13px;*/}
+	.lob_gameListMain{height: calc(100vh - 117px);}
+}
+
+
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+	
+    .lob_gameListWrapper{
+        position: relative;
+        box-sizing: border-box;
+        height: calc(100vh - 70px);
+        /*margin-top: -60px;*/
+        margin-bottom: 10px;
+    }
+    .lob_gameListBrand{
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        padding: 15px 0px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        color: rgba(185,161,121,1.0);
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background:linear-gradient(180deg,rgba(55,59,78,1),rgba(55,59,78,0.8));
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 5px 15px 2px rgba(55,59,78,1);
+    }
+    .lob_gameListMain{
+        box-sizing: border-box;
+        height: calc(100vh - 80px);
+        padding: 50px 15px 30px 15px;
+        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        
+    }
+    .lob_gameListDiv{
+        position: relative;
+        /*float: left;*/
+		display: inline-block;
+        box-sizing: content-box;
+        margin-bottom: 10px;
+    }
+    .lob_gameListBtn{
+
+    }
+    .lob_gameListImg{
+        margin: 0 auto;
+        height: auto;
+        text-align: center;
+    }
+    .lob_gameListImg img{
+        width: 95%;
+        margin: 0 auto;
+        height: auto;  
+    }
+    .myFavorBtn{
+        right:5%;
+    }
+    .lob_gameListName{
+        text-align: center;
+        color: #fff;
+		font-size: 12px;
+    }
+    .lob_gameListBackBtn{
+        border-radius: 0px;     
+    }
+	.lob_gameListTit{
+		font-size: 16px;
+		
+	}
+}
+
+
+/* 聊天室窗 */
+
+.ChatFrameParent{
+	position: fixed;
+	bottom: 10px;
+	right: 20px;
+	z-index: 99999;
+	
+}
+
+.ChatFrame {
+	width: calc(100vw - 40px);
+    max-width: 450px;
+    height: 450px;
+}
+
+
+
+.ChatFrameHeader{
+	position: relative;
+	width: 100%;
+	height: 40px;
+	background: #393C4C;
+    background: -moz-linear-gradient(-145deg,#4b4d5b,#2c2d38);
+    background: -webkit-linear-gradient(-145deg,#4b4d5b,#2c2d38);
+    background: linear-gradient(-145deg,#4b4d5b,#2c2d38);
+	border-radius: 15px 15px 0px 0px;
+	line-height: 40px;
+	color: #fff;
+	text-indent: 15px;
+	
+}
+.ChatCloseBtn{
+	position: absolute;
+	right: 10px;
+	top: 7px;
+	width: 25px;
+	height: 25px;
+	background-image: url("../images/closeIcon.svg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 50%;
+	border-radius: 100px;
+	cursor: pointer;
+}
+.ChatCloseBtn:hover{
+	background-color: rgba(0,0,0,0.2);
+	
+}
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {
+    .ChatFrameParent{
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px
+    }
+	.ChatFrame {
+		height: calc(100% - 40px);
+        width: 100%;
+		max-width: none;
+			
+	}
+    .ChatFrameParent{
+        padding-bottom: 10px;
+    }
+}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {
+	.ChatFrame {
+		height: 250px;
+	}
+}
+
+
+
+
+/*針對移動端水平向 iphone SE*/
+@media screen and (max-width: 580px) and (orientation: landscape) {
+	.lob_gameTypeWrapper{/*height: 60px;margin-top: 65px;*/}
+	.lob_gameBrandImg img{height: 120px; width: auto;}
+	.lob_gameListWrapper{/*margin-top: -50px;*/}
+	.lob_gameListMain{height: calc(100vh - 75px);}
+	.lob_gameListTit #idGameItemTitle{opacity: 0;}
+	.lob_gameBrandName {font-size: 10px;padding: 5px 0px;text-indent: 10px;}
+	.lob_gameBrandStart {padding: 4px 8px;}
+    
+    .lob_gameTypeDiv{
+        overflow: auto;
+        padding-left:150px; 
+    }
+}
+
+
+
+/* img設定 */
+@media (min-width: 768px) and (max-width: 1200px) {.lob_gameListDiv{width: 20%;} }
+@media (min-width: 1201px) {.lob_gameListDiv{width: 16.666%;} }
+@media (min-width: 500px) and (max-width: 767px) {.lob_gameListDiv{width: 25%;} }
+@media (min-width: 390px) and (max-width: 499px) {.lob_gameListDiv{width: 33.3%;} }
+@media (max-width: 389px) {.lob_gameListDiv{width: 50%;} }
+
+
+
+
+/*  新的遊戲篩選 品牌/全遊戲 切換  */
+
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+
+}
+/*   移動端樣式    */
+@media (max-width: 899px) { 
+    .displayType_switch{
+        position: absolute;
+        z-index: 9;
+        left: 6px;
+        top: 56px;
+    }
+    .displayType_switch_Btn{
+        display: block;
+    }
+    
+    .displayType_switch_Btn_G{
+        padding: 5px 6px;
+        margin: 0px auto 5px;
+    }
+    .displayType_switch_Btn_icon {
+        width: 18px;
+        height: 18px;
+    }
+    .displayType_switch_Btn_icon::after {
+        top: 8px;
+        left: 5px;
+    }
+    .displayType_switch_Btn_icon::before {
+        top: 5px;
+        left: 10px;
+    }
+    
+    
+    /*分類位置調整 */
+    .lob_gameTypeDiv{
+        box-sizing: border-box;
+        padding-left: 90px;
+        padding-right: 8px;
+        display: block;
+        white-space:nowrap;
+        
+    }
+    .lob_gameTypeBtn{
+        display: inline-flex;
+        
+    }
+    /*針對移動端水平向 iphone SE*/
+@media screen and (max-width: 580px) and (orientation: landscape) {
+
+    .lob_gameTypeDiv{
+        overflow: auto;
+        padding-left:100px; 
+        width: 100vw;
+    }
+    ::-webkit-scrollbar {
+    background-color: #222;
+    width: 0px;
+    height: 0px;
+    }
+}
+
+    
+    /* 遊戲歷程 */
+
+    .myLastPlayed {
+        position: fixed;
+        top: 110px;
+        right: 0px;
+        height: calc(100% - 110px);
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 5;
+    }
+    .myLastPlayedDIv{
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px 3px 2px;
+        max-width: 375px;
+    }
+    .myLastPlayedHeader{
+        position: relative;
+        top:-2px;
+        display: inline-block;
+        width: 60px;
+        border-bottom: 0px solid rgba(255,255,255,0.2);
+        border-right: 0.5px solid rgba(255,255,255,0.2);
+        padding-bottom: 0px;
+    }
+    .myLastPlayedCon{
+        display: inline-block;
+        width: calc(100% - 70px);
+    }
+    .myLastPlayedItem{
+        position: relative;
+        top:1px;
+        display: inline-block;
+        pointer-events:all; 
+        
+    }
+    .myLastPlayedItem{width: 18.5%;margin: 0px auto;height: auto;}
+    .myLastPlayedItem img{ width: 100%; border: 2px solid rgba(255,255,255,0.3);}
+}
+
+.lob_gameBrandWrapper{
+    padding-bottom: 100px;
+}
+
+
+/*針對移動端垂直向小螢幕*/	
+@media screen and (max-width: 360px) and (orientation: portrait) {
+    .myLastPlayedHeader img{width: 40%;}
+}
+
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {}
+
+
+
+
+
+
+/******----------------------------- */
+
+/*   PC端樣式    */
+@media (min-width: 900px) {
+	.comdPopUp_show .comdCon {
+        position: fixed;
+		top: 140px;
+		left: 100px;
+		width:calc(100% - 200px);
+		height: calc(100% - 200px);
+        margin-left:auto;
+        margin-top: auto;
+        z-index: 10;
+	}
+}
+/*   移動端樣式    */
+@media (max-width: 899px) { 
+    .comdPopUp_show .comdCon {
+        position: fixed;
+		top: 60px;
+		left: 20px;
+		width:calc(100% - 40px);
+		height: calc(100% - 80px);
+        margin-left:auto;
+        margin-top: auto;
+        z-index: 10;
+	}
+}
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {}
+
+
+
+
+
+/*   PC端樣式    */
+@media (min-width: 900px) {}
+/*   移動端樣式    */
+@media (max-width: 899px) { }
+/*針對移動端垂直向*/	
+@media screen and (max-width: 899px) and (orientation: portrait) {}
+/*針對移動端水平向*/
+@media screen and (max-width: 899px) and (orientation: landscape) {}
+

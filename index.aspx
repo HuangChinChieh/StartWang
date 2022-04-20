@@ -67,7 +67,7 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="/Scripts/qcode-decoder.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
 <script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>
 <!-- Swiper JS -->
@@ -92,15 +92,6 @@
             ]
         });
     });
-</script>
-<!-- Dropdown NAV MENU-->
-<script type="text/javascript">
-    function dropdownFunction() {
-        var elementdiv = document.getElementById("dropdownDiv");
-        var elementbtn = document.getElementById("dropdownDiv-btn");
-        elementdiv.classList.toggle("dropdownDiv-down");
-        elementbtn.classList.toggle("dropdownDiv-btn-press");
-    }
 </script>
 <script>
     var c = new common();
@@ -140,7 +131,6 @@
     function API_GetLang() {
         return lang;
     }
-
 
     function API_ShowMessage(title, msg, cbOK, cbCancel) {
         return showMessage(title, msg, cbOK, cbCancel);
@@ -380,7 +370,7 @@
     }
 
     function API_LoadPage(url) {
-        var idDivContent = document.getElementById("idDivContent");
+        var IFramePage = document.getElementById("IFramePage");
         var iFrame = document.createElement("IFRAME");
 
         iFrame.scrolling = "auto";
@@ -390,8 +380,8 @@
         iFrame.marginHeight = "0";
         iFrame.src = url;
 
-        c.clearChildren(idDivContent);
-        idDivContent.appendChild(iFrame);
+        c.clearChildren(IFramePage);
+        IFramePage.appendChild(iFrame);
 
         //mobile remove
         document.getElementById("dropdownDiv").classList.remove("dropdownDiv-down");
@@ -437,41 +427,47 @@
 
     }
 
-    //回收所有在遊戲方的點數
-    function API_ReceiveAllPoint() {
-        window.top.API_ShowMessageOK(mlp.getLanguageKey("刷新"), mlp.getLanguageKey("是否要刷新點數"), function () {
-            var common = window.top.c;
-            var postData = {
-                Token: GWebInfo.Token,
-                SID: GWebInfo.SID
-            };
-            common.callService("<%=Web.GPlatformURL %>/LoginBySID.aspx/ReceiveAllPointBySID", postData, function (success, text) {
-                if (success == true) {
-                    var obj = c.getJSON(text);
-                    if (obj.ResultCode == 0) {
-                        API_ShowMessageOK(mlp.getLanguageKey("訊息"), mlp.getLanguageKey("點數已成功刷新"), function () {
-                        });
-                    } else {
-                        API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常，點數稍後刷新"));
-                    }
-                } else {
-                    API_ShowMessageOK(mlp.getLanguageKey("錯誤"), text);
-                }
-            });
-        });
-    }
+    //function notifyWindowEvent(eventName, o) {
+    //    var iFrameList = document.getElementsByTagName("IFRAME");
+
+    //    for (i = 0; i < iFrameList.length; i++) {
+    //        var divInnerFrame = iFrameList[i];
+
+    //        if (divInnerFrame) {
+    //            if (divInnerFrame.contentWindow) {
+    //                if (divInnerFrame.contentWindow.GWebEventNotify) {
+    //                    try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
+    //                    catch (ex) { }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     function notifyWindowEvent(eventName, o) {
-        var iFrameList = document.getElementsByTagName("IFRAME");
+        var IFramePage = document.getElementById("IFramePage");
 
-        for (i = 0; i < iFrameList.length; i++) {
-            var divInnerFrame = iFrameList[i];
+        if (IFramePage != null) {
+            if (IFramePage.children.length > 0) {
+                for (var _i = 0; _i < IFramePage.children.length; _i++) {
+                    var el = IFramePage.children[_i];
 
-            if (divInnerFrame) {
-                if (divInnerFrame.contentWindow) {
-                    if (divInnerFrame.contentWindow.GWebEventNotify) {
-                        try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
-                        catch (ex) { }
+                    if (el != null) {
+                        if (el.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+                            if (el.contentWindow) {
+                                if (el.contentWindow.EWinEventNotify) {
+                                    var isDisplay = false;
+
+                                    if ((el.style.display.toUpperCase() == "block".toUpperCase()) ||
+                                        (el.style.display.toUpperCase() == "inline".toUpperCase()) ||
+                                        (el.style.display.toUpperCase() == "inline-block".toUpperCase()))
+                                        isDisplay = true;
+
+                                    try { el.contentWindow.EWinEventNotify(eventName, isDisplay, o); }
+                                    catch (ex) { }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -874,14 +870,14 @@
     }
 
     function resize() {
-        var idDivContent = document.getElementById("idDivContent");
+        var IFramePage = document.getElementById("IFramePage");
         var idFrameContent = null;
 
         // resize iframe
-        if (idDivContent != null) {
-            if (idDivContent.children.length > 0) {
-                for (var i = 0; i < idDivContent.children.length; i++) {
-                    var el = idDivContent.children[i];
+        if (IFramePage != null) {
+            if (IFramePage.children.length > 0) {
+                for (var i = 0; i < IFramePage.children.length; i++) {
+                    var el = IFramePage.children[i];
 
                     if (el.tagName.toUpperCase() == "IFRAME") {
                         idFrameContent = el;
@@ -910,7 +906,6 @@
             }
         }
     }
-
 
     function openSelLanguage() {
         document.getElementById("idSelLang").style.display = "block";
@@ -981,15 +976,13 @@
         });
     }
 
-    //function MessageListener(e) {
-    //    if (e.origin == location.origin) {
-    //        if (e.data.Message.toUpperCase() == "LogoutGame".toLocaleUpperCase()) {
-    //            API_LogoutGame(e.data.GameCode, e.data.CurrencyType);
-    //        }
-    //    }
-    //};
+    function dropdownFunction() {
+        var elementdiv = document.getElementById("dropdownDiv");
+        var elementbtn = document.getElementById("dropdownDiv-btn");
+        elementdiv.classList.toggle("dropdownDiv-down");
+        elementbtn.classList.toggle("dropdownDiv-btn-press");
+    }
 
-    //window.addEventListener("message", MessageListener, false);
     window.onload = init;
 </script>
 <script>
@@ -1148,6 +1141,44 @@
         }
     }
 
+        function openServiceChat() {
+        var idChatDivE = document.getElementById("idChatDiv");
+        var idChatFrameParent = document.getElementById("idChatFrameParent");
+        var idChatFrame = document.createElement("IFRAME");
+
+        if (idChatDivE.classList.contains("show")) {
+            idChatDivE.classList.remove("show");
+            idChatFrameParent.style.display = "none";
+        }
+        else {
+            //<iframe id="idChatFrame" name="idChatFrame" class="ChatFrame" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="no" scrolling="no"></iframe>
+            if (idChatDivE.getAttribute("isLoad") != "1") {
+                idChatDivE.setAttribute("isLoad", "1");
+                idChatFrame.id = "idChatFrame";
+                idChatFrame.name = "idChatFrame";
+                idChatFrame.className = "ChatFrame";
+                idChatFrame.border = "0";
+                idChatFrame.frameBorder = "0";
+                idChatFrame.marginWidth = "0";
+                idChatFrame.marginHeight = "0";
+                idChatFrame.allowTransparency = "no";
+                idChatFrame.scrolling = "no";
+
+                idChatFrameParent.appendChild(idChatFrame);
+
+                //idChatFrame.src = EWinWebInfo.EWinUrl + "/Game/ChatMain.aspx?SID=" + EWinWebInfo.SID + "&Acc=" + EWinWebInfo.UserInfo.LoginAccount;
+                //alert(EWinWebInfo.LoginURL);
+                idChatFrame.src = EWinWebInfo.LoginURL + "?CT=" + encodeURIComponent(EWinWebInfo.CT) + "&Lang=" + EWinWebInfo.Lang + "&Action=Chat";
+
+            }
+
+            idChatFrameParent.style.display = "";
+            c.addClassName(idChatDivE, "show");
+
+        }
+
+    }
+
 </script>
 <body>
     <!-- HTML START -->
@@ -1191,11 +1222,7 @@
                                 <div id="idBalance" class="box user-pointV">[Balance]</div>
                                 <div onclick="API_ShowCurrencyWindow('可選幣別');" class="box user-pointTypeSwitch"><a class="language_replace">切換</a></div>
                             </div>
-                            <button onclick="API_ReceiveAllPoint()" class="btn-pointRefresh btn btn-icon-round icon12one-ico-cycle"><span class="language_replace tooltip">刷新錢包點數</span></button>
-
                         </div>
-
-
                     </div>
 
                     <!-- Header 右上角 -->
@@ -1263,7 +1290,7 @@
             </div>
         </div>
         <!-- Content -->
-        <div id="idDivContent" class="DivContent">
+        <div id="IFramePage" class="DivContent">
             <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>
         <!-- 頁尾 -->
