@@ -833,6 +833,7 @@
     }
 
     function checkUserLogin(SID, cb) {
+        debugger;
         var guid = Math.uuid();
 
         lobbyClient.GetUserInfo(SID, guid, function (success, o) {
