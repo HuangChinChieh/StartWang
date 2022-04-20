@@ -1141,7 +1141,7 @@
         }
     }
 
-        function openServiceChat() {
+    function openServiceChat() {
         var idChatDivE = document.getElementById("idChatDiv");
         var idChatFrameParent = document.getElementById("idChatFrameParent");
         var idChatFrame = document.createElement("IFRAME");
@@ -1179,6 +1179,50 @@
 
     }
 
+    // 存款
+    function openPaymentDeposit(dt) {
+        var retPage = "";
+        //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
+        switch (dt) {
+            case 0:
+                window.open(EWinWebInfo.EWinUrl + "/Payment/VPay/VPayDeposit.aspx?SID=" + EWinWebInfo.SID, "_blank");
+                break;
+            case 1:
+                //openBitCoinAddress();
+                break;
+            case 2:
+                retPage = "iType=BackCardIN&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+                API_LoadPage("/Payment/BankCard/BankCard_In.aspx?" + retPage);
+                break;
+                case 4:
+                 window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency , "_blank");
+                break;
+
+        }
+    }
+
+    // 提款
+    function openPaymentWithdrawal(wt) {
+        //wt = 0: 四方/1=區塊鏈
+        switch (wt) {
+            case 0:
+                window.open(EWinWebInfo.EWinUrl + "/Payment/GPay/GPayWithdraw.aspx?SID=" + EWinWebInfo.SID);
+                break;
+            case 1:
+                //openBitCoinAddress();
+                break;
+            case 2:
+                retPage = "iType=BackCardOut&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+          
+                API_LoadPage("/Payment/BankCard/BankCard_Out.aspx?" + retPage);
+                break;
+            case 3:
+                openParentOut();
+                break;
+
+
+        }
+    }
 </script>
 <body>
     <!-- HTML START -->
@@ -1265,9 +1309,13 @@
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
                             </a></li>
-                            <li><a onclick="onBtnPaymentDeposit();"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                            <li><a onclick="openPaymentDeposit(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
-                                <div class="language_replace">充值取款</div>
+                                <div class="language_replace">充值</div>
+                            </a></li>
+                            <li><a onclick="openPaymentWithdrawal(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                                <br>
+                                <div class="language_replace">取款</div>
                             </a></li>
                             <li><a onclick="onBtnHistory();"><span class="icon icon-icon-map" aria-hidden="true"></span>
                                 <br>
