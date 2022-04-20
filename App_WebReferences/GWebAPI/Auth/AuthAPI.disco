@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://gweb.dev4.mts.idv.tw/API/Web/AuthAPI.asmx?wsdl" docRef="http://gweb.dev4.mts.idv.tw/API/Web/AuthAPI.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://gweb.dev4.mts.idv.tw/API/Web/AuthAPI.asmx" xmlns:q1="http://tempuri.org/" binding="q1:AuthAPISoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://gweb.dev4.mts.idv.tw/API/Web/AuthAPI.asmx" xmlns:q2="http://tempuri.org/" binding="q2:AuthAPISoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

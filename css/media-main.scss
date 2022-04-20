@@ -1,0 +1,1253 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+@media (min-width: 1700px){
+	
+}
+@media(min-width:1600px){
+
+}
+@media (min-width: 1200px) and (max-width: 1600px) {
+
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+@media (min-width: 768px){
+	
+}
+@media (max-width: 767px) {
+	
+}
+@media (max-width: 600px) {
+	
+}
+@media (min-width: 900px) {
+    .wrapper {
+	    /* min-width: 1300px; */
+    }
+	
+	.header{
+	    width: 100%;
+	    /* height: 160px; */
+	    /* background: rgba(0,0,0,0.50); */
+    }
+    .header-tit{
+    	max-width: 1280px;
+    	height: 50px;
+    	border-bottom: solid 1px #333;
+    	margin: 0 auto;
+    	padding: 10px 10px;
+    }	
+	.header_none hr{
+		display: none;
+	}
+	.header_none{ /*none-header*/
+		position: relative;
+	    width: 100%;
+	    height: 150px;
+	    background: rgba(0,0,0,0.50);
+    }
+    .header-tit_none{ /*none-header*/
+		position: relative;
+    	max-width: 1280px;
+    	height: 60px;
+		line-height: 60px;
+    	border-bottom: solid 1px #333;
+    	margin: 0 auto;
+    	padding: 5px 10px;
+    }
+	.login_input{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 370px;
+	}
+	#UserID,#pwd{/*none-header*/
+		position: relative;
+		margin-top: 5px;
+		width: 200px;
+		height: 54px;
+		background-color: rgba(0,0,0,0.5);
+		display: inline-block;
+		font-size: 20px;
+	}
+	.UserID{
+		position: relative;
+	}
+	.UserID::before{
+		content: "";
+		width: 50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		top:0px;
+		left: 0px;
+		z-index: 9999;
+	}
+	.LVCode_div{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 190px;
+	}
+	.LVCode_div{/*none-header*/
+		padding-top: 5px;
+	}
+	.LVCode_div img{
+		margin-top: 0px;
+		margin-bottom: 0px;
+		vertical-align: middle;
+	}
+	#ValidateBtn{/*none-header*/
+		margin: 0px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 50px;
+		padding: 6px;
+		vertical-align: middle;
+	}
+	#LoginValidateCode{/*none-header*/
+		margin-top: 3px;
+		height: 22px;
+		background-color: rgba(0,0,0,0.5);
+	}
+	.loginBrn_div{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 0px;
+		padding-top: 5px;
+	}
+	#loginBtn{/*none-header*/
+		/*height: 56px;*/
+		margin-right: 10px;
+	}
+	#signinBtn{/*none-header*/
+		/*height: 56px;*/
+		border:1px solid #9c8866;
+		background-color: rgba(0,0,0,0.5);
+		color: #9c8866;
+	}
+	#signinBtn:hover{/*none-header*/
+		/*height: 56px;*/
+		border:1px solid #9c8866;
+		background-color:#9c8866;
+		color: #fff;
+	}
+	
+	
+	
+	
+	
+
+
+
+
+
+.header-tit-point-wrapper{
+
+    .btn-pointRefresh{
+        width: auto;
+		height: auto;
+		position: relative;
+		overflow: hidden;
+
+		.tooltip{
+
+			position: absolute;
+			display: inline-block !important;
+			// bottom: 0px;
+			left: 40px;
+			white-space: nowrap;
+
+			// height: 30px;
+			color: rgba( #fff, 1);
+
+			background:rgba( #c62828, 0.52);
+
+
+			font-size: 13px;
+			padding: 5px 10px;
+			border-radius: 5px;
+
+			transition: all 0.3s ease-out;
+
+			opacity: 0;
+			left: 35px;
+			
+			&::before{
+				position: absolute;
+				left: -10px;
+				top: 7px;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 5px 10px 5px 0;;				;
+				border-color: transparent rgba(#c62828, 0.52) transparent transparent;
+				-webkit-filter: drop-shadow(0 1px 5px rgba(67,38,0,.5));
+				;
+				-moz-filter: drop-shadow(0 1px 5px rgba(67,38,0,.5));
+				-ms-filter: drop-shadow(0 1px 5px rgba(67,38,0,.5));
+				-o-filter: drop-shadow(0 1px 5px rgba(67,38,0,.5));
+				filter: drop-shadow(0 1px 5px rgba(0,0,0,.3));
+			}
+
+
+		}
+
+		&::before{
+            color: #c62828;
+        }
+
+		&:hover{
+
+			// background: none;
+
+			// &::before{
+			// 	color: #ff4444;
+			// }
+			overflow: visible;
+
+
+			.tooltip{
+
+				opacity: 1;
+				left: 40px;
+
+			}
+
+
+
+
+
+
+		}
+
+		
+	}
+
+
+}
+
+
+.header-tit-point{
+	float: left;
+	position: relative;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 80px;
+	margin-top: 10px;
+
+	height: 35px;
+	background-color: rgba(0,0,0,0.8);
+	border-radius: 50px;
+
+
+	  &::before{
+		top:-4px;
+		left: -50px;
+		background-image: url(../images/icon-chip.png);
+		background-repeat: no-repeat;
+		background-position: left 0px;
+		background-size: 50px;
+		z-index: 2;
+	 }
+
+
+	
+  }
+
+
+  .header-tit-point-bg{
+
+	// padding: 0 15px;
+
+	max-height: 35px;
+
+}
+
+
+	
+
+	
+  
+
+
+	.user-email{
+	float: right;
+	margin: 10px 5px;
+	padding:  10px 20px;
+	}
+	
+	.btn-logout{
+	
+	/* float: right; */
+	}
+
+	
+	
+
+
+	.header-nav{
+	max-width: 1280px;
+	margin: 0 auto;	
+	}
+	.header-nav_none{ /*none-header*/
+	width: 1280px;
+	margin: 0 auto;	
+	}
+	.dropdown-btn{
+		display: none;
+	}
+
+	.header-nav-logo{
+		position: relative;
+		width: calc(100% - (96px * 6) - 10px);
+		max-width: 280px;
+
+	}
+	.header-nav-logo img{
+		position: absolute;
+
+	}
+
+	.header-nav-menu{
+	   float: right;
+		   
+	}
+	
+    .header-nav-menu ol li{
+    	text-align: center;
+    	color: #fff;
+    	float: left;
+    
+    }
+    .header-nav-menu ol li span{
+    	font-size: 25px;
+    	line-height: 30px;
+    	color: #9c8866;
+    }
+    .header-nav-menu ol li a{
+    	display: block;
+    	color: #fff;
+    	/* height: 69px; */
+    	line-height: 20px;
+    	padding: 20px 20px;
+    	/* padding-top:20px; */
+    }
+    .header-nav-menu ol li a:hover{
+    	background: rgba(255,255,255,0.1);
+    	padding-top:15px;
+    	border-bottom: 5px solid #9c8866; 
+    }
+	.swiper-container {
+	  position: relative;
+      /* width: 1280px; */
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	.marquee_form{
+	margin: 0 auto;
+	margin-top: 8px;
+	height: 50px;
+	
+}
+	.navbar-Marquee {
+	    width: 60%;
+	    float: left;	
+  		text-align: left;
+  		border-radius: 50px;
+  		line-height: 20px;	
+	    margin-top: 10px;
+	    margin-left: 10px;
+	    background:rgba(0,0,0,0.5);
+	    padding: 5px 20px;
+		}
+	.marquee_form_left{
+	padding: 1px;
+	line-height: 50px;
+	float: left;
+	font-size: 40px;
+}
+	.marquee_form_right{
+	float: right;
+	margin-top: 15px;
+	margin-right: 20px;
+}	
+/***** 網站內容介紹 *****/	
+.main-game-list{
+	padding-top: 30px;
+	width: 100%;
+	height: auto;
+	min-height: 530px;
+	background: rgba(255,255,255,0.3);
+}
+.game-list-com{
+	margin:auto;
+	width: 1280px;
+}	
+.game-list-btn-left{
+	margin-top: 20px;
+}	
+	.game-list-com-banner550300	{
+	float: left;
+	padding:0px 5px 30px 5px;
+	}
+	.game-list-com-banner550300 a{
+	position: relative;
+	display: block;
+	width: 550px;
+	height: 300px;
+	border-radius: 10px;	
+}
+	.game-list-com-banner550300 a:after{
+	content: "";
+	width: 550px;
+	height: 300px;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+	.game-list-com-banner550300 a img{
+	position: relative;
+	border-radius: 10px;
+	
+}
+	.game-list-com-banner550-tit{
+	width: 510px;
+	height: 270px;
+	padding-top: 50px;
+	padding-left: 40px;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 3;
+}
+	.game-list-com-banner550180{
+	float: left;
+	padding:0px 5px 30px 5px;
+	
+}
+	.game-list-com-banner550180 a{
+		position: relative;
+		display: block;
+		width: 550px;
+		height: 180px;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner550180 a:after{
+		content: "";
+		width: 550px;
+		height: 180px;
+		position: absolute;
+		top:0;
+		left: 0;
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+		z-index: 2;
+	}
+	.game-list-com-banner550180 a img{
+		position: relative;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner550180-tit{
+		width: 510px;
+		height: 150px;
+		padding-top: 30px;
+		padding-left: 40px;
+		position: absolute;
+		top:0;
+		left: 0;
+		z-index: 3;
+	}
+	.game-list-com-banner350300{
+		float: left;
+		padding:0px 5px 30px 5px;
+	}
+	.game-list-com-banner350300 a{
+		position: relative;
+		display: block;
+		width: 350px;
+		height: 300px;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner350300 a:after{
+		content: "";
+		width: 350px;
+		height: 300px;
+		position: absolute;
+		top:0;
+		left: 0;
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+		z-index: 2;
+	}
+	.game-list-com-banner350300 a img{
+		position: relative;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner350-tit{
+		width: 310px;
+		height: 270px;
+		padding-top: 50px;
+		padding-left: 40px;
+		position: absolute;
+		top:0;
+		left: 0;
+		z-index: 3;
+	}	
+		.game-list-com-banner350180{
+		float: left;
+		padding:0px 5px 30px 5px;
+	}
+	.game-list-com-banner350180 a{
+		position: relative;
+		display: block;
+		width: 350px;
+		height: 180px;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner350180 a:after{
+		content: "";
+		width: 350px;
+		height: 180px;
+		position: absolute;
+		top:0;
+		left: 0;
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+		box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+		z-index: 2;
+	}
+	.game-list-com-banner350180 a img{
+		position: relative;
+		border-radius: 10px;
+		
+	}
+	.game-list-com-banner350180-tit{
+		width: 310px;
+		height: 150px;
+		padding-top: 30px;
+		padding-left: 40px;
+		position: absolute;
+		top:0;
+		left: 0;
+		z-index: 3;
+	}
+		.game-list-com-banner550180-m{
+			display: none;
+		}	
+	.mobileAPP-con{
+		text-align: center;
+		width: 100%;
+		height: 450px;
+		background: rgba(0,0,0,0.7);
+		background: url(../images/download_bg.png) center center no-repeat;
+	}	
+	.mobileAPP-con hr{
+		border: none;
+		margin: 10px auto;
+		width: 100px;
+		height: 5px;
+		background: #9c8866;
+	}	
+}
+
+
+
+
+
+
+@media (max-width: 899px) {
+	
+
+
+
+	
+	
+	
+	/***** 網站內容介紹 *****/
+	.main-game-list{
+	padding-top: 30px;
+	width: 100%;
+	height: auto;
+	background: rgba(255,255,255,0.3);
+}
+.game-list-com{
+
+	margin:auto;
+	width: 100%;
+}	
+	.game-list-btn-left{
+	margin-top: 5px;
+}
+	.game-list-com-banner550300	{
+	padding:0px 10px 20px 10px;
+	}
+	.game-list-com-banner550300 a{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 10px;	
+}
+	.game-list-com-banner550300 a:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+	.game-list-com-banner550300 a img{
+	position: relative;
+	border-radius: 10px;
+	width: 100%;
+	height: auto;
+	
+}	
+.game-list-com-banner550-tit{
+	width: 60%;
+	height: auto;
+	padding-top: 4%;
+	padding-left: 8%;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 3;
+}
+	.game-list-com-banner550180{	
+		
+	padding:0px 10px 30px 10px;
+	
+}
+.game-list-com-banner550180 a{
+	position: relative;
+	display: block;
+	width:100%;
+	height: auto;
+	border-radius: 10px;
+	
+}
+.game-list-com-banner550180 a:after{
+	content: "";
+	width:100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+.game-list-com-banner550180 a img{
+	position: relative;
+	border-radius: 10px;
+	width:100%;
+	height: auto;
+	
+}
+.game-list-com-banner550180-tit{
+	width: 80%;
+	height: auto;
+	padding-top:4%;
+	padding-left: 8%;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 3;
+}
+.game-list-com-banner550180-m{	
+		
+	padding:0px 10px 30px 10px;
+	
+}
+.game-list-com-banner550180-m a{
+	position: relative;
+	display: block;
+	width:100%;
+	height: auto;
+	border-radius: 10px;
+	
+}
+.game-list-com-banner550180-m a:after{
+	content: "";
+	width:100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+.game-list-com-banner550180-m a img{
+	position: relative;
+	border-radius: 10px;
+	width:100%;
+	height: auto;
+	
+}
+	
+.game-list-com-banner350300{
+	width: 48%;
+    display: none;
+	padding:0px 0px 30px 0px;
+	margin-left: 1%;
+	
+}
+.game-list-com-banner350300 a{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	
+}
+.game-list-com-banner350300 a:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+.game-list-com-banner350300 a img{
+	position: relative;
+	border-radius: 10px;
+	width: 100%;
+	height: auto;
+	
+}
+.game-list-com-banner350-tit{
+	width: 50%;
+	height: auto;
+	padding-top: 10%;
+	padding-left: 10%;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 3;
+}
+	.game-list-com-banner350180{
+	display: none;
+	padding:0px 5px 30px 5px;
+}
+.game-list-com-banner350180 a{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	
+}
+.game-list-com-banner350180 a:after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 0px 0px 3px rgba(255,255,255,0.2),0px 2px 5px 1px rgba(0,0,0,0.5);
+	z-index: 2;
+}
+.game-list-com-banner350180 a img{
+	position: relative;
+	border-radius: 10px;
+	width: 100%;
+	height: auto;
+	
+}
+.game-list-com-banner350180-tit{
+	width: 50%;
+	height: auto;
+	padding-top: 10%;
+	padding-left: 10%;
+	position: absolute;
+	top:0;
+	left: 0;
+	z-index: 3;
+}
+	/****************************/
+	.header{
+		width: 100%;
+		/* background: rgba(0,0,0,0.8); */
+    }	
+    .header-tit{
+    	width: 100%;
+    	height: 110px;
+    	border-bottom: solid 0px #111;
+    	margin: 0 auto;
+    	position: relative;	
+        /* background:#282828; */
+    }	
+	.header_none hr{
+		display: none;
+	}
+	.header_none{ /*none-header*/
+		position: relative;
+	    width: 100%;
+	    height: auto;
+	    background: rgba(0,0,0,0.50);
+    }
+    .header-tit_none{ /*none-header*/
+		position: relative;
+    	width: 100%;
+    	height: 40px;
+		line-height: 40px;
+    	border-bottom: solid 0px #333;
+    	margin: 0 auto;
+    	padding: 5px 0px;
+    }
+	.login_input{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 370px;
+	}
+	.UserID{
+		position: relative;
+	}
+	.UserID::before{
+		content: "";
+		width: 50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		top:0px;
+		left: 0px;
+		z-index: 9999;
+	}
+	.LVCode_div{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 190px;
+	}
+	.LVCode_div{/*none-header*/
+		padding-top: 5px;
+	}
+	.LVCode_div img{
+		margin-top: 0px;
+		margin-bottom: 0px;
+		vertical-align: middle;
+	}
+	#ValidateBtn{/*none-header*/
+		margin: 0px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		width: 40px;
+		padding: 6px;
+		vertical-align: middle;
+	}
+	#LoginValidateCode{/*none-header*/
+		margin-top: 3px;
+		height: 22px;
+		background-color: rgba(0,0,0,0.5);
+	}
+	.loginBrn_div{/*none-header*/
+		position: absolute;
+		top:0;
+		right: 0px;
+		padding-top: 5px;
+	}
+	#loginBtn{/*none-header*/
+		/*height: 56px;*/
+		margin-right: 10px;
+	}
+	#signinBtn{/*none-header*/
+		/*height: 56px;*/
+		border:1px solid #9c8866;
+		background-color: rgba(0,0,0,0.5);
+		color: #9c8866;
+		margin-right: 5px;
+	}
+	#signinBtn:hover{/*none-header*/
+		/*height: 56px;*/
+		border:1px solid #9c8866;
+		background-color:#9c8866;
+		color: #fff;
+	}
+	
+	
+
+	
+
+.header-tit-point-wrapper{
+	width: 100%;
+	height: auto;
+	background: #9c8866;
+	padding: 7px 0px;;
+
+	/* background-color: rgba(0,0,0,0.8);
+	border-radius: 50px; */
+}
+	
+.header-tit-point{
+	height: 35px;
+	background-color: rgba(0,0,0,0.8);
+	border-radius: 50px;
+}	
+
+
+
+
+	.header-tit-info, 
+	.header-tit-user-login-wrapper{
+		position: absolute;
+		top: 53px;
+	}
+
+	.header-tit-info{		
+		left: 8px;
+		/* width: 30%; */
+	}
+
+	.header-tit-user-login-wrapper{
+		right: 8px;
+	}
+
+
+
+	.header-tit-point{
+		position: relative;
+		margin: 0px 10px 0px 50px;
+		width: auto;
+		padding-left: 20px;
+		
+	}
+	.header-tit-point:before{
+	top:2px;
+	left: -45px;
+	background-image: url(../images/icon-chip-black.png);
+	background-repeat: no-repeat;
+	background-position: left 0px;
+	background-size: 38px;
+	z-index: 2;
+}
+	.user-email{
+	float: right;
+    margin-right: 20px;
+	margin-top: 25px;
+    }
+	.btn-logout{
+	  /* float: right;
+	  margin-right: 20px;
+	  margin-top: 15px; */
+	}
+	
+	
+	.header-nav{
+		/*margin-top: 80px;*/
+		width:100%;
+		padding: 5px 0px;
+		position: relative;
+		/* background: rgba(0,0,0,0.8); */
+	}
+	.header-nav-logo{
+		width: 100%;
+	}
+	.header-nav img{
+		padding-left: 10px;
+		width: 50%;
+        max-width:232px;
+		height: auto;
+	}
+
+	.header-nav_none{/*none-header*/
+		margin-top: 30px;
+		width:100%;
+		padding: 10px 0px;
+		position: relative;
+		background: rgba(0,0,0,0.8);
+	}
+
+	.header-nav_none img{/*none-header*/
+		padding-left: 10px;
+		width: 70%;
+		height: auto;
+	}
+
+	.header-nav-menu{
+	 margin-top: 10px;
+     float: left;
+	 /* background: rgba(0,0,0,0.8);
+	 background: -webkit-linear-gradient(-45deg,rgba(20,5,1,0.9),rgba(0,0,0,0.9));
+     background: -o-linear-gradient(-45deg,rgba(20,5,1,0.9),rgba(0,0,0,0.9));
+     background: -moz-linear-gradient(-45deg,rgba(20,5,1,0.9),rgba(0,0,0,0.9));
+     background: linear-gradient(to -45deg,rgba(20,5,1,0.9),rgba(0,0,0,0.9));	 */
+	 width: 100%;
+	 height: 0px;
+	 overflow: hidden;	
+
+    }
+	#dropdownDiv{
+
+	}
+	.dropdownDiv-down{
+	animation-name:	dropdownDiv-down-an;
+	animation-iteration-count:1;
+	animation-duration:0.8s;
+	animation-fill-mode: forwards;	
+}
+
+	
+	.dropdown-btn{
+		font-size: 25px;
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		/* top :35%; */
+		top : 16px;
+		right: 20px;
+		text-align: center;
+		
+	}
+	
+    .header-nav-menu ol li{
+		display:inline;
+    	text-align: center;
+    	color: #fff;
+		width: 100%; 
+		vertical-align: middle;
+    }
+    .header-nav-menu ol li a span{
+		width: 100%;
+    	font-size: 20px;
+    	line-height: 10px;
+    	color: #9c8866;
+		display: inline;
+		margin-top: 5px;
+		margin-right: 10px;
+    }
+    .header-nav-menu ol li a{
+		text-align: left;
+    	display: block;
+		width: auto;
+    	color: #fff;
+    	line-height:10px;
+		vertical-align: middle;
+		border-bottom: solid 1px #9c8866;
+		padding:20px;
+    }	
+    .header-nav-menu ol li a:active{
+    	background: rgba(255,255,255,0.1);
+    }
+	.header-nav-menu ol li br{
+    	display: none;
+    }
+.swiper-container {
+	  position: relative;
+      width: 100%;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	.swiper-button-next,.swiper-button-prev{
+		display: none;
+	}
+	.marquee_form{
+	position: relative;
+	margin: 0 auto;
+	margin-top: 8px;
+	height: 50px;
+	width: 100%;
+}
+	.marquee_form_left{
+	position: absolute;
+	top:0px;
+	left: 10px;
+	padding: 1px;
+	line-height: 50px;
+	font-size: 40px;
+}
+	.marquee_form_right{
+	position: absolute;
+	top:0px;
+	right: 0px;
+	margin-top: 15px;
+	margin-right: 20px;
+}
+    .navbar-Marquee {
+	    width: 50%;
+  		text-align: left;
+  		border-radius: 50px;
+  		line-height: 20px;	
+	    margin-top: 10px;
+	    margin-left: 40px;
+	    background:rgba(0,0,0,0.5);
+	    padding: 5px 20px;
+		}
+	.mobileAPP-con{
+	text-align: left;
+	width: 100%;
+	height: 450px;
+	background: rgba(0,0,0,0.7);
+	background: url(../images/download_bg_m.png) no-repeat;
+	background-position:  right center;	
+}
+	.mobileAPP-con hr{
+	border: none;
+	margin: 10px 0px ;
+	width: 180px;
+	height: 5px;
+	background: #9c8866;
+}
+	.download-tit{
+	
+		margin-left: 20px;
+	}
+}
+@media (max-width: 899px) and (min-width: 740px){
+	.header_none hr{
+		display: none;
+	}
+	.login_input{
+		text-align: right;
+		position: absolute;
+		top:0;
+		left: 0px;
+	}
+		#UserID,#pwd{/*none-header*/
+		position: relative;
+		margin-top: 5px;
+		width: 150px;
+		height: 54px;
+		background-color: rgba(0,0,0,0.5);
+		display: inline-block;
+		font-size: 20px;
+	}
+}
+@media (max-width: 739px)and (min-width: 561px){
+	.header_none hr{
+		display: none;
+	}
+	.login_input{
+		text-align: right;
+		position: absolute;
+		top:0;
+		left: 0px;
+	}
+		#UserID,#pwd{/*none-header*/
+		position: relative;
+		margin-top: 5px;
+		width:80%;
+		height: 24px;
+		background-color: rgba(0,0,0,0.5);
+		display:block;
+	}
+	#UserID{
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	#pwd{
+		margin-top: 0px;
+	}
+}
+
+@media (max-width: 560px) {
+	.header_none{
+		
+	}
+	
+	
+	.header_none hr{
+		display: block;
+		border: 0.5px solid rgba(255,255,255,0.3);
+		width: 100%;
+		margin-top: 47px;
+	}
+	.login_input{
+		width: 100%;
+		position: absolute;
+		top:0;
+		left: 0px;
+		padding-right: 0px;
+	}
+	#UserID,#pwd{/*none-header*/
+		position: relative;
+		margin-top: 5px;
+		width: 42%;
+		height: 40px;
+		background-color: rgba(0,0,0,0.5);
+		display: inline-block;
+		margin-left: 1%;
+		margin-right: 1%;
+	}
+	#UserID{
+		
+	}
+	.header-nav_none{
+		margin-top: 80px;
+	}
+	.LVCode_div{
+		position:absolute;
+		top:52px;
+		left:1%;
+	}
+	/*.loginBrn_div{
+		margin-top: 0px;
+		position: absolute;
+		top:52px;
+		right:2%;
+	}*/
+	#loginBtn{
+		margin-right: 3px;
+	}
+	
+	.game-list-com-banner350-tit h1{
+		margin-top: 45%;
+	}
+	.game-list-com-banner350-tit p{
+	display: none;	
+	}
+	.game-list-com-banner350-tit .game-list-btn-left{
+		display: none;	
+	}
+
+}
+@media (max-width: 440px){
+	.game-list-btn-left{
+	display: none;
+}
+
+}
+/* Retina-ize images/icons */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx) {
+	
+}

@@ -1,0 +1,1136 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    font-family: STHeiti,Arial,"微軟正黑體","Microsoft JhengHei",simsun,Verdana,Helvetica,sans-serif;
+    font-size: 15px;
+}
+body {
+    background-color: rgba(37,37,37,1.00);
+}
+
+#joinUs path{
+	fill:red;
+}
+
+
+.navbar-default .navbar-nav > li > a, .lineHeight_li_editSP a {
+    color: #939393;
+}
+nav a {
+    text-decoration: none !important;
+}
+
+/* other */
+.bg_color_01_edit_SP {
+    background-color: rgba(37,37,37,1.00);
+    color: rgba(255,255,255,1.00);
+}
+.displayNone_edit_SP {
+    display: none;
+}
+.bg_color_01_edit_SP a {
+    color: rgb(248, 198, 112);
+}
+.TitleTexture_A {
+    margin: 40px auto;
+}
+.TitleTexture_A::after, .TitleTexture_A::before {
+    content: '';
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    width: 125px;
+    height: 22px;
+}
+.TitleTexture_A::after {
+    background-image: url(../images/text_line_125x22_A_right_W.png);
+    margin-left: 20px;
+}
+.TitleTexture_A::before {
+    background-image: url(../images/text_line_125x22_A_left_W.png);
+    margin-right: 20px;
+}
+/*.bgImages_A {
+    background:url( ../images/asanoha-400px2.png);
+    background-repeat:no-repeat;
+    background-position: left top, center;
+	background-size: auto  100%;
+}*/
+
+.NavInfomatioBox_A {
+
+	background:url(../iFrame/images/NavInfomatioBox_BG.png) center top repeat, -webkit-linear-gradient(rgba(20,20,20,0.8),rgba(50,50,50,0.5));
+	background:url(../iFrame/images/NavInfomatioBox_BG.png) center top repeat, -moz-linear-gradient(rgba(20,20,20,0.8),rgba(50,50,50,0.5));
+	background:url(../iFrame/images/NavInfomatioBox_BG.png) center top repeat, -o-linear-gradient(rgba(20,20,20,0.8),rgba(50,50,50,0.5));
+	background:url(../iFrame/images/NavInfomatioBox_BG.png) center top repeat,linear-gradient(rgba(20,20,20,0.8),rgba(50,50,50,0.5));
+	color: #CCC;
+    border-radius: 4px;
+	padding-top: 10px;
+	-webkit-box-shadow:inset 0px 0px 5px 1px rgba(100,100,100,0.3) ,0px 5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:inset 0px 0px 5px 1px rgba(100,100,100,0.3) ,0px 5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:inset 0px 0px 5px 1px rgba(100,100,100,0.3) ,0px 5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:inset 0px 0px 5px 1px rgba(100,100,100,0.3) ,0px 5px 10px 2px rgba(0,0,0,0.3);
+	min-height: 450px;
+	padding-bottom: 20px;
+}
+#myTab1{
+	border-bottom: 2px solid #ba9659;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: rgba(255,255,255,0.9);
+    background-color: rgb(248, 198, 112);
+	background: -webkit-linear-gradient(rgba(248, 198, 112,0.8),rgba(248, 198, 112,0.5));
+	background: -moz-linear-gradient(rgba(248, 198, 112,0.8),rgba(248, 198, 112,0.5));
+	background: -o-linear-gradient(rgba(248, 198, 112,0.8),rgba(248, 198, 112,0.5));
+	background: linear-gradient(rgba(248, 198, 112,0.8),rgba(248, 198, 112,0.5));
+	-webkit-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.7) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.7) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.7) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.7) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+}
+.nav-pills > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+	color: rgba(248, 198, 112,0.5);
+}
+.nav-pills > li > a:hover {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+	color: rgba(255, 255, 255,0.7);
+	background: -webkit-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -moz-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -o-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	-webkit-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+}
+.nav-pills > li > a:focus {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+	color: rgba(255, 255, 255,0.7);
+	background: -webkit-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -moz-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -o-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	-webkit-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+}
+.nav-pills > li > a:active {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+	color: rgba(255, 255, 255,0.7);
+	background: -webkit-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -moz-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -o-linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: linear-gradient(rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	-webkit-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:inset 0px 0px 5px 1px rgba(248, 198, 112,0.3) ,0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+}
+
+
+.well{
+	background: -webkit-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -moz-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -o-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	-webkit-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-moz-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-o-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	color: rgb(248, 198, 112);
+	border: 1px solid #1d1d1d;
+}
+
+.well input{
+	background: rgba(100,100,100,0.4);
+	border: 1px solid rgba(248, 198, 112,1.0);
+	color:  #f8c670;
+}
+.well input::placeholder{
+	color: #888;
+}
+.well input::-webkit-placeholder{
+	color: #888;
+}
+.well input::-moz-placeholder{
+	color: #888;
+}
+.well input::-o-placeholder{
+	color: #888;
+}
+
+select{
+	background-color: rgba(0,0,0,0.2);
+	background:linear-gradient(rgba(100,100,100,0.7),rgba(100,100,100,0.5),rgba(50,50,50,0.3));
+	border: 1px solid rgba(248, 198, 112,1.0);
+	color:  #fff;
+}
+.selectV{
+	background-color: rgba(0,0,0,0.2);
+	background:linear-gradient(rgba(100,100,100,0.7),rgba(100,100,100,0.5),rgba(50,50,50,0.3));
+	border: 1px solid rgba(248, 198, 112,1.0);
+	color:  #fff;
+}
+
+#platform_transfer_pointtype_sel option{
+	line-height: 20px;
+	background-color: rgba(200,200,200,0.8);
+}
+
+#platform_transfer_pointtype_sel option:hover{
+	background-color: #f8c670;
+	color:#fff;
+}
+
+option{
+	line-height: 20px;
+	background-color: rgba(200,200,200,0.8);
+}
+option:hover{
+	background-color: #f8c670;
+	color:#fff;
+}
+#myTab2{
+	margin-top: -20px;
+}
+
+#myTab2 li a,#myTab2 li:active a{
+	background: rgba(0,0,0,0.8);
+	border: 0px solid #000;
+	color: #aaa;
+} 
+.btn-selectV{
+	background: rgba(248, 198, 112,0.15);
+	border: 1px solid rgba(248, 198, 112,1.0);
+	color: rgba(248, 198, 112,1.0);
+}
+.btn-selectV:hover,.btn-selectV:active,.btn-selectV:focus{
+	background: rgba(248, 198, 112,1.0);
+	color: rgba(255, 255, 255,1.0);
+}
+
+.nav-tabs {
+	border-bottom: 0px solid #000;
+	margin-bottom: -20px;
+}
+
+/*   內容頁籤             */
+#account_transfer .nav-pills > li.active > a, #account_transfer .nav-pills > li.active > a:hover, #account_transfer .nav-pills > li.active > a:focus
+,#account_transfer_records .nav-pills > li.active > a, #account_transfer_records .nav-pills > li.active > a:hover, #account_transfer_records .nav-pills > li.active > a:focus
+{
+    color: rgba(255,255,255,0.7);
+    background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_transfer  .nav-pills > li > a,#account_transfer_records  .nav-pills > li > a {
+    position: relative;
+    display: block;
+	color: rgba(248, 198, 112,0.5);
+	padding: 6px 12px;
+}
+#account_transfer  .nav-pills > li > a:hover,#account_transfer_records  .nav-pills > li > a:hover {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_transfer .nav-pills > li > a:focus,#account_transfer_records .nav-pills > li > a:focus {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_transfer .nav-pills > li > a:active,#account_transfer_records .nav-pills > li > a:active {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_transfer .well,#account_transfer_records .well{
+	border:0px;
+	border-radius: 0px 5px 5px 5px;
+}
+
+/*   內容頁籤             */
+#account_withdraw .nav-pills > li.active > a, #account_withdraw .nav-pills > li.active > a:hover, #account_withdraw .nav-pills > li.active > a:focus
+,#account_withdraw_records .nav-pills > li.active > a, #account_withdraw_records .nav-pills > li.active > a:hover, #account_withdraw_records .nav-pills > li.active > a:focus
+{
+    color: rgba(255,255,255,0.7);
+    background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_withdraw  .nav-pills > li > a,#account_withdraw_records  .nav-pills > li > a {
+    position: relative;
+    display: block;
+	color: rgba(248, 198, 112,0.5);
+	padding: 6px 12px;
+}
+#account_withdraw  .nav-pills > li > a:hover,#account_withdraw_records  .nav-pills > li > a:hover {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_withdraw .nav-pills > li > a:focus,#account_withdraw_records .nav-pills > li > a:focus {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_withdraw .nav-pills > li > a:active,#account_withdraw_records .nav-pills > li > a:active {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#account_withdraw .well,#account_withdraw_records .well{
+	border:0px;
+	border-radius: 0px 5px 5px 5px;
+}
+
+/*   內容頁籤             */
+#zone_paymentHistory .nav-pills > li.active > a, #zone_paymentHistory .nav-pills > li.active > a:hover, #azone_paymentHistory .nav-pills > li.active > a:focus
+,#zone_paymentHistory_records .nav-pills > li.active > a, #azone_paymentHistory_records .nav-pills > li.active > a:hover, #zone_paymentHistory_records .nav-pills > li.active > a:focus
+{
+    color: rgba(255,255,255,0.7);
+    background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#azone_paymentHistory  .nav-pills > li > a,#zone_paymentHistory_records  .nav-pills > li > a {
+    position: relative;
+    display: block;
+	color: rgba(248, 198, 112,0.5);
+	padding: 6px 12px;
+}
+#zone_paymentHistory  .nav-pills > li > a:hover,#zone_paymentHistory_records  .nav-pills > li > a:hover {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#zone_paymentHistory .nav-pills > li > a:focus,#zone_paymentHistory_records .nav-pills > li > a:focus {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.4);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#zone_paymentHistory .nav-pills > li > a:active,#zone_paymentHistory_records .nav-pills > li > a:active {
+    position: relative;
+    display: block;
+	color: rgba(255, 255, 255,0.7);
+	background: rgba(0, 0, 0,0.8);
+	-webkit-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	-o-box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	box-shadow:0px -5px 10px 2px rgba(0,0,0,0.3);
+	border-radius: 5px 5px 0px 0px ;
+	padding: 6px 12px;
+}
+#zone_paymentHistory .well,#zone_paymentHistory_records .well{
+	border:0px;
+	border-radius: 0px 5px 5px 5px;
+}
+
+
+#payment_bank_Pane{
+	background: -webkit-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -moz-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -o-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	-webkit-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-moz-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-o-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	color: rgb(248, 198, 112);
+	border: 0px solid #1d1d1d;
+	border-radius: 0px 0px 5px 5px;
+	padding: 19px 0px;
+}
+#payment_bank_Pane  input{
+	background: rgba(0,0,0,0.2);
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #f8c670;
+}
+#payment_bank_Pane input::placeholder{
+	color: #888;
+}
+#payment_bank_Pane  input::-webkit-placeholder{
+	color: #888;
+}
+#payment_bank_Pane  input::-moz-placeholder{
+	color: #888;
+}
+#payment_bank_Pane  input::-o-placeholder{
+	color: #888;
+}
+
+#payment_bank_Pane select{
+	background-color: rgba(0,0,0,0.2);
+	background:linear-gradient(rgba(100,100,100,0.7),rgba(100,100,100,0.5),rgba(50,50,50,0.3));
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #fff;
+}
+#payment_bank_Pane  option{
+	background-color: rgba(200,200,200,0.8);
+}
+#payment_bank_Pane  option:hover{
+	background-color: #f8c670;
+	color:#fff;
+}
+
+/*#account_withdraw {
+	background: -webkit-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -moz-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: -o-linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	background: linear-gradient(rgba(0, 0, 0,0.8),rgba(10, 10, 10,0.4));
+	-webkit-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-moz-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	-o-box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	box-shadow:inset 0px 0px 100px 0px rgba(0, 0, 0,0.8);
+	color: rgb(248, 198, 112);
+	border: 0px solid #1d1d1d;
+	border-radius: 0px 0px 5px 5px;
+	padding: 19px 0px;
+}*/
+
+#account_withdraw  input{
+	background: rgba(0,0,0,0.2);
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #f8c670;
+}
+#account_withdraw input::placeholder{
+	color: #888;
+}
+#account_withdraw  input::-webkit-placeholder{
+	color: #888;
+}
+#account_withdraw  input::-moz-placeholder{
+	color: #888;
+}
+#account_withdraw  input::-o-placeholder{
+	color: #888;
+}
+
+#account_withdraw select{
+	background-color: rgba(0,0,0,0.2);
+	background:linear-gradient(rgba(100,100,100,0.7),rgba(100,100,100,0.5),rgba(50,50,50,0.3));
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #fff;
+}
+#account_withdraw  option{
+	background-color: rgba(200,200,200,0.8);
+}
+#account_withdraw  option:hover{
+	background-color: #f8c670;
+	color:#fff;
+}
+
+        .vena_4List {
+        }
+
+        .vena_4panl {
+        }
+
+       .vena_4panl h3 {
+           line-height: 40px;
+           border-bottom: 2px solid rgb(248, 198, 112);
+		   color:#eee;
+        }
+
+        .vena_4panl2 h3 {
+            line-height: 40px;
+            border-bottom: 2px solid rgb(248, 198, 112);
+			color:#eee;
+        }
+
+        .vena_4List .col-xs-3 p:first-child {
+            color: #aaa;
+        }
+
+        .vena_4form hr {
+            padding: 0px;
+            margin: 0px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            border: 0.5px solid rgba(248, 198, 112,0.15);
+        }
+
+        .vena_4walletTit h4 {
+            line-height: 30px;
+            /*border-left: 2px solid rgb(248, 198, 112);*/
+            text-indent: 8px;
+        }
+
+        .vena_4Link1 {
+            padding: 0px 8px;
+            line-height: 34px;
+            border-right: 1px dotted #aaa;
+            color: deepskyblue;
+            cursor: pointer;
+        }
+
+            .vena_4Link1:last-child {
+                border-right: 0px dotted #aaa;
+            }
+
+            .vena_4Link1:focus {
+                color: dodgerblue;
+            }
+
+            .vena_4Link1:hover {
+                color: dodgerblue;
+            }
+
+        .vena_4MBlistTit {
+            display: inline-block;
+            padding: 0px 8px;
+            border-right: 1px dotted rgba(0,0,0,0.3);
+        }
+
+        .panel-body .vena_4MBlistTit:last-child {
+            border-right: 0px dotted #eee;
+        }
+
+.panel-default {
+	background: none;
+	border:0px;
+	margin-bottom: 0px;
+}
+
+#otherDropdownMenu_tarA .panel-default{
+	background: rgba(30,30,30,0.9);
+	border: 1px solid #000;
+	color:#aaa;
+}
+
+#otherDropdownMenu_tarA .panel-default .panel-body{
+	overflow-y: auto;
+}
+
+#PointTypeTbody tr{
+	border-bottom: 1px dotted rgba(100,100,100,0.4);	
+}
+#PointTypeTbody tr:last-child{
+	border-bottom: 0px solid rgba(100,100,100,0.2);	
+	border-top: 2px solid rgba(100,100,100,0.4);
+}
+
+#PointTypeTbody .text-primary{
+	color: #f8c670;
+}
+#PointTypeTbody .text-warning{
+	color: #f8c670;
+}
+#PointTypeTbody .text-danger{
+	color: #f86f6c;
+}
+
+.panel-default > .panel-heading{
+	background: rgba(10,10,10,0.6);
+	border:0px;
+	color:#aaa;
+}
+
+.vena_4form2{
+	padding:0px 20px;
+}
+
+
+.order-list .panel-default{
+	background: rgba(20,20,20,0.75);
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #fff;
+}
+.order-list .panel-default > .panel-heading{
+	background: -webkit-linear-gradient(-135deg,rgba(10,10,10,0.3),rgba(248, 198, 112,0.1) );
+	background: -moz-linear-gradient(-135deg,rgba(10,10,10,0.3),rgba(248, 198, 112,0.1) );
+	background: -o-linear-gradient(-135deg,rgba(10,10,10,0.3),rgba(248, 198, 112,0.1) );
+	background: linear-gradient(-135deg,rgba(10,10,10,0.3),rgba(248, 198, 112,0.1) );
+	border:0px;
+	color:#aaa;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.order-list .panel-collapse{
+	padding: 10px;
+}
+.collapse_font_title{
+	color:#aaa !important;
+	font-size: 12px;
+}
+.collapse_font_content{
+	color: #fff !important;
+	font-size: 12px;
+}
+
+#accordion .label-info ,#accordionOrder .label-info{
+	background: rgba(248, 198, 112,0.5) !important;
+}
+#accordion .label-primary,#accordionOrder .label-primary{
+	background: none !important;
+}
+#accordion .label-warning,#accordionOrder .label-warning{
+	background: none !important;
+	color: rgba(248, 198, 112,1.0) !important;
+}
+#accordion .label-success,#accordionOrder .label-success{
+	
+}
+#accordion a,#accordionOrder a{
+	color: rgb(248, 198, 112) !important;
+    text-decoration: none !important;
+    background: rgba(248, 198, 112,0.3) !important;
+    border: 1px solid rgb(248, 198, 112) !important;
+	padding: 5px 10px ;
+	border-radius: 5px;
+	font-size: 12px;
+}
+
+
+
+.table-striped > tbody > tr:nth-of-type(odd){
+	background: rgba(80,80,80,0.0);
+}
+.table > thead > tr.info > td,.table > tbody > tr.info > td{
+	background: rgba(178,160,120,0.8);
+	border: 0px;
+}
+.table > thead > tr.danger > td,.table > tbody > tr.danger > td{
+	background: rgba(78,60,20,0.8);
+	border: 0px;
+}
+
+
+.panel-default > .panel-heading  .btn-primary{
+	background: -webkit-linear-gradient(135deg,rgba(248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -moz-linear-gradient(rgba(135deg,248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: -o-linear-gradient(rgba(135deg,248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	background: linear-gradient(rgba(135deg,248, 198, 112,0.1),rgba(248, 198, 112,0.5));
+	border:0px;
+	color:#fff;
+}
+
+
+.btn-info{
+	color: rgb(248, 198, 112) !important;
+    text-decoration: none !important;
+    background: rgba(248, 198, 112,0.3) !important;
+    border: 1px solid rgb(248, 198, 112) !important;
+}
+.btn-info:hover{
+	background: rgba(248, 198, 112,1.0) !important;
+	color: #fff !important;
+}
+
+
+
+
+#idSummaryTable .btn-primary{
+	color: rgb(248, 198, 112) !important;
+    text-decoration: none !important;
+    background: rgba(248, 198, 112,0.3) !important;
+    border: 1px solid rgb(248, 198, 112) !important;
+}
+#idSummaryTable .btn-primary:hover{
+	background: rgba(248, 198, 112,1.0) !important;
+	color: #fff !important;
+}
+
+
+.shadowBox_A {
+    box-shadow: 2px 2px 20px;
+}
+.iconSize_editSP_A {
+    font-size: 1.5em;
+}
+.iconSize_editSP_A.glyphicon {
+    margin: 0;
+}
+.lineHeight_li_editSP a {
+    line-height: normal !important;
+}
+.lineHeight_li_editSP p {
+    margin: 5px 0 0;
+}
+
+.btn_EditSP_A {
+    padding: 0 12px;
+}
+.btn_EditSP_B {
+    padding: 14px 0px;
+	margin-right: 5px;
+}
+
+/* table */
+.td_vertical-align_edit_SP_M {
+}
+.td_vertical-align_edit_SP_M td {
+    vertical-align: middle !important;
+	line-height: 30px !important;
+}
+
+/* Space */
+.otherSpace_edit_SP {
+    padding: 20px 0;
+    /*margin-top: 20px;*/
+}
+.otherSpace_edit_SP_B {
+    padding: 0 0;
+    /*margin-top: 20px;*/
+}
+.otherSpace_edit_SP_C {
+    padding: 0 0 20px;
+}
+.otherSpace_edit_SP_LR_A {
+    padding: 0 30px;
+}
+.mobileControlDisplay_editSP_A tr td:nth-of-type(6), .mobileControlDisplay_editSP_A tr td:nth-of-type(7) {
+    display: none;
+}
+
+
+/* menuUserInformation */
+.menuUserInformationTextColor_A {
+    color: rgb(248, 198, 112) !important;
+    text-decoration: none !important;
+}
+.menuUserInformationTextColor_B {
+	position: absolute;
+	top: 9px;
+	right: 14px;
+    color: rgb(248, 198, 112) !important;
+    text-decoration: none !important;
+	background: rgba(248, 198, 112,0.3) !important;
+	padding: 4px 12px;
+	border-radius: 5px;
+	float: right;
+	border: 1px solid rgb(248, 198, 112) !important;
+}
+.menuUserInformationTextColor_B:hover {
+    color: rgb(255, 255, 255) !important;
+	background: rgb(248, 198, 112) !important;
+	border: 1px solid rgb(248, 198, 112) !important;
+}
+
+
+
+
+/* nav */
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: rgb(248, 198, 112);
+}
+.navbar_edit_SP {
+    margin-bottom: 0;
+    border: 0;
+}
+.navbar-toggle_edit_SP {
+    margin: 22px 15px 22px 0;
+}
+.navbar-default_edit_SP {
+    background-color: rgba(0,0,0,1.00);
+}
+.navbar-brand_edit_SP {
+    height: 80px;
+    padding: 0;
+    line-height: 80px;
+}
+.navbar-brand_edit_SP > img {
+    height: 100%;
+    padding: 0 30px;
+    width: auto;
+}
+
+@media (min-width: 768px) {
+    .navbar_edit_SP {
+        border-radius: 0;
+    }
+    .otherSpace_edit_SP_B {
+        padding: 100px 0;
+    }
+    .otherSpace_edit_SP_C {
+        padding: 20px 0;
+    }
+    .mobileControlDisplay_editSP_A tr td:nth-of-type(6), .mobileControlDisplay_editSP_A tr td:nth-of-type(7) {
+        display: table-cell;
+    }
+}
+
+.navbar-nav_edit_SP > li > a {
+    line-height: 50px;
+}
+
+.navbar-form_edit_SP {
+    margin: 23px;
+}
+.navbar-form_edit_SP_0 {
+/*
+    margin: 23px;
+*/
+}
+
+/* AD slide */
+.container-fluid_edit_SP {
+    padding-left: 0;
+    padding-right: 0;
+}
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+.row_edit_SP {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* AD 廣告區 動畫特效 */
+.thumbnail {
+    overflow: hidden;
+    cursor: pointer;
+}
+.thumbnail > img, .thumbnail a > img {
+    transition: transform 0.3s;
+}
+.thumbnail > img:hover, .thumbnail a > img:hover {
+    transform: scale(1.1,1.1);
+}
+.thumbnail > img:hover, .thumbnail a > img {
+}
+
+/* footer */
+.footerBox {
+    background-color: #1B1B1B;
+    color: rgba(255,255,255,1.00);
+    padding: 10px 0;
+}
+
+/* animation-delay */
+
+/*
+.animationDelay_edit_SP_01, .animationDelay_edit_SP_02, .animationDelay_edit_SP_03 {
+    position: relative;
+    animation-duration: 1.5s;
+    animation-delay: 1.5s;
+}
+.animationDelay_edit_SP_01 {
+    animation-name: onloadAnime_01;
+}
+.animationDelay_edit_SP_02 {
+    animation-name: onloadAnime_02;
+}
+.animationDelay_edit_SP_03 {
+    animation-name: onloadAnime_03;
+}
+@keyframes onloadAnime_01 {
+    0% {left: -200px}
+    100%{left: 0;}
+}
+@keyframes onloadAnime_02 {
+    0% {right: -200px}
+    100%{right: 0;}
+}
+@keyframes onloadAnime_03 {
+    0% {bottom: -200px}
+    100%{bottom: 0;}
+}
+*/
+
+/**/
+.navInNav_edit_SP > li > a {
+    padding: 6px 12px;
+}
+
+
+/* modal 樣式 */
+.modal{
+	
+}
+.modal input{
+	background: rgba(0,0,0,0.2);
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #f8c670;
+}
+.modal input::placeholder{
+	color: #888;
+}
+.modal input::-webkit-placeholder{
+	color: #888;
+}
+.modal input::-moz-placeholder{
+	color: #888;
+}
+.modal input::-o-placeholder{
+	color: #888;
+}
+
+.modal select{
+	background-color: rgba(0,0,0,0.2);
+	background:linear-gradient(rgba(100,100,100,0.7),rgba(100,100,100,0.5),rgba(50,50,50,0.3));
+	border: 1px solid rgba(248, 198, 112,0.15);
+	color:  #fff;
+}
+.modal option{
+	background-color: rgba(200,200,200,0.8);
+}
+.modal option:hover{
+	background-color: #f8c670;
+	color:#fff;
+}
+
+.modal-dialog{
+	
+}
+.modal-content{
+	background: #2d2d2d;
+	color: #CCC;
+}
+.modal-content hr{
+	border-top: 1px dotted rgba(248, 198, 112,0.15);
+}
+.modal-content .close{
+	color: #aaa;
+	text-shadow: 0px 0px 0px rgba(0,0,0,0.0);
+	opacity: 1;
+}
+.modal-content .close:hover{
+	color: #f8c670;
+}
+.modal-content .close:active{
+	color: #f8c670;
+}
+.modal-header{
+	background-color: rgba(248, 198, 112,0.1);
+	border-bottom: 1px solid rgba(248, 198, 112,0.3);
+	border-radius: 5px 5px 0px 0px;
+}
+.modal-title{
+	color: #f8c670;
+	/*color: #fff;*/
+}
+.modal-footer{
+	border-top: 1px solid rgba(248, 198, 112,0.3);
+}
+
+
+/* modal 彈出視窗垂直至中 */
+/**/
+/**/
+@media (min-width: 768px){
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+}
+
+/*       LM換行分界       */
+
+@media (max-width: 991px){
+
+		#zone_platformTransferHistory .panel-heading button{
+		margin-top: 10px;
+	}
+		#pane0_reM button,#pane0_trHit button{
+		margin-top: 10px;
+	}
+	
+}
+
+
+
+/*       SM換行分界       */
+@media (max-width: 768px){
+	#pane0_TrM .btn-success{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	
+
+}
+
+
+
+/*   PC端樣式分界    */
+@media (min-width: 768px) {
+	.bgImages_A {
+    background:url( ../images/asanoha-400px2.png);
+    background-repeat:no-repeat;
+    background-position: center center;
+	background-size:   100% auto;
+}
+}
+
+/*   移動端樣式分界    */
+
+@media (max-width: 767px) {
+	.bgImages_A {
+    background:url( ../images/asanoha-400px2.png);
+    background-repeat:no-repeat;
+    background-position: top center;
+	background-size: auto  100% ;
+    }
+}
+
+
+.btnActiveDate{}
+
+
+.btnBlock{
+	color: rgb(248, 198, 112);
+	display: block;
+	width: 95%;
+	margin: 10px auto;
+	background: rgba(248, 198, 112,0.3);
+	line-height: 30px;
+	margin-top: 20px;
+	border: 1px solid rgb(248, 198, 112);
+	-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	-o-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+}
+.btnBlock:hover{
+	color: #fff;
+	background: rgba(248, 198, 112,1.0);
+}
+
+.btnBlockLine{
+	color: rgb(248, 198, 112);
+	display: block;
+	width: 95%;
+	margin: 10px auto;
+	background: rgba(248, 198, 112,0.3);
+	line-height: 30px;
+	border: 1px solid rgb(248, 198, 112);
+	-webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	-o-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+}
+.btnBlockLine:hover{
+	color: #fff;
+	background: rgba(248, 198, 112,1.0);
+}
+
+
+/*        錢包詳細膠囊板頭樣式            */
+.panelListStyle .panelListD5{
+	float: right;
+}
+
+                             
+#dialog99Play::after{
+	content: "";
+	position: fixed;
+	width: 1000%;
+	height: 1000%;
+	margin-left: -500%;
+	margin-top: -400%;
+	background: rgba(30,30,30,0.6);
+	z-index: -1;
+	
+}
+
+/*      註冊頁電話輸入框      */
+.birthdayCon .BDspan{
+	display: inline-block;
+	width: 4%;
+	text-align: center;
+}
+.birthdayCon input{
+	display: inline-block;
+	width: 30%;
+}
+
+
+
