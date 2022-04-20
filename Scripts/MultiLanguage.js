@@ -1,5 +1,6 @@
 ﻿var multiLanguage = function () {
     var _LanguageContextJSON = [];
+    var _LangFile = [];
 
     function loadLanguageFromFile(langFile, cb) {
         readTextFile(langFile, function (success, text) {
@@ -198,7 +199,7 @@
                 if (clsObject.hasAttribute("language_replace")) {
                     for (var jj = 0; jj < _LanguageContextJSON.length; jj++) {
                         var langObj = _LanguageContextJSON[jj];
-                        
+
                         if (clsObject.getAttribute("language_replace") == "1") {
                             if (clsObject.id) {
                                 _languageReplaceElement(langObj, clsObject, null, clsObject.id);
@@ -239,6 +240,43 @@
             cb();
     }
 
+    function loadExtLangFile(lang, cb) {
+        var langIndex = 0;
+
+        function loadLangFromIndex(index, _cb) {
+            if ((_LangFile.length - 1) >= langIndex) {
+                var name;
+
+                name = _LangFile[index];
+
+                if (name != null) {
+                    loadLanguageFromFile(name + "." + lang + ".json", function () {
+                        langIndex++;
+                        loadLangFromIndex(langIndex, _cb);
+                    });
+                } else {
+                    if (_cb)
+                        _cb();
+                }
+            } else {
+                if (_cb)
+                    _cb();
+            }
+        }
+
+        langIndex = 0;
+        loadLangFromIndex(langIndex, cb);
+    }
+
+    function loadIntLangFile(pageName, lang, cb) {
+        loadLanguageFromFile("/_Global." + lang + ".json", function () {
+            loadLanguageFromFile(pageName + "." + lang + ".json", function () {
+                if (cb)
+                    cb();
+            });
+        });
+    }
+
     this.getLanguageKey = function (key) {
         var retValue = key;
 
@@ -259,6 +297,10 @@
         return retValue;
     }
 
+    this.addLangFile = function (name) {
+        _LangFile[_LangFile.length] = name;
+    }
+
     this.loadLanguage = function (lang, cb) {
         if (lang) {
             if (lang != "") {
@@ -274,8 +316,8 @@
 
                 _LanguageContextJSON = [];
 
-                loadLanguageFromFile("/_Global." + lang + ".json", function () {
-                    loadLanguageFromFile(pageName + "." + lang + ".json", function () {
+                loadExtLangFile(lang, function () {
+                    loadIntLangFile(pageName, lang, function () {
                         DoLanguageReplace(cb);
                     });
                 });

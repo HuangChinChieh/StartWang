@@ -11,7 +11,7 @@
 <!doctype html>
 <html>
 <head>
-     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" content="99PLAY">
@@ -93,9 +93,9 @@
         p.GetWebTag(Math.uuid(), function (success, o) {
             if (success) {
                 var idTags = document.getElementById("idTags");
-                
+
                 //init
-                while(idTags.children.length > 1) {
+                while (idTags.children.length > 1) {
                     idTags.removeChild(idTags.lastChild);
                 }
 
@@ -123,7 +123,7 @@
                                     break;
                                 case "彩票":
                                     tag.getElementsByClassName("iconTag")[0].classList.add("icon-tab-lt");
-                                    break;    
+                                    break;
                                 default:
                                     tag.classList.add("icon-tab-rb");
                                     break;
@@ -157,6 +157,8 @@
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             GWebInfo = window.parent.API_GetWebInfo();
+
+            LoadGamePage();
             //p = window.parent.API_GetGWebHubAPI();
 
             //if (p != null) {
@@ -299,7 +301,7 @@
             target.classList.add("IsFav");
             heartDom.classList.add("icon-fa-heart");
 
-            window.top.API_ShowMessage(mlp.getLanguageKey("我的最愛"),mlp.getLanguageKey("是否新增至我的最愛"), function () {
+            window.top.API_ShowMessage(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("是否新增至我的最愛"), function () {
                 setFavoriteGame(gameCode, type);
                 setGameLobbySection(nowWebTag);
             }, null);
@@ -396,6 +398,22 @@
     function OpenBonusDepositShow() {
         window.top.API_LoadPage("Activity/OpenBonusDeposit_03312022/index.html");
     }
+
+    function LoadGamePage() {
+        let url = "Lobby/GameLobby.aspx";
+        var IFramePage = document.getElementById("IFrameGamePage");
+        var iFrame = document.createElement("IFRAME");
+
+        iFrame.scrolling = "auto";
+        iFrame.border = "0";
+        iFrame.frameBorder = "0";
+        iFrame.marginWidth = "0";
+        iFrame.marginHeight = "0";
+        iFrame.src = url;
+
+        c.clearChildren(IFramePage);
+        IFramePage.appendChild(iFrame);
+    }
 </script>
 <script>
     var c = new common();
@@ -475,148 +493,8 @@
         </div>
         <!-- 遊戲介紹 -->
         <div class="main-game-list">
-            <%--            <div class="game-list-com">
-                <!-- banner550x300 -->
-                <div class="game-list-com-banner550300">
-                    <a target="_blank" href="Redirect.aspx">
-                        <div class="game-list-com-banner550-tit">
-                            <h1>真人荷官</h1>
-                            <p>亞洲知名賭場，現場畫面直播!</p>
-                            <p>為您提共最佳的遊戲體驗。</p>
-                            <p>亞洲最佳比賽畫面</p>
-                            <p>支援各種移動設備</p>
-                            <p>您可以盡情享受遊戲的樂趣</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 馬上開始</button></div>
-                        </div>
-                        <img src="images/gameList/01.png" alt="" />
-                    </a>
-                </div>
-			 <!-- banner350x300 -->
-                <div class="game-list-com-banner350300">
-                    <a>
-                        <div class="game-list-com-banner350-tit">
-                            <h1>捕魚館</h1>
-                            <p>各式經典玩法</p>
-                            <p>輕鬆捕魚</p>
-                            <p>名利雙收</p>
-                            <p>PK競技</p>
-                            <p>真實刺激的遊戲體驗</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 馬上開始</button></div>
-                        </div>
-                        <img src="images/gameList/02-2.png" alt="" />
-                    </a>
-                </div>
-                <!-- banner350x300 -->
-
-                <div class="game-list-com-banner350300">
-                    <a>
-                        <div class="game-list-com-banner350-tit">
-                            <h1>電子機台</h1>
-                            <p>各式經典遊戲</p>
-                            <p>777</p>
-                            <p>捕魚</p>
-                            <p>水果盤</p>
-                            <p>真實刺激的遊戲體驗</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 馬上開始</button></div>
-                        </div>
-                        <img src="images/gameList/02.png" alt="" />
-                    </a>
-                </div>
-
-				                <!--
-                <div class="game-list-com-banner350300">
-                    <a>
-                        <div class="game-list-com-banner350-tit">
-                            <h1>行動遊玩</h1>
-                            <p>全新HTML5平台</p>
-                            <p>適用電腦及移動裝置</p>
-                            <p>全方位照顧您的需求</p>
-                            <p>齊備各款熱門遊戲</p>
-                            <p>提供前所未有的娛樂體驗</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-download fa-1x" aria-hidden="true"></i> 即刻下載</button></div>
-                        </div>
-                        <img src="images/gameList/03.png" alt="" />
-                    </a>
-                </div>
-                -->
-				<!-- banner350x180 -->
-                <div class="game-list-com-banner350180">
-                    <a>
-                        <div class="game-list-com-banner350180-tit">
-                            <h1>新手教學</h1>
-                            <p>快速上手立即暢玩</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-graduation-cap fa-1x" aria-hidden="true"></i> 前往上課</button></div>
-                        </div>
-                        <img src="images/gameList/04.png" alt="" />
-                    </a>
-                </div>
-				<!-- banner350x180 -->
-                <div class="game-list-com-banner350180">
-                    <a>
-                        <div class="game-list-com-banner350180-tit">
-                            <h1>儲值專區</h1>
-                            <p>.</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-graduation-cap fa-1x" aria-hidden="true"></i> 馬上儲值</button></div>
-                        </div>
-                        <img src="images/gameList/05.png" alt="" />
-                    </a>
-                </div>	
-				<!-- banner550x180-m -->
-                <div class="game-list-com-banner550180-m">
-                    <a target="_blank" href="Redirect.aspx">
-                        <div class="game-list-com-banner550180-tit">
-                            <h1>電子遊戲</h1>
-                            <p>各式經典遊戲，真實刺激的遊戲體驗!</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 馬上開始</button></div>
-                        </div>
-                        <img src="images/gameList/banner550180-m-01.png" alt="" />
-                    </a>
-                </div>
-				<!-- banner550x180-m -->
-                <div class="game-list-com-banner550180-m">
-                    <a target="_blank" href="Redirect.aspx">
-                        <div class="game-list-com-banner550180-tit">
-                            <h1>新手教學</h1>
-                            <p>快速上手立即暢玩</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 前往上課</button></div>
-                        </div>
-                        <img src="images/gameList/banner550180-m-02.png" alt="" />
-                    </a>
-                </div>	
-                <!-- banner550x180 -->
-                <div class="game-list-com-banner550180">
-                    <a target="_blank" href="Redirect.aspx">
-                        <div class="game-list-com-banner550180-tit">
-                            <h1>VIP專屬服務</h1>
-                            <p>99PLAY會員獨享，為您獻上各種福利優惠!</p>
-                            <div class="game-list-btn-left btnTypeA"><button><i class="fa fa-rocket fa-1x" aria-hidden="true"></i> 了解詳情</button></div>
-                        </div>
-                        <img src="images/gameList/06.png" alt="" />
-                    </a>
-                </div>				
-			</div>--%>
-            <div class="gamePageBox">
-                <aside class="gameTabs" id="idTags">
-                    <!-- 當前頁籤 要在<A> 加上class="cur" -->
-                    <a data-tagid="fav" onclick="switchWebTag()" class="cur tags"><i class="icon-tab-fav"></i><span class="language_replace">最愛</span></a>
-                    <%--                <a><i class="icon-tab-rb"></i><span>真人</span></a>
-                <a><i class="icon-tab-cg"></i><span>棋牌</span></a>
-                <a><i class="icon-tab-sp"></i><span>體育</span></a>
-                <a><i class="icon-tab-eg"></i><span>電子</span></a>--%>
-                </aside>
-
-                <main class="gamePanel">
-                    <div class="gamePanel-inner">
-                        <div class="gameSearchBox">
-                            <div class="inner-box">
-                                <i class="fa fa-search"></i>
-                                <input onchange="searchGame()" id="searchGame" type="text" language_replace="placeholder" placeholder="搜尋">
-                            </div>
-                        </div>
-                        <div id="gameSection">
-                        </div>
-                    </div>
-                </main>
+            <div id="IFrameGamePage" class="DivContent">
+                <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
             </div>
         </div>
         <!-- 下載頁面 -->

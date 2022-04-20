@@ -58,11 +58,11 @@
         lobWrapper.classList.toggle("lob_NavSwitch");
     }
 </script>
-<script type="text/javascript" src="/Scripts/Common.js"></script>
-<script type="text/javascript" src="/Scripts/UIControl.js"></script>
-<script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
-<script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
-<script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
+<script type="text/javascript" src="../Scripts/Common.js"></script>
+<script type="text/javascript" src="../Scripts/UIControl.js"></script>
+<script type="text/javascript" src="../Scripts/MultiLanguage.js"></script>
+<script type="text/javascript" src="../Scripts/Math.uuid.js"></script>
+<script type="text/javascript" src="../Scripts/bignumber.min.js"></script>
 <script type="text/javascript">
     var ui = new uiControl();
     var c = new common();

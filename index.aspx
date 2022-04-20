@@ -18,7 +18,7 @@
     string[] stringSeparators = new string[] { "&&_" };
     string[] Separators;
     int AllowLobby = 0;
-    int AllowMemberCenter=0;
+    int AllowMemberCenter = 0;
     string GameCodeListStr = string.Empty;
     string b = Request["b"];
     string c = Request["c"];
@@ -26,29 +26,23 @@
     string AllowAksoDeposit = EWinWeb.AllowAksoDeposit;
     string AllowAksoWithDrawal = EWinWeb.AllowAksoWithDrawal;
 
-    try
-    {
-        if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt")))
-        {
+    try {
+        if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt"))) {
             FileData = System.IO.File.ReadAllText(Server.MapPath("/App_Data/Bulletin.txt"));
-            if (string.IsNullOrEmpty(FileData) == false)
-            {
+            if (string.IsNullOrEmpty(FileData) == false) {
                 Separators = FileData.Split(stringSeparators, StringSplitOptions.None);
                 Bulletin = Separators[0];
                 Bulletin = Bulletin.Replace("\r", "<br />").Replace("\n", string.Empty);
-                if (Separators.Length > 1)
-                {
+                if (Separators.Length > 1) {
                     isModify = Separators[1];
                 }
 
-                if (isModify == "1")
-                {
+                if (isModify == "1") {
                     Response.Redirect("maintenance.html");
                 }
             }
         }
-    }
-    catch (Exception ex) { };
+    } catch (Exception ex) { };
 
 
     if (string.IsNullOrEmpty(Request["SID"]) == false)
@@ -75,30 +69,11 @@
     dynamic GameCodeList = lobbyAPI.GetCompanyGameCode(Token, Guid.NewGuid().ToString());
     GameCodeListStr = Newtonsoft.Json.JsonConvert.SerializeObject(GameCodeList);
 
-    if (string.IsNullOrEmpty(Request["Lang"]))
-    {
+    if (string.IsNullOrEmpty(Request["Lang"])) {
         string userLang = CodingControl.GetDefaultLanguage();
 
-        if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; }
-        else { Lang = "ENG"; }
-    }
-    else
-    {
+        if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; } else { Lang = "ENG"; }
+    } else {
         Lang = Request["Lang"];
     }
 %>
@@ -382,7 +357,7 @@
         if (favoriteGamesStr) {
             window.localStorage.setItem("FavoriteGames", favoriteGamesStr);
         }
-        window.location.href = "Refresh.aspx?Init.aspx";
+        window.location.href = "Refresh.aspx?index.aspx";
     }
 
     //刪除cookie
@@ -411,6 +386,10 @@
 
     function API_Home() {
         API_LoadPage('home.aspx');
+    }
+
+    function API_Lobby() {
+        API_LoadPage("Lobby/GameLobby.aspx?b=<%=b%>&c=<%=c%>&cSub=<%=cSub%>");    
     }
 
     function queryInfoData() {
@@ -597,7 +576,7 @@
 
     }
 
-        function API_SetLogin(_SID, cb) {
+    function API_SetLogin(_SID, cb) {
         var sourceLogined = EWinWebInfo.UserLogined;
         //var btnlogin = document.getElementById("BtnLogin");
         //btnlogin.style.display = "none";
@@ -884,7 +863,7 @@
     function checkUserLogin(SID, cb) {
         let data = {
             SID: SID,
-            GUID:Math.uuid()
+            GUID: Math.uuid()
         }
 
         lobbyClient.GetUserInfo(data, function (success, o) {
@@ -920,7 +899,7 @@
         var idHeaderCon = document.getElementById("header-con");
 
         if (EWinWebInfo.UserLogined) {
-   
+
             idUserNotLogin.style.display = "none";
             idUserNotLogin.classList.remove("NotLogin");
             idUserLogined.style.display = "block";
@@ -1009,7 +988,7 @@
             if (needCheckLogin == true) {
                 needCheckLogin = false;
 
-              if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
+                if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
                     checkUserLogin(EWinWebInfo.SID, function (success) {
                         if (success == true) {
                             updateBaseInfo();
@@ -1484,8 +1463,8 @@
                 retPage = "iType=BackCardIN&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
                 API_LoadPage("/Payment/BankCard/BankCard_In.aspx?" + retPage);
                 break;
-                case 4:
-                 window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency , "_blank");
+            case 4:
+                window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency, "_blank");
                 break;
 
         }
@@ -1503,7 +1482,7 @@
                 break;
             case 2:
                 retPage = "iType=BackCardOut&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
-          
+
                 API_LoadPage("/Payment/BankCard/BankCard_Out.aspx?" + retPage);
                 break;
             case 3:
@@ -1513,7 +1492,7 @@
 
         }
     }
-    
+
     window.onload = init;
 </script>
 <body>
@@ -1586,7 +1565,7 @@
                                 <br>
                                 <div class="language_replace">回首頁</div>
                             </a></li>
-                            <li><a onclick="API_LoadPage('gameLobby.aspx')"><span class="icon icon-icon-poker" aria-hidden="true"></span>
+                            <li><a onclick=" API_Lobby()"><span class="icon icon-icon-poker" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
                             </a></li>

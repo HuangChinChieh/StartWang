@@ -42,6 +42,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
+<script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
 <script>
     var c = new common();
     var ui = new uiControl();

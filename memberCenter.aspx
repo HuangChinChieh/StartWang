@@ -62,6 +62,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
+<script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
 <script type="text/javascript">
     var c = new common();
     var WebInfo;
@@ -821,7 +822,6 @@
                                 <div class="rowEdit">
                                     <div class="rowLeft"><span class="language_replace">備註</span></div>
                                     <div class="rowRight">
-                                        <div class="textareaInfo"><i></i><span class="language_replace">區域銀行請備註銀行所在的省縣市資訊</span></div>
                                         <textarea type="text" id="txtDescription" language_replace="placeholder" name="Remarks" rows="6" cols="40"></textarea>
                                     </div>
                                 </div>
