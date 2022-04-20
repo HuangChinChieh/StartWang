@@ -1,15 +1,104 @@
 ﻿<%@ Page Language="C#" %>
 <%
-    string Page = Request["Page"];
-    string Token = string.Empty;
+    string Token;
+    int RValue;
+    Random R = new Random();
+    string Lang = "";
+    string SID = string.Empty;
+    string CT = string.Empty;
+    string LoginURL = string.Empty;
+    string CompanyCode = System.Configuration.ConfigurationManager.AppSettings["CompanyCode"];
+    int RegisterType = 0;
+    int RegisterParentPersonCode = 0;
+    string LoginStatus = Request["LoginStatus"];
+    string Bulletin = string.Empty;
+    string FileData = string.Empty;
+    string isModify = "0";
+    string[] stringSeparators = new string[] { "&&_" };
+    string[] Separators;
+    int AllowLobby = 0;
+    int AllowMemberCenter=0;
+    string GameCodeListStr = string.Empty;
+    string b = Request["b"];
+    string c = Request["c"];
+    string cSub = Request["cSub"];
+    string AllowAksoDeposit = EWinWeb.AllowAksoDeposit;
+    string AllowAksoWithDrawal = EWinWeb.AllowAksoWithDrawal;
 
-    Token = Request["Token"];
-    if (string.IsNullOrEmpty(Token))
+    try
     {
-        if (string.IsNullOrEmpty(Page) == false)
-            Response.Redirect("Init.aspx?Page=" + Server.UrlEncode(Page));
-        else
-            Response.Redirect("Init.aspx");
+        if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt")))
+        {
+            FileData = System.IO.File.ReadAllText(Server.MapPath("/App_Data/Bulletin.txt"));
+            if (string.IsNullOrEmpty(FileData) == false)
+            {
+                Separators = FileData.Split(stringSeparators, StringSplitOptions.None);
+                Bulletin = Separators[0];
+                Bulletin = Bulletin.Replace("\r", "<br />").Replace("\n", string.Empty);
+                if (Separators.Length > 1)
+                {
+                    isModify = Separators[1];
+                }
+
+                if (isModify == "1")
+                {
+                    Response.Redirect("maintenance.html");
+                }
+            }
+        }
+    }
+    catch (Exception ex) { };
+
+
+    if (string.IsNullOrEmpty(Request["SID"]) == false)
+        SID = Request["SID"];
+
+    if (string.IsNullOrEmpty(Request["CT"]) == false)
+        CT = Request["CT"];
+
+    if (string.IsNullOrEmpty(Request["LoginURL"]) == false)
+        LoginURL = Request["LoginURL"];
+
+
+    EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+    RValue = R.Next(100000, 9999999);
+    Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
+
+
+    dynamic CompanySite = lobbyAPI.GetCompanySite(Token, Guid.NewGuid().ToString());
+    AllowLobby = CompanySite.Company.AllowLobby;
+    RegisterType = CompanySite.RegisterType;
+    RegisterParentPersonCode = CompanySite.RegisterParentPersonCode;
+    AllowMemberCenter = CompanySite.Company.AllowMemberCenter;
+
+    dynamic GameCodeList = lobbyAPI.GetCompanyGameCode(Token, Guid.NewGuid().ToString());
+    GameCodeListStr = Newtonsoft.Json.JsonConvert.SerializeObject(GameCodeList);
+
+    if (string.IsNullOrEmpty(Request["Lang"]))
+    {
+        string userLang = CodingControl.GetDefaultLanguage();
+
+        if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; }
+        else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; }
+        else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; }
+        else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; }
+        else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; }
+        else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; }
+        else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; }
+        else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; }
+        else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; }
+        else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; }
+        else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; }
+        else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; }
+        else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; }
+        else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; }
+        else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; }
+        else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; }
+        else { Lang = "ENG"; }
+    }
+    else
+    {
+        Lang = Request["Lang"];
     }
 %>
 <!doctype html>
@@ -66,9 +155,11 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="/Scripts/qcode-decoder.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery-1.6.4.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
+<script type="text/javascript" src="/Scripts/PaymentAPI.js"></script>
+<%--<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
+<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>--%>
 <!-- Swiper JS -->
 <script src="/Scripts/swiper.min.js"></script>
 <script src="/Scripts/jquery.mkinfinite.js"></script>
@@ -110,36 +201,57 @@
     var qr = new QCodeDecoder();
     var lang = "CHS";
     var page = "<%=Page%>";
-    var IsTestSite = "<%=Web.IsTestSite%>";
+    var LoginStatus = "<%=LoginStatus%>";
+    var CompanyCode = "<%=CompanyCode%>";
     var needCheckLogin = false;
-    var GWebUrl = "<%=Web.GWebURL %>";
-    var GWebInfo = {
-        Token: "<%=Token%>",
-        SID: null,
-        GWebUrl: "<%=Web.GWebURL%>",
-        DomainURL: null,
-        MarqueeText: null,
+    var lastWalletList = null; // 記錄最後一次同步的錢包, 用來分析是否錢包有變動
+    var ID = 0;
+    var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
+    var GameCodeList = <%=GameCodeListStr%>;
+    var postObj = null;
+    var apiURL = "/index.aspx";
+    var lobbyClient;
+    var paymentClient;
+    var EWinWebInfo = {
+        EWinUrl: "<%=EWinWeb.EWinUrl %>",
+        Token: "",
+        SID: "<%=SID%>",
+        CT: "<%=CT%>",
+        LoginURL: "<%=LoginURL%>",
         UserLogined: false,
-        UserRecoverable: false,
+        Lang: "<%=Lang%>",
+        SiteInfo: null,
         UserInfo: null,
-        InAppMode: false,
-        DeviceId: null,
-        NotifyToken: null,
-        DeviceName: null,
-        PushType: 0,
-        DeviceType: 0,
-        GPSLon: null,
-        GPSLat: null,
-        APPVersion: null,
-        CurrencyType: null,
-        PCBannerDocumentNumber: null,
-        MobileBannerDocumentNumber: null
-    };
+        RegisterType: "<%=RegisterType%>",
+        RegisterParentPersonCode: "<%=RegisterParentPersonCode%>",
+        GameCodeList: {
+            CategoryList: [],
+            GameBrandList: [],
+            GameList: null
+        }
+    }
+    var SiteInfo;
+    var selectedCurrency = '';
 
     function API_GetLang() {
         return lang;
     }
 
+    function API_GetWebInfo() {
+        return EWinWebInfo;
+    }
+
+    function API_GetLang() {
+        return EWinWebInfo.Lang;
+    }
+
+    function API_GetLobbyAPI() {
+        return lobbyClient;
+    }
+
+    function API_GetPaymentAPI() {
+        return paymentClient;
+    }
 
     function API_ShowMessage(title, msg, cbOK, cbCancel) {
         return showMessage(title, msg, cbOK, cbCancel);
@@ -150,7 +262,7 @@
     }
 
     function API_RefreshUserInfo(cb) {
-        checkUserLogin(GWebInfo.SID, function (logined) {
+        checkUserLogin(EWinWebInfo.SID, function (logined) {
             updateBaseInfo();
 
             notifyWindowEvent("LoginState", logined);
@@ -277,18 +389,98 @@
 
     function API_Logout() {
         let favoriteGamesStr = window.localStorage.getItem("FavoriteGames");
-        GWebInfo.UserInfo = null;
-        GWebInfo.UserLogined = false;
+        EWinWebInfo.UserInfo = null;
+        EWinWebInfo.UserLogined = false;
+        EWinWebInfo.CT = "";
         window.localStorage.clear();
         window.sessionStorage.clear();
+        delCookie("RecoverToken");
+        delCookie("SID");
+        delCookie("CT");
         if (favoriteGamesStr) {
             window.localStorage.setItem("FavoriteGames", favoriteGamesStr);
         }
         window.location.href = "Refresh.aspx?Init.aspx";
     }
 
-    function API_GetWebInfo() {
-        return GWebInfo;
+    //刪除cookie
+    function delCookie(name) {
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getCookie("RecoverToken");
+        if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
+
+    function API_Home() {
+        API_LoadPage('home.aspx');
+    }
+
+    function queryInfoData() {
+        var GUID = Math.uuid();
+        lobbyClient.GetInfoData2(GUID, ID, function (success, reps) {
+            if (success) {
+                if (reps.Result == 0) {
+                    var o = JSON.parse(reps.Message);
+                    for (var i = 0; i < o.length; i++) {
+                        if (o[i].InfoID > 0) {
+                            var t = c.getTemplate("templateToast");
+                            var guid = Math.uuid();
+
+                            t.id = guid;
+                            c.setClassText(t, "ToastItemTime", null, o[i].InfoDate);
+                            c.setClassText(t, "ToastName", null, o[i].InfoAccount);
+                            c.setClassText(t, "ToastAmount", null, c.toCurrency(o[i].InfoAmount));
+                            t.classList.add("toast");
+                            t.getElementsByClassName("ToastItemCloseBtn")[0].setAttribute("guid", guid);
+                            t.getElementsByClassName("ToastItemCloseBtn")[0].onclick = function () {
+                                var toast = document.getElementById(this.getAttribute("guid"));
+                                toast.parentNode.removeChild(toast);
+                            }
+                            document.getElementById("ToasterDiv").appendChild(t);
+
+                            if (ID == 0) {
+                                ID = o[i].InfoID;
+                            }
+
+                            if (o[i].InfoID > ID) {
+                                ID = o[i].InfoID;
+                            }
+
+                            window.setTimeout(function () {
+                                for (var i = 0; i < document.getElementsByClassName("toast").length; i++) {
+                                    if (document.getElementsByClassName("toast")[i].style.opacity == 0) {
+                                        var toast = document.getElementsByClassName("toast")[i];
+                                        toast.parentNode.removeChild(toast);
+                                    }
+                                }
+
+                            }, 15000)
+                        }
+                        else {
+                            if (o[0].InfoID == 0) {
+                                ID = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     function API_SetCurrencyType(c) {
@@ -308,10 +500,10 @@
     function API_ListCurrencyType() {
         var pi = null;
 
-        if (GWebInfo.UserLogined == true) {
-            if (GWebInfo.UserInfo != null) {
-                if (GWebInfo.UserInfo.PointInfo != null) {
-                    pi = GWebInfo.UserInfo.PointInfo;
+        if (EWinWebInfo.UserLogined == true) {
+            if (EWinWebInfo.UserInfo != null) {
+                if (GWebInfo.UserInfo.WalletList != null) {
+                    pi = GWebInfo.UserInfo.WalletList;
                 }
             }
         }
@@ -323,11 +515,11 @@
         var pi = null;
 
         if (c != null) {
-            if (GWebInfo.UserLogined == true) {
-                if (GWebInfo.UserInfo != null) {
-                    if (GWebInfo.UserInfo.PointInfo != null) {
-                        for (var i = 0; i < GWebInfo.UserInfo.PointInfo.length; i++) {
-                            var walletInfo = GWebInfo.UserInfo.PointInfo[i];
+            if (EWinWebInfo.UserLogined == true) {
+                if (EWinWebInfo.UserInfo != null) {
+                    if (EWinWebInfo.UserInfo.WalletList != null) {
+                        for (var i = 0; i < EWinWebInfo.UserInfo.WalletList.length; i++) {
+                            var walletInfo = EWinWebInfo.UserInfo.WalletList[i];
 
                             if (walletInfo.CurrencyType.toUpperCase() == c.toUpperCase()) {
                                 pi = walletInfo;
@@ -344,19 +536,6 @@
 
     function API_GetSelCurrencyType() {       
         return API_GetCurrencyType(document.getElementById("idCurrencyType").innerText);
-    }
-
-    function API_GetGWebHubAPI(newInst) {
-        var retValue;
-
-
-        if (newInst == true) {
-            retValue = new GWebHubAPI(GWebInfo.GWebUrl, GWebInfo.Token);
-        } else {
-            retValue = pHubClient;
-        }
-
-        return retValue;
     }
 
     function API_ShowMask(text, scope, cbClick) {
@@ -507,18 +686,17 @@
             var postData;
 
             API_ShowMask(mlp.getLanguageKey("登入復原中"), "full");
-            postData = encodeURI("Token=" + GWebInfo.Token + "&RecoverToken=" + recoverToken);
+            postData = encodeURI("RecoverToken=" + recoverToken);
             c.callService("/LoginRecover.aspx?" + postData, null, function (success, o) {
                 API_HideMask();
 
                 if (success) {
                     var obj = c.getJSON(o);
 
-                    if (obj.ResultCode == 0) {
-                        GWebInfo.Token = obj.Token;
-                        GWebInfo.SID = obj.SID;
+                    if (obj.Result == 0) {
+                        EWinWebInfo.SID = obj.SID;
 
-                        pHubClient.SetToken(obj.Token);
+                        //pHubClient.SetToken(obj.Token);
 
                         setCookie("RecoverToken", obj.RecoverToken, 365);
 
@@ -658,40 +836,24 @@
     function checkUserLogin(SID, cb) {
         var guid = Math.uuid();
 
-        pHubClient.GetUserInfo(SID, guid, function (success, o) {
+        lobbyClient.GetUserInfo(SID, guid, function (success, o) {
             if (success) {
-                if (o.ResultCode == 0) {
-                    GWebInfo.SID = SID;
-                    GWebInfo.UserLogined = true;
-                    GWebInfo.UserInfo = o;
+                if (o.Result == 0) {
+                    EWinWebInfo.SID = SID;
+                    EWinWebInfo.UserLogined = true;
+                    EWinWebInfo.UserInfo = o;
 
-                    if (GWebInfo.UserInfo.Company != null) {
-                        GWebInfo.DomainURL = GWebInfo.UserInfo.Company.DomainURL;
-                        GWebInfo.MarqueeText = GWebInfo.UserInfo.Company.MarqueeText;
-                        GWebInfo.PCBannerDocumentNumber = GWebInfo.UserInfo.Company.PCBannerDocumentNumber;
-                        GWebInfo.MobileBannerDocumentNumber = GWebInfo.UserInfo.Company.MobileBannerDocumentNumber;
-
-
-                    }
-
-                    if ((GWebInfo.CurrencyType == null) || (GWebInfo.CurrencyType == "")) {
-                        if (GWebInfo.UserInfo.PointInfo != null) {
-                            if (GWebInfo.UserInfo.PointInfo.length > 0) {
-                                GWebInfo.CurrencyType = GWebInfo.UserInfo.PointInfo[0].CurrencyType;
-                            }
-                        }
-                    }
-
-                    if (cb)
+                    if (cb) {
                         cb(true);
+                    }
                 } else {
-                    if ((o.Message == "InvalidSID") || (o.Message == "InvalidToken")) {
+                    if (o.Message == "InvalidSID") {
                         // login fail
-                        GWebInfo.UserLogined = false;
+                        EWinWebInfo.UserLogined = false;
                     } else {
-                        GWebInfo.UserLogined = false;
+                        EWinWebInfo.UserLogined = false;
 
-                        API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o.Message);
+                        API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
                     }
 
                     if (cb)
@@ -706,28 +868,29 @@
         var idUserLogined = document.getElementById("idUserLogined");
         var idHeaderCon = document.getElementById("header-con");
 
-        if (GWebInfo.UserLogined) {
-            var pi;
-
-            pi = API_GetCurrencyType(GWebInfo.CurrencyType);
-
+        if (EWinWebInfo.UserLogined) {
+   
             idUserNotLogin.style.display = "none";
             idUserNotLogin.classList.remove("NotLogin");
             idUserLogined.style.display = "block";
             idHeaderCon.classList.add("login");
 
-            c.setElementText("idUserLevel", null, GWebInfo.UserInfo.UserLevel);
-            //c.setElementText("idRealName", null, GWebInfo.UserInfo.RealName);
-            c.setElementText("idNickName", null, GWebInfo.UserInfo.NickName);
+            c.setElementText("idUserLevel", null, EWinWebInfo.UserInfo.UserLevel);
+            c.setElementText("idNickName", null, EWinWebInfo.UserInfo.LoginAccount);
 
-            if (pi != null) {
-                var idCurrencyType = document.getElementById("idCurrencyType");
-                var idBalance = document.getElementById("idBalance");
+            var idCurrencyType = document.getElementById("idCurrencyType");
+            var idBalance = document.getElementById("idBalance");
 
-                idCurrencyType.innerText = pi.CurrencyType;
-                idBalance.innerText = "$" + new BigNumber(pi.PointValue).toFormat();
+            if (selectedCurrency == '') {
+                idCurrencyType.innerText = EWinWebInfo.UserInfo.WalletList[0].CurrencyType;
+                idBalance.innerText = EWinWebInfo.UserInfo.WalletList[0].PointValue;
+                selectedCurrency = EWinWebInfo.UserInfo.WalletList[0].CurrencyType;
+            } else {
+                var indexWalletList = EWinWebInfo.UserInfo.WalletList.findIndex(function (d) { return d.CurrencyType == selectedCurrency });
+                idCurrencyType.innerText = EWinWebInfo.UserInfo.WalletList[indexWalletList].CurrencyType;
+                idBalance.innerText = EWinWebInfo.UserInfo.WalletList[indexWalletList].PointValue;
+                selectedCurrency = EWinWebInfo.UserInfo.WalletList[indexWalletList].CurrencyType;
             }
-
         } else {
             idUserNotLogin.style.display = "block";
             idUserNotLogin.classList.add("NotLogin");
@@ -738,13 +901,11 @@
     }
 
     function init() {
-        GWebInfo.SID = window.localStorage.getItem("SID");
-        if (window.localStorage.getItem("CurrencyType") != null)
-            GWebInfo.CurrencyType = window.localStorage.getItem("CurrencyType");
+        EWinWebInfo.SID = window.localStorage.getItem("SID");
 
         if (window.localStorage.getItem("Lang") != null)
             lang = window.localStorage.getItem("Lang");
-        
+
 
         //語系介面初始化 
         //----start----
@@ -764,101 +925,19 @@
 
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
-            pHubClient = new GWebHubAPI(GWebInfo.GWebUrl, GWebInfo.Token);
-
-            // 設定 SignalR 事件
-            // handleReceiveMsg: 收到伺服器傳回訊息
-            // handleConnected: 連線完成
-            // handleReconnected: 重新連線完成
-            // handleReconnecting: 重新連線中
-            // handleDisconnect: 斷線
-            pHubClient.handleReceiveMsg(function (o) {
-            });
-
-            pHubClient.handleConnected(function () {
-                needCheckLogin = true;
-                pHubClient.RefreshSID(GWebInfo.SID, Math.uuid());
-
-                if ((page != null) && (page != ""))
-                    API_LoadPage(page);
-                else
-                    API_LoadPage("home.aspx");
-
-                if (t1 != null) {
-                    window.clearInterval(t1);
-                }
-
-                t1 = window.setInterval(function () {
-                    // refresh SID and Token;
-                    var guid = Math.uuid();
-
-                    if (pHubClient.state() == 1) {
-                        pHubClient.RefreshSID(GWebInfo.SID, guid, function (success, o) {
-                            //console.log("RefreshSID:" + guid);
-                            if (success == true) {
-                                if (o.ResultCode == 0) {
-                                    needCheckLogin = true;
-                                    //needCheckLogin = true;
-                                } else {
-                                    if ((GWebInfo.SID != null) && (GWebInfo.SID != "")) {
-                                        needCheckLogin = true;
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }, 10000);
-            });
-
-            pHubClient.handleReconnected(function () {
-            });
-
-            pHubClient.handleReconnecting(function () {
-            });
-
-            pHubClient.handleDisconnect(function () {
-            });
-
-            pHubClient.handleStateChange(function (newState, oldState) {
-                switch (pHubClient.state()) {
-                    case 0:
-                        break;
-                    case 1:
-                        API_HideMask();
-                        break;
-                    case 2:
-                        API_ShowMask(mlp.getLanguageKey("重新連線中..."), "full");
-                        break;
-                    case 4:
-                        API_ShowMask(mlp.getLanguageKey("服務器連線中斷"), "full");
-                        break;
-                }
-            });
-
-            pHubClient.initializeConnection();
-
-            if (IsTestSite != "True") {
-                var tryitBtn = document.getElementById("tryitBtn");
-                tryitBtn.style.display = "none";
+            lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
+            paymentClient = new PaymentAPI("/API/PaymentAPI.asmx");
+            if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
+                initLobbyClient();
+            }
+            else {
+                API_Home();
             }
 
-            window.setInterval(function () {
-                if (needCheckLogin == true) {
-                    needCheckLogin = false;
-
-                    if ((GWebInfo.SID != null) && (GWebInfo.SID != "")) {
-                        checkUserLogin(GWebInfo.SID, function (success) {
-                            if (success == true) {
-                                updateBaseInfo();
-                            } else {
-                                userRecover();
-                            }
-                        });
-                    } else {
-                        updateBaseInfo();
-                    }
-                }
-            }, 500);
+            try {
+                EWinWebInfo.GameCodeList = GameCodeList.GameCodeList;
+            }
+            catch (e) { }
         });
 
         //API_ShowMessageOK("錯誤", "請輸入登入帳號");
@@ -870,6 +949,141 @@
         }, 500);
 
         window.localStorage.setItem("Lang", lang);
+    }
+
+    function initLobbyClient() {
+        //lobbyClient = new LobbyHubAPI(CT);
+
+        // 設定 SignalR 事件
+        // handleReceiveMsg: 收到伺服器傳回訊息
+        // handleConnected: 連線完成
+        // handleReconnected: 重新連線完成
+        // handleReconnecting: 重新連線中
+        // handleDisconnect: 斷線
+
+        if (LoginStatus == "success") {
+            //是否允許大廳
+            if (EWinWebInfo.SiteInfo != null) {
+                if (EWinWebInfo.SiteInfo.Company.AllowLobby == 1) {
+                    //是否有多遊戲
+                    postObj = {
+                        GUID: Math.uuid()
+                    }
+
+                    lobbyClient.GetCompanyGameCode(postObj, function (success, o) {
+                        if (success) {
+                            if (o.Result == 0) {
+                                EWinWebInfo.GameCodeList = o.GameCodeList;
+                                if (o.GameCodeList.length > 0) {
+                                    API_Lobby();
+                                }
+                                else {
+                                    API_Home();
+                                }
+                            }
+                        }
+
+                    })
+                }
+                else {
+                    API_Home();
+                }
+            }
+            else {
+                API_Home();
+            }
+        }
+        else {
+            API_Home();
+        }
+
+        window.setTimeout(function () {
+            postObj = {
+                GUID: Math.uuid()
+            }
+
+            lobbyClient.GetCompanySite(postObj, function (success, o) {
+                if (success) {
+                    if (o.Result == 0) {
+                        //SiteInfo = o;
+                        EWinWebInfo.SiteInfo = o;
+                        if ((EWinWebInfo.SID != null) && (EWinWebInfo.SID != "")) {
+                            API_SetLogin(EWinWebInfo.SID, function (logined) {
+                                if (logined == false) {
+                                    userRecover();
+                                }
+                            });
+                        } else {
+                            updateBaseInfo();
+                        }
+                        API_HideMask();
+                        //if (cb)
+                        //    cb(true);
+                    } else {
+                        if (o.Message == "InvalidSID") {
+                            // login fail
+                            EWinWebInfo.UserLogined = false;
+                        } else {
+                            EWinWebInfo.UserLogined = false;
+
+                            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
+                        }
+                    }
+                }
+                else {
+                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("服務器異常, 請稍後再嘗試一次"), function () {
+                        window.location.href = "index.aspx"
+                    });
+                }
+            });
+        }, 500);
+
+        window.setInterval(function () {
+            // refresh SID and Token;
+            var guid = Math.uuid();
+
+            if ((EWinWebInfo.SID != null) && (EWinWebInfo.SID != "")) {
+                postObj = {
+                    SID: EWinWebInfo.SID,
+                    GUID: Math.uuid()
+                }
+                lobbyClient.KeepSID(postObj, function (success, o) {
+                    if (success == true) {
+                        if (o.Result == 0) {
+                            needCheckLogin = true;
+                        } else {
+                            if ((EWinWebInfo.SID != null) && (EWinWebInfo.SID != "")) {
+                                needCheckLogin = true;
+                            }
+                        }
+                    }
+                });
+            }
+        }, 10000);
+
+        window.setInterval(function () {
+            if (needCheckLogin == true) {
+                needCheckLogin = false;
+
+                if ((EWinWebInfo.SID != null) && (EWinWebInfo.SID != "")) {
+                    API_SetLogin(EWinWebInfo.SID, function (logined) {
+                        if (logined == false) {
+                            userRecover();
+                        }
+                    });
+                } else {
+                    updateBaseInfo();
+                }
+            }
+        }, 1000);
+
+        queryInfoData();
+        setInterval(queryInfoData, 20000);
+
+        if (hasBulletin == true) {
+            document.getElementById("popupBulletin").style.display = "block";
+        }
+
     }
 
     function resize() {
@@ -993,18 +1207,20 @@
 </script>
 <script>
     function CreateLoginValidateCode() {
-        c.callService("CreateAuthCode.aspx", null, function (success, text) {
+        var now = new Date();
+        iURL = "/GetValidateImage.aspx?time=" + now.getTime();
+        c.callService(iURL, null, function (success, text) {
             if (success == true) {
                 var o = c.getJSON(text);
 
-                if (o.ResultCode == 0) {
+                if (o.Result == 0) {
                     var idValidImage = document.getElementById("idLoginValidImage");
                     var idFormUserLogin = document.getElementById("idFormUserLogin");
 
                     idFormUserLogin.LoginGUID.value = o.LoginGUID;
 
                     if (idValidImage != null) {
-                        idValidImage.src = o.ImageContent;
+                        idValidImage.src = o.Image;
                         idValidImage.style.display = "block";
                     }
                 } else {

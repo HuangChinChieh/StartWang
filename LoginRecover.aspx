@@ -1,92 +1,48 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LoginRecover.aspx.cs" Inherits="LoginRecover" %>
 <%
-    GWebAPI.Auth.AuthAPI AuthAPI = new GWebAPI.Auth.AuthAPI();
+    EWin.LoginAPI LoginAPI = new EWin.LoginAPI();
     RecoverResult ResultObj = new RecoverResult();
     string Token = string.Empty;
-    string NewToken = string.Empty;
     string NewRecoverToken = string.Empty;
     string SID = string.Empty;
     string MsgContent = string.Empty;
     string RecoverToken = string.Empty;
 
     RecoverToken = Request["RecoverToken"];
-    Token = Request["Token"];
 
-    if ((string.IsNullOrEmpty(RecoverToken) == false) && (string.IsNullOrEmpty(Token) == false))
+    //if ((string.IsNullOrEmpty(RecoverToken) == false) && (string.IsNullOrEmpty(Token) == false))
+    if ((string.IsNullOrEmpty(RecoverToken) == false))
     {
-        GWebAPI.Auth.LoginResult LoginResult;
-        dynamic postObject = null;
-        dynamic Result = null;
-        string SourceEncString;
-        string CustomHeader;
-        string WebApiURL = string.Empty;
-        string GWebDate = string.Empty;
+        EWin.LoginResult LoginResult;
+        int RValue;
+        Random R = new Random();
 
-        // 檢查 Token 是否仍允許使用
-        WebApiURL = Web.GWebApiUrl;
+        // 重新產生 Token
+        RValue = R.Next(100000, 9999999);
+        Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
 
-        postObject = new System.Dynamic.ExpandoObject();
-        postObject.GUID = System.Guid.NewGuid().ToString();
-        postObject.Token = Token;
-        postObject.SID = "";
-
-        Result = CodingControl.GetWebJSONContent(WebApiURL + "/RefreshSID", "POST", Newtonsoft.Json.JsonConvert.SerializeObject(postObject));
-        if (Result.ResultCode != 0)
+        // 嘗試恢復登入狀態
+        LoginResult = LoginAPI.RecoverLogin(Token, RecoverToken, CodingControl.GetUserIP());
+        if (LoginResult != null)
         {
-            // 需要更新 Token
-            GWebDate = System.DateTime.UtcNow.ToString("yyyyMMddHHmmss");
-            SourceEncString = Web.CompanyCode + ":" + Web.ApiKey + ":" + GWebDate;
-
-            // 重新建立 Token
-            postObject = new System.Dynamic.ExpandoObject();
-            postObject.GUID = System.Guid.NewGuid().ToString();
-            postObject.Hash = CodingControl.GetMD5(SourceEncString, false);
-
-            CustomHeader = "GWeb-CompanyCode: " + Web.CompanyCode + "\r\n" +
-                           "GWeb-ApiKey: " + Web.ApiKey + "\r\n" +
-                           "GWeb-Date: " + GWebDate;
-
-            Result = CodingControl.GetWebJSONContent(WebApiURL + "/CreateServerToken", "POST", Newtonsoft.Json.JsonConvert.SerializeObject(postObject), CustomHeader);
-            if (Result.ResultCode == 0)
+            if (LoginResult.ResultState == EWin.enumResultState.OK)
             {
-                NewToken = Result.Message;
-            }
-        }
-        else
-        {
-            NewToken = Token;
-        }
+                SID = LoginResult.SID;
 
-        if (string.IsNullOrEmpty(NewToken) == false)
-        {
-            // 嘗試恢復登入狀態
-            LoginResult = AuthAPI.RecoverLogin(NewToken, RecoverToken, CodingControl.GetUserIP());
-            if (LoginResult != null)
-            {
-                if (LoginResult.ResultCode == GWebAPI.Auth.enumResultCode.OK)
+                if (string.IsNullOrEmpty(LoginResult.RecoverToken) == false)
                 {
-                    SID = LoginResult.Message;
-
-                    if (string.IsNullOrEmpty(LoginResult.RecoverToken) == false)
-                    {
-                        NewRecoverToken = LoginResult.RecoverToken;
-                    }
-
-                    ResultObj.ResultCode = RecoverResult.enumResultCode.OK;
-                    ResultObj.Token = NewToken;
-                    ResultObj.SID = SID;
-                    ResultObj.RecoverToken = NewRecoverToken;
+                    NewRecoverToken = LoginResult.RecoverToken;
                 }
-                else
-                {
-                    ResultObj.ResultCode = RecoverResult.enumResultCode.ERR;
-                    ResultObj.Message = "LoginExpire:" + LoginResult.Message;
-                }
+
+                ResultObj.ResultCode = RecoverResult.enumResultCode.OK;
+                ResultObj.Token = Token;
+                ResultObj.SID = SID;
+                ResultObj.RecoverToken = NewRecoverToken;
             }
             else
             {
                 ResultObj.ResultCode = RecoverResult.enumResultCode.ERR;
-                ResultObj.Message = "ServerError";
+                ResultObj.Message = "LoginExpire:" + LoginResult.Message;
             }
         }
         else
