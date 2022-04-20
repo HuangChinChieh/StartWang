@@ -15,54 +15,42 @@ using System.Web.UI;
 
 public class CodingControl
 {
-    public static dynamic GetJSON(string s)
+
+    public static void SendMail(string SMTPServer, System.Net.Mail.MailAddress FromName, System.Net.Mail.MailAddress ToName, string Subject, string Body, string LoginAccount, string LoginPassword, string Charset, Boolean EnableSsl = false, int Port = 587)
     {
-        dynamic o = null;
+        System.Net.Mail.SmtpClient SMTP;
+        System.Net.Mail.MailMessage Msg;
 
-        if (string.IsNullOrEmpty(s) == false)
+        SMTP = new System.Net.Mail.SmtpClient(SMTPServer, Port);
+        SMTP.EnableSsl = EnableSsl;
+        SMTP.Credentials = new System.Net.NetworkCredential(LoginAccount, LoginPassword);
+        Msg = new System.Net.Mail.MailMessage();
+        Msg.Body = Body;
+        Msg.IsBodyHtml = true;
+
+        if (Charset == String.Empty)
         {
-            dynamic o2 = null;
-
-            try
-            {
-                o2 = Newtonsoft.Json.JsonConvert.DeserializeObject(s);
-            }
-            catch (Exception ex)
-            {
-            }
-
-            if (o2 != null)
-            {
-                bool dKeyExist = false;
-
-                if (o2 is System.Dynamic.ExpandoObject)
-                {
-                    if (((IDictionary<string, object>)o2).ContainsKey("d"))
-                    {
-                        dKeyExist = true;
-                    }
-                }
-                else if (o2 is Newtonsoft.Json.Linq.JObject)
-                {
-                    if (o2["d"] != null)
-                    {
-                        dKeyExist = true;
-                    }
-                }
-
-                if (dKeyExist)
-                {
-
-                    o = o2.d;
-                }
-                else
-                {
-                    o = o2;
-                }
-            }
+            Msg.BodyEncoding = System.Text.Encoding.Default;
+        }
+        else
+        {
+            Msg.BodyEncoding = System.Text.Encoding.GetEncoding(Charset);
         }
 
-        return o;
+        Msg.From = FromName;
+        Msg.To.Add(ToName);
+        Msg.Subject = Subject;
+
+        try
+        {
+            SMTP.Send(Msg);
+        }
+        catch (System.Net.WebException ex)
+        {
+
+        }
+
+        Msg = null;
     }
 
     public static string GetUnicodeEscape(string s) {
@@ -175,12 +163,18 @@ public class CodingControl
         }
 
         // 濾除 port
-        if (string.IsNullOrEmpty(RetValue) == false) {
-            int tmpIndex;
+        if (string.IsNullOrEmpty(RetValue) == false)
+        {
+            if (RetValue.IndexOf(".") != -1)
+            {
+                // ipv4
+                int tmpIndex;
 
-            tmpIndex = RetValue.IndexOf(":");
-            if (tmpIndex != -1) {
-                RetValue = RetValue.Substring(0, tmpIndex);
+                tmpIndex = RetValue.IndexOf(":");
+                if (tmpIndex != -1)
+                {
+                    RetValue = RetValue.Substring(0, tmpIndex);
+                }
             }
         }
 
@@ -272,34 +266,23 @@ public class CodingControl
         string RetValue;
 
         Temp = HttpContext.Current.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"];
-        TempArr = Temp.Split(';');
-
-        LangArr = TempArr[0].Split(',');
-
-        if (LangArr[0].Trim() == string.Empty)
-            RetValue = "en-us";
-        else
-            RetValue = LangArr[0];
-
-        return RetValue;
-    }
-
-    public static dynamic GetWebJSONContent(string URL, string Method = "GET", string SendData = "", string CustomHeader = null, string ContentType = null, int Timeout = 30000)
-    {
-        string HttpContent;
-        dynamic o = null;
-        string defaultContentType = "application/json";
-
-        if (ContentType != null)
-            defaultContentType = ContentType;
-
-        HttpContent = GetWebTextContent(URL, Method, SendData, CustomHeader, defaultContentType, null, Timeout);
-        if (string.IsNullOrEmpty(HttpContent) == false)
+        if (string.IsNullOrEmpty(Temp) == false)
         {
-            o = GetJSON(HttpContent);
+            TempArr = Temp.Split(';');
+
+            LangArr = TempArr[0].Split(',');
+
+            if (LangArr[0].Trim() == string.Empty)
+                RetValue = "en-us";
+            else
+                RetValue = LangArr[0];
+        }
+        else
+        {
+            RetValue = "en-us";
         }
 
-        return o;
+        return RetValue;
     }
 
     public static byte[] GetWebBinaryContent(string URL)
@@ -315,8 +298,6 @@ public class CodingControl
 
     public static string GetWebTextContent(string URL, string Method = "GET", string SendData = "", string CustomHeader = null, string ContentType = null, System.Text.Encoding TextEncoding = null, int Timeout = 30000)
     {
-        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
-
         System.Net.HttpWebRequest HttpClient;
         System.Net.HttpWebResponse HttpResponse;
         System.IO.Stream Stm;
@@ -337,6 +318,7 @@ public class CodingControl
         HttpClient.ContinueTimeout = Timeout;
         HttpClient.ReadWriteTimeout = Timeout;
         HttpClient.Timeout = Timeout;
+        HttpClient.ServicePoint.Expect100Continue = false;
 
         if (CustomHeader != null)
         {
@@ -462,7 +444,7 @@ public class CodingControl
         return RetValue;
     }
 
-
+   
     public static string UserIP()
     {
         // 取得使用者的 IP Address
@@ -520,6 +502,32 @@ public class CodingControl
         }
 
         return RetValue;
+    }
+
+    public static string AESEncrypt(byte[] data, string Key)
+    {
+        byte[] KeyData = System.Text.Encoding.UTF8.GetBytes(Key);
+        byte[] AES_IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; //Encoding.UTF8.GetBytes("0000000000000000");
+        byte[] RetData;
+
+        System.Security.Cryptography.AesCryptoServiceProvider aes = new System.Security.Cryptography.AesCryptoServiceProvider();
+        System.Security.Cryptography.ICryptoTransform Enc = aes.CreateEncryptor(KeyData, AES_IV);
+        RetData = Enc.TransformFinalBlock(data, 0, data.Length);
+
+        return Convert.ToBase64String(RetData);
+    }
+
+    public static byte[] AESDecrypt(string s, string Key)
+    {
+        byte[] KeyData = System.Text.Encoding.UTF8.GetBytes(Key);
+        byte[] AES_IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; //Encoding.UTF8.GetBytes("0000000000000000");
+        byte[] SourceData;
+
+        SourceData = Convert.FromBase64String(s);
+        System.Security.Cryptography.AesCryptoServiceProvider aes = new System.Security.Cryptography.AesCryptoServiceProvider();
+        System.Security.Cryptography.ICryptoTransform Dec = aes.CreateDecryptor(KeyData, AES_IV);
+
+        return Dec.TransformFinalBlock(SourceData, 0, SourceData.Length);
     }
 
     public static string GetSHA256(string data, bool Base64Encoding = true)
@@ -597,44 +605,129 @@ public class CodingControl
         }
     }
 
-    public static decimal FormatDecimal(decimal s)
+    public static dynamic GetWebJSONContent(string URL, string Method = "GET", string SendData = "", string CustomHeader = null, string ContentType = null, System.Text.Encoding TextEncoding = null, int Timeout = 30000)
     {
-        //decimal iValue;
-        //decimal LeftValue;
-        //int i = 1;
-        //decimal s2;
-        //bool IsNegative = false;
+        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
-        //if (s < 0)
-        //    IsNegative = true;
+        string HttpContent;
+        dynamic o = null;
+        string defaultContentType = "application/json";
 
-        //s2 = Math.Abs(s);
+        if (ContentType != null)
+            defaultContentType = ContentType;
 
-        //iValue = Math.Floor(s2)/1;
+        HttpContent = GetWebTextContent(URL, Method, SendData, CustomHeader, defaultContentType, TextEncoding, Timeout);
+        if (string.IsNullOrEmpty(HttpContent) == false)
+        {
+            o = GetJSON(HttpContent);
+        }
 
-        //LeftValue = s2 % 1;
-        //ExtControl.AlertMsg("", "LeftValue="+LeftValue.ToString()+",s2="+ s2.ToString()+ ",iValue=" + iValue.ToString());
-        //do
-        //{
-        //    decimal tmpValue ;
-        //    decimal powerNumber = Convert.ToDecimal(Math.Pow(10, i));
-
-        //    tmpValue = (LeftValue * powerNumber % 1);
-        //    if (tmpValue == 0)
-        //    {
-        //        iValue += (LeftValue * powerNumber) * Convert.ToDecimal(Math.Pow(10, -i));
-
-        //        break;
-        //    }
-        //    else
-        //        i += 1;
-        //} while (true);
-
-        //if (IsNegative)
-        //    return 0 - iValue;
-        //else
-        //    return iValue;
-        return s / 1.000000000000000000000000000000000m;
+        return o;
     }
 
+    public static dynamic GetJSON(string s)
+    {
+        dynamic o = null;
+
+        if (string.IsNullOrEmpty(s) == false)
+        {
+            dynamic o2 = null;
+
+            try
+            {
+                o2 = Newtonsoft.Json.JsonConvert.DeserializeObject(s);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            if (o2 != null)
+            {
+                bool dKeyExist = false;
+
+                if (o2 is System.Dynamic.ExpandoObject)
+                {
+                    if (((IDictionary<string, object>)o2).ContainsKey("d"))
+                    {
+                        dKeyExist = true;
+                    }
+                }
+                else if (o2 is Newtonsoft.Json.Linq.JObject)
+                {
+                    if (o2["d"] != null)
+                    {
+                        dKeyExist = true;
+                    }
+                }
+
+                if (dKeyExist)
+                {
+
+                    o = o2.d;
+                }
+                else
+                {
+                    o = o2;
+                }
+            }
+        }
+
+        return o;
+    }
+
+
+    public static string GetEmailTemp(string LoginAccount, string ValidateCode, enumSendMailType SendMailType)
+    {
+        Stream myStream;
+
+        if (SendMailType == enumSendMailType.Register)
+        {
+            myStream = new FileStream(HttpContext.Current.Server.MapPath(@"/Html/ocw/verification.html"), FileMode.Open);
+        }
+        else if (SendMailType == enumSendMailType.ForgetPassword)
+        {
+            myStream = new FileStream(HttpContext.Current.Server.MapPath(@"/Html/ocw/verification.html"), FileMode.Open);
+        }
+        else
+        {
+            myStream = new FileStream(HttpContext.Current.Server.MapPath(@"/Html/ocw/thanks.html"), FileMode.Open);
+        }
+
+        Encoding encode = System.Text.Encoding.GetEncoding("GB2312");
+        StreamReader myStreamReader = new StreamReader(myStream, encode);
+        string strhtml = myStreamReader.ReadToEnd();
+        myStream.Close();
+        string stroutput = string.Empty;
+        stroutput = strhtml.Replace("{0}", LoginAccount);
+
+        if (SendMailType == enumSendMailType.Register)
+        {
+            stroutput = stroutput.Replace("{1}", ValidateCode);
+            stroutput = stroutput.Replace("{2}", "您的驗證碼如下。");
+            stroutput = stroutput.Replace("{3}", "請於10分鐘內輸入驗證碼。");
+        }
+        else if (SendMailType == enumSendMailType.ForgetPassword)
+        {
+            stroutput = stroutput.Replace("{1}", ValidateCode);
+            stroutput = stroutput.Replace("{2}", "重置密碼的驗證碼如下。");
+            stroutput = stroutput.Replace("{3}", "請於重製頁面下輸入驗證碼。");
+
+        }
+
+        return stroutput;
+    }
+
+    public static decimal FormatDecimal(decimal value, int point)
+    {
+
+        decimal pointV = (decimal)Math.Pow(10, point);
+        return decimal.Ceiling(value * pointV) / pointV;
+    }
+
+    public enum enumSendMailType
+    {
+        Register = 0,
+        ForgetPassword = 1,
+        ThanksLetter = 2
+    }
 }
