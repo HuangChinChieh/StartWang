@@ -56,8 +56,6 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="Scripts/jquery.min.1.7.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>
 <!-- Swiper JS -->
 <script src="/Scripts/swiper.min.js"></script>
 <script src="/Scripts/jquery.mkinfinite.js"></script>
@@ -159,11 +157,11 @@
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             GWebInfo = window.parent.API_GetWebInfo();
-            p = window.parent.API_GetGWebHubAPI();
+            //p = window.parent.API_GetGWebHubAPI();
 
-            if (p != null) {
-                getWebTag();
-            }
+            //if (p != null) {
+            //    getWebTag();
+            //}
         });
     }
 

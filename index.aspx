@@ -128,15 +128,6 @@
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/99playfont/99fonts.css" rel="stylesheet" type="text/css">
     <link href="css/12onefont/12onefont.css" rel="stylesheet" type="text/css">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
@@ -160,8 +151,6 @@
 <script type="text/javascript" src="/Scripts/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
 <script type="text/javascript" src="/Scripts/PaymentAPI.js"></script>
-<%--<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/jquery.signalR-2.3.0.min.js"></script>
-<script type="text/javascript" src="<%=Web.GWebURL %>/Scripts/GWebHubAPI.js"></script>--%>
 <!-- Swiper JS -->
 <script src="/Scripts/swiper.min.js"></script>
 <script src="/Scripts/jquery.mkinfinite.js"></script>
@@ -266,7 +255,7 @@
     }
 
     function API_OpenQRCodeScanner(fileInput, cb) {
-        if (GWebInfo.InAppMode) {
+        if (EWinWebInfo.InAppMode) {
             AppBridge.openQRCode(function (result) {
                 if (cb)
                     cb(result);
@@ -313,7 +302,7 @@
             ddList[ddList.length] = item;
         }
 
-        API_ShowDropdownWindow(title, ddList, GWebInfo.CurrencyType, function (v) {
+        API_ShowDropdownWindow(title, ddList, EWinWebInfo.CurrencyType, function (v) {
             API_SetCurrencyType(v);
             updateBaseInfo();
         }, null);
@@ -480,7 +469,7 @@
         var pi = API_GetCurrencyType(c);
 
         if (pi != null) {
-            GWebInfo.CurrencyType = c;
+            EWinWebInfo.CurrencyType = c;
             window.localStorage.setItem("CurrencyType", c);
 
             notifyWindowEvent("SetCurrencyType", c);
@@ -495,8 +484,8 @@
 
         if (EWinWebInfo.UserLogined == true) {
             if (EWinWebInfo.UserInfo != null) {
-                if (GWebInfo.UserInfo.WalletList != null) {
-                    pi = GWebInfo.UserInfo.WalletList;
+                if (EWinWebInfo.UserInfo.WalletList != null) {
+                    pi = EWinWebInfo.UserInfo.WalletList;
                 }
             }
         }
@@ -572,7 +561,7 @@
         var PointInfo = API_GetSelCurrencyType();
 
         if (PointInfo.PointValue > 0) {
-            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + GWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + GWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + GWebInfo.UserInfo.LoginAccount);
+            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + EWinWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + EWinWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + EWinWebInfo.UserInfo.LoginAccount);
             //gameWindow.GameCode = GameCode;
             //gameWindow.CurrencyType = PointInfo.CurrencyType;
             //gameWindow.onbeforeunload = function () {
@@ -592,8 +581,8 @@
         var common = window.top.c;
         var postData = {
             GameCode: GameCode,
-            Token: GWebInfo.Token,
-            SID: GWebInfo.SID,
+            Token: EWinWebInfo.Token,
+            SID: EWinWebInfo.SID,
             CurrencyType: CurrencyType
         };
         common.callService("<%=Web.GPlatformURL %>/LoginBySID.aspx/LogoutBySID", postData, function (success, text) {
@@ -606,6 +595,66 @@
             }
         });
 
+    }
+
+        function API_SetLogin(_SID, cb) {
+        var sourceLogined = EWinWebInfo.UserLogined;
+        //var btnlogin = document.getElementById("BtnLogin");
+        //btnlogin.style.display = "none";
+        checkUserLogin(_SID, function (logined) {
+            var raiseCurrencyChange = false;
+
+            updateBaseInfo();
+
+            // check wallet
+            if ((lastWalletList != null) && (EWinWebInfo.UserInfo != null)) {
+                if (EWinWebInfo.UserInfo.WalletList != null) {
+                    if (lastWalletList.length == EWinWebInfo.UserInfo.WalletList.length) {
+                        for (var i = 0; i < lastWalletList.length; i++) {
+                            var eachWallet = lastWalletList[i];
+
+                            for (var j = 0; j < EWinWebInfo.UserInfo.WalletList.length; j++) {
+                                var runtimeWallet = EWinWebInfo.UserInfo.WalletList[j];
+
+                                if (runtimeWallet.CurrencyType == eachWallet.CurrencyType) {
+                                    if (runtimeWallet.PointValue != eachWallet.PointValue) {
+                                        raiseCurrencyChange = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (raiseCurrencyChange)
+                                break;
+                        }
+                    } else {
+                        raiseCurrencyChange = true;
+                    }
+
+                    lastWalletList = EWinWebInfo.UserInfo.WalletList;
+                }
+            }
+
+            if (logined) {
+                window.localStorage.setItem("SID", _SID);
+
+
+                if (cb)
+                    cb(true);
+            } else {
+                window.localStorage.setItem("SID", "");
+
+                if (cb)
+                    cb(false);
+            }
+
+            if (sourceLogined == logined)
+                notifyWindowEvent("LoginState", logined);
+
+            if (raiseCurrencyChange)
+                notifyWindowEvent("BalanceChange", logined);
+
+        });
     }
 
     //function notifyWindowEvent(eventName, o) {
@@ -706,7 +755,7 @@
                                 cb(true);
                         });
                     } else {
-                        GWebInfo.UserLogined = false;
+                        EWinWebInfo.UserLogined = false;
 
                         API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入。") + obj.Message, function () {
                             //API_LoadMainPage("Login");
@@ -833,10 +882,12 @@
     }
 
     function checkUserLogin(SID, cb) {
-        debugger;
-        var guid = Math.uuid();
+        let data = {
+            SID: SID,
+            GUID:Math.uuid()
+        }
 
-        lobbyClient.GetUserInfo(SID, guid, function (success, o) {
+        lobbyClient.GetUserInfo(data, function (success, o) {
             if (success) {
                 if (o.Result == 0) {
                     EWinWebInfo.SID = SID;
@@ -901,8 +952,6 @@
     }
 
     function init() {
-        EWinWebInfo.SID = window.localStorage.getItem("SID");
-
         if (window.localStorage.getItem("Lang") != null)
             lang = window.localStorage.getItem("Lang");
 
@@ -929,6 +978,14 @@
             paymentClient = new PaymentAPI("/API/PaymentAPI.asmx");
             if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
                 initLobbyClient();
+
+                checkUserLogin(EWinWebInfo.SID, function (success) {
+                    if (success == true) {
+                        updateBaseInfo();
+                    } else {
+                        userRecover();
+                    }
+                });
             }
             else {
                 API_Home();
@@ -946,6 +1003,24 @@
         resize();
         setInterval(function () {
             resize();
+        }, 500);
+
+        window.setInterval(function () {
+            if (needCheckLogin == true) {
+                needCheckLogin = false;
+
+              if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
+                    checkUserLogin(EWinWebInfo.SID, function (success) {
+                        if (success == true) {
+                            updateBaseInfo();
+                        } else {
+                            userRecover();
+                        }
+                    });
+                } else {
+                    updateBaseInfo();
+                }
+            }
         }, 500);
 
         window.localStorage.setItem("Lang", lang);
@@ -1200,9 +1275,6 @@
         elementbtn.classList.toggle("dropdownDiv-btn-press");
     }
 
-    window.onload = init;
-</script>
-<script>
     function CreateLoginValidateCode() {
         var now = new Date();
         iURL = "/GetValidateImage.aspx?time=" + now.getTime();
@@ -1240,7 +1312,7 @@
     }
 
     function onBtnMemberCenter() {
-        if (GWebInfo.UserLogined) {
+        if (EWinWebInfo.UserLogined) {
             API_LoadPage("memberCenter.aspx");
         } else {
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
@@ -1248,7 +1320,7 @@
     }
 
     function onBtnHistory() {
-        if (GWebInfo.UserLogined) {
+        if (EWinWebInfo.UserLogined) {
             API_LoadPage("history.aspx");
         } else {
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
@@ -1256,17 +1328,16 @@
     }
 
     function onBtnChat() {
-        if (GWebInfo.UserLogined) {
-            window.open("ChatMain.aspx?Token=" + GWebInfo.Token + "&SID=" + GWebInfo.SID + "&Acc=" + GWebInfo.UserInfo.LoginAccount);
+        if (EWinWebInfo.UserLogined) {
+            window.open("ChatMain.aspx?Token=" + EWinWebInfo.Token + "&SID=" + EWinWebInfo.SID + "&Acc=" + EWinWebInfo.UserInfo.LoginAccount);
         } else {
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
         }
     }
 
-
     function onBtnPaymentDeposit() {
-        if (GWebInfo.UserLogined) {
-            //window.open(GWebUrl + "/API/Payment/GpayDeposit.aspx?Token=" + GWebInfo.Token + "&SID=" + GWebInfo.SID, "_blank");
+        if (EWinWebInfo.UserLogined) {
+            //window.open(GWebUrl + "/API/Payment/GpayDeposit.aspx?Token=" + EWinWebInfo.Token + "&SID=" + EWinWebInfo.SID, "_blank");
             API_LoadPage("mywallet.aspx");
         } else {
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
@@ -1442,6 +1513,8 @@
 
         }
     }
+    
+    window.onload = init;
 </script>
 <body>
     <!-- HTML START -->
@@ -1453,20 +1526,9 @@
                 <div id="idUserNotLogin" class="header-tit_none">
                     <div class="header-tit-con">
                         <div class="box btnTypeA loginBrn_div">
-                            <!-- 
-                            請在"語系" 的 button 加入 每個語系 的對應 class：
-                            
-                                1.簡體中文：ico-before-flag-cn
-                                2.繁體中文：ico-before-flag-hk
-                                3.日文：ico-before-flag-jp
-                                4.英文：ico-before-flag-en
-                                5.韓文：ico-before-flag-kr
-                                6.越南文：ico-before-flag-vn
-                                7.印度文：ico-before-flag-in
-                         -->
                             <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
                             <%--<button type="button" class="btn btn-customerservice btn-icon-round icon-service" id="" role="button" data-toggle="modal" data-target="" onclick="">客服</button>--%>
-                            <button type="button" class="box btn btn-gradient-golden" id="tryitBtn" role="button" data-toggle="modal" data-target="" onclick="onBtnTryIt();"><i class="icon icon12one-ico-poker icon-large" aria-hidden="true"></i><span class="language_replace">搶先試玩</span></button>
+                            <%--<button type="button" class="box btn btn-gradient-golden" id="tryitBtn" role="button" data-toggle="modal" data-target="" onclick="onBtnTryIt();"><i class="icon icon12one-ico-poker icon-large" aria-hidden="true"></i><span class="language_replace">搶先試玩</span></button>--%>
                             <button type="button" class="box btn btn-default" id="loginBtn" role="button" data-toggle="modal" data-target="#idLoginImage" onclick="onBtnLoginShow();"><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i><span class="language_replace">登入</span></button>
                             <button type="button" class="btn btn-info" id="signinBtn" role="button" data-toggle="modal" data-target="#myModal" onclick="onBtnUserRegisterShow();"><i class="fa fa-address-card fa-1x" aria-hidden="true"></i><span class="language_replace">註冊</span></button>
                         </div>
