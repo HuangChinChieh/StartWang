@@ -125,8 +125,8 @@
         lang = window.top.API_GetLang();
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
-            GWebInfo = window.parent.API_GetWebInfo();
-            p = window.parent.API_GetGWebHubAPI();
+            GWebInfo = window.top.API_GetWebInfo();
+            p = window.top.API_GetGWebHubAPI();
 
             if (p != null) {
                 getWebTag();

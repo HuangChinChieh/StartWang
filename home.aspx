@@ -1,12 +1,12 @@
 ﻿<%@ Page Language="C#" %>
 
 <%
-    string Token = string.Empty;
+//string Token = string.Empty;
 
-    Token = Request["Token"];
-    if (string.IsNullOrEmpty(Token)) {
-        Response.Redirect("Init.aspx");
-    }
+//Token = Request["Token"];
+//if (string.IsNullOrEmpty(Token)) {
+//    Response.Redirect("Init.aspx");
+//}
 %>
 <!doctype html>
 <html>

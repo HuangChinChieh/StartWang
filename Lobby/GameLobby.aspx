@@ -142,7 +142,7 @@
                 window.open(WebInfo.EWinUrl + "/Game/Login.aspx?SID=" + WebInfo.SID + "&Lang=" + WebInfo.Lang + "&CT=" + encodeURIComponent(WebInfo.CT))
             }
             else
-                window.open(WebInfo.EWinUrl + "/API/GamePlatformAPI/" + gameBrand + "/UserLogin.aspx?SID=" + WebInfo.SID + "&Language=" + WebInfo.Lang + "&CurrencyType=" + window.parent.selectedCurrency + "&GameName=" + gameName + "&DemoPlay=" + DemoPlay, "_blank");
+                window.open(WebInfo.EWinUrl + "/API/GamePlatformAPI/" + gameBrand + "/UserLogin.aspx?SID=" + WebInfo.SID + "&Language=" + WebInfo.Lang + "&CurrencyType=" + window.top.selectedCurrency + "&GameName=" + gameName + "&DemoPlay=" + DemoPlay, "_blank");
         }
 
         //history
@@ -500,7 +500,7 @@
     }
 
     function showWalletUI() {
-        window.parent.API_ShowWallet(mlp.getLanguageKey("切換幣別"), true, true, function (ct) {
+        window.top.API_ShowWallet(mlp.getLanguageKey("切換幣別"), true, true, function (ct) {
             setCurrencyType(ct);
         });
     }
@@ -569,13 +569,13 @@
 
 
                 } else {
-                    window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("獲取個人資料錯誤:") + mlp.getLanguageKey(o.Message));
+                    window.top.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("獲取個人資料錯誤:") + mlp.getLanguageKey(o.Message));
                 }
             } else {
                 var o = c.getJSON(content);
 
                 if (o == "Timeout")
-                    window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請重新操作"));
+                    window.top.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請重新操作"));
                 else
                     if ((o != null) && (o != ""))
                         alert(o);
@@ -599,13 +599,13 @@
                 if (o.Result == 0) {
                     initGameCode(o);
                 } else {
-                    window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("獲取遊戲資料錯誤:") + mlp.getLanguageKey(o.Message));
+                    window.top.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("獲取遊戲資料錯誤:") + mlp.getLanguageKey(o.Message));
                 }
             } else {
                 var o = c.getJSON(content);
 
                 if (o == "Timeout")
-                    window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請重新操作"));
+                    window.top.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請重新操作"));
                 else
                     if ((o != null) && (o != ""))
                         alert(o);
@@ -1599,7 +1599,8 @@
     function init() {
         var idEntryMask = document.getElementById("idEntryMask");
 
-        WebInfo = window.parent.API_GetWebInfo();
+        WebInfo = window.top.API_GetWebInfo();
+                  window.top.API_GetWebInfo()
         lang = WebInfo.Lang;
 
         idEntryMask.style.display = "none";

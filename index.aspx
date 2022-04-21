@@ -528,7 +528,7 @@
         iFrame.marginWidth = "0";
         iFrame.marginHeight = "0";
         iFrame.src = url;
-
+        iFrame.style.height = '100%';
         c.clearChildren(IFramePage);
         IFramePage.appendChild(iFrame);
 
@@ -1169,11 +1169,11 @@
                 } catch (ex) {
                 }
 
-                if (iframeDocument != null) {
-                    if (iframeDocument.body != null) {
-                        idFrameContent.height = iframeDocument.body.scrollHeight;
-                    }
-                }
+                //if (iframeDocument != null) {
+                //    if (iframeDocument.body != null) {
+                //        idFrameContent.height = iframeDocument.body.scrollHeight;
+                //    }
+                //}
             }
         }
     }
@@ -1450,47 +1450,57 @@
 
     // 存款
     function openPaymentDeposit(dt) {
-        var retPage = "";
-        //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
-        switch (dt) {
-            case 0:
-                window.open(EWinWebInfo.EWinUrl + "/Payment/VPay/VPayDeposit.aspx?SID=" + EWinWebInfo.SID, "_blank");
-                break;
-            case 1:
-                //openBitCoinAddress();
-                break;
-            case 2:
-                retPage = "iType=BackCardIN&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
-                API_LoadPage("/Payment/BankCard/BankCard_In.aspx?" + retPage);
-                break;
-            case 4:
-                window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency, "_blank");
-                break;
 
+        if (EWinWebInfo.UserLogined) {
+            var retPage = "";
+            //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
+            switch (dt) {
+                case 0:
+                    window.open(EWinWebInfo.EWinUrl + "/Payment/VPay/VPayDeposit.aspx?SID=" + EWinWebInfo.SID, "_blank");
+                    break;
+                case 1:
+                    //openBitCoinAddress();
+                    break;
+                case 2:
+                    retPage = "iType=BackCardIN&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+                    API_LoadPage("/Payment/BankCard/BankCard_In.aspx?" + retPage);
+                    break;
+                case 4:
+                    window.open("/Payment/Wallet_GCASH_PHP.aspx?SID=" + EWinWebInfo.SID + "&CurrencyType=" + selectedCurrency, "_blank");
+                    break;
+
+            }
+        } else {
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
         }
+     
     }
 
     // 提款
     function openPaymentWithdrawal(wt) {
-        //wt = 0: 四方/1=區塊鏈
-        switch (wt) {
-            case 0:
-                window.open(EWinWebInfo.EWinUrl + "/Payment/GPay/GPayWithdraw.aspx?SID=" + EWinWebInfo.SID);
-                break;
-            case 1:
-                //openBitCoinAddress();
-                break;
-            case 2:
-                retPage = "iType=BackCardOut&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
+        if (EWinWebInfo.UserLogined) {
+            switch (wt) {
+                case 0:
+                    window.open(EWinWebInfo.EWinUrl + "/Payment/GPay/GPayWithdraw.aspx?SID=" + EWinWebInfo.SID);
+                    break;
+                case 1:
+                    //openBitCoinAddress();
+                    break;
+                case 2:
+                    retPage = "iType=BackCardOut&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency;
 
-                API_LoadPage("/Payment/BankCard/BankCard_Out.aspx?" + retPage);
-                break;
-            case 3:
-                openParentOut();
-                break;
+                    API_LoadPage("/Payment/BankCard/BankCard_Out.aspx?" + retPage);
+                    break;
+                case 3:
+                    openParentOut();
+                    break;
 
 
+            }
+        } else {
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
         }
+        //wt = 0: 四方/1=區塊鏈
     }
 
     window.onload = init;
@@ -1598,7 +1608,7 @@
             </div>
         </div>
         <!-- Content -->
-        <div id="IFramePage" class="DivContent">
+        <div id="IFramePage" class="DivContent" style="height:100%">
             <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>
         <!-- 頁尾 -->
