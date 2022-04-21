@@ -1029,7 +1029,8 @@
                             if (o.Result == 0) {
                                 EWinWebInfo.GameCodeList = o.GameCodeList;
                                 if (o.GameCodeList.length > 0) {
-                                    API_Lobby();
+                                    //API_Lobby();
+                                    API_Home();
                                 }
                                 else {
                                     API_Home();
@@ -1580,7 +1581,7 @@
                                 <br>
                                 <div class="language_replace">回首頁</div>
                             </a></li>
-                            <li><a onclick=" API_Lobby()"><span class="icon icon-icon-poker" aria-hidden="true"></span>
+                            <li><a onclick=" API_Home()"><span class="icon icon-icon-poker" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
                             </a></li>
@@ -1613,9 +1614,12 @@
             </div>
         </div>
         <!-- Content -->
-        <div id="IFramePage" class="DivContent" style="height:100%">
+    <%--    <div id="IFramePage" class="DivContent">
             <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
-        </div>
+        </div>--%>
+            <div id="IFramePage" class="DivContent" style="height:100%">
+        <iframe id="idFrameContent"></iframe>
+    </div>
         <!-- 頁尾 -->
         <div class="main-footer">.</div>
 
