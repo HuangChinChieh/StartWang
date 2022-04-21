@@ -51,7 +51,6 @@
     var TopWindow;
     var isPC;
 
-
     function RefreshGameLogin() {
         var postData = {
             GameCode: GameCode,
@@ -74,7 +73,6 @@
         });
 
     }
-
 
     function UpdateGameLogin(cb) {
         var postData = {

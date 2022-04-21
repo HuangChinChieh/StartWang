@@ -122,6 +122,7 @@
             var el = switchTagDiv[0].children[i];
             el.classList.remove("active");
         }
+
         e.classList.add("active");
         if (Tag == 'UserPage') {
             divUserPage.style.display = "block";
@@ -325,7 +326,6 @@
                     if (o.Result == 0) {
                         window.parent.showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("成功新增銀行卡"), function () {
                             getBankCardList(updateBaseInfo);
-
                         });
                     } else {
                         window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
