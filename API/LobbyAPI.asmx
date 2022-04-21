@@ -182,7 +182,6 @@ public class LobbyAPI : System.Web.Services.WebService {
 
                                     RetInfoArr.Add(iInfoData);
 
-
                                     if (RetInfoArr.Count > 2)
                                     {
                                         break;
@@ -211,7 +210,6 @@ public class LobbyAPI : System.Web.Services.WebService {
 
                                             RetInfoArr.Add(iInfoData);
                                         }
-
                                     }
                                 }
                             }

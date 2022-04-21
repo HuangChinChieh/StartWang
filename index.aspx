@@ -1449,6 +1449,11 @@
 
     }
 
+    function onForgotPassword() {
+            onBtnLoginHide();
+            API_LoadPage("ForgotPassword.aspx");
+    }
+
     // 存款
     function openPaymentDeposit(dt) {
 
@@ -1638,7 +1643,7 @@
                     <input type="text" language_replace="placeholder" placeholder="輸入帳號" name="LoginAccount">
                     <input type="password" language_replace="placeholder" placeholder="輸入密碼" name="LoginPassword">
                     <div onclick="onBtnLoginStep1();" class="popupBtn_red"><span class="language_replace">登入</span></div>
-                    <div class="popupBtn_redOL"><span class="language_replace">忘記密碼</span></div>
+                    <div onclick="onForgotPassword();" class="popupBtn_redOL"><span class="language_replace">忘記密碼</span></div>
                 </div>
                 <!-- 第二步 -->
                 <div id="idUserLoginStep2" class="" style="display: none;">
