@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Description" content="99PLAY">
+    <meta name="Description" content="12one">
     <title>12万娱乐城</title>
     <!-- Favicon and touch icons -->
 
@@ -48,431 +48,119 @@
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script>
     var c = new common();
+    var apiURL = "/RequireRegister.aspx";
     var pCode = "<%=PCode%>";
-    var GWebInfo;
     var p;
     var mlp;
+    var EWinWebInfo;
     var lang;
-    var lastPhoneCodeDate = new Date();
+    var RegisterParentPersonCode = 0;
+    function requireRegister() {
+        var form = document.forms[0];
+        var PCode = form.PCode;
+        var ContactPhonePrefix = form.ContactPhonePrefix;
+        var ContactPhoneNumber = form.ContactPhoneNumber;
+        var EMail = form.EMail;
+        var RealName = form.RealName;
+        var postObj;
+        var ps = [];
 
-    function CheckAccountPhoneExist() {
-        var idPhonePrefix = document.getElementById("idPhonePrefix");
-        var idPhoneNumber = document.getElementById("idPhoneNumber");
-
-        if ((idPhonePrefix.selectedIndex != -1) && (idPhoneNumber.value != "")) {
-            p.CheckAccountPhoneExist(Math.uuid(), idPhonePrefix.options[idPhonePrefix.selectedIndex].value, idPhoneNumber.value, function (success, o) {
-                var idLoginAccount = document.getElementById("idLoginAccount");
-
-                if (success) {
-                    if (o.ResultCode == 0) {
-                        setDeniedText("idPhoneNumberDenied", mlp.getLanguageKey("電話號碼已存在, 請勿重複註冊"));
-                    } else {
-                        hideDeniedText("idPhoneNumberDenied");
-                    }
-                }
-            });
+        postObj = {
+            GUID: Math.uuid(),
+            ParentPersonCode: PCode.value,
+            PS: [{
+                Name: "ContactPhonePrefix",
+                Value: ContactPhonePrefix.value
+            }, {
+                Name: "ContactPhoneNumber",
+                Value: ContactPhoneNumber.value
+            }, {
+                Name: "EMail",
+                Value: EMail.value
+            }, {
+                Name: "RealName",
+                Value: RealName.value
+            }],
+            UBC: null
         }
-    }
-
-    function CheckUserAccountExist() {
-        var idLoginAccount = document.getElementById("idLoginAccount");
-
-        hideDeniedText("idLoginAccountDeniedText");
-        if (idLoginAccount.value != "") {
-            p.CheckAccountExist(Math.uuid(), idLoginAccount.value, function (success, o) {
-                if (success) {
-                    if (o.ResultCode != 0) {
-                        idLoginAccount.className = "checked";
-                    } else {
-                        idLoginAccount.className = "denied";
-                        setDeniedText("idLoginAccountDeniedText", mlp.getLanguageKey("帳號已存在"));
-                    }
-                }
-            });
-        } else {
-            setDeniedText("idLoginAccountDeniedText", mlp.getLanguageKey("請輸入登入帳號"));
-        }
-    }
-
-    function CheckPasswordAvailable() {
-        var idLoginPassword = document.getElementById("idLoginPassword");
-        var idLoginPassword2 = document.getElementById("idLoginPassword2");
-
-        hideDeniedText("idLoginPasswordDeniedText");
-        hideDeniedText("idLoginPassword2DeniedText");
-
-        if (idLoginPassword.value == "") {
-            idLoginPassword.className = "denied";
-            setDeniedText("idLoginPasswordDeniedText", mlp.getLanguageKey("請輸入登入密碼"));
-        } else if (idLoginPassword.value.length < 6) {
-            idLoginPassword.className = "denied";
-            setDeniedText("idLoginPasswordDeniedText", mlp.getLanguageKey("密碼須超過 6 位數"));
-        } else if (idLoginPassword.value.length > 16) {
-            idLoginPassword.className = "denied";   
-            setDeniedText("idLoginPasswordDeniedText", mlp.getLanguageKey("密碼不行超過 16 位數"));
-        } else {
-            idLoginPassword.className = "checked";
-
-            if (idLoginPassword2.value != idLoginPassword.value) {
-                idLoginPassword2.className = "denied";
-                setDeniedText("idLoginPassword2DeniedText", mlp.getLanguageKey("驗證密碼失敗"));
-            } else {
-                idLoginPassword2.className = "checked";
-            }
-        }
-    }
-
-
-
-    function CheckValidateCode(cb) {
-        var LoginGUID = document.forms[0].LoginGUID;
-        var LoginValidateCode = document.forms[0].LoginValidateCode;
-
-
-        c.callService("ValidateAuthCode.aspx?Token=" + GWebInfo.Token + "&LoginGUID=" + LoginGUID.value + "&ImageCode=" + LoginValidateCode.value, null, function (success, text) {
-            if (success == true) {
-                var o = c.getJSON(text);
-
-                if (o.ResultCode == 0) {
-                    if (cb)
-                        cb(true);
+        p.RequireRegister2(postObj, function (success, o) {
+            if (success) {
+                if (o.Result == 0) {
+                    alert(mlp.getLanguageKey("感謝您的註冊, 我們會盡快通知您帳號與密碼"));
+                    location.reload();
                 } else {
-                    cb(false);
+                    if (o.Message == "AlreadyRegister") {
+                        alert(mlp.getLanguageKey("E-mail 或聯繫電話已經註冊!"));
+                    } else {
+                        alert(mlp.getLanguageKey(o.Message));
+                    }
                 }
             } else {
-                cb(false);
+                alert(mlp.getLanguageKey("網路錯誤:") + o);
             }
         });
     }
 
-    function CreateRegisterValidateCode() {
-        c.callService("CreateAuthCode.aspx?Token=" + GWebInfo.Token, null, function (success, text) {
-            if (success == true) {
-                var o = c.getJSON(text);
+    function formSubmitCheck() {
+        var form = document.forms[0];
+        var PCode = form.PCode;
+        var ContactPhonePrefix = form.ContactPhonePrefix;
+        var ContactPhoneNumber = form.ContactPhoneNumber;
+        var EMail = form.EMail;
+        var RealName = form.RealName;
+        var retValue = false;
 
-                if (o.ResultCode == 0) {
-                    var idValidImage = document.getElementById("idRegValidImage");
-                    var idFormRegister = document.getElementById("idFormRegister");
+        if (ContactPhonePrefix.selectedIndex == -1)
+            alert(mlp.getLanguageKey("錯誤, 請選擇聯繫電話國碼"));
+        else if (ContactPhoneNumber.value == "")
+            alert(mlp.getLanguageKey("錯誤, 請輸入聯繫電話"));
+        else if (EMail.value == "")
+            alert(mlp.getLanguageKey("錯誤, 請輸入 E-mail"));
+        else if (RealName.value == "")
+            alert(mlp.getLanguageKey("錯誤, 請輸入真實姓名"));
+        else if (RegisterParentPersonCode == 2 && PCode.value == "")
+            alert(mlp.getLanguageKey("錯誤, 請輸入推薦碼"));
+        else
+            retValue = true;
 
-                    idFormRegister.LoginGUID.value = o.LoginGUID;
-
-                    if (idValidImage != null) {
-                        idValidImage.src = o.ImageContent;
-                        idValidImage.style.display = "block";
-                    }
-                } else {
-                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o.Message));
-                }
-            } else {
-                if (text == "Timeout") {
-                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路異常, 請再嘗試一次"));
-                } else {
-                    alert(text);
-                }
-            }
-        });
-    }
-
-    function onBtnPhoneCode() {
-        //CreateAccountPhoneValidateCode
-        var idPhonePrefix = document.getElementById("idPhonePrefix");
-        var idPhoneNumber = document.getElementById("idPhoneNumber");
-        var allowValidate = false;
-
-        if (idPhonePrefix.selectedIndex == -1) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請選擇電話國碼"));
-        } else if (idPhoneNumber.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入電話號碼"));
-        } else {
-            allowValidate = true;
-        }
-
-        if (allowValidate) {
-            var idBtnSendPhoneCode = document.getElementById("idBtnSendPhoneCode");
-            var idBtnSendPhoneCodeText = document.getElementById("idBtnSendPhoneCodeText");
-
-            idBtnSendPhoneCode.style.display = "none";
-            idBtnSendPhoneCodeText.style.display = "block";
-
-            p.CheckAccountPhoneExist(Math.uuid(), idPhonePrefix.options[idPhonePrefix.selectedIndex].value, idPhoneNumber.value, function (success, o) {
-                var idLoginAccount = document.getElementById("idLoginAccount");
-
-                if (success) {
-                    if (o.ResultCode != 0) {
-                        lastPhoneCodeDate = new Date();
-
-                        p.CreatePhoneValidateCode(Math.uuid(), idPhonePrefix.options[idPhonePrefix.selectedIndex].value, idPhoneNumber.value, function (success, o) {
-                            if (success) {
-                                if (o.ResultCode == 0) {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("驗證碼已發送至您的手機"));
-                                } else {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o.Message));
-                                }
-                            } else {
-                                if (o == "Timeout") {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路異常, 請重新嘗試"));
-                                } else {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o));
-                                }
-                            }
-                        });
-                    } else {
- 
-                        setDeniedText("idPhoneNumberDenied", mlp.getLanguageKey("電話號碼已存在, 請勿重複註冊"));
-
-                        idBtnSendPhoneCode.style.display = "block";
-                        idBtnSendPhoneCodeText.style.display = "none";
-                    }
-                } else {
-                    if (o == "Timeout") {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路異常, 請重新嘗試"));
-                    } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o));
-                    }
-
-
-                    idBtnSendPhoneCode.style.display = "block";
-                    idBtnSendPhoneCodeText.style.display = "none";
-                }
-            });
+        if (retValue) {
+            requireRegister();
         }
     }
 
-    function onBtnUserRegisterStep1() {
-        var idLoginAccount = document.getElementById("idLoginAccount");
-        var idLoginPassword = document.getElementById("idLoginPassword");
-        var idLoginPassword2 = document.getElementById("idLoginPassword2");
-        var idPhonePrefix = document.getElementById("idPhonePrefix");
-        var idPhoneNumber = document.getElementById("idPhoneNumber");
-        var idRealName = document.getElementById("idRealName");
-        var idNickName = document.getElementById("idNickName");
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "LoginState":
+                break;
+            case "BalanceChange":
+                break;
+            case "SetLanguage":
+                var lang = param;
 
-        if (idLoginAccount.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
-        } else if (idLoginAccount.classList.contains("denied")) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("帳號已存在"));
-        } else if (idLoginPassword.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
-        } else if (idLoginPassword.value.length < 8) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("密碼須超過 8 位數"));
-        } else if (idLoginPassword.value.length > 16) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("密碼不行超過 16 位數"));
-        } else if (idPhonePrefix.selectedIndex == -1) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請選擇電話國碼"));
-        } else if (idPhoneNumber.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入電話號碼"));
-        } else if (idPhoneNumberDenied.style.display == "block") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話號碼已存在, 請勿重複註冊"));
-        } else if (idRealName.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入真實姓名"));
-        } else if (idRealName.value.length >= 50) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("真實姓名長度勿超過50"));
-        } else if (idNickName.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入暱稱"));
-        } else if (idNickName.value.length >= 16) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("暱稱長度勿超過16"));
-        } else {
-            if (idLoginPassword.value != idLoginPassword2.value) {
-                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("驗證密碼失敗"));
-            } else {
-                CreateRegisterValidateCode();
-
-                idUserRegStep1.style.display = "none";
-                idUserRegStep2.style.display = "block";
-            }
-        }
-    }
-
-    function onBtnUserRegisterStep2() {
-        var form = document.getElementById("idFormUserLogin");
-        var idLoginAccount = document.getElementById("idLoginAccount");
-        var idLoginPassword = document.getElementById("idLoginPassword");
-        var idLoginPassword2 = document.getElementById("idLoginPassword2");
-        var idPhonePrefix = document.getElementById("idPhonePrefix");
-        var idPhoneNumber = document.getElementById("idPhoneNumber");
-        var idRealName = document.getElementById("idRealName");
-        var idPhoneCode = document.getElementById("idPhoneCode");
-        var idNickName = document.getElementById("idNickName");
-        var allowSubmit = true;
-
-        if (idLoginAccount.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
-            allowSubmit = false;
-        } else if (idLoginPassword.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
-            allowSubmit = false;
-        } else if (idLoginPassword.value.length < 8) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("密碼須超過 8 位數"));
-            allowSubmit = false;
-        } else if (idLoginPassword.value.length > 16) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("密碼不行超過 16 位數"));
-            allowSubmit = false;
-        } else if (idPhonePrefix.selectedIndex == -1) {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請選擇電話國碼"));
-            allowSubmit = false;
-        } else if (idPhoneNumber.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入電話號碼"));
-            allowSubmit = false;
-        } else if (idRealName.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入真實姓名"));
-            allowSubmit = false;
-        } else if (idNickName.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入暱稱"));
-            allowSubmit = false;
-        } else if (idPhoneCode.value == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("簡訊驗證碼為空"));
-            allowSubmit = false;
-        } else {
-            if (idLoginPassword.value != idLoginPassword2.value) {
-                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("驗證密碼失敗"));
-                allowSubmit = false;
-            }
-        }
-
-        if (allowSubmit) {
-            CheckValidateCode(function (success) {
-                if (success == true) {
-                    var LoginAccount = idLoginAccount.value;
-                    var LoginPassword = idLoginPassword.value;
-                    var PhoneCode = idPhoneCode.value;
-                    var ParentPersonCode;
-
-                    if ((pCode != null) && (pCode != "")) {
-                        ParentPersonCode = pCode;
-                    } else {
-                        var idPCode = document.getElementById("idPCode");
-
-                        ParentPersonCode = idPCode.value;
-                    }
-
-                    p.CreateAccount(Math.uuid(), LoginAccount, LoginPassword, ParentPersonCode, PhoneCode, [{ Name: "RealName", Value: idRealName.value, Name: "NickName", Value: idNickName.value }, { Name: "ContactPhonePrefix", Value: idPhonePrefix.options[idPhonePrefix.selectedIndex].value }, { Name: "ContactPhoneNumber", Value: idPhoneNumber.value }], function (success, o) {
-                        if (success) {
-                            if (o.ResultCode == 0) {
-                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("註冊成功, 請按登入按鈕進行登入"), function () {
-                                    window.parent.location.href = "index.aspx";
-                                });
-                            } else {
-                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o.Message));
-                            }
-                        } else {
-                            if (o == "Timeout") {
-                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路異常, 請重新嘗試"));
-                            } else {
-                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey(o));
-                            }
-                        }
-                    });
-                } else {
-                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("圖片驗證碼錯誤"));
-                }
-            });
-        }
-    }
-
-    function QRCodeScanner() {
-        var idQRImage = document.getElementById("idQRImage");
-        var idQRCodeResult = document.getElementById("idQRCodeResult");
-        var CurrencyType = document.getElementById("idInCurrencyType").dataset.value;
-
-        window.top.API_OpenQRCodeScanner(idQRImage, function (result) {
-            if ((result != null) && (result != "")) {
-                var idPCode = document.getElementById("idPCode");
-
-                idQRCodeResult.innerHTML = "";
-                idPCode.value = result;
-            } else {
-                idQRCodeResult.innerHTML = mlp.getLanguageKey("找不到可用的 QRcode，請再試一次");
-            }
-        });
-    }
-
-    function updateBaseInfo() {
-        var idPCode1 = document.getElementById("idPCode1");
-        var idPCode2 = document.getElementById("idPCode2");
-
-        if ((pCode != null) && (pCode != "")) {
-            idPCode1.style.display = "block";
-            idPCode2.style.display = "none";
-        } else {
-            idPCode1.style.display = "none";
-            idPCode2.style.display = "block";
-        }
-    }
-
-    function hideDeniedText(id) {
-        var el = document.getElementById(id);
-
-        if (el != null) {
-            el.style.display = "none";
-        }
-    }
-
-    function setDeniedText(id, text) {
-        var el = document.getElementById(id);
-
-        if (el != null) {
-            var seted = false;
-
-            for (var i = 0; i < el.children.length; i++) {
-                var el2 = el.children[i];
-
-                if (el2.tagName.toUpperCase() == "span".toUpperCase()) {
-                    el2.innerHTML = text;
-                    seted = true;
-                    break;
-                }
-            }
-
-            
-            if (seted) {
-                el.style.display = "block";
-            } else {
-                el.innerHTML = text;
-                el.style.display = "block";
-            }
+                mlp.loadLanguage(lang);
+                break;
         }
     }
 
     function init() {
         lang = window.top.API_GetLang();
+        EWinWebInfo = window.parent.EWinWebInfo;
+        p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
-            GWebInfo = window.parent.API_GetWebInfo();
-            p = window.parent.API_GetGWebHubAPI();
-
-            if (p != null)
-                updateBaseInfo();
+            document.forms[0].Lang.value = lang;
+            if (!EWinWebInfo)
+                RegisterParentPersonCode = 0;
             else
-                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路錯誤"), function () {
-                    window.top.location.href = "index.aspx";
-                });
+                RegisterParentPersonCode = EWinWebInfo.RegisterParentPersonCode;
 
-            setInterval(function () {
-                var idBtnSendPhoneCode = document.getElementById("idBtnSendPhoneCode");
-                var idBtnSendPhoneCodeText = document.getElementById("idBtnSendPhoneCodeText");
-                var idBtnSendPhoneCodeTextSeconds = document.getElementById("idBtnSendPhoneCodeTextSeconds");
-
-                if (idBtnSendPhoneCodeText.style.display == "block") {
-                    var d = new Date();
-
-                    if (((d - lastPhoneCodeDate) / 1000) > 60) {
-                        idBtnSendPhoneCode.style.display = "block";
-                        idBtnSendPhoneCodeText.style.display = "none";
-                    } else {
-                        idBtnSendPhoneCodeTextSeconds.innerText = 60 - parseInt((d - lastPhoneCodeDate) / 1000);
-                    }
-                }
-            }, 500);
-        });
-    }
-
-    function GWebEventNotify(eventName, isDisplay, o) {
-        if (isDisplay) {
-            if (eventName == "SetLanguage") {
-                lang = o;
-                mlp.loadLanguage(lang, function () { });
+            if (pCode != "") {
+                let PCode1 = document.getElementById("idPCode1");
+                let PCode2 = document.getElementById("idPCode2");
+                PCode1.style.display = "block";
+                PCode2.style.display = "none";
             }
-        }
+        });
     }
 
     window.onload = init;
@@ -495,16 +183,16 @@
                         <div id="idPCode1" class="ReferralCode"><span class="language_replace">推薦碼</span>:<span><%=PCode %></span></div>
                         <!-- 自行輸入推薦碼 -->
                         <div id="idPCode2" class="ReferralCodeInput">
-                            <input type="text" class="" language_replace="placeholder" placeholder="輸入推薦碼" name="ReferralCode" id="idPCode" value="<%=PCode %>">
-                            <div class="scanBtn" onclick="QRCodeScanner()">
+                            <input type="text" class="" language_replace="placeholder" placeholder="輸入推薦碼" name="PCode" id="idPCode" value="<%=PCode %>">
+                         <%--   <div class="scanBtn" onclick="QRCodeScanner()">
                                 <i class="fa fa-qrcode"></i>
                                 <input type="file" onchange="QRCodeScanner()" accept="image/*" id="idQRImage" name="idQRImage" style="display: none;">
-                            </div>
-                            <div id="idQRCodeResult" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span>Decode failure</span></div>
+                            </div>--%>
+                            <%--<div id="idQRCodeResult" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span>Decode failure</span></div>--%>
                         </div>
                         <div class="optionInput">
                             <div class="dropdownMenu">
-                                <select id="idPhonePrefix" onchange="CheckAccountPhoneExist()">
+                                <select id="idPhonePrefix" name="ContactPhonePrefix">
                                     <option class="language_replace" value="+86">+86 中國</option>
                                     <option class="language_replace" value="+852">+852 香港</option>
                                     <option class="language_replace" value="+853">+853 澳門</option>
@@ -523,39 +211,30 @@
                                 </select>
                             </div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
-                            <input id="idPhoneNumber" type="text" placeholder="輸入電話" name="UserPhoneNo" onblur="CheckAccountPhoneExist()">
-                            <div id="idPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
+                            <input id="idContactPhoneNumber" type="text" placeholder="輸入電話" name="ContactPhoneNumber" >
+                            <div id="idContactPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
                         </div>
                         <div>
-                            <div id="idBtnSendPhoneCode" class="popupBtn_red" onclick="onBtnPhoneCode()"><span class="language_replace">發送驗證碼</span></div>
+                         <%--   <div id="idBtnSendPhoneCode" class="popupBtn_red" onclick="onBtnPhoneCode()"><span class="language_replace">發送驗證碼</span></div>
                             <div id="idBtnSendPhoneCodeText" class="popupBtn_gray" style="display: none"><span class="language_replace">可於</span><span id="idBtnSendPhoneCodeTextSeconds">60</span><span class="language_replace">秒後再次發送</span></div>
                             <input id="idPhoneCode" type="password" class="" language_replace="placeholder" placeholder="輸入簡訊驗證碼" name="text">
-                            <div class="popup_notice" style="display:inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入發送至您指定手機門號之簡訊驗證碼</span></div>
+                            <div class="popup_notice" style="display:inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入發送至您指定手機門號之簡訊驗證碼</span></div>--%>
                         </div>
                         <div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
-                            <input id="idLoginAccount" type="text" language_replace="placeholder" placeholder="設定帳號" name="UserID" onblur="CheckUserAccountExist()">
-                            <div id="idLoginAccountDeniedText" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">帳號重複</span></div>
-                            <input id="idNickName" maxlength="16" type="text" language_replace="placeholder" placeholder="設定暱稱" name="NickName" autocomplete="off">
+                            <input id="idEMail" type="text" language_replace="placeholder" placeholder="信箱" name="EMail">
+                            <input id="idRealName" type="text" language_replace="placeholder" placeholder="設定真實姓名" name="RealName">
+                            <div class="popup_notice" style="display: inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入與銀行卡相同之真實姓名以確保您的權益</span></div>
+                            <div class="popupBtn_red" onclick="formSubmitCheck()"><span class="language_replace">註冊</span></div>
+                           <%-- <input id="idNickName" maxlength="16" type="text" language_replace="placeholder" placeholder="設定暱稱" name="NickName" autocomplete="off">
                             <input id="idRealName" maxlength="50" type="text" language_replace="placeholder" placeholder="設定真實姓名" name="RealName">
                             <div class="popup_notice" style="display:inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入與銀行卡相同之真實姓名以確保您的權益</span></div>
                             <input id="idLoginPassword" type="password" class="" language_replace="placeholder" placeholder="輸入密碼" name="password" onblur="CheckPasswordAvailable()">
                             <div id="idLoginPasswordDeniedText" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入英文或數字8-16位數</span></div>
                             <input id="idLoginPassword2" type="password" class="" language_replace="placeholder" placeholder="確認密碼" name="password" onblur="CheckPasswordAvailable()">
                             <div id="idLoginPassword2DeniedText" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">輸入錯誤</span></div>
-                            <div class="popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>
+                            <div class="popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>--%>
                         </div>
-                    </div>
-                    <!-- 第二步 -->
-                    <div id="idUserRegStep2" style="display: none">
-                            <div class="ValidateDiv">
-                                <div class="ValidateImg">
-                                    <img id="idRegValidImage" alt="" />
-                                    <div class="popupBtn_reF"><span onclick="CreateRegisterValidateCode()" class="fa fa-refresh fa-1x"></span></div>
-                                </div>
-                                <input type="text" name="LoginValidateCode" language_replace="placeholder" placeholder="輸入驗證碼" autocomplete="off">
-                            </div>
-                            <div class="popupBtn_red" onclick="onBtnUserRegisterStep2()"><span class="language_replace">確認</span></div>
                     </div>
                 </div>
             </div>

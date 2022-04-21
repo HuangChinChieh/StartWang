@@ -206,8 +206,10 @@
                 if (o.ResultState == 0) {
                     oBankCardList = o;
 
-                    if (cb)
+                    if (cb) {
                         cb(true);
+                    }
+                      
                 } else {
                     if (o.Message == "NoRecord") {
                         showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未設定銀行卡, 請至會員中心新增收款銀行卡"));
@@ -420,23 +422,23 @@
                             if (oBankCardList.IsWalletPassword == false) {
                                 showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未設定錢包密碼, 請先至會員中心設定錢包密碼"));
                             } else {
-                                var bankCardListCount = 0;
+                                //var bankCardListCount = 0;
 
-                                if (oBankCardList != null) {
-                                    if (oBankCardList.BankCardList != null) {
-                                        for (var i = 0; i < oBankCardList.BankCardList.length; i++) {
-                                            if (oBankCardList.BankCardList[i].BankCardState == 0) {
-                                                bankCardListCount++;
-                                            }
-                                        }
-                                    }
-                                }
+                                //if (oBankCardList != null) {
+                                //    if (oBankCardList.BankCardList != null) {
+                                //        for (var i = 0; i < oBankCardList.BankCardList.length; i++) {
+                                //            if (oBankCardList.BankCardList[i].BankCardState == 0) {
+                                //                bankCardListCount++;
+                                //            }
+                                //        }
+                                //    }
+                                //}
 
-                                if (bankCardListCount <= 0) {
-                                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未設定銀行卡, 請至會員中心新增收款銀行卡"), function () {
-                                        parent.API_MemberCenter();
-                                    });
-                                }
+                                //if (bankCardListCount <= 0) {
+                                //    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未設定銀行卡, 請至會員中心新增收款銀行卡"), function () {
+                                //        parent.API_MemberCenter();
+                                //    });
+                                //}
 
                                 updateBaseInfo();
                             }
