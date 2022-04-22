@@ -60,7 +60,7 @@ body .vegas-container {
 }
 
 body.vegas-container {
-    overflow: auto;
+    overflow: hidden;
     position: static;
     z-index: -2;
 }

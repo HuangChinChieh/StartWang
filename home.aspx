@@ -41,7 +41,6 @@
     <link href="css/layout.css" rel="stylesheet" type="text/css">
     <link href="css/media-main.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" type="text/css">
-    <link href="css/vegas.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/99playfont/99fonts.css" rel="stylesheet" type="text/css">
     <link href="css/gamelobby.css" rel="stylesheet" type="text/css">
@@ -79,6 +78,7 @@
             z-index: 3;
             transition: all linear 0.2s;
         }
+
     </style>
 
     <style>
@@ -137,6 +137,8 @@
             box-sizing: border-box;
             height: calc(100vh - 110px);
             /*margin-top: -60px;*/
+            width: calc(100% - 200px);
+            left: 100px;
         }
 
         .lob_gameListBrand {
@@ -160,11 +162,13 @@
 
         .lob_gameListMain {
             box-sizing: border-box;
-            height: calc(100vh - 220px);
-            padding: 60px 30px 30px 30px;
+            height: calc(100vh - 300px);
+            padding: 30px 30px 30px 30px;
             overflow: auto;
             overflow-x: hidden;
             overflow-y: auto;
+            top: 100px;
+            position: relative
         }
 
         .lob_gameListDiv {
@@ -180,8 +184,9 @@
 
         .lob_gameListImg {
             margin: 0 auto;
-            height: auto;
+            height: 200px;
             text-align: center;
+            width:200px;
         }
 
             .lob_gameListImg img {
@@ -328,8 +333,8 @@
             justify-content: center;
             padding: 8px 13px;
             background: rgba(255,255,255,0.2);
-            margin: 2px;
-            border-radius: 50px;
+            margin: 10px 3px 3px 3px;
+            border-radius: 20px;
             cursor: pointer;
             color: rgba(0,0,0,0.5);
             -webkit-backdrop-filter: blur(20px);
@@ -351,36 +356,37 @@
             display: inline-block;
             background: linear-gradient(90deg,rgba(0,0,0,0.15),rgba(0,0,0,0));
             padding: 0px 60px 0px 10px;
+            margin-top: 10px;
             text-align: left;
         }
 
-        	.lob_gameLobbyMain{
-		display: -wibkit-flex;
-        display: -moz-flex;
-        display: flex;
-        -wibkit-align-items: center;
-        -moz-align-items: center;
-        align-items: center;
-        -wibkit-justify-content: space-around;
-        -moz-justify-content: space-around;
-        justify-content:space-around;
-		margin-top: 8px;
-		min-height: 320px;
-		max-height: calc(100vh - 168px);
-		width: auto;
-		max-width: 100vw;
-		overflow: auto;
-        -webkit-overflow-scrolling:touch;
-	}
-	.lob_gameBrandWrapper{
-        -webkit-overflow-scrolling:touch;
-		width: auto;
-		max-width: 900px;
-    }
-	
-	.lob_gameBrandWrapper{
-		
-    }
+        .lob_gameLobbyMain {
+            display: -wibkit-flex;
+            display: -moz-flex;
+            display: flex;
+            -wibkit-align-items: center;
+            -moz-align-items: center;
+            align-items: center;
+            -wibkit-justify-content: space-around;
+            -moz-justify-content: space-around;
+            justify-content: space-around;
+            margin-top: 8px;
+            min-height: 320px;
+            max-height: calc(100vh - 168px);
+            width: auto;
+            max-width: 100vw;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .lob_gameBrandWrapper {
+            -webkit-overflow-scrolling: touch;
+            width: auto;
+            max-width: 900px;
+        }
+
+        .lob_gameBrandWrapper {
+        }
     </style>
 </head>
 <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
@@ -1174,7 +1180,7 @@
                 <div class="myFavorBtn"></div>
             </div>
         </div>
-                <div id="TemplateGameCategorySubBtn" style="display:none">
+        <div id="TemplateGameCategorySubBtn" style="display: none">
             <div class="lob_gamesListBtn">
                 <div class="displayType_switch_Btn_icon2"></div>
                 <span class="language_replace lob_categorySubName">--</span>
@@ -1276,92 +1282,82 @@
     <!-- -->
     <div class="comdPopUp_hidden" id="divGamePage" hidden="hidden">
         <div class="maskDiv"></div>
-        <div class="comdCon">
-            <div class="gameComdHidden gameComdShow">
-                <!--div class="comdTit">
-						<span id="divGamePageTitle"></span>
-					</div>
-                    <hr-->
-                <div class="popUp_input_div" id="divGamePageContent" style="font-size: 32px">
-                    <div class="lob_gameListWrapper" id="idGamePage">
-                        <div id="templateGameItem" style="display: none">
-                            <div class="lob_gameListDiv">
-                                <div class="lob_gameListBtn">
-                                    <div class="lob_gameListImg">
-                                        <img class="idGameIcon" onerror="showDefaultGameIcon(this)">
-                                    </div>
-                                    <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
-                                </div>
-                                <div class="myFavorBtn"></div>
-                            </div>
+        <div class="comdCon lob_gameListWrapper" id="idGamePage">
+            <div id="templateGameItem" style="display: none">
+                <div class="lob_gameListDiv">
+                    <div class="lob_gameListBtn">
+                        <div class="lob_gameListImg">
+                            <img class="idGameIcon" onerror="showDefaultGameIcon(this)">
                         </div>
-                        <div class="lob_gameListBrand">
-                            <div id="btnGameListClose" class="lob_gameListBackBtn">
-                                <img src="images/lobby/icon_back.svg">
-                            </div>
-                            <div class="lob_gameListTit"><span id="idGameItemTitle">CG老虎機</span></div>
-                            <!-- 遊戲子分類 -->
-                            <!-- 遊戲子分類選單 -->
-                            <div class="lob_gamesListHeader2" id="id_GameSubBtnList2">
-                            </div>
-                        </div>
-                        <div class="lob_gameListMain" id="idGameItemList">
-                        </div>
+                        <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
                     </div>
+                    <div class="myFavorBtn"></div>
                 </div>
+            </div>
+            <div class="lob_gameListBrand">
+                <div id="btnGameListClose" class="lob_gameListBackBtn">
+                    <img src="images/lobby/icon_back.svg">
+                </div>
+                <div class="lob_gameListTit"><span id="idGameItemTitle">CG老虎機</span></div>
+                <!-- 遊戲子分類 -->
+                <!-- 遊戲子分類選單 -->
+                <div class="lob_gamesListHeader2" id="id_GameSubBtnList2">
+                </div>
+            </div>
+            <div class="lob_gameListMain" id="idGameItemList">
             </div>
         </div>
     </div>
 
-    <!-- 遊戲列表END -->     
+    <!-- 遊戲列表END -->
     <!-- 遊戲大廳 依品牌 -->
-        <div class="lob_gameLobbyMain" id="idgameLobbyMain" style="display: block;">
-            <!--height: 0px;overflow: hidden;min-height: 0px;-->
-            <!-- 遊戲廠牌內容  -->
+    <div class="lob_gameLobbyMain" id="idgameLobbyMain" style="display: none;">
+        <!--height: 0px;overflow: hidden;min-height: 0px;-->
+        <!-- 遊戲廠牌內容  -->
 
-            <div id="id_GameBrandList" class="lob_gameBrandWrapper">
-                <!-- 遊戲按鈕 -->
-                <div class="lob_gameBrandDiv BrandShow" style="cursor: pointer" gamebrandcode="EwinBaccarat" data-categ="Baccarat" onclick="API_OpenGameCode('EWin','')">
-                    <div class="lob_gameBrandPanel" data-tilt>
-                        <!-- 主視覺圖片 -->
-                        <div class="lob_gameBrandImg mainImgBg">
-                            <img src="images/lobby/logo/demo_mainImg.png">
-                        </div>
-                        <!-- LOGO圖片 -->
-                        <div class="lob_gameBrandImg_M mainImgLogo">
-                            <img src="images/lobby/logo/demo_logoPC2.png">
-                        </div>
-                        <!-- 品牌名 -->
-                        <div class="lob_gameBrandName"><span class="language_replace span_gameBrandName" id="DefaultCompanyCode"><%=EWinWeb.CompanyCode%></span>&nbsp;<span class="language_replace span_gameBrandName" id="DefaultGameBrand">VIP Club</span></div>
-                        <div class="lob_gameBrandStart">
-                            <span class="language_replace">Start</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div id="id_GameBrandList" class="lob_gameBrandWrapper">
             <!-- 遊戲按鈕 -->
-            <div id="templateGameBrandItem" style="display: none">
-                <div class="lob_gameBrandDiv BrandShow">
-                    <div class="lob_gameBrandPanel" data-tilt>
-                        <!-- 主視覺圖片 -->
-                        <div class="lob_gameBrandImg">
-                            <img class="BrandImg" src="images/lobby/logo/demo_mainImg.png">
-                        </div>
-                        <!-- LOGO圖片 -->
-                        <div class="lob_gameBrandImg_M">
-                            <img class="BrandIcon" src="images/lobby/logo/demo_logoPC.png">
-                        </div>
-                        <!-- 品牌名 -->
-                        <div class="lob_gameBrandName"><span class="language_replace span_BrandCode">--</span></div>
-                        <div class="lob_gameBrandStart">
-                            <span class="language_replace">Start</span>
-                        </div>
+            <div class="lob_gameBrandDiv BrandShow" style="cursor: pointer" gamebrandcode="EwinBaccarat" data-categ="Baccarat" onclick="API_OpenGameCode('EWin','')">
+                <div class="lob_gameBrandPanel" data-tilt>
+                    <!-- 主視覺圖片 -->
+                    <div class="lob_gameBrandImg mainImgBg">
+                        <img src="images/lobby/logo/demo_mainImg.png">
+                    </div>
+                    <!-- LOGO圖片 -->
+                    <div class="lob_gameBrandImg_M mainImgLogo">
+                        <img src="images/lobby/logo/demo_logoPC2.png">
+                    </div>
+                    <!-- 品牌名 -->
+                    <div class="lob_gameBrandName"><span class="language_replace span_gameBrandName" id="DefaultCompanyCode"><%=EWinWeb.CompanyCode%></span>&nbsp;<span class="language_replace span_gameBrandName" id="DefaultGameBrand">VIP Club</span></div>
+                    <div class="lob_gameBrandStart">
+                        <span class="language_replace">Start</span>
                     </div>
                 </div>
             </div>
-            <!-- 遊戲大廳END -->
         </div>
+
+        <!-- 遊戲按鈕 -->
+        <div id="templateGameBrandItem" style="display: none">
+            <div class="lob_gameBrandDiv BrandShow">
+                <div class="lob_gameBrandPanel" data-tilt>
+                    <!-- 主視覺圖片 -->
+                    <div class="lob_gameBrandImg">
+                        <img class="BrandImg" src="images/lobby/logo/demo_mainImg.png">
+                    </div>
+                    <!-- LOGO圖片 -->
+                    <div class="lob_gameBrandImg_M">
+                        <img class="BrandIcon" src="images/lobby/logo/demo_logoPC.png">
+                    </div>
+                    <!-- 品牌名 -->
+                    <div class="lob_gameBrandName"><span class="language_replace span_BrandCode">--</span></div>
+                    <div class="lob_gameBrandStart">
+                        <span class="language_replace">Start</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 遊戲大廳END -->
+    </div>
     <!-- Initialize Swiper -->
     <%--<script src="/Scripts/index_marquee.js"></script>--%>
     <script>
