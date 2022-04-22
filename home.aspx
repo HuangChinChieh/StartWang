@@ -135,7 +135,7 @@
         .lob_gameListWrapper {
             position: relative;
             box-sizing: border-box;
-            height: calc(100vh - 110px);
+            height: 100%;
             /*margin-top: -60px;*/
             width: calc(100% - 200px);
             left: 100px;
@@ -162,7 +162,7 @@
 
         .lob_gameListMain {
             box-sizing: border-box;
-            height: calc(100vh - 300px);
+            height: calc(100vh - 120px);
             padding: 30px 30px 30px 30px;
             overflow: auto;
             overflow-x: hidden;
@@ -201,7 +201,7 @@
 
         .myFavorBtn {
             position: absolute;
-            bottom: 36px;
+            bottom: 50px;
             background: rgba(255,255,255,0.3);
             width: 29px;
             height: 29px;
