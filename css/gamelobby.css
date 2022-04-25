@@ -156,7 +156,6 @@
 @media (min-width: 900px) {
     .gamePanel {
         height: calc(100% - 36px);
-        height: 600px;
     }
 }
 
