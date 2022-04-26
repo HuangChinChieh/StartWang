@@ -1617,11 +1617,11 @@
     <%--    <div id="IFramePage" class="DivContent">
             <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>--%>
-            <div id="IFramePage" class="DivContent" style="height:100%">
+            <div id="IFramePage" class="DivContent" style="height:calc(100% - 161px)">
         <iframe id="idFrameContent"></iframe>
     </div>
         <!-- 頁尾 -->
-        <div class="main-footer">.</div>
+       <%-- <div class="main-footer">.</div>--%>
 
 
 

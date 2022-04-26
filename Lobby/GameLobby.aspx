@@ -78,7 +78,7 @@
     var GameCodeList = <%=GameCodeListStr%>;
     var GameHistoryArr = new Array();
     var GameMyFavorArr = new Array();
- var defaultB = "<%=b%>";
+    var defaultB = "<%=b%>";
     var defaultC = "<%=c%>";
     var defaultCsub = "<%=cSub%>";
     var directShow = false;
@@ -1600,7 +1600,7 @@
         var idEntryMask = document.getElementById("idEntryMask");
 
         WebInfo = window.top.API_GetWebInfo();
-                  window.top.API_GetWebInfo()
+        window.top.API_GetWebInfo()
         lang = WebInfo.Lang;
 
         idEntryMask.style.display = "none";
@@ -1838,13 +1838,13 @@
                     </div>
                 </div>
                 <div id="id_GameCategoryList" class="lob_gameTypeDiv">
-                    <div id="idCategoryMyFavor" class="lob_gameTypeBtn" data-categ="myFavor" onclick="changeGameCateg(this,'myFavor')" >
+                    <div id="idCategoryMyFavor" class="lob_gameTypeBtn" data-categ="myFavor" onclick="changeGameCateg(this,'myFavor')">
                         <div class="lob_gameTypeIcon">
                             <img src="images/lobby/icon_gametype_Favicon.svg">
                         </div>
                         <div class="lob_gameTypeName"><span class="language_replace">最愛</span></div>
                     </div>
-                    <div id="idCategoryFast" class="lob_gameTypeBtn" data-categ="Fast" onclick="changeGameCateg(this,'Fast')" style="display:none">
+                    <div id="idCategoryFast" class="lob_gameTypeBtn" data-categ="Fast" onclick="changeGameCateg(this,'Fast')" style="display: none">
                         <div class="lob_gameTypeIcon">
                             <img src="images/lobby/icon_gametype_Favicon.svg">
                         </div>
@@ -1908,54 +1908,41 @@
             <div id="id_GamesList" class="lob_gameBrandWrapper">
                 <!-- 遊戲子分類選單 -->
                 <div class="lob_gamesListHeader" id="id_GameSubBtnList">
-                    
                 </div>
                 <!-- 遊戲列表 -->
                 <div id="idCategorySubGameList" class="lob_gamesListCon">
-
                 </div>
-                <div id="idGameListNoData" style="display:none">目前無資料</div>
+                <div id="idGameListNoData" style="display: none">目前無資料</div>
             </div>
         </div>
         <!-- -->
 
         <!-- -->
-        <div class="comdPopUp_hidden" id="divGamePage">
+        <div class="comdPopUp_hidden" id="divGamePage" hidden="hidden">
             <div class="maskDiv"></div>
-            <div class="comdCon">
-                <div class="gameComdHidden gameComdShow">
-                    <!--div class="comdTit">
-						<span id="divGamePageTitle"></span>
-					</div>
-                    <hr-->
-                    <div class="popUp_input_div" id="divGamePageContent" style="font-size: 32px">
-                        <div class="lob_gameListWrapper" id="idGamePage">
-                            <div id="templateGameItem" style="display: none">
-                                <div class="lob_gameListDiv">
-                                    <div class="lob_gameListBtn">
-                                        <div class="lob_gameListImg">
-                                            <img class="idGameIcon" onerror="showDefaultGameIcon(this)">
-                                        </div>
-                                        <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
-                                    </div>
-                                    <div class="myFavorBtn"></div>
-                                </div>
+            <div class="comdCon lob_gameListWrapper" id="idGamePage">
+                <div id="templateGameItem" style="display: none">
+                    <div class="lob_gameListDiv">
+                        <div class="lob_gameListBtn">
+                            <div class="lob_gameListImg">
+                                <img class="idGameIcon" onerror="showDefaultGameIcon(this)">
                             </div>
-                            <div class="lob_gameListBrand">
-                                <div id="btnGameListClose" class="lob_gameListBackBtn">
-                                    <img src="images/lobby/icon_back.svg">
-                                </div>
-                                <div class="lob_gameListTit"><span id="idGameItemTitle">CG老虎機</span></div>
-                                <!-- 遊戲子分類 -->
-                                <!-- 遊戲子分類選單 -->
-                                <div class="lob_gamesListHeader2" id="id_GameSubBtnList2">
-                                    
-                                </div>
-                            </div>
-                            <div class="lob_gameListMain" id="idGameItemList">
-                            </div>
+                            <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
                         </div>
+                        <div class="myFavorBtn"></div>
                     </div>
+                </div>
+                <div class="lob_gameListBrand">
+                    <div id="btnGameListClose" class="lob_gameListBackBtn">
+                        <img src="images/lobby/icon_back.svg">
+                    </div>
+                    <div class="lob_gameListTit"><span id="idGameItemTitle">CG老虎機</span></div>
+                    <!-- 遊戲子分類 -->
+                    <!-- 遊戲子分類選單 -->
+                    <div class="lob_gamesListHeader2" id="id_GameSubBtnList2">
+                    </div>
+                </div>
+                <div class="lob_gameListMain" id="idGameItemList">
                 </div>
             </div>
         </div>
@@ -2055,33 +2042,32 @@
             </div>
         </div>
         <!-- 遊戲歷程-->
-        <div id="idMyLastPlayed" class="myLastPlayed" style="display:none">
+        <div id="idMyLastPlayed" class="myLastPlayed" style="display: none">
             <div class="myLastPlayedDIv">
                 <div class="myLastPlayedHeader">
                     <img src="images/lobby/icon_myLastPlayedItem_B.svg">
                     <div class="myLastPlayedHeaderText"><span class="language_replace">History</span></div>
                 </div>
                 <div id="idLastPlayedCon" class="myLastPlayedCon">
-                    
                 </div>
             </div>
         </div>
 
-        <div id="TemplateGameCategorySubBtn" style="display:none">
+        <div id="TemplateGameCategorySubBtn" style="display: none">
             <div class="lob_gamesListBtn">
                 <div class="displayType_switch_Btn_icon2"></div>
                 <span class="language_replace lob_categorySubName">--</span>
             </div>
         </div>
 
-        <div id="TemplateGameCategorySubBtn2" style="display:none">
+        <div id="TemplateGameCategorySubBtn2" style="display: none">
             <div class="displayType_switch_Btn_G lob_gamesListBtn2">
                 <div class="displayType_switch_Btn_icon"></div>
                 <span class="language_replace lob_categorySubName">--</span>
             </div>
         </div>
 
-        <div id="TemplateGameCategorySubGameItem" style="display:none">
+        <div id="TemplateGameCategorySubGameItem" style="display: none">
             <div class="lob_gameListDiv">
                 <div class="lob_gameListBtn">
                     <div class="lob_gameListImg">
@@ -2093,7 +2079,7 @@
             </div>
         </div>
 
-        <div id="TemplatePlayedItem" style="display:none">
+        <div id="TemplatePlayedItem" style="display: none">
             <div class="myLastPlayedItem">
                 <img class="idGameIcon" src="http://ewin.dev.mts.idv.tw/Files/GamePlatformPic/PG/PC/CHS/dragon-legend.png" alt="gameIcon">
             </div>

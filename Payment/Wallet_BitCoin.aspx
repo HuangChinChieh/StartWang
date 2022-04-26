@@ -30,7 +30,6 @@
     <link href="css/wallet_layout.css" rel="stylesheet" type="text/css">
     <link href="css/media-main.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" type="text/css">
-    <link href="css/vegas.css" rel="stylesheet" type="text/css">
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/99playfont/99fonts.css" rel="stylesheet" type="text/css">
 
