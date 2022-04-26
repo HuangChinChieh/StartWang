@@ -243,7 +243,7 @@
                                             break;
                                     }
 
-                                    c.setClassText(gameRowOneDom, "GameName", null, "<sapn class='language_replace'>" + GameName + "</span>");
+                                    c.setClassText(gameRowOneDom, "GameName", null,  "<sapn>" + GameName + "</span>");
                                     c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);
                                     c.setClassText(gameRowOneDom, "RewardValue", null, o.DetailList[i].RewardValue);
 
@@ -332,7 +332,7 @@
                                             break;
                                     }
 
-                                    c.setClassText(gameRowOneDom, "PaymentType", null, o.DetailList[i].PaymentType == 0 ? "<sapn class='language_replace'>存款</span>" : "<sapn class='language_replace'>取款</span>");
+                                    c.setClassText(gameRowOneDom, "PaymentType", null, o.DetailList[i].DirectionType == 0 ? "<sapn class='language_replace'>存款</span>" : "<sapn class='language_replace'>取款</span>");
                                     c.setClassText(gameRowOneDom, "FinishedDate", null, o.DetailList[i].FinishedDate.split(" ")[1]);
                                     c.setClassText(gameRowOneDom, "PaymentProviderCode", null, "<sapn class='language_replace'>" + PaymentProviderCode + "</span>");
                                     c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);

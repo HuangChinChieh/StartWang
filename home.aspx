@@ -1302,7 +1302,7 @@
                             <div class="lob_gameListTit"><span id="idGameItemTitle">CG老虎機</span></div>
                             <!-- 遊戲子分類 -->
                             <!-- 遊戲子分類選單 -->
-                            <div class="lob_gamesListHeader2" id="id_GameSubBtnList2">
+                            <div class="lob_gamesListHeader2" id="id_GameSubBtnList2" style="display:none;">
                             </div>
                         </div>
                         <div class="lob_gameListMain" id="idGameItemList">
@@ -1322,7 +1322,7 @@
             <div id="id_GameBrandList" class="lob_gameBrandWrapper">
                 <!-- 遊戲按鈕 -->
                 <div class="lob_gameBrandDiv BrandShow" style="cursor: pointer" gamebrandcode="EwinBaccarat" data-categ="Baccarat" onclick="API_OpenGameCode('EWin','')">
-                    <div class="lob_gameBrandPanel" data-tilt>
+                    <div class="lob_gameBrandPanel">
                         <!-- 主視覺圖片 -->
                         <div class="lob_gameBrandImg mainImgBg">
                             <img src="images/lobby/logo/demo_mainImg.png">
