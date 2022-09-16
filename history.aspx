@@ -378,12 +378,8 @@
                                     ParentMain.appendChild(gameRowOneDom);
                                     mlp.loadLanguage(EWinWebInfo.Lang);
                                 }
-
-
                             } else {
-
                                 window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("沒有資料"));
-
                             }
                         } else {
                             window.parent.showMessageOK(mlp.getLanguageKey("提示"), mlp.getLanguageKey("取得資料失敗"));

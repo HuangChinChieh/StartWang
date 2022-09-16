@@ -315,6 +315,30 @@ public class LobbyAPI : System.Web.Services.WebService {
         return RetValue;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult GetUserAccountProperty(string GUID, string SID, string PropertyName) {
+
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult RetValue = null;
+
+        RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), SID, GUID, PropertyName);
+
+        return RetValue;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult SetUserAccountProperty(string GUID, string SID, string PropertyName,string PropertyValue) {
+
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult RetValue = null;
+
+        RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),SID, GUID, PropertyName, PropertyValue);
+
+        return RetValue;
+    }
+
     #endregion
 
     #region Kevin

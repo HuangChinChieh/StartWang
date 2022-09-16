@@ -76,6 +76,52 @@
         });
     };
 
+    this.GetUserAccountProperty = function (GUID, SID, PropertyName, cb) {
+        var url = APIUrl + "/GetUserAccountProperty";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            SID: SID,
+            PropertyName: PropertyName
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.SetUserAccountProperty = function (GUID, SID, PropertyName, PropertyValue, cb) {
+        var url = APIUrl + "/SetUserAccountProperty";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            SID: SID,
+            PropertyName: PropertyName,
+            PropertyValue: PropertyValue
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
 
     //#region Kevin
     this.RequireRegister2 = function (data, cb) {

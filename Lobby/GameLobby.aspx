@@ -1052,7 +1052,7 @@
 
                 }
             }
-
+            debugger;
             //只有一個遊戲，直接開
             if (insertCount == 1) {
                 if (directShow == true) {

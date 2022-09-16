@@ -30,13 +30,17 @@
           <s:enumeration value="ERR" />
         </s:restriction>
       </s:simpleType>
-      <s:element name="SetCompanyGameCodeTag">
+      <s:element name="AddPromotionCollect">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="PS" type="tns:ArrayOfPropertySet" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollectAreaType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExpireDay" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Action" type="tns:ArrayOfPropertySet" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -51,6 +55,104 @@
           <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="AddPromotionCollectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddPromotionCollectResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPromotionCollectAvailable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPromotionCollectAvailableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPromotionCollectAvailableResult" type="tns:PromotionCollectResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PromotionCollectResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CollectList" type="tns:ArrayOfPromotionCollect" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPromotionCollect">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PromotionCollect" nillable="true" type="tns:PromotionCollect" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PromotionCollect">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CollectID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PromotionID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PromotionDetailID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CollectAreaType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:enumStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionContent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpireDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CollectDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Taked" />
+          <s:enumeration value="Expire" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetPromotionCollectHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPromotionCollectHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPromotionCollectHistoryResult" type="tns:PromotionCollectHistoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PromotionCollectHistoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CollectList" type="tns:ArrayOfPromotionCollect" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SetCompanyGameCodeTag">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PS" type="tns:ArrayOfPropertySet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SetCompanyGameCodeTagResponse">
         <s:complexType>
           <s:sequence>
@@ -895,6 +997,26 @@
           <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="IsNew" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Tag" type="tns:ArrayOfPropertySet" />
+          <s:element minOccurs="0" maxOccurs="1" name="RTP" type="tns:ArrayOfRTPInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRTPInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RTPInfo" nillable="true" type="tns:RTPInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RTPInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BetCount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="WinValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RTP1" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RTP3" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RTP10" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RTP30" type="s:decimal" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetCompanyGameCode">
@@ -1307,6 +1429,8 @@
         </s:sequence>
       </s:complexType>
       <s:element name="APIResult" nillable="true" type="tns:APIResult" />
+      <s:element name="PromotionCollectResult" nillable="true" type="tns:PromotionCollectResult" />
+      <s:element name="PromotionCollectHistoryResult" nillable="true" type="tns:PromotionCollectHistoryResult" />
       <s:element name="RequireWithdrawalHistoryResult" nillable="true" type="tns:RequireWithdrawalHistoryResult" />
       <s:element name="DocumentListResult" nillable="true" type="tns:DocumentListResult" />
       <s:element name="DocumentResult" nillable="true" type="tns:DocumentResult" />
@@ -1329,6 +1453,24 @@
   </wsdl:message>
   <wsdl:message name="HeartBeatSoapOut">
     <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPromotionCollectSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPromotionCollect" />
+  </wsdl:message>
+  <wsdl:message name="AddPromotionCollectSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPromotionCollectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPromotionCollectAvailable" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPromotionCollectAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetPromotionCollectHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetPromotionCollectHistoryResponse" />
   </wsdl:message>
   <wsdl:message name="SetCompanyGameCodeTagSoapIn">
     <wsdl:part name="parameters" element="tns:SetCompanyGameCodeTag" />
@@ -1600,6 +1742,24 @@
   </wsdl:message>
   <wsdl:message name="HeartBeatHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableHttpGetOut">
+    <wsdl:part name="Body" element="tns:PromotionCollectResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistoryHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BeginDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:PromotionCollectHistoryResult" />
   </wsdl:message>
   <wsdl:message name="GetRequireWithdrawalHistoryByUserAccountIDHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
@@ -2004,6 +2164,24 @@
   <wsdl:message name="HeartBeatHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectAvailableHttpPostOut">
+    <wsdl:part name="Body" element="tns:PromotionCollectResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistoryHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BeginDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionCollectHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:PromotionCollectHistoryResult" />
+  </wsdl:message>
   <wsdl:message name="GetRequireWithdrawalHistoryByUserAccountIDHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="SID" type="s:string" />
@@ -2405,6 +2583,18 @@
       <wsdl:input message="tns:HeartBeatSoapIn" />
       <wsdl:output message="tns:HeartBeatSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AddPromotionCollect">
+      <wsdl:input message="tns:AddPromotionCollectSoapIn" />
+      <wsdl:output message="tns:AddPromotionCollectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <wsdl:input message="tns:GetPromotionCollectAvailableSoapIn" />
+      <wsdl:output message="tns:GetPromotionCollectAvailableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <wsdl:input message="tns:GetPromotionCollectHistorySoapIn" />
+      <wsdl:output message="tns:GetPromotionCollectHistorySoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SetCompanyGameCodeTag">
       <wsdl:input message="tns:SetCompanyGameCodeTagSoapIn" />
       <wsdl:output message="tns:SetCompanyGameCodeTagSoapOut" />
@@ -2587,6 +2777,14 @@
       <wsdl:input message="tns:HeartBeatHttpGetIn" />
       <wsdl:output message="tns:HeartBeatHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <wsdl:input message="tns:GetPromotionCollectAvailableHttpGetIn" />
+      <wsdl:output message="tns:GetPromotionCollectAvailableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <wsdl:input message="tns:GetPromotionCollectHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetPromotionCollectHistoryHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetRequireWithdrawalHistoryByUserAccountID">
       <wsdl:input message="tns:GetRequireWithdrawalHistoryByUserAccountIDHttpGetIn" />
       <wsdl:output message="tns:GetRequireWithdrawalHistoryByUserAccountIDHttpGetOut" />
@@ -2753,6 +2951,14 @@
       <wsdl:input message="tns:HeartBeatHttpPostIn" />
       <wsdl:output message="tns:HeartBeatHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <wsdl:input message="tns:GetPromotionCollectAvailableHttpPostIn" />
+      <wsdl:output message="tns:GetPromotionCollectAvailableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <wsdl:input message="tns:GetPromotionCollectHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetPromotionCollectHistoryHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetRequireWithdrawalHistoryByUserAccountID">
       <wsdl:input message="tns:GetRequireWithdrawalHistoryByUserAccountIDHttpPostIn" />
       <wsdl:output message="tns:GetRequireWithdrawalHistoryByUserAccountIDHttpPostOut" />
@@ -2918,6 +3124,33 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HeartBeat">
       <soap:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPromotionCollect">
+      <soap:operation soapAction="http://tempuri.org/AddPromotionCollect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <soap:operation soapAction="http://tempuri.org/GetPromotionCollectAvailable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <soap:operation soapAction="http://tempuri.org/GetPromotionCollectHistory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3333,6 +3566,33 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddPromotionCollect">
+      <soap12:operation soapAction="http://tempuri.org/AddPromotionCollect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <soap12:operation soapAction="http://tempuri.org/GetPromotionCollectAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetPromotionCollectHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SetCompanyGameCodeTag">
       <soap12:operation soapAction="http://tempuri.org/SetCompanyGameCodeTag" style="document" />
       <wsdl:input>
@@ -3741,6 +4001,24 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <http:operation location="/GetPromotionCollectAvailable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <http:operation location="/GetPromotionCollectHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRequireWithdrawalHistoryByUserAccountID">
       <http:operation location="/GetRequireWithdrawalHistoryByUserAccountID" />
       <wsdl:input>
@@ -4106,6 +4384,24 @@
     <http:binding verb="POST" />
     <wsdl:operation name="HeartBeat">
       <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectAvailable">
+      <http:operation location="/GetPromotionCollectAvailable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotionCollectHistory">
+      <http:operation location="/GetPromotionCollectHistory" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
