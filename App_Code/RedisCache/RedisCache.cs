@@ -34,11 +34,15 @@ public static class RedisCache
             string Key4;
 
             Key4 = XMLPath + ":CompanyGameCode";
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     DTWriteToRedis(DBIndex, DT, Key4);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
 
@@ -51,11 +55,13 @@ public static class RedisCache
             string Key4;
 
             Key4 = XMLPath + ":CompanyGameCode";
-            if (KeyExists(DBIndex, Key4) == false) {
+            if (KeyExists(DBIndex, Key4) == false)
+            {
                 return null;
             }
 
-            if (KeyExists(DBIndex, Key4)) {
+            if (KeyExists(DBIndex, Key4))
+            {
                 R = JsonReadFromRedis(DBIndex, Key4);
             }
 
@@ -67,11 +73,15 @@ public static class RedisCache
             string Key4;
 
             Key4 = XMLPath + ":CompanyGameCode";
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key4, 300);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -90,7 +100,8 @@ public static class RedisCache
             bool RetValue = false;
 
             Key = XMLPath + ":SID." + SID;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 RetValue = true;
             }
 
@@ -108,15 +119,21 @@ public static class RedisCache
 
             Key3 = XMLPath + ":AllSID";
             HEList = Client.HashGetAll(Key3.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
                                     string Value = HEValue.ToString();
 
@@ -136,14 +153,17 @@ public static class RedisCache
         {
             string RetValue = null;
 
-            if (string.IsNullOrEmpty(SID) == false) {
+            if (string.IsNullOrEmpty(SID) == false)
+            {
                 string Key;
                 StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
 
                 Key = XMLPath + ":SID." + SID;
 
-                if (Client.KeyExists(Key.ToUpper())) {
-                    if (Client.HashExists(Key.ToUpper(), ("Param." + ParamName).ToUpper())) {
+                if (Client.KeyExists(Key.ToUpper()))
+                {
+                    if (Client.HashExists(Key.ToUpper(), ("Param." + ParamName).ToUpper()))
+                    {
                         RetValue = Client.HashGet(Key.ToUpper(), ("Param." + ParamName).ToUpper());
                     }
                 }
@@ -156,13 +176,15 @@ public static class RedisCache
         {
             bool RetValue = false;
 
-            if (string.IsNullOrEmpty(SID) == false) {
+            if (string.IsNullOrEmpty(SID) == false)
+            {
                 string Key;
                 StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
 
                 Key = XMLPath + ":SID." + SID;
 
-                if (Client.KeyExists(Key.ToUpper())) {
+                if (Client.KeyExists(Key.ToUpper()))
+                {
                     Client.HashSet(Key.ToUpper(), ("Param." + ParamName).ToUpper(), ParamValue);
                     RetValue = true;
                 }
@@ -182,8 +204,8 @@ public static class RedisCache
 
 
             UserAccountEncID = BaseValue1;
-            SID = RndString + UserAccountEncID + "-" + BaseValue1 + DateTimeSerial;
-
+            //SID = RndString + UserAccountEncID + "-" + BaseValue1 + DateTimeSerial;
+            SID = RndString + System.Guid.NewGuid().ToString() + "-" + BaseValue1 + DateTimeSerial;
             CreateSID(SID, LoginAccount, CompanyCode, AccessIP, IsGuestAccount, EWinSID, EWinCT);
 
             return SID;
@@ -226,7 +248,8 @@ public static class RedisCache
 
             Key = XMLPath + ":SID." + SID;
 
-            if (Client.KeyExists(Key.ToUpper())) {
+            if (Client.KeyExists(Key.ToUpper()))
+            {
                 StackExchange.Redis.ITransaction T;
 
                 T = Client.CreateTransaction();
@@ -250,10 +273,14 @@ public static class RedisCache
             string Key1;
 
             Key1 = XMLPath + ":SID." + SID;
-            if (KeyExists(DBIndex, Key1)) {
-                try {
+            if (KeyExists(DBIndex, Key1))
+            {
+                try
+                {
                     KeyDelete(DBIndex, Key1);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -267,8 +294,10 @@ public static class RedisCache
             Key2 = XMLPath + ":UserAccountID:" + UserAccountID;
 
             SIDList = GetSIDByUserAccountID(UserAccountID);
-            if (SIDList != null) {
-                foreach (string EachSID in SIDList) {
+            if (SIDList != null)
+            {
+                foreach (string EachSID in SIDList)
+                {
                     ExpireSID(EachSID);
                 }
             }
@@ -285,18 +314,25 @@ public static class RedisCache
 
             Key2 = XMLPath + ":UserAccountID:" + UserAccountID;
             HEList = Client.HashGetAll(Key2.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
 
-                                    if (CheckSIDExist(SID)) {
+                                    if (CheckSIDExist(SID))
+                                    {
                                         iList.Add(SID);
                                     }
                                 }
@@ -309,7 +345,7 @@ public static class RedisCache
             return iList.ToArray();
         }
 
-        public static string[] GetSIDByLoginAccount(int LoginAccount)
+        public static string[] GetSIDByLoginAccount(string LoginAccount)
         {
             string Key2;
             StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient();
@@ -318,18 +354,25 @@ public static class RedisCache
 
             Key2 = XMLPath + ":LoginAccount:" + LoginAccount;
             HEList = Client.HashGetAll(Key2.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
 
-                                    if (CheckSIDExist(SID)) {
+                                    if (CheckSIDExist(SID))
+                                    {
                                         iList.Add(SID);
                                     }
                                 }
@@ -345,51 +388,87 @@ public static class RedisCache
         public static SIDInfo GetSIDInfo(string SID) {
             SIDInfo RetValue = null;
 
-            if (string.IsNullOrEmpty(SID) == false) {
+            if (string.IsNullOrEmpty(SID) == false)
+            {
                 string Key;
                 StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
                 StackExchange.Redis.HashEntry[] HE;
 
                 Key = XMLPath + ":SID." + SID;
 
-                if (Client.KeyExists(Key.ToUpper())) {
+                if (Client.KeyExists(Key.ToUpper()))
+                {
                     HE = Client.HashGetAll(Key.ToUpper());
-                    if (HE != null) {
-                        if (HE.Length > 0) {
+                    if (HE != null)
+                    {
+                        if (HE.Length > 0)
+                        {
                             RetValue = new SIDInfo();
 
-                            foreach (StackExchange.Redis.HashEntry EachHE in HE) {
+                            foreach (StackExchange.Redis.HashEntry EachHE in HE)
+                            {
                                 string Name = EachHE.Name.ToString();
                                 string Value = EachHE.Value.ToString();
 
-                                if (Name.ToUpper() == "SID".ToUpper()) {
+                                if (Name.ToUpper() == "SID".ToUpper())
+                                {
                                     RetValue.SID = Value;
-                                } else if (Name.ToUpper() == "CompanyCode".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "CompanyCode".ToUpper())
+                                {
                                     RetValue.CompanyCode = Value;
-                                } else if (Name.ToUpper() == "LoginAccount".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "LoginAccount".ToUpper())
+                                {
                                     RetValue.LoginAccount = Value;
-                                } else if (Name.ToUpper() == "IsGuestAccount".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "IsGuestAccount".ToUpper())
+                                {
                                     RetValue.IsGuestAccount = Convert.ToBoolean(Value);
-                                } else if (Name.ToUpper() == "Language".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "Language".ToUpper())
+                                {
                                     RetValue.Language = Value;
-                                } else if (Name.ToUpper() == "AccessIP".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "AccessIP".ToUpper())
+                                {
                                     RetValue.AccessIP = Value;
-                                } else if (Name.ToUpper() == "EWinSID".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "EWinSID".ToUpper())
+                                {
                                     RetValue.EWinSID = Value;
-                                } else if (Name.ToUpper() == "EWinCT".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "EWinCT".ToUpper())
+                                {
                                     RetValue.EWinCT = Value;
-                                } else if (Name.ToUpper() == "IsBindingAccount".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "IsBindingAccount".ToUpper())
+                                {
                                     if (Value == "1")
+                                    {
                                         RetValue.IsBindingAccount = true;
-                                } else if (Name.ToUpper() == "BindingType".ToUpper()) {
+                                    }
+                                }
+                                else if (Name.ToUpper() == "BindingType".ToUpper())
+                                {
                                     RetValue.BindingType = Convert.ToInt32(Value);
-                                } else if (Name.ToUpper() == "BindingUID".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "BindingUID".ToUpper())
+                                {
                                     RetValue.BindingUID = Value;
-                                } else if (Name.ToUpper() == "BindingNickname".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "BindingNickname".ToUpper())
+                                {
                                     RetValue.BindingNickname = Value;
-                                } else if (Name.ToUpper() == "BindingHeadImg".ToUpper()) {
+                                }
+                                else if (Name.ToUpper() == "BindingHeadImg".ToUpper())
+                                {
                                     RetValue.BindingHeadImg = Value;
-                                } else { }
+                                }
+                                else { }
+                                //else if (Name.ToUpper() == "CashUnit".ToUpper()) { RetValue.CashUnit = Convert.ToInt32(Value); }
+                                //else if (Name.ToUpper() == "Timezone".ToUpper()) { RetValue.Timezone = Convert.ToDecimal(Value); }
+
                             }
                         }
                     }
@@ -407,7 +486,8 @@ public static class RedisCache
 
             Key = XMLPath + ":SID." + SID;
 
-            if (Client.KeyExists(Key.ToUpper()) == true) {
+            if (Client.KeyExists(Key.ToUpper()) == true)
+            {
                 Client.KeyExpire(Key.ToUpper(), new TimeSpan(0, 0, 120));
 
                 RetValue = true;
@@ -427,26 +507,35 @@ public static class RedisCache
 
             Key2 = XMLPath + ":UserAccountID:" + UserAccountID;
             HEList = Client.HashGetAll(Key2.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
                     T = Client.CreateTransaction();
 
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
                                     string Value = HEValue.ToString();
 
                                     RetValue.TotalCount++;
 
-                                    if (CheckSIDExist(SID) == false) {
+                                    if (CheckSIDExist(SID) == false)
+                                    {
                                         T.HashDeleteAsync(Key2.ToUpper(), HEName);
                                         RetValue.ExpireCount++;
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         ExpireSIDCounter.AliveSID ASID = new ExpireSIDCounter.AliveSID();
 
                                         ASID.SID = SID;
@@ -481,26 +570,35 @@ public static class RedisCache
 
             Key2 = XMLPath + ":LoginAccount:" + LoginAccount;
             HEList = Client.HashGetAll(Key2.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
                     T = Client.CreateTransaction();
 
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
                                     string Value = HEValue.ToString();
 
                                     RetValue.TotalCount++;
 
-                                    if (CheckSIDExist(SID) == false) {
+                                    if (CheckSIDExist(SID) == false)
+                                    {
                                         T.HashDeleteAsync(Key2.ToUpper(), HEName);
                                         RetValue.ExpireCount++;
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         ExpireSIDCounter.AliveSID ASID = new ExpireSIDCounter.AliveSID();
 
                                         ASID.SID = SID;
@@ -535,26 +633,35 @@ public static class RedisCache
 
             Key3 = XMLPath + ":AllSID";
             HEList = Client.HashGetAll(Key3.ToUpper());
-            if (HEList != null) {
-                if (HEList.Length > 0) {
+            if (HEList != null)
+            {
+                if (HEList.Length > 0)
+                {
                     T = Client.CreateTransaction();
 
-                    foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+                    foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                    {
                         string HEName = EachHE.Name;
                         string HEValue = EachHE.Value;
 
-                        if (string.IsNullOrEmpty(HEName) == false) {
-                            if (HEName.Length >= 4) {
-                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper()) {
+                        if (string.IsNullOrEmpty(HEName) == false)
+                        {
+                            if (HEName.Length >= 4)
+                            {
+                                if (HEName.Substring(0, 4).ToUpper() == "SID_".ToUpper())
+                                {
                                     string SID = HEName.Substring(4);
                                     string Value = HEValue.ToString();
 
                                     RetValue.TotalCount++;
 
-                                    if (CheckSIDExist(SID) == false) {
+                                    if (CheckSIDExist(SID) == false)
+                                    {
                                         T.HashDeleteAsync(Key3.ToUpper(), HEName);
                                         RetValue.ExpireCount++;
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         ExpireSIDCounter.AliveSID ASID = new ExpireSIDCounter.AliveSID();
 
                                         ASID.SID = SID;
@@ -586,16 +693,20 @@ public static class RedisCache
             bool RetValue = false;
 
             Key1 = XMLPath + ":SID." + SID;
-            if (Client.KeyExists(Key1.ToUpper())) {
+            if (Client.KeyExists(Key1.ToUpper()))
+            {
                 T = Client.CreateTransaction();
                 T.HashSetAsync(Key1.ToUpper(), Field, Value);
 
-                for (int _I = 1; _I <= 3; _I++) {
-                    try {
+                for (int _I = 1; _I <= 3; _I++)
+                {
+                    try
+                    {
                         T.Execute();
                         RetValue = true;
                         break;
-                    } catch (Exception ex) { }
+                    }
+                    catch (Exception ex) { }
                 }
             }
 
@@ -636,12 +747,16 @@ public static class RedisCache
             T.HashSetAsync(Key2.ToUpper(), "SID_" + SI.SID, System.DateTime.Now.ToBinary());
             T.HashSetAsync(Key3.ToUpper(), "SID_" + SI.SID, System.DateTime.Now.ToBinary());
 
-            for (int _I = 1; _I <= 3; _I++) {
-                try {
+            for (int _I = 1; _I <= 3; _I++)
+            {
+                try
+                {
                     T.Execute();
                     Client.KeyExpire(Key1.ToUpper(), new TimeSpan(0, 0, 120));
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -691,11 +806,13 @@ public static class RedisCache
             string Key;
 
             Key = XMLPath + ":OrderNumber:" + OrderNumber;
-            if (KeyExists(DBIndex, Key) == false) {
+            if (KeyExists(DBIndex, Key) == false)
+            {
                 return default(T);
             }
 
-            if (KeyExists(DBIndex, Key)) {
+            if (KeyExists(DBIndex, Key))
+            {
                 R = JsonReadFromRedis<T>(DBIndex, Key);
             }
 
@@ -707,29 +824,39 @@ public static class RedisCache
             string Key;
 
             Key = XMLPath + ":OrderNumber:" + OrderNumber;
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 600);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
 
-        public static void UpdatePaymentContent(string JsonData, string OrderNumber, int ExpireTime) {
+        public static void UpdatePaymentContent(string JsonData, string OrderNumber, int ExpireTime)
+        {
             string Key;
 
             Key = XMLPath + ":OrderNumber:" + OrderNumber;
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, ExpireTime);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
 
-        public static void DeletePaymentContent(string OrderNumber) {
+        public static void DeletePaymentContent(string OrderNumber)
+        {
             string Key2;
             StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient();
 
@@ -746,19 +873,26 @@ public static class RedisCache
 
             Key = XMLPath + ":LoginAccount:" + LoginAccount;
 
-            if (KeyExists(DBIndex, Key)) {
+            if (KeyExists(DBIndex, Key))
+            {
                 NowDatas = JsonReadFromRedis<List<T>>(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 NowDatas = new List<T>();
             }
 
             NowDatas.Add(Target);
 
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, Newtonsoft.Json.JsonConvert.SerializeObject(NowDatas), Key);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -774,31 +908,98 @@ public static class RedisCache
             Key = XMLPath + ":LoginAccount:" + LoginAccount;
             Key2Base = XMLPath + ":OrderNumber:";
 
-            if (KeyExists(DBIndex, Key)) {
+            if (KeyExists(DBIndex, Key))
+            {
                 Newtonsoft.Json.Linq.JArray checkData = Newtonsoft.Json.Linq.JArray.Parse(RedisRead(DBIndex, Key));
 
-                foreach (var item in checkData) {
+                foreach (var item in checkData)
+                {
                     string Key2 = Key2Base + item["OrderNumber"];
 
-                    if (KeyExists(DBIndex, Key2)) {
+                    if (KeyExists(DBIndex, Key2))
+                    {
                         NowDatas.Add(item.ToObject<T>());
-                    } else {
+                    }
+                    else
+                    {
                         IsNeedReWrite = true;
                     }
                 }
             }
 
-            if (IsNeedReWrite) {
-                for (int I = 0; I <= 3; I++) {
-                    try {
+            if (IsNeedReWrite)
+            {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         JsonStringWriteToRedis(DBIndex, Newtonsoft.Json.JsonConvert.SerializeObject(NowDatas), Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
 
             return NowDatas;
+        }
+    }
+
+    public static class JKCDeposit
+    {
+        private static string XMLPath = "JKCDeposit";
+        private static int DBIndex = 0;
+
+        public static System.Data.DataTable GetJKCDepositByContactPhoneNumber(string ContactPhoneNumber)
+        {
+            string Key;
+            System.Data.DataTable DT;
+
+            Key = XMLPath + ":ContactPhoneNumber:" + ContactPhoneNumber;
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateJKCDepositByContactPhoneNumber(ContactPhoneNumber);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateJKCDepositByContactPhoneNumber(string ContactPhoneNumber)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+
+            SS = "SELECT * FROM JKCDeposit WITH (NOLOCK) WHERE ContactPhoneNumber=@ContactPhoneNumber";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@ContactPhoneNumber", System.Data.SqlDbType.VarChar).Value = ContactPhoneNumber;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                Key = XMLPath + ":ContactPhoneNumber:" + ContactPhoneNumber;
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
         }
     }
 
@@ -812,7 +1013,7 @@ public static class RedisCache
             T R = default(T);
             string Key;
 
-            Key = XMLPath + ":"+ Date + ":LoginAccount:" + LoginAccount;
+            Key = XMLPath + ":" + Date + ":LoginAccount:" + LoginAccount;
             if (KeyExists(DBIndex, Key) == false)
             {
                 return default(T);
@@ -920,10 +1121,12 @@ public static class RedisCache
 
             Key = XMLPath + ":" + Token;
             HEList = Client.HashGetAll(Key.ToUpper());
-            if (HEList != null) {
+            if (HEList != null)
+            {
                 RetValue = new TokenContent();
 
-                foreach (StackExchange.Redis.HashEntry EachHE in HEList) {
+                foreach (StackExchange.Redis.HashEntry EachHE in HEList)
+                {
                     string HEName = EachHE.Name.ToString();
                     string HEValue = EachHE.Value.ToString();
 
@@ -963,9 +1166,12 @@ public static class RedisCache
             System.Data.DataTable DT;
 
             Key = XMLPath;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdatePaymentCategory();
             }
 
@@ -984,14 +1190,19 @@ public static class RedisCache
             DBCmd.CommandText = SS;
             DBCmd.CommandType = System.Data.CommandType.Text;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
+            if (DT.Rows.Count > 0)
+            {
                 Key = XMLPath;
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1011,9 +1222,12 @@ public static class RedisCache
             System.Data.DataTable DT;
 
             Key = XMLPath + ":" + PaymentMethodID.ToString();
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdatePaymentMethodByID(PaymentMethodID);
             }
 
@@ -1034,14 +1248,19 @@ public static class RedisCache
             DBCmd.CommandType = System.Data.CommandType.Text;
             DBCmd.Parameters.Add("@PaymentMethodID", System.Data.SqlDbType.Int).Value = PaymentMethodID;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
+            if (DT.Rows.Count > 0)
+            {
                 Key = XMLPath + ":" + DT.Rows[0]["PaymentMethodID"].ToString();
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1055,9 +1274,12 @@ public static class RedisCache
             System.Data.DataTable DT;
 
             Key = XMLPath + ":" + EWinTaginfoDefault;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdatePaymentMethodByEWinTaginfoDefault(EWinTaginfoDefault);
             }
 
@@ -1078,14 +1300,19 @@ public static class RedisCache
             DBCmd.CommandType = System.Data.CommandType.Text;
             DBCmd.Parameters.Add("@EWinTaginfoDefault", System.Data.SqlDbType.VarChar).Value = EWinTaginfoDefault;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
+            if (DT.Rows.Count > 0)
+            {
                 Key = XMLPath + ":" + (string)DT.Rows[0]["EWinTaginfoDefault"];
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1099,9 +1326,12 @@ public static class RedisCache
             System.Data.DataTable DT;
 
             Key = XMLPath + ":" + Category;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdatePaymentMethodByCategory(Category);
             }
 
@@ -1122,14 +1352,19 @@ public static class RedisCache
             DBCmd.CommandType = System.Data.CommandType.Text;
             DBCmd.Parameters.Add("@PaymentCategoryCode", System.Data.SqlDbType.VarChar).Value = Category;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
+            if (DT.Rows.Count > 0)
+            {
                 Key = XMLPath + ":" + (string)DT.Rows[0]["PaymentCategoryCode"];
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1149,9 +1384,12 @@ public static class RedisCache
             System.Data.DataTable DT;
 
             Key = XMLPath + ":" + LoginAccount;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdateUserAccountTotalSummaryByLoginAccount(LoginAccount);
             }
 
@@ -1174,14 +1412,19 @@ public static class RedisCache
             DBCmd.CommandType = System.Data.CommandType.Text;
             DBCmd.Parameters.Add("@LoginAccount", System.Data.SqlDbType.VarChar).Value = LoginAccount;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
-              
+            if (DT.Rows.Count > 0)
+            {
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1190,25 +1433,31 @@ public static class RedisCache
         }
     }
 
-    public static class UserAccountSummary {
+    public static class UserAccountSummary
+    {
         private static string XMLPath = "UserAccountSummary";
         private static int DBIndex = 0;
 
-        public static System.Data.DataTable GetUserAccountSummary(string LoginAccount, DateTime SummaryDate) {
+        public static System.Data.DataTable GetUserAccountSummary(string LoginAccount, DateTime SummaryDate)
+        {
             string Key;
             System.Data.DataTable DT;
             Key = XMLPath + ":" + LoginAccount + ":SummaryDaye:" + SummaryDate.ToString("yyyy/MM/dd");
 
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 DT = DTReadFromRedis(DBIndex, Key);
-            } else {
+            }
+            else
+            {
                 DT = UpdateUserAccountSummary(LoginAccount, SummaryDate);
             }
 
             return DT;
         }
 
-        public static System.Data.DataTable UpdateUserAccountSummary(string LoginAccount, DateTime SummaryDate) {
+        public static System.Data.DataTable UpdateUserAccountSummary(string LoginAccount, DateTime SummaryDate)
+        {
             string Key;
             string SS;
             System.Data.SqlClient.SqlCommand DBCmd;
@@ -1224,14 +1473,19 @@ public static class RedisCache
             DBCmd.Parameters.Add("@LoginAccount", System.Data.SqlDbType.VarChar).Value = LoginAccount;
             DBCmd.Parameters.Add("@SummaryDate", System.Data.SqlDbType.DateTime).Value = SummaryDate;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
-            if (DT.Rows.Count > 0) {
-               
+            if (DT.Rows.Count > 0)
+            {
 
-                for (int I = 0; I <= 3; I++) {
-                    try {
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
                         DTWriteToRedis(DBIndex, DT, Key, 86400);
                         break;
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }
@@ -1240,7 +1494,8 @@ public static class RedisCache
         }
     }
 
-    public static class FingerPrint{
+    public static class FingerPrint
+    {
         private static string XMLPath = "FingerPrint";
         private static int DBIndex = 0;
 
@@ -1249,11 +1504,15 @@ public static class RedisCache
             string Key;
 
             Key = XMLPath + ":FingerPrint:" + FingerPrint;
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 600);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -1265,39 +1524,63 @@ public static class RedisCache
 
             Key = XMLPath + ":FingerPrint:" + FingerPrint;
 
-            if (KeyExists(DBIndex, Key)) {
+            if (KeyExists(DBIndex, Key))
+            {
                 R = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return R;
+        }
+
+        public static string DelFingerPrint(string FingerPrint)
+        {
+            string R = "";
+            string Key;
+
+            Key = XMLPath + ":FingerPrint:" + FingerPrint;
+
+            if (KeyExists(DBIndex, Key))
+            {
+                KeyDelete(DBIndex, Key);
             }
 
             return R;
         }
     }
 
-    public static class CryptoExchangeRate {
+    public static class CryptoExchangeRate
+    {
         private static string XMLPath = "CryptoExchangeRate";
         private static int DBIndex = 0;
 
-        public static string GetCryptoExchangeRate() {
+        public static string GetCryptoExchangeRate()
+        {
             string Key;
             string strRet = string.Empty;
 
             Key = XMLPath;
-            if (KeyExists(DBIndex, Key) == true) {
+            if (KeyExists(DBIndex, Key) == true)
+            {
                 strRet = JsonReadFromRedis(DBIndex, Key);
             }
 
             return strRet;
         }
 
-        public static void UpdateCryptoExchangeRate(string JsonData) {
+        public static void UpdateCryptoExchangeRate(string JsonData)
+        {
             string Key;
 
             Key = XMLPath;
-            for (int I = 0; I <= 3; I++) {
-                try {
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 60);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }
@@ -1340,6 +1623,71 @@ public static class RedisCache
             DBCmd = new System.Data.SqlClient.SqlCommand();
             DBCmd.CommandText = SS;
             DBCmd.CommandType = System.Data.CommandType.Text;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key, 86400);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
+        }
+    }
+
+    public static class UserAccountEventBonusHistory
+    {
+        private static string XMLPath = "UserAccountEventBonusHistory";
+        private static int DBIndex = 0;
+
+        public static System.Data.DataTable GetEventBonusHistoryByLoginAccountAndDate(string LoginAccount, DateTime StartDate, DateTime EndDate)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            string strMonth = EndDate.ToString("yyyy-MM");
+            Key = XMLPath + ":Date:" + strMonth + ":LoginAccount:" + LoginAccount;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateEventBonusHistoryByLoginAccountAndDate(LoginAccount, StartDate, EndDate);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateEventBonusHistoryByLoginAccountAndDate(string LoginAccount, DateTime StartDate, DateTime EndDate)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+            string strMonth = EndDate.ToString("yyyy-MM");
+            Key = XMLPath + ":Date:" + strMonth + ":LoginAccount:" + LoginAccount;
+
+            SS = " SELECT * " +
+                      " FROM UserAccountEventBonusHistory  WITH (NOLOCK) " +
+                      " WHERE LoginAccount = @LoginAccount " +
+                      "      AND CreateDate >= @StartDate " +
+                      "      AND CreateDate < @EndDate ";
+
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@LoginAccount", System.Data.SqlDbType.VarChar).Value = LoginAccount;
+            DBCmd.Parameters.Add("@StartDate", System.Data.SqlDbType.DateTime).Value = StartDate;
+            DBCmd.Parameters.Add("@EndDate", System.Data.SqlDbType.DateTime).Value = EndDate;
             DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
             if (DT.Rows.Count > 0)
             {
@@ -1418,11 +1766,452 @@ public static class RedisCache
         }
     }
 
-    public static void UpdateRedisByPrivateKey() {
+    public static class CompanyCategory
+    {
+        private static string XMLPath = "CompanyCategory";
+        private static int DBIndex = 0;
+
+        public static System.Data.DataTable GetCompanyCategory()
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateCompanyCategory();
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateCompanyCategory()
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+
+            SS = "SELECT * FROM CompanyCategory WITH (NOLOCK)";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                Key = XMLPath;
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
+        }
+    }
+
+    public static class CompanyCategoryGameCode
+    {
+        private static string XMLPath = "CompanyCategoryGameCode";
+        private static int DBIndex = 0;
+
+        public static void DeleteCompanyCategoryGameCode(int CompanyCategoryID)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":CompanyCategoryID:" + CompanyCategoryID;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                KeyDelete(DBIndex, Key);
+            }
+        }
+
+        public static System.Data.DataTable GetCompanyCategoryGameCodeByID(int CompanyCategoryID)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":CompanyCategoryID:" + CompanyCategoryID;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateCompanyGameCodeByID(CompanyCategoryID);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateCompanyGameCode()
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+            System.Data.DataTable CompanyGameCodeDT = null;
+
+            SS = "SELECT * FROM CompanyCategory WITH (NOLOCK)";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+
+                foreach (System.Data.DataRow DR in DT.Rows)
+                {
+                    int CompanyCategoryID = (int)DR["CompanyCategoryID"];
+                    Key = XMLPath + ":CompanyCategoryID:" + CompanyCategoryID;
+
+                    CompanyGameCodeDT = new System.Data.DataTable();
+
+                    SS = "SELECT * FROM CompanyCategoryGameCode WITH (NOLOCK) WHERE forCompanyCategoryID = @forCompanyCategoryID";
+                    DBCmd = new System.Data.SqlClient.SqlCommand();
+                    DBCmd.CommandText = SS;
+                    DBCmd.CommandType = System.Data.CommandType.Text;
+                    DBCmd.Parameters.Add("@forCompanyCategoryID", System.Data.SqlDbType.Int).Value = CompanyCategoryID;
+                    CompanyGameCodeDT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+
+                    if (CompanyGameCodeDT.Rows.Count > 0)
+                    {
+                        for (int I = 0; I <= 3; I++)
+                        {
+                            try
+                            {
+                                DTWriteToRedis(DBIndex, CompanyGameCodeDT, Key);
+                                break;
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return DT;
+        }
+
+        public static string UpdateAllCompanyGameCode(string JsonString)
+        {
+            string Key;
+
+            Key = XMLPath + ":All";
+
+            for (int I = 0; I <= 3; I++)
+            {
+                try
+                {
+                    JsonStringWriteToRedis(0, JsonString, Key);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            return JsonString;
+        }
+
+        public static string UpdateAllCompanyGameCodeFromDB()
+        {
+            string Key;
+            string JsonString = "";
+            System.Data.SqlClient.SqlCommand DBCmd;
+            EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+            EWin.Lobby.CompanyGameCodeResult companyGameCodeResult;
+
+            companyGameCodeResult = lobbyAPI.GetCompanyGameCode(GetToken(), Guid.NewGuid().ToString());
+            if (companyGameCodeResult.Result == EWin.Lobby.enumResult.OK)
+            {
+                JsonString = Newtonsoft.Json.JsonConvert.SerializeObject(companyGameCodeResult);
+                Key = XMLPath + ":All";
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        JsonStringWriteToRedis(0, JsonString, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return JsonString;
+        }
+
+        private static string GetToken()
+        {
+            string Token;
+            int RValue;
+            Random R = new Random();
+            RValue = R.Next(100000, 9999999);
+            Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
+
+            return Token;
+        }
+
+        public static string GetAllCompanyGameCode()
+        {
+            string Key;
+            string DATA = "";
+            Key = XMLPath + ":All";
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DATA = JsonReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DATA = UpdateAllCompanyGameCodeFromDB();
+            }
+
+            return DATA;
+        }
+
+        public static System.Data.DataTable UpdateCompanyGameCodeByID(int CompanyCategoryID)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable CompanyGameCodeDT = null;
+
+            Key = XMLPath + ":CompanyCategoryID:" + CompanyCategoryID;
+
+            SS = "SELECT * FROM CompanyCategoryGameCode WITH (NOLOCK) WHERE forCompanyCategoryID = @forCompanyCategoryID";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@forCompanyCategoryID", System.Data.SqlDbType.Int).Value = CompanyCategoryID;
+            CompanyGameCodeDT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+
+            if (CompanyGameCodeDT.Rows.Count > 0)
+            {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, CompanyGameCodeDT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return CompanyGameCodeDT;
+        }
+
+    }
+
+    public static class CompanyGameCode
+    {
+        private static string XMLPath = "CompanyGameCode";
+        private static int DBIndex = 0;
+
+        public static void DeleteCompanyGameCode(string BrandCode, string GameCode)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":" + BrandCode + ":" + GameCode;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                KeyDelete(DBIndex, Key);
+            }
+        }
+
+        public static System.Data.DataTable GetCompanyGameCode(string BrandCode, string GameCode)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":" + BrandCode + ":" + GameCode;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateCompanyGameCode(BrandCode, GameCode);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateCompanyGameCode(string BrandCode, string GameCode)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+            Key = XMLPath + ":" + BrandCode + ":" + GameCode;
+
+            SS = "SELECT * FROM CompanyGameCode WITH (NOLOCK) WHERE GameCode=@GameCode";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@GameCode", System.Data.SqlDbType.VarChar).Value = GameCode;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
+        }
+
+    }
+
+    public static class UserAccountEventSummary
+    {
+        private static string XMLPath = "UserAccountEventSummary";
+        private static int DBIndex = 0;
+
+        public static System.Data.DataTable GetUserAccountEventSummaryByLoginAccount(string LoginAccount)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":LoginAccount:" + LoginAccount;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateUserAccountEventSummaryByLoginAccount(LoginAccount);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateUserAccountEventSummaryByLoginAccount(string LoginAccount)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+
+            SS = "SELECT * FROM UserAccountEventSummary WITH (NOLOCK)" +
+                 " WHERE LoginAccount=@LoginAccount ";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@LoginAccount", System.Data.SqlDbType.VarChar).Value = LoginAccount;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                Key = XMLPath + ":LoginAccount:" + LoginAccount;
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
+        }
+
+
+        public static System.Data.DataTable GetUserAccountEventSummaryByLoginAccountAndActivityName(string LoginAccount, string ActivityName)
+        {
+            string Key;
+            System.Data.DataTable DT;
+            Key = XMLPath + ":LoginAccount:" + LoginAccount + ":ActivityName:" + ActivityName;
+
+            if (KeyExists(DBIndex, Key) == true)
+            {
+                DT = DTReadFromRedis(DBIndex, Key);
+            }
+            else
+            {
+                DT = UpdateUserAccountEventSummaryByLoginAccountAndActivityName(LoginAccount, ActivityName);
+            }
+
+            return DT;
+        }
+
+        public static System.Data.DataTable UpdateUserAccountEventSummaryByLoginAccountAndActivityName(string LoginAccount, string ActivityName)
+        {
+            string Key;
+            string SS;
+            System.Data.SqlClient.SqlCommand DBCmd;
+            System.Data.DataTable DT = null;
+
+            SS = "SELECT * FROM UserAccountEventSummary WITH (NOLOCK)" +
+                 " WHERE LoginAccount=@LoginAccount And ActivityName=@ActivityName";
+            DBCmd = new System.Data.SqlClient.SqlCommand();
+            DBCmd.CommandText = SS;
+            DBCmd.CommandType = System.Data.CommandType.Text;
+            DBCmd.Parameters.Add("@LoginAccount", System.Data.SqlDbType.VarChar).Value = LoginAccount;
+            DBCmd.Parameters.Add("@ActivityName", System.Data.SqlDbType.VarChar).Value = ActivityName;
+            DT = DBAccess.GetDB(EWinWeb.DBConnStr, DBCmd);
+            if (DT.Rows.Count > 0)
+            {
+                Key = XMLPath + ":LoginAccount:" + LoginAccount + ":ActivityName:" + ActivityName;
+
+                for (int I = 0; I <= 3; I++)
+                {
+                    try
+                    {
+                        DTWriteToRedis(DBIndex, DT, Key);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            return DT;
+        }
+    }
+
+    public static void UpdateRedisByPrivateKey()
+    {
         PaymentCategory.UpdatePaymentCategory();
         PaymentMethod.UpdatePaymentMethodByCategory("Paypal");
         PaymentMethod.UpdatePaymentMethodByCategory("Crypto");
     }
+
 
     public static void DTWriteToRedis(int DBIndex, System.Data.DataTable DT, string Key, int ExpireTimeoutSeconds = 0)
     {
@@ -1464,6 +2253,7 @@ public static class RedisCache
         return JsonContent;
     }
 
+
     public static T JsonReadFromRedis<T>(int DBIndex, string Key)
     {
         string JsonContent;
@@ -1486,10 +2276,12 @@ public static class RedisCache
     {
         string result = string.Empty;
 
-        if (_dt != null) {
+        if (_dt != null)
+        {
             System.IO.StringWriter writer = new System.IO.StringWriter();
 
-            if (string.IsNullOrEmpty(_dt.TableName)) {
+            if (string.IsNullOrEmpty(_dt.TableName))
+            {
                 _dt.TableName = "Datatable";
             }
 
@@ -1504,14 +2296,17 @@ public static class RedisCache
     {
         string result = string.Empty;
 
-        if (_ds != null) {
+        if (_ds != null)
+        {
             System.IO.StringWriter writer = new System.IO.StringWriter();
             int I = 0;
 
-            foreach (System.Data.DataTable EachTable in _ds.Tables) {
+            foreach (System.Data.DataTable EachTable in _ds.Tables)
+            {
                 I += 1;
 
-                if (string.IsNullOrEmpty(EachTable.TableName)) {
+                if (string.IsNullOrEmpty(EachTable.TableName))
+                {
                     EachTable.TableName = "Datatable." + I.ToString();
                 }
             }
@@ -1525,28 +2320,34 @@ public static class RedisCache
 
     public static System.Data.DataTable DTDeserialize(string _strData)
     {
-        if (string.IsNullOrEmpty(_strData) == false) {
+        if (string.IsNullOrEmpty(_strData) == false)
+        {
             System.Data.DataTable DT = new System.Data.DataTable();
             System.IO.StringReader StringStream = new System.IO.StringReader(_strData);
 
             DT.ReadXml(StringStream);
 
             return DT;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
 
     public static System.Data.DataSet DSDeserialize(string _strData)
     {
-        if (string.IsNullOrEmpty(_strData) == false) {
+        if (string.IsNullOrEmpty(_strData) == false)
+        {
             System.Data.DataSet DS = new System.Data.DataSet();
             System.IO.StringReader StringStream = new System.IO.StringReader(_strData);
 
             DS.ReadXml(StringStream);
 
             return DS;
-        } else {
+        }
+        else
+        {
             return null;
         }
     }
@@ -1576,9 +2377,12 @@ public static class RedisCache
     {
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
 
-        if (ExpireTimeoutSecond == 0) {
+        if (ExpireTimeoutSecond == 0)
+        {
             Client.StringSet(Key.ToUpper(), Content);
-        } else {
+        }
+        else
+        {
             StackExchange.Redis.ITransaction T = Client.CreateTransaction();
 
             T.StringSetAsync(Key.ToUpper(), Content);
@@ -1594,7 +2398,8 @@ public static class RedisCache
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
         string RetValue = string.Empty;
 
-        if (Client.KeyExists(Key.ToUpper())) {
+        if (Client.KeyExists(Key.ToUpper()))
+        {
             RetValue = Client.StringGet(Key.ToUpper()).ToString();
         }
 
@@ -1619,9 +2424,12 @@ public static class RedisCache
     {
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
 
-        if (ExpireTimeoutSecond == 0) {
+        if (ExpireTimeoutSecond == 0)
+        {
             Client.HashSet(Key.ToUpper(), HashName.ToUpper(), Content);
-        } else {
+        }
+        else
+        {
             StackExchange.Redis.ITransaction T = Client.CreateTransaction();
 
             T.HashSetAsync(Key.ToUpper(), HashName.ToUpper(), Content);
@@ -1637,7 +2445,8 @@ public static class RedisCache
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
         string RetValue = string.Empty;
 
-        if (Client.KeyExists(Key.ToUpper())) {
+        if (Client.KeyExists(Key.ToUpper()))
+        {
             RetValue = Client.HashGet(Key.ToUpper(), HashName.ToUpper());
         }
 
@@ -1649,7 +2458,8 @@ public static class RedisCache
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
         StackExchange.Redis.HashEntry[] RetValue = null;
 
-        if (Client.KeyExists(Key.ToUpper())) {
+        if (Client.KeyExists(Key.ToUpper()))
+        {
             RetValue = Client.HashGetAll(Key.ToUpper());
         }
 
@@ -1668,7 +2478,8 @@ public static class RedisCache
         StackExchange.Redis.IDatabase Client = EWinWeb.GetRedisClient(DBIndex);
         string RetValue = null;
 
-        if (Client.KeyExists(Key.ToUpper())) {
+        if (Client.KeyExists(Key.ToUpper()))
+        {
             RetValue = Client.ListLeftPop(Key.ToUpper()).ToString();
         }
 
@@ -1684,18 +2495,23 @@ public static class RedisCache
         string LockValue = System.Guid.NewGuid().ToString();
         bool RetValue = false;
 
-        while (true) {
+        while (true)
+        {
             if (System.DateTime.Now.Subtract(EntryDate).Seconds >= WaitLockTimeoutSecond)
                 break;
 
-            if (Client.LockTake(Key.ToUpper(), LockValue, new TimeSpan(0, 0, WaitLockTimeoutSecond))) {
+            if (Client.LockTake(Key.ToUpper(), LockValue, new TimeSpan(0, 0, WaitLockTimeoutSecond)))
+            {
                 RetValue = true;
 
-                try {
+                try
+                {
                     Func.Invoke();
                     Client.LockRelease(Key.ToUpper(), LockValue);
                     break;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Client.LockRelease(Key.ToUpper(), LockValue);
                     throw ex;
                 }

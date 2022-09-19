@@ -38,6 +38,9 @@ public static class EWinWeb
     public static string CasinoWorldUrl = System.Configuration.ConfigurationManager.AppSettings["CasinoWorldUrl"];
     public static string StartWangUrl = System.Configuration.ConfigurationManager.AppSettings["StartWangUrl"];
 
+    public static string EPayToken = System.Configuration.ConfigurationManager.AppSettings["EPayToken"];
+
+
     public static string CreateToken(string PrivateKey, string ApiKey, string RandomValue)
     {
         string Token;
