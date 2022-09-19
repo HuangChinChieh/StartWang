@@ -470,12 +470,38 @@ public class LobbyAPI : System.Web.Services.WebService {
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult KeepSID(string SID, string GUID) {
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.APIResult RetValue = null;
+   EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult lobbyAPI_ret = new EWin.Lobby.APIResult();
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();
+        RedisCache.SessionContext.SIDInfo SI;
 
-        RetValue = lobbyAPI.KeepSID(GetToken(), SID, GUID);
+        SI = RedisCache.SessionContext.GetSIDInfo(SID);
 
-        return RetValue;
+        if (SI != null && !string.IsNullOrEmpty(SI.EWinSID)) {
+            lobbyAPI_ret = lobbyAPI.KeepSID(GetToken(), SI.EWinSID, GUID);
+
+            if (lobbyAPI_ret.Result == EWin.Lobby.enumResult.OK) {
+                if (RedisCache.SessionContext.RefreshSID(SID) == true) {
+                    R.Result = EWin.Lobby.enumResult.OK;
+                } else {
+                    R.Result = EWin.Lobby.enumResult.ERR;
+                    R.Message = "InvalidWebSID";
+                    R.GUID = GUID;
+                }
+            } else {
+                RedisCache.SessionContext.ExpireSID(SID);
+
+                R.Result = EWin.Lobby.enumResult.ERR;
+                R.Message = "InvalidWebSID";
+                R.GUID = GUID;
+            }
+        } else {
+            R.Result = EWin.Lobby.enumResult.ERR;
+            R.Message = "InvalidWebSID";
+            R.GUID = GUID;
+        }
+
+        return R;
     }
 
     [WebMethod]
