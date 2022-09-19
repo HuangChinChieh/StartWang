@@ -5,34 +5,23 @@
     RedisCache.SessionContext.SIDInfo SI;
     string GameBrand = Request["GameBrand"];
     string SID = Request["SID"];
+    string CT = Request["CT"];
     string Lang = Request["Lang"];
     string CurrencyType = Request["CurrencyType"];
     string GameName = Request["GameName"];
     string HomeUrl = Request["HomeUrl"];
     string DemoPlay = string.IsNullOrEmpty(Request["DemoPlay"]) ? "0" : Request["DemoPlay"]; //不支援DEMO直接最外層判斷
 
-    SI = RedisCache.SessionContext.GetSIDInfo(SID);
-
-    if (SI != null && !string.IsNullOrEmpty(SI.EWinSID)) {
-        if (GameBrand == "EWin" && GameName == "EWinGaming") {
-            if (DemoPlay == "0") {
-                Response.Redirect(EWinWeb.EWinGameUrl + "/Game/Login.aspx?CT=" + HttpUtility.UrlEncode(SI.EWinCT) + "&Lang=" + Lang);
-            } else {
-                Response.Write("NotSupportDemo");
-                Response.Flush();
-                Response.End();
-            }
+    if (GameBrand == "EWin" && GameName == "EWinGaming") {
+        if (DemoPlay == "0") {
+            Response.Redirect(EWinWeb.EWinGameUrl + "/Game/Login.aspx?CT=" + HttpUtility.UrlEncode(CT) + "&Lang=" + Lang);
         } else {
-            Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI/" + GameBrand + "/UserLogin.aspx?SID=" + SI.EWinSID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameName=" + GameName + "&HomeUrl=" + HomeUrl + "&DemoPlay=" + DemoPlay);
-        }
-    } else {
-        if (DemoPlay == "1") {
-            Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI/" + GameBrand + "/UserLogin.aspx?Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameName=" + GameName + "&HomeUrl=" + HomeUrl + "&DemoPlay=" + DemoPlay);
-        } else {
-            Response.Write("LoginStateExpire");
+            Response.Write("NotSupportDemo");
             Response.Flush();
             Response.End();
         }
+    } else {
+        Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI/" + GameBrand + "/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameName=" + GameName + "&HomeUrl=" + HomeUrl + "&DemoPlay=" + DemoPlay);
     }
 %>
 <!doctype html>

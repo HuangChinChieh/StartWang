@@ -929,7 +929,7 @@
 
     function checkUserLogin(SID, cb) {
         let data = {
-            WebSID: SID,
+            SID: SID,
             GUID: Math.uuid()
         }
 
@@ -1669,12 +1669,12 @@
             });
 
             if (gameBrand.toUpperCase() == "EWin".toUpperCase() || gameBrand.toUpperCase() == "YS".toUpperCase()) {
-                gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+                gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
             } else {
                 if (EWinWebInfo.DeviceType == 1) {
-                    gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+                    gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
                 } else {
-                    GameLoadPage("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx");
+                    GameLoadPage("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx");
                 }
             }
         }
