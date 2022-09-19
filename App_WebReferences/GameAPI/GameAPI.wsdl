@@ -166,6 +166,33 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="UpdateProperty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PS" type="tns:ArrayOfPropertySet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPropertySet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PropertySet" nillable="true" type="tns:PropertySet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PropertySet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdatePropertyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePropertyResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="UpdateDeviceInfo">
         <s:complexType>
           <s:sequence>
@@ -1115,6 +1142,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="TxHash" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="TokenAmount" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="GasValue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FailureDescription" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -1714,6 +1742,12 @@
   </wsdl:message>
   <wsdl:message name="GetUserBankCardSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePropertySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProperty" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePropertySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePropertyResponse" />
   </wsdl:message>
   <wsdl:message name="UpdateDeviceInfoSoapIn">
     <wsdl:part name="parameters" element="tns:UpdateDeviceInfo" />
@@ -3008,6 +3042,10 @@
       <wsdl:input message="tns:GetUserBankCardSoapIn" />
       <wsdl:output message="tns:GetUserBankCardSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateProperty">
+      <wsdl:input message="tns:UpdatePropertySoapIn" />
+      <wsdl:output message="tns:UpdatePropertySoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateDeviceInfo">
       <wsdl:input message="tns:UpdateDeviceInfoSoapIn" />
       <wsdl:output message="tns:UpdateDeviceInfoSoapOut" />
@@ -3638,6 +3676,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateProperty">
+      <soap:operation soapAction="http://tempuri.org/UpdateProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateDeviceInfo">
       <soap:operation soapAction="http://tempuri.org/UpdateDeviceInfo" style="document" />
       <wsdl:input>
@@ -4075,6 +4122,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserBankCard">
       <soap12:operation soapAction="http://tempuri.org/GetUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProperty">
+      <soap12:operation soapAction="http://tempuri.org/UpdateProperty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
