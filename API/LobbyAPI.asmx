@@ -322,7 +322,7 @@ public class LobbyAPI : System.Web.Services.WebService {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
         EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), SID, GUID, PropertyName);
+        RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), GUID,EWin.Lobby.enumUserTypeParam.BySID ,SID, PropertyName);
 
         return RetValue;
     }
@@ -334,7 +334,7 @@ public class LobbyAPI : System.Web.Services.WebService {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
         EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),SID, GUID, PropertyName, PropertyValue);
+        RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),GUID,EWin.Lobby.enumUserTypeParam.BySID,SID, PropertyName, PropertyValue);
 
         return RetValue;
     }

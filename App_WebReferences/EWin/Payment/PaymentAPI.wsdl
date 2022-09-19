@@ -37,7 +37,10 @@
               <s:element minOccurs="0" maxOccurs="1" name="TokenContractAddress" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="TxHash" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="TokenAmount" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="TokenExchangeRate" type="s:decimal" />
               <s:element minOccurs="1" maxOccurs="1" name="GasValue" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="GasExchangeRate" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FailureDescription" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
             </s:sequence>
@@ -68,8 +71,10 @@
               <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="AmountMax" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="CashAmount" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="BankCardGUID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TaxFeeValue" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="ReceiptFilename" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="ReceiptDate" type="s:dateTime" />
               <s:element minOccurs="1" maxOccurs="1" name="CreateDate" type="s:dateTime" />
@@ -117,6 +122,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="ClientOrderNumber" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaxFeeValue" type="s:decimal" />
             <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="PointStatus" type="s:boolean" />
             <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
@@ -165,6 +171,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="PointStatus" type="tns:enumPointStatus" />
               <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
               <s:element minOccurs="0" maxOccurs="1" name="PointFailureDescription" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TaxFeeValue" type="s:decimal" />
               <s:element minOccurs="1" maxOccurs="1" name="AuditAdminID" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="FinishedAdminID" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="AuditDate" type="s:dateTime" />
@@ -235,6 +242,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="ClientOrderNumber" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaxFeeValue" type="s:decimal" />
             <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="PointStatus" type="s:boolean" />
             <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
@@ -459,6 +467,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="PaymentSerial" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TaxFeeValue" type="s:decimal" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -745,6 +754,7 @@
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
     <wsdl:part name="PaymentSerial" type="s:string" />
+    <wsdl:part name="TaxFeeValue" type="s:string" />
   </wsdl:message>
   <wsdl:message name="FinishedPaymentHttpGetOut">
     <wsdl:part name="Body" element="tns:PaymentResult" />
@@ -861,6 +871,7 @@
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
     <wsdl:part name="PaymentSerial" type="s:string" />
+    <wsdl:part name="TaxFeeValue" type="s:string" />
   </wsdl:message>
   <wsdl:message name="FinishedPaymentHttpPostOut">
     <wsdl:part name="Body" element="tns:PaymentResult" />
