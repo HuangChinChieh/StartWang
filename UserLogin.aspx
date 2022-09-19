@@ -4,8 +4,10 @@
     int RValue;
     Random R = new Random();
     bool LoginSuccess = true;
-    if (CodingControl.FormSubmit())
-    {
+    string WebSID = null;
+    string UserIP = CodingControl.GetUserIP();
+
+    if (CodingControl.FormSubmit()) {
         string LoginGUID = Request["LoginGUID"];
         string LoginAccount = Request["LoginAccount"];
         string LoginPassword = Request["LoginPassword"];
@@ -18,17 +20,24 @@
         Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
 
         LoginAPIResult = LoginAPI.UserLogin(Token, LoginGUID, LoginAccount, LoginPassword, EWinWeb.CompanyCode, ValidImg, CodingControl.GetUserIP());
-        if (LoginAPIResult.ResultState == EWin.enumResultState.OK)
-        {
-            Response.SetCookie(new HttpCookie("RecoverToken", LoginAPIResult.RecoverToken) { Expires = System.DateTime.Parse("2038/12/31") });
-            Response.SetCookie(new HttpCookie("SID", LoginAPIResult.SID));
-            Response.SetCookie(new HttpCookie("CT", LoginAPIResult.CT));
-            Response.SetCookie(new HttpCookie("LoginURL", LoginAPIResult.LoginURL));
-           
-            Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=success");
-        }
-        else
-        {
+        if (LoginAPIResult.ResultState == EWin.enumResultState.OK) {
+
+            WebSID = RedisCache.SessionContext.CreateSID(EWinWeb.CompanyCode, LoginAccount, UserIP, false, LoginAPIResult.SID, LoginAPIResult.CT);
+
+            if (string.IsNullOrEmpty(WebSID) == false) {
+
+                Response.SetCookie(new HttpCookie("RecoverToken", LoginAPIResult.RecoverToken) { Expires = System.DateTime.Parse("2038/12/31") });
+                Response.SetCookie(new HttpCookie("SID", WebSID));
+                Response.SetCookie(new HttpCookie("CT", LoginAPIResult.CT));
+                Response.SetCookie(new HttpCookie("LoginURL", LoginAPIResult.LoginURL));
+
+                Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=success");
+
+            } else {
+                Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=success");
+            }
+
+        } else {
             Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=fail");
             //Response.Write(LoginAPIResult.Message);
         }

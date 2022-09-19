@@ -30,12 +30,93 @@
           <s:enumeration value="ERR" />
         </s:restriction>
       </s:simpleType>
-      <s:element name="AddPromotionCollect">
+      <s:element name="AddUserAccountBrowserPageLog">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceType" type="tns:enumDeviceType" />
+            <s:element minOccurs="0" maxOccurs="1" name="PageURL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserAgent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Refer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumDeviceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknow" />
+          <s:enumeration value="PC" />
+          <s:enumeration value="Mobile" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AddUserAccountBrowserPageLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserAccountBrowserPageLogResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetExpireUserAccountPromotionByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollectID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetExpireUserAccountPromotionByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetExpireUserAccountPromotionByIDResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetExpireUserAccountPromotion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollectAreaType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetExpireUserAccountPromotionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetExpireUserAccountPromotionResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CollectUserAccountPromotion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CollectID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CollectUserAccountPromotionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CollectUserAccountPromotionResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPromotionCollect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="CollectAreaType" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="ExpireDay" type="s:int" />
@@ -103,6 +184,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ActionContent" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ExpireDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BonusPointValue" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="CollectDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
         </s:sequence>
@@ -157,23 +239,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SetCompanyGameCodeTagResult" type="tns:APIResult" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SetUserAccountTag">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="PS" type="tns:ArrayOfPropertySet" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SetUserAccountTagResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SetUserAccountTagResult" type="tns:APIResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -354,25 +419,46 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserType" type="tns:enumUserTypeParam" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserTypeParam" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="PropertyName" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:simpleType name="enumUserTypeParam">
+        <s:restriction base="s:string">
+          <s:enumeration value="BySID" />
+          <s:enumeration value="ByLoginAccount" />
+          <s:enumeration value="ByPersonCode" />
+          <s:enumeration value="BySIDParent" />
+        </s:restriction>
+      </s:simpleType>
       <s:element name="GetUserAccountPropertyResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetUserAccountPropertyResult" type="tns:APIResult" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserAccountPropertyResult" type="tns:UserAccountPropertyResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:complexType name="UserAccountPropertyResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PropertyName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PropertyValue" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
       <s:element name="SetUserAccountProperty">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserType" type="tns:enumUserTypeParam" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserTypeParam" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="PropertyName" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="PropertyValue" type="s:string" />
           </s:sequence>
@@ -382,6 +468,24 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SetUserAccountPropertyResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserAccountProperty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserType" type="tns:enumUserTypeParam" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserTypeParam" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PropertyName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserAccountPropertyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveUserAccountPropertyResult" type="tns:APIResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -674,6 +778,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="CheckAccountExistEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckAccountExistExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckAccountExistExResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CheckAccountExist">
         <s:complexType>
           <s:sequence>
@@ -704,6 +827,22 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="CheckAccountExistByContactPhoneNumberResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckAccountExistByEMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckAccountExistByEMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckAccountExistByEMailResult" type="tns:APIResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -877,7 +1016,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="Birthday" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="HasServiceChatMessage" type="s:boolean" />
-              <s:element minOccurs="0" maxOccurs="1" name="Tag" type="tns:ArrayOfPropertySet" />
+              <s:element minOccurs="0" maxOccurs="1" name="Property" type="tns:ArrayOfPropertySet" />
               <s:element minOccurs="0" maxOccurs="1" name="Company" type="tns:CompanyInfo" />
               <s:element minOccurs="0" maxOccurs="1" name="AllBinding" type="tns:ArrayOfBindingInfo" />
               <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWalletInfo" />
@@ -947,23 +1086,112 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:element name="GetCompanyGameCodeByPage">
+      <s:element name="GetGameCodeRTP">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="GameCategoryCode" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="GameCategorySubCode" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetCompanyGameCodeByPageResponse">
+      <s:element name="GetGameCodeRTPResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyGameCodeByPageResult" type="tns:CompanyGameCodeResult" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetGameCodeRTPResult" type="tns:GameCodeRTPResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GameCodeRTPResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RTPList" type="tns:ArrayOfGameCodeRTP" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGameCodeRTP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GameCodeRTP" nillable="true" type="tns:GameCodeRTP" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GameCodeRTP">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCategoryCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BetCount" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="WinValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxWinValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxWinRate" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGameBrand">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGameBrandResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGameBrandResult" type="tns:GameBrandResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GameBrandResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="GameBrandList" type="tns:ArrayOfGameBrandItem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGameBrandItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GameBrandItem" nillable="true" type="tns:GameBrandItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GameBrandItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GameBrandState" type="tns:enumGameBrandState" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumGameBrandState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Open" />
+          <s:enumeration value="Maintain" />
+          <s:enumeration value="Closed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetCompanyGameCodeByUpdateTimestamp">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateTimestamp" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="GameID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyGameCodeByUpdateTimestampResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyGameCodeByUpdateTimestampResult" type="tns:CompanyGameCodeResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -971,8 +1199,8 @@
         <s:complexContent mixed="false">
           <s:extension base="tns:APIResult">
             <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="PageSize" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="TotalPage" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastTimestamp" type="s:long" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastGameID" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfGameCodeItem" />
             </s:sequence>
           </s:extension>
@@ -987,6 +1215,7 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="BrandCode" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GameStatus" type="tns:enumGameCodeStatus" />
           <s:element minOccurs="1" maxOccurs="1" name="GameID" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="GameName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="GameCategoryCode" type="s:string" />
@@ -996,8 +1225,33 @@
           <s:element minOccurs="0" maxOccurs="1" name="RTPInfo" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="IsHot" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="IsNew" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyCategoryTag" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateTimestamp" type="s:long" />
           <s:element minOccurs="0" maxOccurs="1" name="Tag" type="tns:ArrayOfPropertySet" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="tns:ArrayOfGameCodeLanguage" />
           <s:element minOccurs="0" maxOccurs="1" name="RTP" type="tns:ArrayOfRTPInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCodeCategory" type="tns:ArrayOfCompanyGameCodeCategory" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumGameCodeStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="GameOpen" />
+          <s:enumeration value="GameMaintain" />
+          <s:enumeration value="GameClosed" />
+          <s:enumeration value="OverCount" />
+          <s:enumeration value="Deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfGameCodeLanguage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GameCodeLanguage" nillable="true" type="tns:GameCodeLanguage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GameCodeLanguage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LanguageCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayText" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfRTPInfo">
@@ -1019,6 +1273,17 @@
           <s:element minOccurs="1" maxOccurs="1" name="RTP30" type="s:decimal" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfCompanyGameCodeCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGameCodeCategory" nillable="true" type="tns:CompanyGameCodeCategory" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGameCodeCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortIndex" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetCompanyGameCode">
         <s:complexType>
           <s:sequence>
@@ -1034,6 +1299,43 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetCompanyCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyCategoryResult" type="tns:CompanyCategoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanyCategoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CategoryList" type="tns:ArrayOfCompanyCategory" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyCategory" nillable="true" type="tns:CompanyCategory" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyCategory">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyCategoryID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SortIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetCompanyMarqueeText">
         <s:complexType>
           <s:sequence>
@@ -1388,6 +1690,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="TxHash" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="TokenAmount" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="GasValue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FailureDescription" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -1434,13 +1737,17 @@
       <s:element name="RequireWithdrawalHistoryResult" nillable="true" type="tns:RequireWithdrawalHistoryResult" />
       <s:element name="DocumentListResult" nillable="true" type="tns:DocumentListResult" />
       <s:element name="DocumentResult" nillable="true" type="tns:DocumentResult" />
+      <s:element name="UserAccountPropertyResult" nillable="true" type="tns:UserAccountPropertyResult" />
       <s:element name="TransferHistoryResult" nillable="true" type="tns:TransferHistoryResult" />
       <s:element name="UserBankCardListResult" nillable="true" type="tns:UserBankCardListResult" />
       <s:element name="CompanySiteResult" nillable="true" type="tns:CompanySiteResult" />
       <s:element name="CompanyGameCodeExchangeResult" nillable="true" type="tns:CompanyGameCodeExchangeResult" />
       <s:element name="UserInfoResult" nillable="true" type="tns:UserInfoResult" />
       <s:element name="UserBalanceResult" nillable="true" type="tns:UserBalanceResult" />
+      <s:element name="GameCodeRTPResult" nillable="true" type="tns:GameCodeRTPResult" />
+      <s:element name="GameBrandResult" nillable="true" type="tns:GameBrandResult" />
       <s:element name="CompanyGameCodeResult" nillable="true" type="tns:CompanyGameCodeResult" />
+      <s:element name="CompanyCategoryResult" nillable="true" type="tns:CompanyCategoryResult" />
       <s:element name="GameOrderDetailListResult" nillable="true" type="tns:GameOrderDetailListResult" />
       <s:element name="OrderSummaryResult" nillable="true" type="tns:OrderSummaryResult" />
       <s:element name="ValidateCodeResult" nillable="true" type="tns:ValidateCodeResult" />
@@ -1453,6 +1760,30 @@
   </wsdl:message>
   <wsdl:message name="HeartBeatSoapOut">
     <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserAccountBrowserPageLog" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserAccountBrowserPageLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:SetExpireUserAccountPromotionByID" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:SetExpireUserAccountPromotionByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionSoapIn">
+    <wsdl:part name="parameters" element="tns:SetExpireUserAccountPromotion" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionSoapOut">
+    <wsdl:part name="parameters" element="tns:SetExpireUserAccountPromotionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionSoapIn">
+    <wsdl:part name="parameters" element="tns:CollectUserAccountPromotion" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionSoapOut">
+    <wsdl:part name="parameters" element="tns:CollectUserAccountPromotionResponse" />
   </wsdl:message>
   <wsdl:message name="AddPromotionCollectSoapIn">
     <wsdl:part name="parameters" element="tns:AddPromotionCollect" />
@@ -1477,12 +1808,6 @@
   </wsdl:message>
   <wsdl:message name="SetCompanyGameCodeTagSoapOut">
     <wsdl:part name="parameters" element="tns:SetCompanyGameCodeTagResponse" />
-  </wsdl:message>
-  <wsdl:message name="SetUserAccountTagSoapIn">
-    <wsdl:part name="parameters" element="tns:SetUserAccountTag" />
-  </wsdl:message>
-  <wsdl:message name="SetUserAccountTagSoapOut">
-    <wsdl:part name="parameters" element="tns:SetUserAccountTagResponse" />
   </wsdl:message>
   <wsdl:message name="GetRequireWithdrawalHistoryByUserAccountIDSoapIn">
     <wsdl:part name="parameters" element="tns:GetRequireWithdrawalHistoryByUserAccountID" />
@@ -1531,6 +1856,12 @@
   </wsdl:message>
   <wsdl:message name="SetUserAccountPropertySoapOut">
     <wsdl:part name="parameters" element="tns:SetUserAccountPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertySoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUserAccountProperty" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertySoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserAccountPropertyResponse" />
   </wsdl:message>
   <wsdl:message name="AddThresholdSoapIn">
     <wsdl:part name="parameters" element="tns:AddThreshold" />
@@ -1604,6 +1935,12 @@
   <wsdl:message name="KeepSIDSoapOut">
     <wsdl:part name="parameters" element="tns:KeepSIDResponse" />
   </wsdl:message>
+  <wsdl:message name="CheckAccountExistExSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckAccountExistEx" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistExSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckAccountExistExResponse" />
+  </wsdl:message>
   <wsdl:message name="CheckAccountExistSoapIn">
     <wsdl:part name="parameters" element="tns:CheckAccountExist" />
   </wsdl:message>
@@ -1615,6 +1952,12 @@
   </wsdl:message>
   <wsdl:message name="CheckAccountExistByContactPhoneNumberSoapOut">
     <wsdl:part name="parameters" element="tns:CheckAccountExistByContactPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckAccountExistByEMail" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckAccountExistByEMailResponse" />
   </wsdl:message>
   <wsdl:message name="RequireRegisterSoapIn">
     <wsdl:part name="parameters" element="tns:RequireRegister" />
@@ -1652,17 +1995,35 @@
   <wsdl:message name="GetUserBalanceSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserBalanceResponse" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageSoapIn">
-    <wsdl:part name="parameters" element="tns:GetCompanyGameCodeByPage" />
+  <wsdl:message name="GetGameCodeRTPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGameCodeRTP" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageSoapOut">
-    <wsdl:part name="parameters" element="tns:GetCompanyGameCodeByPageResponse" />
+  <wsdl:message name="GetGameCodeRTPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGameCodeRTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGameBrand" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGameBrandResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyGameCodeByUpdateTimestamp" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyGameCodeByUpdateTimestampResponse" />
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeSoapIn">
     <wsdl:part name="parameters" element="tns:GetCompanyGameCode" />
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeSoapOut">
     <wsdl:part name="parameters" element="tns:GetCompanyGameCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyCategory" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyCategoryResponse" />
   </wsdl:message>
   <wsdl:message name="GetCompanyMarqueeTextSoapIn">
     <wsdl:part name="parameters" element="tns:GetCompanyMarqueeText" />
@@ -1743,6 +2104,48 @@
   <wsdl:message name="HeartBeatHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="DeviceType" type="s:string" />
+    <wsdl:part name="PageURL" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+    <wsdl:part name="DeviceGUID" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+    <wsdl:part name="Refer" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CollectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="CollectAreaType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CollectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="GetPromotionCollectAvailableHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="SID" type="s:string" />
@@ -1819,21 +2222,33 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountPropertyHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
-    <wsdl:part name="SID" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
     <wsdl:part name="PropertyName" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetUserAccountPropertyHttpGetOut">
-    <wsdl:part name="Body" element="tns:APIResult" />
+    <wsdl:part name="Body" element="tns:UserAccountPropertyResult" />
   </wsdl:message>
   <wsdl:message name="SetUserAccountPropertyHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
-    <wsdl:part name="SID" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
     <wsdl:part name="PropertyName" type="s:string" />
     <wsdl:part name="PropertyValue" type="s:string" />
   </wsdl:message>
   <wsdl:message name="SetUserAccountPropertyHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertyHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
+    <wsdl:part name="PropertyName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertyHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="AddThresholdHttpGetIn">
@@ -1967,6 +2382,17 @@
   <wsdl:message name="KeepSIDHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="CheckAccountExistExHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="PhonePrefix" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistExHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="CheckAccountExistHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
@@ -1982,6 +2408,14 @@
     <wsdl:part name="PhoneNumber" type="s:string" />
   </wsdl:message>
   <wsdl:message name="CheckAccountExistByContactPhoneNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanySiteHttpGetIn">
@@ -2017,16 +2451,29 @@
   <wsdl:message name="GetUserBalanceHttpGetOut">
     <wsdl:part name="Body" element="tns:UserBalanceResult" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageHttpGetIn">
+  <wsdl:message name="GetGameCodeRTPHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
-    <wsdl:part name="GameBrand" type="s:string" />
-    <wsdl:part name="GameCategoryCode" type="s:string" />
-    <wsdl:part name="GameCategorySubCode" type="s:string" />
-    <wsdl:part name="PageSize" type="s:string" />
-    <wsdl:part name="Page" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageHttpGetOut">
+  <wsdl:message name="GetGameCodeRTPHttpGetOut">
+    <wsdl:part name="Body" element="tns:GameCodeRTPResult" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandHttpGetOut">
+    <wsdl:part name="Body" element="tns:GameBrandResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UpdateTimestamp" type="s:string" />
+    <wsdl:part name="GameID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampHttpGetOut">
     <wsdl:part name="Body" element="tns:CompanyGameCodeResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeHttpGetIn">
@@ -2035,6 +2482,13 @@
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeHttpGetOut">
     <wsdl:part name="Body" element="tns:CompanyGameCodeResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategoryHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:CompanyCategoryResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanyMarqueeTextHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
@@ -2164,6 +2618,48 @@
   <wsdl:message name="HeartBeatHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="DeviceType" type="s:string" />
+    <wsdl:part name="PageURL" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+    <wsdl:part name="DeviceGUID" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+    <wsdl:part name="Refer" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountBrowserPageLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CollectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="CollectAreaType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetExpireUserAccountPromotionHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CollectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CollectUserAccountPromotionHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="GetPromotionCollectAvailableHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="SID" type="s:string" />
@@ -2240,21 +2736,33 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountPropertyHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
-    <wsdl:part name="SID" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
     <wsdl:part name="PropertyName" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetUserAccountPropertyHttpPostOut">
-    <wsdl:part name="Body" element="tns:APIResult" />
+    <wsdl:part name="Body" element="tns:UserAccountPropertyResult" />
   </wsdl:message>
   <wsdl:message name="SetUserAccountPropertyHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
-    <wsdl:part name="SID" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
     <wsdl:part name="PropertyName" type="s:string" />
     <wsdl:part name="PropertyValue" type="s:string" />
   </wsdl:message>
   <wsdl:message name="SetUserAccountPropertyHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertyHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UserType" type="s:string" />
+    <wsdl:part name="UserTypeParam" type="s:string" />
+    <wsdl:part name="PropertyName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserAccountPropertyHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="AddThresholdHttpPostIn">
@@ -2388,6 +2896,17 @@
   <wsdl:message name="KeepSIDHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="CheckAccountExistExHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="PhonePrefix" type="s:string" />
+    <wsdl:part name="PhoneNumber" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistExHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="CheckAccountExistHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
@@ -2403,6 +2922,14 @@
     <wsdl:part name="PhoneNumber" type="s:string" />
   </wsdl:message>
   <wsdl:message name="CheckAccountExistByContactPhoneNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckAccountExistByEMailHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanySiteHttpPostIn">
@@ -2438,16 +2965,29 @@
   <wsdl:message name="GetUserBalanceHttpPostOut">
     <wsdl:part name="Body" element="tns:UserBalanceResult" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageHttpPostIn">
+  <wsdl:message name="GetGameCodeRTPHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
-    <wsdl:part name="GameBrand" type="s:string" />
-    <wsdl:part name="GameCategoryCode" type="s:string" />
-    <wsdl:part name="GameCategorySubCode" type="s:string" />
-    <wsdl:part name="PageSize" type="s:string" />
-    <wsdl:part name="Page" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
   </wsdl:message>
-  <wsdl:message name="GetCompanyGameCodeByPageHttpPostOut">
+  <wsdl:message name="GetGameCodeRTPHttpPostOut">
+    <wsdl:part name="Body" element="tns:GameCodeRTPResult" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGameBrandHttpPostOut">
+    <wsdl:part name="Body" element="tns:GameBrandResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="UpdateTimestamp" type="s:string" />
+    <wsdl:part name="GameID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameCodeByUpdateTimestampHttpPostOut">
     <wsdl:part name="Body" element="tns:CompanyGameCodeResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeHttpPostIn">
@@ -2456,6 +2996,13 @@
   </wsdl:message>
   <wsdl:message name="GetCompanyGameCodeHttpPostOut">
     <wsdl:part name="Body" element="tns:CompanyGameCodeResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategoryHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyCategoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:CompanyCategoryResult" />
   </wsdl:message>
   <wsdl:message name="GetCompanyMarqueeTextHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
@@ -2583,6 +3130,22 @@
       <wsdl:input message="tns:HeartBeatSoapIn" />
       <wsdl:output message="tns:HeartBeatSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <wsdl:input message="tns:AddUserAccountBrowserPageLogSoapIn" />
+      <wsdl:output message="tns:AddUserAccountBrowserPageLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionByIDSoapIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionSoapIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <wsdl:input message="tns:CollectUserAccountPromotionSoapIn" />
+      <wsdl:output message="tns:CollectUserAccountPromotionSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddPromotionCollect">
       <wsdl:input message="tns:AddPromotionCollectSoapIn" />
       <wsdl:output message="tns:AddPromotionCollectSoapOut" />
@@ -2598,10 +3161,6 @@
     <wsdl:operation name="SetCompanyGameCodeTag">
       <wsdl:input message="tns:SetCompanyGameCodeTagSoapIn" />
       <wsdl:output message="tns:SetCompanyGameCodeTagSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="SetUserAccountTag">
-      <wsdl:input message="tns:SetUserAccountTagSoapIn" />
-      <wsdl:output message="tns:SetUserAccountTagSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRequireWithdrawalHistoryByUserAccountID">
       <wsdl:input message="tns:GetRequireWithdrawalHistoryByUserAccountIDSoapIn" />
@@ -2634,6 +3193,10 @@
     <wsdl:operation name="SetUserAccountProperty">
       <wsdl:input message="tns:SetUserAccountPropertySoapIn" />
       <wsdl:output message="tns:SetUserAccountPropertySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <wsdl:input message="tns:RemoveUserAccountPropertySoapIn" />
+      <wsdl:output message="tns:RemoveUserAccountPropertySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="AddThreshold">
       <wsdl:input message="tns:AddThresholdSoapIn" />
@@ -2683,6 +3246,10 @@
       <wsdl:input message="tns:KeepSIDSoapIn" />
       <wsdl:output message="tns:KeepSIDSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <wsdl:input message="tns:CheckAccountExistExSoapIn" />
+      <wsdl:output message="tns:CheckAccountExistExSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <wsdl:input message="tns:CheckAccountExistSoapIn" />
       <wsdl:output message="tns:CheckAccountExistSoapOut" />
@@ -2690,6 +3257,10 @@
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <wsdl:input message="tns:CheckAccountExistByContactPhoneNumberSoapIn" />
       <wsdl:output message="tns:CheckAccountExistByContactPhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <wsdl:input message="tns:CheckAccountExistByEMailSoapIn" />
+      <wsdl:output message="tns:CheckAccountExistByEMailSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="RequireRegister">
       <wsdl:input message="tns:RequireRegisterSoapIn" />
@@ -2715,13 +3286,25 @@
       <wsdl:input message="tns:GetUserBalanceSoapIn" />
       <wsdl:output message="tns:GetUserBalanceSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <wsdl:input message="tns:GetCompanyGameCodeByPageSoapIn" />
-      <wsdl:output message="tns:GetCompanyGameCodeByPageSoapOut" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <wsdl:input message="tns:GetGameCodeRTPSoapIn" />
+      <wsdl:output message="tns:GetGameCodeRTPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <wsdl:input message="tns:GetGameBrandSoapIn" />
+      <wsdl:output message="tns:GetGameBrandSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <wsdl:input message="tns:GetCompanyGameCodeByUpdateTimestampSoapIn" />
+      <wsdl:output message="tns:GetCompanyGameCodeByUpdateTimestampSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <wsdl:input message="tns:GetCompanyGameCodeSoapIn" />
       <wsdl:output message="tns:GetCompanyGameCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <wsdl:input message="tns:GetCompanyCategorySoapIn" />
+      <wsdl:output message="tns:GetCompanyCategorySoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyMarqueeText">
       <wsdl:input message="tns:GetCompanyMarqueeTextSoapIn" />
@@ -2777,6 +3360,22 @@
       <wsdl:input message="tns:HeartBeatHttpGetIn" />
       <wsdl:output message="tns:HeartBeatHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <wsdl:input message="tns:AddUserAccountBrowserPageLogHttpGetIn" />
+      <wsdl:output message="tns:AddUserAccountBrowserPageLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionByIDHttpGetIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionHttpGetIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <wsdl:input message="tns:CollectUserAccountPromotionHttpGetIn" />
+      <wsdl:output message="tns:CollectUserAccountPromotionHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetPromotionCollectAvailable">
       <wsdl:input message="tns:GetPromotionCollectAvailableHttpGetIn" />
       <wsdl:output message="tns:GetPromotionCollectAvailableHttpGetOut" />
@@ -2816,6 +3415,10 @@
     <wsdl:operation name="SetUserAccountProperty">
       <wsdl:input message="tns:SetUserAccountPropertyHttpGetIn" />
       <wsdl:output message="tns:SetUserAccountPropertyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <wsdl:input message="tns:RemoveUserAccountPropertyHttpGetIn" />
+      <wsdl:output message="tns:RemoveUserAccountPropertyHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="AddThreshold">
       <wsdl:input message="tns:AddThresholdHttpGetIn" />
@@ -2865,6 +3468,10 @@
       <wsdl:input message="tns:KeepSIDHttpGetIn" />
       <wsdl:output message="tns:KeepSIDHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <wsdl:input message="tns:CheckAccountExistExHttpGetIn" />
+      <wsdl:output message="tns:CheckAccountExistExHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <wsdl:input message="tns:CheckAccountExistHttpGetIn" />
       <wsdl:output message="tns:CheckAccountExistHttpGetOut" />
@@ -2872,6 +3479,10 @@
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <wsdl:input message="tns:CheckAccountExistByContactPhoneNumberHttpGetIn" />
       <wsdl:output message="tns:CheckAccountExistByContactPhoneNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <wsdl:input message="tns:CheckAccountExistByEMailHttpGetIn" />
+      <wsdl:output message="tns:CheckAccountExistByEMailHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanySite">
       <wsdl:input message="tns:GetCompanySiteHttpGetIn" />
@@ -2889,13 +3500,25 @@
       <wsdl:input message="tns:GetUserBalanceHttpGetIn" />
       <wsdl:output message="tns:GetUserBalanceHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <wsdl:input message="tns:GetCompanyGameCodeByPageHttpGetIn" />
-      <wsdl:output message="tns:GetCompanyGameCodeByPageHttpGetOut" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <wsdl:input message="tns:GetGameCodeRTPHttpGetIn" />
+      <wsdl:output message="tns:GetGameCodeRTPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <wsdl:input message="tns:GetGameBrandHttpGetIn" />
+      <wsdl:output message="tns:GetGameBrandHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <wsdl:input message="tns:GetCompanyGameCodeByUpdateTimestampHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyGameCodeByUpdateTimestampHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <wsdl:input message="tns:GetCompanyGameCodeHttpGetIn" />
       <wsdl:output message="tns:GetCompanyGameCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <wsdl:input message="tns:GetCompanyCategoryHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyCategoryHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyMarqueeText">
       <wsdl:input message="tns:GetCompanyMarqueeTextHttpGetIn" />
@@ -2951,6 +3574,22 @@
       <wsdl:input message="tns:HeartBeatHttpPostIn" />
       <wsdl:output message="tns:HeartBeatHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <wsdl:input message="tns:AddUserAccountBrowserPageLogHttpPostIn" />
+      <wsdl:output message="tns:AddUserAccountBrowserPageLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionByIDHttpPostIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <wsdl:input message="tns:SetExpireUserAccountPromotionHttpPostIn" />
+      <wsdl:output message="tns:SetExpireUserAccountPromotionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <wsdl:input message="tns:CollectUserAccountPromotionHttpPostIn" />
+      <wsdl:output message="tns:CollectUserAccountPromotionHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetPromotionCollectAvailable">
       <wsdl:input message="tns:GetPromotionCollectAvailableHttpPostIn" />
       <wsdl:output message="tns:GetPromotionCollectAvailableHttpPostOut" />
@@ -2990,6 +3629,10 @@
     <wsdl:operation name="SetUserAccountProperty">
       <wsdl:input message="tns:SetUserAccountPropertyHttpPostIn" />
       <wsdl:output message="tns:SetUserAccountPropertyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <wsdl:input message="tns:RemoveUserAccountPropertyHttpPostIn" />
+      <wsdl:output message="tns:RemoveUserAccountPropertyHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="AddThreshold">
       <wsdl:input message="tns:AddThresholdHttpPostIn" />
@@ -3039,6 +3682,10 @@
       <wsdl:input message="tns:KeepSIDHttpPostIn" />
       <wsdl:output message="tns:KeepSIDHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <wsdl:input message="tns:CheckAccountExistExHttpPostIn" />
+      <wsdl:output message="tns:CheckAccountExistExHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <wsdl:input message="tns:CheckAccountExistHttpPostIn" />
       <wsdl:output message="tns:CheckAccountExistHttpPostOut" />
@@ -3046,6 +3693,10 @@
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <wsdl:input message="tns:CheckAccountExistByContactPhoneNumberHttpPostIn" />
       <wsdl:output message="tns:CheckAccountExistByContactPhoneNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <wsdl:input message="tns:CheckAccountExistByEMailHttpPostIn" />
+      <wsdl:output message="tns:CheckAccountExistByEMailHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanySite">
       <wsdl:input message="tns:GetCompanySiteHttpPostIn" />
@@ -3063,13 +3714,25 @@
       <wsdl:input message="tns:GetUserBalanceHttpPostIn" />
       <wsdl:output message="tns:GetUserBalanceHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <wsdl:input message="tns:GetCompanyGameCodeByPageHttpPostIn" />
-      <wsdl:output message="tns:GetCompanyGameCodeByPageHttpPostOut" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <wsdl:input message="tns:GetGameCodeRTPHttpPostIn" />
+      <wsdl:output message="tns:GetGameCodeRTPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <wsdl:input message="tns:GetGameBrandHttpPostIn" />
+      <wsdl:output message="tns:GetGameBrandHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <wsdl:input message="tns:GetCompanyGameCodeByUpdateTimestampHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyGameCodeByUpdateTimestampHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <wsdl:input message="tns:GetCompanyGameCodeHttpPostIn" />
       <wsdl:output message="tns:GetCompanyGameCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <wsdl:input message="tns:GetCompanyCategoryHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyCategoryHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetCompanyMarqueeText">
       <wsdl:input message="tns:GetCompanyMarqueeTextHttpPostIn" />
@@ -3131,6 +3794,42 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <soap:operation soapAction="http://tempuri.org/AddUserAccountBrowserPageLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <soap:operation soapAction="http://tempuri.org/SetExpireUserAccountPromotionByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <soap:operation soapAction="http://tempuri.org/SetExpireUserAccountPromotion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <soap:operation soapAction="http://tempuri.org/CollectUserAccountPromotion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddPromotionCollect">
       <soap:operation soapAction="http://tempuri.org/AddPromotionCollect" style="document" />
       <wsdl:input>
@@ -3160,15 +3859,6 @@
     </wsdl:operation>
     <wsdl:operation name="SetCompanyGameCodeTag">
       <soap:operation soapAction="http://tempuri.org/SetCompanyGameCodeTag" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SetUserAccountTag">
-      <soap:operation soapAction="http://tempuri.org/SetUserAccountTag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3241,6 +3931,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetUserAccountProperty">
       <soap:operation soapAction="http://tempuri.org/SetUserAccountProperty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <soap:operation soapAction="http://tempuri.org/RemoveUserAccountProperty" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3356,6 +4055,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <soap:operation soapAction="http://tempuri.org/CheckAccountExistEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <soap:operation soapAction="http://tempuri.org/CheckAccountExist" style="document" />
       <wsdl:input>
@@ -3367,6 +4075,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <soap:operation soapAction="http://tempuri.org/CheckAccountExistByContactPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <soap:operation soapAction="http://tempuri.org/CheckAccountExistByEMail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3428,8 +4145,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <soap:operation soapAction="http://tempuri.org/GetCompanyGameCodeByPage" style="document" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <soap:operation soapAction="http://tempuri.org/GetGameCodeRTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <soap:operation soapAction="http://tempuri.org/GetGameBrand" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyGameCodeByUpdateTimestamp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3439,6 +4174,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <soap:operation soapAction="http://tempuri.org/GetCompanyGameCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyCategory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3566,6 +4310,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <soap12:operation soapAction="http://tempuri.org/AddUserAccountBrowserPageLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <soap12:operation soapAction="http://tempuri.org/SetExpireUserAccountPromotionByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <soap12:operation soapAction="http://tempuri.org/SetExpireUserAccountPromotion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <soap12:operation soapAction="http://tempuri.org/CollectUserAccountPromotion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddPromotionCollect">
       <soap12:operation soapAction="http://tempuri.org/AddPromotionCollect" style="document" />
       <wsdl:input>
@@ -3595,15 +4375,6 @@
     </wsdl:operation>
     <wsdl:operation name="SetCompanyGameCodeTag">
       <soap12:operation soapAction="http://tempuri.org/SetCompanyGameCodeTag" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SetUserAccountTag">
-      <soap12:operation soapAction="http://tempuri.org/SetUserAccountTag" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3676,6 +4447,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetUserAccountProperty">
       <soap12:operation soapAction="http://tempuri.org/SetUserAccountProperty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <soap12:operation soapAction="http://tempuri.org/RemoveUserAccountProperty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3791,6 +4571,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <soap12:operation soapAction="http://tempuri.org/CheckAccountExistEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <soap12:operation soapAction="http://tempuri.org/CheckAccountExist" style="document" />
       <wsdl:input>
@@ -3802,6 +4591,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <soap12:operation soapAction="http://tempuri.org/CheckAccountExistByContactPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <soap12:operation soapAction="http://tempuri.org/CheckAccountExistByEMail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3863,8 +4661,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <soap12:operation soapAction="http://tempuri.org/GetCompanyGameCodeByPage" style="document" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <soap12:operation soapAction="http://tempuri.org/GetGameCodeRTP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <soap12:operation soapAction="http://tempuri.org/GetGameBrand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyGameCodeByUpdateTimestamp" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3874,6 +4690,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <soap12:operation soapAction="http://tempuri.org/GetCompanyGameCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyCategory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -4001,6 +4826,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <http:operation location="/AddUserAccountBrowserPageLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <http:operation location="/SetExpireUserAccountPromotionByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <http:operation location="/SetExpireUserAccountPromotion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <http:operation location="/CollectUserAccountPromotion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPromotionCollectAvailable">
       <http:operation location="/GetPromotionCollectAvailable" />
       <wsdl:input>
@@ -4084,6 +4945,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetUserAccountProperty">
       <http:operation location="/SetUserAccountProperty" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <http:operation location="/RemoveUserAccountProperty" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4199,6 +5069,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <http:operation location="/CheckAccountExistEx" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <http:operation location="/CheckAccountExist" />
       <wsdl:input>
@@ -4210,6 +5089,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <http:operation location="/CheckAccountExistByContactPhoneNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <http:operation location="/CheckAccountExistByEMail" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4253,8 +5141,26 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <http:operation location="/GetCompanyGameCodeByPage" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <http:operation location="/GetGameCodeRTP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <http:operation location="/GetGameBrand" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <http:operation location="/GetCompanyGameCodeByUpdateTimestamp" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4264,6 +5170,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <http:operation location="/GetCompanyGameCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <http:operation location="/GetCompanyCategory" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4391,6 +5306,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AddUserAccountBrowserPageLog">
+      <http:operation location="/AddUserAccountBrowserPageLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotionByID">
+      <http:operation location="/SetExpireUserAccountPromotionByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetExpireUserAccountPromotion">
+      <http:operation location="/SetExpireUserAccountPromotion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CollectUserAccountPromotion">
+      <http:operation location="/CollectUserAccountPromotion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetPromotionCollectAvailable">
       <http:operation location="/GetPromotionCollectAvailable" />
       <wsdl:input>
@@ -4474,6 +5425,15 @@
     </wsdl:operation>
     <wsdl:operation name="SetUserAccountProperty">
       <http:operation location="/SetUserAccountProperty" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserAccountProperty">
+      <http:operation location="/RemoveUserAccountProperty" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -4589,6 +5549,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistEx">
+      <http:operation location="/CheckAccountExistEx" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckAccountExist">
       <http:operation location="/CheckAccountExist" />
       <wsdl:input>
@@ -4600,6 +5569,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckAccountExistByContactPhoneNumber">
       <http:operation location="/CheckAccountExistByContactPhoneNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckAccountExistByEMail">
+      <http:operation location="/CheckAccountExistByEMail" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -4643,8 +5621,26 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetCompanyGameCodeByPage">
-      <http:operation location="/GetCompanyGameCodeByPage" />
+    <wsdl:operation name="GetGameCodeRTP">
+      <http:operation location="/GetGameCodeRTP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameBrand">
+      <http:operation location="/GetGameBrand" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameCodeByUpdateTimestamp">
+      <http:operation location="/GetCompanyGameCodeByUpdateTimestamp" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
@@ -4654,6 +5650,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCompanyGameCode">
       <http:operation location="/GetCompanyGameCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyCategory">
+      <http:operation location="/GetCompanyCategory" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

@@ -54,7 +54,7 @@ public class LobbyAPI : System.Web.Services.WebService {
 
         try {
             //CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <service@OCW888.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, "service@OCW888.com", "koajejksxfyiwixx", "utf-8", true);
-          CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <mail@ewin-soft.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, LoginAccount, LoginPassword, "utf-8", true);
+            CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <mail@ewin-soft.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, LoginAccount, LoginPassword, "utf-8", true);
             result.Result = EWin.Lobby.enumResult.OK;
             result.Message = "";
 
@@ -259,11 +259,11 @@ public class LobbyAPI : System.Web.Services.WebService {
 
         switch (SendMailType) {
             case CodingControl.enumSendMailType.Register:
-                    validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
-                    if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
-                    {
-                        ValidateCode = validateCodeResult.ValidateCode;
-                    }
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+                {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
                 break;
             case CodingControl.enumSendMailType.ForgetPassword:
                 checkUserAccountResult= EWinWebAPI.CheckUserAccountByEMailAndLoginAccount(GetToken(), GUID, EMail,LoginAccount);
@@ -315,29 +315,29 @@ public class LobbyAPI : System.Web.Services.WebService {
         return RetValue;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.Lobby.APIResult GetUserAccountProperty(string GUID, string SID, string PropertyName) {
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.Lobby.APIResult GetUserAccountProperty(string GUID, string SID, string PropertyName) {
 
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.APIResult RetValue = null;
+    //    EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+    //    EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), SID, GUID, PropertyName);
+    //    RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), SID, GUID, PropertyName);
 
-        return RetValue;
-    }
+    //    return RetValue;
+    //}
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.Lobby.APIResult SetUserAccountProperty(string GUID, string SID, string PropertyName,string PropertyValue) {
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.Lobby.APIResult SetUserAccountProperty(string GUID, string SID, string PropertyName,string PropertyValue) {
 
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.APIResult RetValue = null;
+    //    EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+    //    EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),SID, GUID, PropertyName, PropertyValue);
+    //    RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),SID, GUID, PropertyName, PropertyValue);
 
-        return RetValue;
-    }
+    //    return RetValue;
+    //}
 
     #endregion
 
@@ -427,14 +427,22 @@ public class LobbyAPI : System.Web.Services.WebService {
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.Lobby.UserInfoResult GetUserInfo(string SID, string GUID) {
-
+    public EWin.Lobby.UserInfoResult GetUserInfo(string WebSID, string GUID) {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.UserInfoResult RetValue = null;
+        RedisCache.SessionContext.SIDInfo SI;
 
-        RetValue = lobbyAPI.GetUserInfo(GetToken(), SID, GUID);
+        SI = RedisCache.SessionContext.GetSIDInfo(WebSID);
 
-        return RetValue;
+        if (SI != null && !string.IsNullOrEmpty(SI.EWinSID)) {
+            return lobbyAPI.GetUserInfo(GetToken(), SI.EWinSID, GUID);
+        } else {
+            var R = new EWin.Lobby.UserInfoResult() {
+                Result = EWin.Lobby.enumResult.ERR,
+                Message = "InvalidWebSID",
+                GUID = GUID
+            };
+            return R;
+        }
     }
 
     [WebMethod]
@@ -519,6 +527,15 @@ public class LobbyAPI : System.Web.Services.WebService {
         RetValue = lobbyAPI.GetPaymentHistory(GetToken(), SID, GUID, BeginDate, EndDate);
 
         return RetValue;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.CompanyGameCodeResult GetCompanyGameCodeByUpdateTimestamp(string GUID, long UpdateTimestamp, int GameID) {
+
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        return lobbyAPI.GetCompanyGameCodeByUpdateTimestamp(GetToken(), GUID, UpdateTimestamp, GameID);
+
     }
     #endregion
 

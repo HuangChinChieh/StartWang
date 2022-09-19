@@ -110,10 +110,62 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
     <style>
-        iframe {
+        /*iframe {
             width: 1px;
             min-width: 100%;
+        }*/
+
+        .divGameFrameBody {
+    z-index: 5;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.95);
+    position: relative
+}
+
+    .divGameFrameBody .btn {
+        background-color: #036EB7
+    }
+
+        .divGameFrameBody .btn, .divGameFrameBody .btn * {
+            -webkit-transition: all 0.15s ease-in-out;
+            transition: all 0.15s ease-in-out
         }
+
+            .divGameFrameBody .btn:hover {
+                background-color: #00497A
+            }
+
+                .divGameFrameBody .btn:hover .icon {
+                    -webkit-transform: scale(1.2,1.2);
+                    transform: scale(1.2,1.2)
+                }
+
+    .divGameFrameBody .btn-game-close {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 0 5px 5px 0;
+        right: -50px;
+        top: 0
+    }
+
+        .divGameFrameBody .btn-game-close .icon {
+            width: 50px;
+            height: 50px
+        }
+
+            .divGameFrameBody .btn-game-close .icon:before {
+                background-color: #fff
+            }
     </style>
 </head>
 <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
@@ -127,6 +179,7 @@
 <script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
 <script type="text/javascript" src="/Scripts/PaymentAPI.js"></script>
 <!-- Swiper JS -->
+<script src="Scripts/GameCodeBridge.js"></script>
 <script src="/Scripts/swiper.min.js"></script>
 <script src="/Scripts/jquery.mkinfinite.js"></script>
 <script src="/Scripts/vegas.min.js"></script>
@@ -169,6 +222,9 @@
     var apiURL = "/index.aspx";
     var lobbyClient;
     var paymentClient;
+    var GCB;
+    var CompanyGameCategoryCodes = ["All"];
+    var gameWindow;
     var EWinWebInfo = {
         EWinUrl: "<%=EWinWeb.EWinUrl %>",
         Token: "",
@@ -181,6 +237,8 @@
         UserInfo: null,
         RegisterType: "<%=RegisterType%>",
         RegisterParentPersonCode: "<%=RegisterParentPersonCode%>",
+        DeviceType: getOS(),
+        IsOpenGame: false,
         GameCodeList: {
             CategoryList: [],
             GameBrandList: [],
@@ -189,6 +247,10 @@
     }
     var SiteInfo;
     var selectedCurrency = '';
+
+    function API_GetGCB() {
+        return GCB;
+    }
 
     function API_GetLang() {
         return lang;
@@ -389,7 +451,7 @@
     }
 
     function API_Lobby() {
-        API_LoadPage("Lobby/GameLobby.aspx?b=<%=b%>&c=<%=c%>&cSub=<%=cSub%>");    
+        API_LoadPage("Lobby/GameLobby.aspx?b=<%=b%>&c=<%=c%>&cSub=<%=cSub%>");
     }
 
     function queryInfoData() {
@@ -449,6 +511,7 @@
 
         if (pi != null) {
             EWinWebInfo.CurrencyType = c;
+            selectedCurrency = c;
             window.localStorage.setItem("CurrencyType", c);
 
             notifyWindowEvent("SetCurrencyType", c);
@@ -634,6 +697,10 @@
                 notifyWindowEvent("BalanceChange", logined);
 
         });
+    }
+
+    function API_OpenGame(GameBrand, GameName, LangName) {
+        openGame(GameBrand, GameName, LangName);
     }
 
     //function notifyWindowEvent(eventName, o) {
@@ -862,7 +929,7 @@
 
     function checkUserLogin(SID, cb) {
         let data = {
-            SID: SID,
+            WebSID: SID,
             GUID: Math.uuid()
         }
 
@@ -950,11 +1017,45 @@
 
         //----end----
 
+        GCB = new GameCodeBridge("/API/LobbyAPI.asmx", 30,
+            {
+                GameCode: "EWin.EWinGaming",
+                GameBrand: "EWin",
+                GameStatus: 0,
+                GameID: 0,
+                GameName: "EWinGaming",
+                GameCategoryCode: "Live",
+                GameCategorySubCode: "Baccarat",
+                GameAccountingCode: null,
+                AllowDemoPlay: 1,
+                RTPInfo: "",
+                IsHot: 1,
+                IsNew: 1,
+                SortIndex: 99,
+                Tags: [],
+                Language: [{
+                    LanguageCode: "JPN",
+                    DisplayText: "EWinゲーミング"
+                },
+                {
+                    LanguageCode: "CHT",
+                    DisplayText: "真人百家樂(eWIN)"
+                }],
+                RTP: null
+            },
+            () => {
+                notifyWindowEvent("GameLoadEnd", null);
+            }
+        );
 
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
             paymentClient = new PaymentAPI("/API/PaymentAPI.asmx");
+
+            appendGameFrame();
+            getCompanyGameCategoryCode();
+
             if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
                 initLobbyClient();
 
@@ -1450,8 +1551,8 @@
     }
 
     function onForgotPassword() {
-            onBtnLoginHide();
-            API_LoadPage("ForgotPassword.aspx");
+        onBtnLoginHide();
+        API_LoadPage("ForgotPassword.aspx");
     }
 
     // 存款
@@ -1479,7 +1580,7 @@
         } else {
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
         }
-     
+
     }
 
     // 提款
@@ -1507,6 +1608,127 @@
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
         }
         //wt = 0: 四方/1=區塊鏈
+    }
+
+    function getOS() {
+        var os = function () {
+            var ua = navigator.userAgent,
+                isWindowsPhone = /(?:Windows Phone)/.test(ua),
+                isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+                isAndroid = /(?:Android)/.test(ua),
+                isFireFox = /(?:Firefox)/.test(ua),
+                isChrome = /(?:Chrome|CriOS)/.test(ua),
+                isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+                isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+                isPc = !isPhone && !isAndroid && !isSymbian;
+            return {
+                isTablet: isTablet,
+                isPhone: isPhone,
+                isAndroid: isAndroid,
+                isPc: isPc
+            };
+        }();
+
+        if (os.isAndroid || os.isPhone) {
+            return 1;
+        } else if (os.isTablet) {
+            return 1;
+        } else if (os.isPc) {
+            return 0;
+        }
+    };
+
+    function getCompanyGameCategoryCode() {
+        GCB.GetGameCategoryCode((categoryCodeItem) => {
+            if (CompanyGameCategoryCodes.indexOf(categoryCodeItem.GameCategoryCode) < 0) {
+                CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
+            }
+        }, () => {
+            //console.log("done");
+        })
+    }
+
+    function openGame(gameBrand, gameName) {
+        //先關閉Game彈出視窗(如果存在)
+        if (gameWindow) {
+            gameWindow.close();
+        }
+
+        if (!EWinWebInfo.UserLogined) {
+
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                API_Home()
+            }, null);
+
+        } else {
+            EWinWebInfo.IsOpenGame = true;
+            GCB.AddPlayed(gameBrand + "." + gameName, function (success) {
+                if (success) {
+                    //API_RefreshPersonalPlayed(gameBrand + "." + gameName, true);
+                }
+            });
+
+            if (gameBrand.toUpperCase() == "EWin".toUpperCase() || gameBrand.toUpperCase() == "YS".toUpperCase()) {
+                gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+            } else {
+                if (EWinWebInfo.DeviceType == 1) {
+                    gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+                } else {
+                    GameLoadPage("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx");
+                }
+            }
+        }
+    }
+
+    function GameLoadPage(url) {
+        var IFramePage = document.getElementById("GameIFramePage");
+
+        if (IFramePage != null) {
+            $('#divGameFrame').css('display', 'flex');
+
+            if (IFramePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+                //API_LoadingStart();
+
+                //setTimeout(function () {
+                //    API_LoadingEnd(1);
+                //}, 10000);
+
+                IFramePage.src = url;
+                //IFramePage.onload = function () {
+                //    API_LoadingEnd(1);
+                //}
+            }
+        }
+    }
+
+    function CloseGameFrame() {
+        //滿版遊戲介面
+        $('#divGameFrame').css('display', 'none');
+        //滿版遊戲介面 end
+        appendGameFrame();
+    }
+
+    function appendGameFrame() {
+        $("#divGameFrame").children().remove();
+        let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+
+        let w = vh * 16 / 9;
+
+        if (w > vw) {
+            w = vw - 110;
+        } else if (Math.abs(vw - w) < 110) {
+            w = vw - 110;
+        }
+
+        // class="divGameFrame"
+        let tmp = `<div class="divGameFrameWrapper">
+            <div class="btn-wrapper">
+                <div class="btn btn-game-close" onclick="CloseGameFrame()"><i class="icon icon-mask icon-error"></i></div>
+            </div>
+            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#09f" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
+        </div>`;
+        $("#divGameFrame").append(tmp);
     }
 
     window.onload = init;
@@ -1613,21 +1835,31 @@
                 </div>
             </div>
         </div>
+
+        
+    
+        <!-- 滿版遊戲介面 -->
+    <div id="divGameFrame" class="divGameFrameBody">
+        <div class="divGameFrameWrapper">
+            <div class="btn-wrapper">
+                <div class="btn btn-game-close" onclick="CloseGameFrame()"><i class="icon icon-mask icon-error"></i></div>
+            </div>
+            <iframe id="GameIFramePage" class="divGameFrame" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
+        </div>
+    </div>
+
         <!-- Content -->
-    <%--    <div id="IFramePage" class="DivContent">
+        <%--    <div id="IFramePage" class="DivContent">
             <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>--%>
-            <div id="IFramePage" class="DivContent" style="height:calc(100% - 161px)">
-        <iframe id="idFrameContent"></iframe>
-    </div>
+        <div id="IFramePage" class="DivContent" style="height: calc(100% - 161px)">
+            <iframe id="idFrameContent"></iframe>
+        </div>
         <!-- 頁尾 -->
-       <%-- <div class="main-footer">.</div>--%>
-
-
-
+        <%-- <div class="main-footer">.</div>--%>
     </div>
     <!-- wrapper END -->
-
+    <!-- 滿版遊戲介面 end-->
     <!-- 跳出視窗 -->
     <!-- 登入頁 -->
     <div id="idLoginBox" class="popup" style="display: none;">
@@ -1842,7 +2074,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!-- HTML END -->

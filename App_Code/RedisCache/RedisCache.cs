@@ -342,8 +342,7 @@ public static class RedisCache
             return iList.ToArray();
         }
 
-        public static SIDInfo GetSIDInfo(string SID)
-        {
+        public static SIDInfo GetSIDInfo(string SID) {
             SIDInfo RetValue = null;
 
             if (string.IsNullOrEmpty(SID) == false) {
@@ -363,15 +362,34 @@ public static class RedisCache
                                 string Name = EachHE.Name.ToString();
                                 string Value = EachHE.Value.ToString();
 
-                                if (Name.ToUpper() == "SID".ToUpper()) { RetValue.SID = Value; } else if (Name.ToUpper() == "CompanyCode".ToUpper()) { RetValue.CompanyCode = Value; } else if (Name.ToUpper() == "LoginAccount".ToUpper()) { RetValue.LoginAccount = Value; } else if (Name.ToUpper() == "IsGuestAccount".ToUpper()) { RetValue.IsGuestAccount = Convert.ToBoolean(Value); } else if (Name.ToUpper() == "Language".ToUpper()) { RetValue.Language = Value; }
-                                                                                                                                                                                                                                                                                                                                                                                              //else if (Name.ToUpper() == "UserCountry".ToUpper()) { RetValue.UserCountry = Value; }
-                                                                                                                                                                                                                                                                                                                                                                                              else if (Name.ToUpper() == "AccessIP".ToUpper()) { RetValue.AccessIP = Value; } else if (Name.ToUpper() == "EWinSID".ToUpper()) { RetValue.EWinSID = Value; } else if (Name.ToUpper() == "EWinCT".ToUpper()) { RetValue.EWinCT = Value; } else if (Name.ToUpper() == "IsBindingAccount".ToUpper()) {
+                                if (Name.ToUpper() == "SID".ToUpper()) {
+                                    RetValue.SID = Value;
+                                } else if (Name.ToUpper() == "CompanyCode".ToUpper()) {
+                                    RetValue.CompanyCode = Value;
+                                } else if (Name.ToUpper() == "LoginAccount".ToUpper()) {
+                                    RetValue.LoginAccount = Value;
+                                } else if (Name.ToUpper() == "IsGuestAccount".ToUpper()) {
+                                    RetValue.IsGuestAccount = Convert.ToBoolean(Value);
+                                } else if (Name.ToUpper() == "Language".ToUpper()) {
+                                    RetValue.Language = Value;
+                                } else if (Name.ToUpper() == "AccessIP".ToUpper()) {
+                                    RetValue.AccessIP = Value;
+                                } else if (Name.ToUpper() == "EWinSID".ToUpper()) {
+                                    RetValue.EWinSID = Value;
+                                } else if (Name.ToUpper() == "EWinCT".ToUpper()) {
+                                    RetValue.EWinCT = Value;
+                                } else if (Name.ToUpper() == "IsBindingAccount".ToUpper()) {
                                     if (Value == "1")
                                         RetValue.IsBindingAccount = true;
-                                } else if (Name.ToUpper() == "BindingType".ToUpper()) { RetValue.BindingType = Convert.ToInt32(Value); } else if (Name.ToUpper() == "BindingUID".ToUpper()) { RetValue.BindingUID = Value; } else if (Name.ToUpper() == "BindingNickname".ToUpper()) { RetValue.BindingNickname = Value; } else if (Name.ToUpper() == "BindingHeadImg".ToUpper()) { RetValue.BindingHeadImg = Value; }
-                                                                                                                                                                                                                                                                                                                           //else if (Name.ToUpper() == "CashUnit".ToUpper()) { RetValue.CashUnit = Convert.ToInt32(Value); }
-                                                                                                                                                                                                                                                                                                                           //else if (Name.ToUpper() == "Timezone".ToUpper()) { RetValue.Timezone = Convert.ToDecimal(Value); }
-                                                                                                                                                                                                                                                                                                                           else { }
+                                } else if (Name.ToUpper() == "BindingType".ToUpper()) {
+                                    RetValue.BindingType = Convert.ToInt32(Value);
+                                } else if (Name.ToUpper() == "BindingUID".ToUpper()) {
+                                    RetValue.BindingUID = Value;
+                                } else if (Name.ToUpper() == "BindingNickname".ToUpper()) {
+                                    RetValue.BindingNickname = Value;
+                                } else if (Name.ToUpper() == "BindingHeadImg".ToUpper()) {
+                                    RetValue.BindingHeadImg = Value;
+                                } else { }
                             }
                         }
                     }
