@@ -1677,9 +1677,9 @@
         // class="divGameFrame"
         let tmp = `<div class="divGameFrameWrapper">
             <div class="btn-wrapper">
-                <div class="btn btn-game-close" onclick="CloseGameFrame()"><i class="icon icon-mask icon-error"></i></div>
+                <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
             </div>
-            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#09f" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
+            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#000" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
         </div>`;
         $("#divGameFrame").append(tmp);
     }

@@ -483,6 +483,10 @@ button i {
   margin-right: 5px;
 }
 
+.btn{
+  cursor: pointer;
+}
+
 .btnTypeA button {
   padding: 10px 20px;
   border-radius: 3px;
@@ -2956,8 +2960,9 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   top: 0;
 }
 
-.divGameFrameWrapper{
+.divGameFrameWrapper {
   position: relative;
+  border: solid 1px rgb(156 136 102 / 45%);
 }
 
 
@@ -2986,7 +2991,12 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   height: 50px;
   border-radius: 0 5px 5px 0;
   right: -50px;
-  top: 0
+  top: 0;
+  font-size: 35px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 }
 
 .divGameFrameBody .btn-game-close .icon {
