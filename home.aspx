@@ -679,6 +679,12 @@
                 <div class="swiper-slide">
                     <div class="swiper-tit"></div>
                     <div class="swiper-zoom-container">
+                        <img onclick="OpenBonusDepositShow()" src="images/banner/OpenBonusDeposit-20220920.jpg" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="swiper-tit"></div>
+                    <div class="swiper-zoom-container">
                         <img onclick="OpenBonusDepositShow()" src="images/banner/OpenBonusDeposit-20220331.jpg" />
                     </div>
                 </div>
@@ -759,8 +765,168 @@
                     <img src="images/btn_apple_store.png" alt="" /></a>
             </div>
         </div>
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <footer class="footer-container">
+                    <div class="footer-inner">
+                        <div class="container">
+                            <%--
+                            <ul class="company-info row">
+                                <li class="info-item col">
+                                    <a id="Footer_About" onclick="showPartialHtml('','About', true, null)"><span class="language_replace">關於我們</span></a>
+                                </li>                       
+                                <li class="info-item col">
+                                    <a id="Footer_ResponsibleGaming" onclick="showPartialHtml('', 'ResponsibleGaming', true, null)">
+                                        <span class="language_replace">負責任的賭博</span>
+                                    </a>
+                                </li>
+                                <li class="info-item col">
+                                    <a id="Footer_Rules" onclick="showPartialHtml('', 'Rules', true, null)">
+                                        <span class="language_replace">利用規約</span>
+                                    </a>
+                                </li>
+                                <li class="info-item col">
+                                    <a id="Footer_PrivacyPolicy" onclick="showPartialHtml('', 'PrivacyPolicy', true, null)">
+                                        <span class="language_replace">隱私權政策</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            --%>
+                            <div class="partner">
+                                <div class="logo">
+                                    <div class="row">
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-eWIN.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-microgaming.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-kgs.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-bbin.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-gmw.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-cq9.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-red-tiger.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-evo.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-bco.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-cg.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-playngo.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-pg.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-netent.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-kx.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-evops.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-bti.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-zeus.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-biggaming.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-play.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-h.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="logo-item">
+                                            <div class="img-crop">
+                                                <img src="/images/logo/footer/logo-va.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="footer-lang">
+                                <div class="input-fake-select" onclick="showLangProp()">
+                                    <div class="lang-list">
+                                        <div class="lang-item">
+                                            <!-- icon-flag-JP/icon-flag-ZH 切換-->
+                                            <i id="footerLangIcon" class="icon icon-mask"></i>
+                                            <span id="footerLangText" class="lang-name language_replace"></span>
+                                        </div>
+                                    </div>
+                                    <div class="has-arrow"><i class="arrow"></i></div>
+                                </div>
+                            </div>
+                            <div class="footer-copyright">
+                                <p class="language_replace">Copyright © 2022 亿万. All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+           </div>
     </div>
     <!-- wrapper END -->
+    
 
     <!-- HTML END -->
 

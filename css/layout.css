@@ -2267,14 +2267,19 @@ input[type=radio]:checked ~ .pageDDataBtn::after, input[type=checkbox]:checked ~
 
   .DivContent {
     margin-top: 115px;
+    /* height: 100%; */
+    height: calc(100% - 115px);
+    
   }
 
-  .header-con.login + .DivContent {
+  .header-con.login ~ .DivContent {
     margin-top: 170px;
+    height: calc(100% - 170px);
   }
 
   .NotLogin > .DivContent {
     margin-top: 135px;
+    height: calc(100% - 135px);
   }
 }
 /* Custom Input ============================================  */
@@ -2498,6 +2503,9 @@ input[type=radio]:checked ~ .pageDDataBtn::after, input[type=checkbox]:checked ~
   background-color: white;
 }
 /* 2022 ADD ====================*/
+.idFrameContent{
+  overflow: hidden;
+}
 .container{
   max-width: 1200px;
   margin: 0 auto;
