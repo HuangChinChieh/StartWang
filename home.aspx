@@ -679,13 +679,7 @@
                 <div class="swiper-slide">
                     <div class="swiper-tit"></div>
                     <div class="swiper-zoom-container">
-                        <img onclick="()" src="images/banner/OpenBonusDeposit-20220920.jpg" />
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="swiper-tit"></div>
-                    <div class="swiper-zoom-container">
-                        <img onclick="OpenBonusDepositShow()" src="images/banner/OpenBonusDeposit-20220331.jpg" />
+                        <img src="images/banner/OpenBonusDeposit-20220920.jpg" />
                     </div>
                 </div>
             </div>
@@ -706,7 +700,7 @@
                         <div id="a2" class="ann"><a href="#">恭喜!玩家user01，獲得<i>彩金$99,000</i></a></div>
                         <div id="a3" class="ann"><a href="#">聖誕活動!儲就送!<i>最高8,888點!</i></a></div>
                         <div id="a4" class="ann"><a href="#">恭喜!玩家user88，獲得<i>彩金$989,000</i></a></div>--%>
-                        <marquee direction="left" height="30" scrollamount="5" behavior="behavior" style="color:white">跑馬燈測試</marquee>
+                        <marquee direction="left" height="30" scrollamount="5" behavior="behavior" style="color:white">哥睡的不是覺，睡的是夢想與希望</marquee>
                     </div>
                 </div>
                <%-- <div class="marquee_form_right"><a href="#"><i class="icon icon-icon-news"></i><span class="language_replace">最新消息</span></a></div>--%>
