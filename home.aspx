@@ -945,19 +945,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="footer-lang">
-                                <div class="input-fake-select" onclick="showLangProp()">
-                                    <div class="lang-list">
-                                        <div class="lang-item">
-                                            <!-- icon-flag-JP/icon-flag-ZH 切換-->
-                                            <i id="footerLangIcon" class="icon icon-mask"></i>
-                                            <span id="footerLangText" class="lang-name language_replace"></span>
-                                        </div>
-                                    </div>
-                                    <div class="has-arrow"><i class="arrow"></i></div>
-                                </div>
-                            </div>
                             <div class="footer-copyright">
                                 <p class="language_replace">Copyright © 2022 亿万. All Rights Reserved.</p>
                             </div>
