@@ -139,6 +139,7 @@
             WebInfo = window.parent.API_GetWebInfo();
             WebInfo.GameCodeList = GameCodeList.GameCodeList;
             initGameCode(WebInfo);
+            
         });
     }
 
@@ -695,13 +696,14 @@
                 <div class="marquee_form_left"><a class="icon icon-megaphone"></a></div>
                 <div class="navbar-Marquee">
                     <div id="ann_box" class="ann">
-                        <div id="a1" class="ann"><a href="#">99PLAY <i>HTML5 Beta版</i>上線!!</a></div>
+                       <%-- <div id="a1" class="ann"><a href="#">99PLAY <i>HTML5 Beta版</i>上線!!</a></div>
                         <div id="a2" class="ann"><a href="#">恭喜!玩家user01，獲得<i>彩金$99,000</i></a></div>
                         <div id="a3" class="ann"><a href="#">聖誕活動!儲就送!<i>最高8,888點!</i></a></div>
-                        <div id="a4" class="ann"><a href="#">恭喜!玩家user88，獲得<i>彩金$989,000</i></a></div>
+                        <div id="a4" class="ann"><a href="#">恭喜!玩家user88，獲得<i>彩金$989,000</i></a></div>--%>
+                        <marquee direction="left" height="30" scrollamount="5" behavior="behavior" style="color:white">跑馬燈測試</marquee>
                     </div>
                 </div>
-                <div class="marquee_form_right"><a href="#"><i class="icon icon-icon-news"></i><span class="language_replace">最新消息</span></a></div>
+               <%-- <div class="marquee_form_right"><a href="#"><i class="icon icon-icon-news"></i><span class="language_replace">最新消息</span></a></div>--%>
             </div>
         </div>
         <!-- 遊戲介紹 -->
