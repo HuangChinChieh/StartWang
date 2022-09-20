@@ -679,7 +679,7 @@
                 <div class="swiper-slide">
                     <div class="swiper-tit"></div>
                     <div class="swiper-zoom-container">
-                        <img onclick="OpenBonusDepositShow()" src="images/banner/OpenBonusDeposit-20220920.jpg" />
+                        <img onclick="()" src="images/banner/OpenBonusDeposit-20220920.jpg" />
                     </div>
                 </div>
                 <div class="swiper-slide">

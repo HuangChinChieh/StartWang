@@ -617,7 +617,8 @@ input[type="radio"]+label .lob_gameTypeIcon,
 
 .lob_gameListMain {
   box-sizing: border-box;
-  height: calc(100vh - 120px);
+  /* height: calc(100vh - 120px); */
+  height: calc(100% - 120px);
   padding: 15px 30px 30px 15px;
   /* overflow: auto; */
   overflow-x: hidden;
