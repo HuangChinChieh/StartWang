@@ -38,23 +38,30 @@ public class LobbyAPI : System.Web.Services.WebService {
         return R;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult CheckValidateCode(string GUID, EWin.Lobby.enumValidateType ValidateType, string EMail, string ContactPhonePrefix, string ContactPhoneNumber, string ValidateCode) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        return lobbyAPI.CheckValidateCode(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber, ValidateCode);
+    }
+
     private EWin.Lobby.APIResult SendMail(string EMail, string ValidateCode, EWin.Lobby.APIResult result, CodingControl.enumSendMailType SendMailType) {
         string Subject = string.Empty;
         string SendBody = string.Empty;
         string LoginAccount = "mail@ewin-soft.com";
         string LoginPassword = "pjxkeuoxnntvjuar";
         Subject = "Verify Code";
-        SendBody = " 您的驗證碼為 <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "請您於180分鐘內驗證，如超過時間，請重新發送驗證碼。 <br/><br/>" +
-            " 您的验证码为 <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "请您于180分钟内验证，如超过时间，请重新发送验证码。 <br/><br/>" +
-            " Your verification code is <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "Please verify within 180 minutes. If the time is exceeded, please resend the verification code. <br/><br/>" +
-            " 인증 코드는 <Font color='#FF0000'>" + ValidateCode + "</Font> 입니다. 인증은 180분 내에  완료하여야 합니다. 시간 내에 인증하지 않을 시 인증코드를 재 발송 신청을 부탁드립니다. <br/><br/>" +
-            " Mã xác minh của bạn là <Font color='#FF0000'>" + ValidateCode + "</Font> Vui lòng xác minh trong vòng 180 phút. Nếu thời gian xác minh đã hết, vui lòng nhấp lại vào \"Gửi mã xác minh\". <br/><br/>"+
-            " あなたの認証番号は <Font color='#FF0000'>" + ValidateCode + "</Font> です。有効時間の180分内に認証をよろしく御願い致します。もし時間を超えたら、認証番号をもう一度発送させをよろしくお願い致します。";
+        SendBody = " 您的驗證碼為 <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "請您於180分鐘內驗證，如超過時間，請重新發送驗證碼。 <br/><br/>";
+        //" 您的验证码为 <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "请您于180分钟内验证，如超过时间，请重新发送验证码。 <br/><br/>" +
+        //" Your verification code is <Font color='#FF0000'>" + ValidateCode + "</Font>，" + "Please verify within 180 minutes. If the time is exceeded, please resend the verification code. <br/><br/>" +
+        //" 인증 코드는 <Font color='#FF0000'>" + ValidateCode + "</Font> 입니다. 인증은 180분 내에  완료하여야 합니다. 시간 내에 인증하지 않을 시 인증코드를 재 발송 신청을 부탁드립니다. <br/><br/>" +
+        //" Mã xác minh của bạn là <Font color='#FF0000'>" + ValidateCode + "</Font> Vui lòng xác minh trong vòng 180 phút. Nếu thời gian xác minh đã hết, vui lòng nhấp lại vào \"Gửi mã xác minh\". <br/><br/>"+
+        //" あなたの認証番号は <Font color='#FF0000'>" + ValidateCode + "</Font> です。有効時間の180分内に認証をよろしく御願い致します。もし時間を超えたら、認証番号をもう一度発送させをよろしくお願い致します。";
         //SendBody = CodingControl.GetEmailTemp(EMail, ValidateCode, SendMailType);
 
         try {
             //CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <service@OCW888.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, "service@OCW888.com", "koajejksxfyiwixx", "utf-8", true);
-          CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <mail@ewin-soft.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, LoginAccount, LoginPassword, "utf-8", true);
+            CodingControl.SendMail("smtp.gmail.com", new System.Net.Mail.MailAddress("Service <mail@ewin-soft.com>"), new System.Net.Mail.MailAddress(EMail), Subject, SendBody, LoginAccount, LoginPassword, "utf-8", true);
             result.Result = EWin.Lobby.enumResult.OK;
             result.Message = "";
 
@@ -259,11 +266,11 @@ public class LobbyAPI : System.Web.Services.WebService {
 
         switch (SendMailType) {
             case CodingControl.enumSendMailType.Register:
-                    validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
-                    if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
-                    {
-                        ValidateCode = validateCodeResult.ValidateCode;
-                    }
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+                {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
                 break;
             case CodingControl.enumSendMailType.ForgetPassword:
                 checkUserAccountResult= EWinWebAPI.CheckUserAccountByEMailAndLoginAccount(GetToken(), GUID, EMail,LoginAccount);
@@ -339,6 +346,125 @@ public class LobbyAPI : System.Web.Services.WebService {
         return RetValue;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult CheckAccountExist(string GUID, string LoginAccount) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        return lobbyAPI.CheckAccountExist(GetToken(), GUID, LoginAccount);
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult SetUserMail(string GUID, EWin.Lobby.enumValidateType ValidateType, CodingControl.enumSendMailType SendMailType, string EMail, string ContactPhonePrefix, string ContactPhoneNumber, string ReceiveRegisterRewardURL)
+    {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.ValidateCodeResult validateCodeResult;
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult() { GUID = GUID, Result = EWin.Lobby.enumResult.ERR };
+        string ValidateCode = string.Empty;
+        TelPhoneNormalize telPhoneNormalize = new TelPhoneNormalize(ContactPhonePrefix, ContactPhoneNumber);
+        if (telPhoneNormalize != null)
+        {
+            ContactPhonePrefix = telPhoneNormalize.PhonePrefix;
+            ContactPhoneNumber = telPhoneNormalize.PhoneNumber;
+        }
+
+        switch (SendMailType)
+        {
+            case CodingControl.enumSendMailType.Register:
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+                {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
+                break;
+            case CodingControl.enumSendMailType.ForgetPassword:
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+                {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
+                break;
+            case CodingControl.enumSendMailType.ThanksLetter:
+
+                break;
+        }
+
+        switch (ValidateType)
+        {
+            case EWin.Lobby.enumValidateType.EMail:
+                if (SendMailType == CodingControl.enumSendMailType.RegisterReceiveReward)
+                {
+                    R = SendRegisterReceiveRewardMail(EMail, R, ReceiveRegisterRewardURL);
+                }
+                else
+                {
+                    R = SendMail(EMail, ValidateCode, R, SendMailType);
+                }
+                break;
+            case EWin.Lobby.enumValidateType.PhoneNumber:
+                string smsContent = "新規登録確認コード（" + ValidateCode + "）" + "\r\n" + "マハラジャをお選びいただき、ありがとうございます。";
+                R = SendSMS(GUID, "0", 0, ContactPhonePrefix + ContactPhoneNumber, smsContent);
+                break;
+            default:
+                break;
+        }
+
+        return R;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult CreateAccount(string GUID, string LoginAccount, string LoginPassword, string ParentPersonCode, string CurrencyList, EWin.Lobby.PropertySet[] PS) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();
+        R = lobbyAPI.CreateAccount(GetToken(), GUID, LoginAccount, LoginPassword, ParentPersonCode, CurrencyList, PS);
+
+        return R;
+    }
+
+
+    private EWin.Lobby.APIResult SendRegisterReceiveRewardMail(string EMail, EWin.Lobby.APIResult result, string ReceiveRegisterRewardURL)
+    {
+        string Subject = string.Empty;
+        string SendBody = string.Empty;
+        string apiURL = "https://mail.surenotifyapi.com/v1/messages";
+        string apiKey = "NDAyODgxNDM4MGJiZTViMjAxODBkYjZjMmRjYzA3NDgtMTY1NDE0Mzc1NC0x";
+        Subject = "RegisterReceiveReward";
+
+        SendBody = CodingControl.GetRegisterReceiveRewardEmailTemp(EMail, ReceiveRegisterRewardURL);
+
+        try
+        {
+
+            Newtonsoft.Json.Linq.JObject objBody = new Newtonsoft.Json.Linq.JObject();
+            Newtonsoft.Json.Linq.JObject objRecipients = new Newtonsoft.Json.Linq.JObject();
+            Newtonsoft.Json.Linq.JArray aryRecipients = new Newtonsoft.Json.Linq.JArray();
+
+            objBody.Add("subject", Subject);
+            objBody.Add("fromName", "マハラジャ");
+            objBody.Add("fromAddress", "edm@casino-maharaja.com");
+            objBody.Add("content", SendBody);
+
+            objRecipients.Add("name", EMail);
+            objRecipients.Add("address", EMail);
+            aryRecipients.Add(objRecipients);
+
+            objBody.Add("recipients", aryRecipients);
+
+            CodingControl.GetWebTextContent(apiURL, "POST", objBody.ToString(), "x-api-key:" + apiKey, "application/json", System.Text.Encoding.UTF8);
+            result.Result = EWin.Lobby.enumResult.OK;
+            result.Message = "";
+
+        }
+        catch (Exception ex)
+        {
+            result.Result = EWin.Lobby.enumResult.ERR;
+            result.Message = "";
+        }
+        return result;
+    }
     #endregion
 
     #region Kevin

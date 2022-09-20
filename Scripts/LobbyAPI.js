@@ -99,6 +99,108 @@
         });
     };
 
+    this.SetUserMail = function (GUID, ValidateType, SendMailType, EMail, ContactPhonePrefix, ContactPhoneNumber, ReceiveRegisterRewardURL, cb) {
+        var url = APIUrl + "/SetUserMail";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            ValidateType: ValidateType,
+            SendMailType: SendMailType,
+            EMail: EMail,
+            ContactPhonePrefix: ContactPhonePrefix,
+            ContactPhoneNumber: ContactPhoneNumber,
+            ReceiveRegisterRewardURL: ReceiveRegisterRewardURL
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.CheckValidateCode = function (GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber, ValidateCode, cb) {
+        var url = APIUrl + "/CheckValidateCode";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            ValidateType: ValidateType,
+            EMail: EMail,
+            ContactPhonePrefix: ContactPhonePrefix,
+            ContactPhoneNumber: ContactPhoneNumber,
+            ValidateCode: ValidateCode,
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+
+    this.CreateAccount = function (GUID, LoginAccount, LoginPassword, ParentPersonCode, CurrencyList, PS, cb) {
+        var url = APIUrl + "/CreateAccount";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            LoginAccount: LoginAccount,
+            LoginPassword: LoginPassword,
+            ParentPersonCode: ParentPersonCode,
+            CurrencyList: CurrencyList,
+            PS: PS
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.CheckAccountExist = function (GUID, LoginAccount, cb) {
+        var url = APIUrl + "/CheckAccountExist";
+        var postData;
+
+        postData = {
+            LoginAccount: LoginAccount,
+            GUID: GUID
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
     this.SetUserAccountProperty = function (GUID, SID, PropertyName, PropertyValue, cb) {
         var url = APIUrl + "/SetUserAccountProperty";
         var postData;
