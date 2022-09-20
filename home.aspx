@@ -777,8 +777,8 @@
                     <li class="spec-item spec-02">
                         <div class="spec-item-inner">
                             <div class="content">
-                                <h3 class="title">最專業</h3>
-                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                                <h3 class="title">最安全</h3>
+                                <p class="desc">採用國際知名互聯網安全檢測機嚴格檢測與 128 位加密技術，確保您的數據安全和隱私，保證絕不將您的資料透漏或出售給第三方。</p>
                             </div>
                         </div>
 
@@ -786,8 +786,8 @@
                     <li class="spec-item spec-03">
                         <div class="spec-item-inner">
                             <div class="content">
-                                <h3 class="title">最專業</h3>
-                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                                <h3 class="title">最便捷</h3>
+                                <p class="desc">引領市場的卓越技術，自主研發了全套終端應用，讓您暢享Web、H5，更有iOS、Android原生App，讓您隨時隨地，娛樂投注隨心所欲！ 7X24小時在線客服提供最貼心最優質的服務。</p>
                             </div>
                         </div>
 
@@ -795,8 +795,8 @@
                     <li class="spec-item spec-04">
                         <div class="spec-item-inner">
                             <div class="content">
-                                <h3 class="title">最專業</h3>
-                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                                <h3 class="title">最可靠</h3>
+                                <p class="desc">為您承諾提供負責任的博彩和各種安全簡便的存款及提款選擇，最安全的保證並且遵守其製定的行為和準則。</p>
                             </div>
                         </div>
 
