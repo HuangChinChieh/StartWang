@@ -748,6 +748,7 @@
             </div>
         </div>
         <!-- 下載頁面 -->
+        <%--
         <div class="mobileAPP-con">
             <div class="download-tit">
                 <h1 class="language_replace">行動娛樂-APP</h1>
@@ -764,6 +765,52 @@
                 <a>
                     <img src="images/btn_apple_store.png" alt="" /></a>
             </div>
+        </div>--%>
+
+        <!-- 網站特點 -->
+        <div class="web-spec">
+            <div class="container">
+                <ul class="web-spec-list">
+                    <li class="spec-item spec-01">
+                        <div class="spec-item-inner">
+                            <div class="content">
+                                <h3 class="title">最專業</h3>
+                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="spec-item spec-02">
+                        <div class="spec-item-inner">
+                            <div class="content">
+                                <h3 class="title">最專業</h3>
+                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="spec-item spec-03">
+                        <div class="spec-item-inner">
+                            <div class="content">
+                                <h3 class="title">最專業</h3>
+                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="spec-item spec-04">
+                        <div class="spec-item-inner">
+                            <div class="content">
+                                <h3 class="title">最專業</h3>
+                                <p class="desc">為您提供最優質的體育賽事、真人娛樂場、電子遊戲、彩票及無數小遊戲，同時不斷開發更佳的娛樂產品，給您全方位的優良體驗和酣暢淋漓的遊戲享受。</p>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+           
         </div>
 
         <!-- FOOTER -->
