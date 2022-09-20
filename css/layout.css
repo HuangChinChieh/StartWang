@@ -2503,6 +2503,9 @@ input[type=radio]:checked ~ .pageDDataBtn::after, input[type=checkbox]:checked ~
   background-color: white;
 }
 /* 2022 ADD ====================*/
+.DivContent{
+  height: calc(100% - 161px);
+}
 .idFrameContent{
   overflow: hidden;
 }
