@@ -23,6 +23,9 @@
   "會員註冊": "Register as member",
   "推薦碼": "Invitation code",
   "輸入推薦碼": "Enter invitation code",
+  "暱稱請輸入英文與數字，長度12位元以內": "under 12 letters for nickname",
+  "信箱": "email address",
+  "國家": "country ",
   "+86 中國": "+86 China",
   "+852 香港": "+852 Nong Kong",
   "+853 澳門": "+853 Macau",
@@ -55,5 +58,6 @@
   "輸入錯誤": "Error",
   "註冊": "Register",
   "輸入驗證碼": "Enter confirmation code",
+  "驗證碼": " verification code",
   "確認": "Confirm"
 }

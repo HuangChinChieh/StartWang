@@ -74,7 +74,7 @@
 
         if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; } else { Lang = "ENG"; }
     } else {
-        Lang = Request["Lang"];
+        Lang = "CHT";
     }
 %>
 <!doctype html>
@@ -209,7 +209,7 @@
     var mlp;
     var t1 = null;
     var qr = new QCodeDecoder();
-    var lang = "CHS";
+    var lang = "<%=Lang%>";
     var page = "<%=Page%>";
     var LoginStatus = "<%=LoginStatus%>";
     var CompanyCode = "<%=CompanyCode%>";
@@ -227,6 +227,9 @@
     var gameWindow;
     var EWinWebInfo = {
         EWinUrl: "<%=EWinWeb.EWinUrl %>",
+        EWinGameUrl: "<%=EWinWeb.EWinGameUrl %>",
+        MainCurrencyType: "<%=EWinWeb.MainCurrencyType %>",
+        RegisterCurrencyType: "<%=EWinWeb.RegisterCurrencyType %>",
         Token: "",
         SID: "<%=SID%>",
         CT: "<%=CT%>",

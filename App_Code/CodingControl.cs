@@ -724,10 +724,27 @@ public class CodingControl
         return decimal.Ceiling(value * pointV) / pointV;
     }
 
+    public static string GetRegisterReceiveRewardEmailTemp(string LoginAccount, string URL)
+    {
+        Stream myStream;
+        myStream = new FileStream(HttpContext.Current.Server.MapPath(@"/Html/RegisterReceiveReward.html"), FileMode.Open);
+
+        Encoding encode = System.Text.Encoding.GetEncoding("GB2312");
+        StreamReader myStreamReader = new StreamReader(myStream, encode);
+        string strhtml = myStreamReader.ReadToEnd();
+        myStream.Close();
+        string stroutput = string.Empty;
+        stroutput = strhtml.Replace("{0}", LoginAccount);
+        stroutput = stroutput.Replace("{1}", URL);
+
+        return stroutput;
+    }
+
     public enum enumSendMailType
     {
         Register = 0,
         ForgetPassword = 1,
-        ThanksLetter = 2
+        ThanksLetter = 2,
+        RegisterReceiveReward = 3
     }
 }

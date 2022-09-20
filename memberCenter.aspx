@@ -384,9 +384,11 @@
     }
 
     function updateBaseInfo() {
-        var UserLevel = document.getElementById("idUserLevel");
+        
         var CurrencyType = document.getElementById("idCurrencyType");
         var RealName = document.getElementById("idRealName");
+        var NickName = document.getElementById("idNickName");
+        var Country = document.getElementById("idCountry");
         //var NickName = document.getElementById("idNickName");
         var ContactPhonePrefix = document.getElementById("idContactPhonePrefix");
         var ContactPhoneNumber = document.getElementById("idContactPhoneNumber");
@@ -396,8 +398,22 @@
         var UserValidBetValue = document.getElementById("idUserValidBetValue");
         var divBankCardCurrencyList = document.getElementById("tabCurrencyList");
 
-        UserLevel.innerText = WebInfo.UserInfo.UserLevel;
         RealName.innerText = WebInfo.UserInfo.RealName;
+        NickName.innerText = WebInfo.UserInfo.NickName;
+        Country.innerText = WebInfo.UserInfo.Country;
+
+        var ExtraData = JSON.parse(WebInfo.UserInfo.ExtraData);
+
+        for (var i = 0; i < ExtraData.length; i++) {
+            if (ExtraData[i].Name == "NickName") {
+                NickName.innerText = ExtraData[i].Value;
+            }
+
+            if (ExtraData[i].Name == "Country") {
+                Country.innerText = ExtraData[i].Value;
+            }
+        }
+
         //NickName.innerText = WebInfo.UserInfo.BindingNickname;
         ContactPhonePrefix.innerText = WebInfo.UserInfo.ContactPhonePrefix;
         ContactPhoneNumber.innerText = WebInfo.UserInfo.ContactPhoneNumber;
@@ -636,8 +652,8 @@
                         <div class="rowHalf">
                             <div class="rowTitle"><span class="language_replace">個人資料</span></div>
                             <div class="rowElm">
-                                <div class="rowLeft"><span class="language_replace">會員等級</span></div>
-                                <div class="rowRight"><span id="idUserLevel">[UserLevel]</span></div>
+                                <div class="rowLeft"><span class="language_replace">暱稱</span></div>
+                                <div class="rowRight"><span id="idNickName">[NickName]</span></div>
                             </div>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">可用幣別</span></div>
@@ -646,6 +662,10 @@
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">真實姓名</span></div>
                                 <div class="rowRight"><span id="idRealName">[RealName]</span></div>
+                            </div>
+                            <div class="rowElm">
+                                <div class="rowLeft"><span class="language_replace">國家</span></div>
+                                <div class="rowRight"><span id="idCountry">[Country]</span></div>
                             </div>
                             <div class="rowElm" style="display: none;">
                                 <div class="rowLeft"><span class="language_replace">電話</span></div>
@@ -688,25 +708,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- -->
-                            <div class="rowElm" id="wpwDiv">
-                                <div class="rowLeft"><span class="language_replace">錢包密碼</span></div>
-                                <div class="rowRight"><span id="idWalletPasswordSetText">***********</span></div>
-                                <div class="rowBtnFull" onclick="wpwEdit()"><span id="idWalletPasswordButtonText" class="language_replace">修改</span></div>
-                            </div>
-                            <!-- -->
-                            <div class="rowEdit" id="wpwForm" style="display: none;">
-                                <div class="rowLeft"><span class="language_replace">修改錢包密碼</span></div>
-                                <div class="rowRight">
-                                    <input type="password" id="idWalletPasswordSrc" language_replace="placeholder" placeholder="輸入舊密碼">
-                                    <input type="password" id="idWalletPasswordNew1" language_replace="placeholder" placeholder="設定新密碼">
-                                    <input type="password" id="idWalletPasswordNew2" language_replace="placeholder" placeholder="確認新密碼">
-                                    <div class="rowBtnCon">
-                                        <div class="sBtnOutline" onclick="cancelWalletPassword()"><span class="language_replace">取消</span></div>
-                                        <div class="sBtnFull" onclick="setWalletPassword()"><span class="language_replace">確定修改</span></div>
-                                    </div>
-                                </div>
-                            </div>
+                           
                             <%} %>
                             <!-- -->
                             <div class="rowElm" style="display: none;">
