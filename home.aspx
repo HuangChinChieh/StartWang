@@ -805,7 +805,7 @@
         <!-- 遊戲按鈕 -->
         <div id="templateGameBrandItem" style="display: none">
             <div class="lob_gameBrandDiv BrandShow">
-                <div class="lob_gameBrandPanel" data-tilt>
+                <div class="lob_gameBrandPanel">
                     <!-- 主視覺圖片 -->
                     <div class="lob_gameBrandImg">
                         <img class="BrandImg" src="images/lobby/logo/demo_mainImg.png">
