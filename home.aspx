@@ -416,13 +416,24 @@
             tempGB.classList.add("gameFigure");
             c.setClassText(tempGB, "gameName", null, "<span class='language_replace'>" + mlp.getLanguageKey(BrandCode) + "</span> " + "<span class='language_replace'>" + mlp.getLanguageKey(BrandCateg) + "</span>");
 
-            BIcon = c.getFirstClassElement(tempGB, "mobileLogo");
-            if (BIcon != null) {
-                BIcon.src = WebInfo.EWinUrl + "/Lobby/images/lobby/logo/" + BrandCode + "/logoPC_" + BrandCateg + ".png";
-            }
-            BImg = c.getFirstClassElement(tempGB, "pcLogo");
-            if (BImg != null) {
-                BImg.src = WebInfo.EWinUrl + "/Lobby/images/lobby/logo/" + BrandCode + "/mainImg_" + BrandCateg + ".png";
+            if (BrandCode == "EWin") {
+                BIcon = c.getFirstClassElement(tempGB, "mobileLogo");
+                if (BIcon != null) {
+                    BIcon.src = "images/lobby/logo/demo_logoPC2.png";
+                }
+                BImg = c.getFirstClassElement(tempGB, "pcLogo");
+                if (BImg != null) {
+                    BImg.src = "images/lobby/logo/demo_mainImg.png";
+                }
+            } else {
+                BIcon = c.getFirstClassElement(tempGB, "mobileLogo");
+                if (BIcon != null) {
+                    BIcon.src = WebInfo.EWinUrl + "/Lobby/images/lobby/logo/" + BrandCode + "/logoPC_" + BrandCateg + ".png";
+                }
+                BImg = c.getFirstClassElement(tempGB, "pcLogo");
+                if (BImg != null) {
+                    BImg.src = WebInfo.EWinUrl + "/Lobby/images/lobby/logo/" + BrandCode + "/mainImg_" + BrandCateg + ".png";
+                }
             }
 
             tempGB.onclick = new Function("showGameList('" + BrandCode + "', '" + BrandCateg + "')");

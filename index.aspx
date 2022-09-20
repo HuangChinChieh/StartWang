@@ -1782,7 +1782,7 @@
                                 7.印度文：ico-before-flag-in
                          -->
                         <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
-                        <button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>
+                        <%--<button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>--%>
 
 
                         <div onclick="btnConfirmLogout();" class="box btn-logout btnTypeA">

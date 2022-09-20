@@ -14,7 +14,7 @@
 
     if (GameBrand == "EWin" && GameName == "EWinGaming") {
         if (DemoPlay == "0") {
-            Response.Redirect(EWinWeb.EWinGameUrl + "/Game/Login.aspx?CT=" + HttpUtility.UrlEncode(CT) + "&Lang=" + Lang);
+            Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + HttpUtility.UrlEncode(CT) + "&Lang=" + Lang);
         } else {
             Response.Write("NotSupportDemo");
             Response.Flush();
