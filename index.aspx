@@ -606,7 +606,7 @@
         var PointInfo = API_GetSelCurrencyType();
 
         if (PointInfo.PointValue > 0) {
-            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + EWinWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + EWinWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + EWinWebInfo.UserInfo.LoginAccount);
+            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + EWinWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + EWinWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + EWinWebInfo.UserInfo.LoginAccount + "&CT=" + EWinWebInfo.CT);
             //gameWindow.GameCode = GameCode;
             //gameWindow.CurrencyType = PointInfo.CurrencyType;
             //gameWindow.onbeforeunload = function () {
@@ -1672,7 +1672,7 @@
             });
 
             if (gameBrand.toUpperCase() == "EWin".toUpperCase() || gameBrand.toUpperCase() == "YS".toUpperCase()) {
-                gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+                window.open(EWinWebInfo.EWinUrl + "/Game/Login.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CT=" + encodeURIComponent(EWinWebInfo.CT))
             } else {
                 if (EWinWebInfo.DeviceType == 1) {
                     gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
