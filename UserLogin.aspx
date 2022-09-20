@@ -4,31 +4,30 @@
     int RValue;
     Random R = new Random();
     bool LoginSuccess = true;
-    if (CodingControl.FormSubmit())
-    {
+    string WebSID = null;
+    string UserIP = CodingControl.GetUserIP();
+
+    if (CodingControl.FormSubmit()) {
         string LoginGUID = Request["LoginGUID"];
         string LoginAccount = Request["LoginAccount"];
         string LoginPassword = Request["LoginPassword"];
         string ValidImg = Request["LoginValidateCode"];
         EWin.LoginResult LoginAPIResult;
         EWin.LoginAPI LoginAPI = new EWin.LoginAPI();
-
-
+        
         RValue = R.Next(100000, 9999999);
         Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
 
         LoginAPIResult = LoginAPI.UserLogin(Token, LoginGUID, LoginAccount, LoginPassword, EWinWeb.CompanyCode, ValidImg, CodingControl.GetUserIP());
-        if (LoginAPIResult.ResultState == EWin.enumResultState.OK)
-        {
+        if (LoginAPIResult.ResultState == EWin.enumResultState.OK) {
             Response.SetCookie(new HttpCookie("RecoverToken", LoginAPIResult.RecoverToken) { Expires = System.DateTime.Parse("2038/12/31") });
             Response.SetCookie(new HttpCookie("SID", LoginAPIResult.SID));
             Response.SetCookie(new HttpCookie("CT", LoginAPIResult.CT));
             Response.SetCookie(new HttpCookie("LoginURL", LoginAPIResult.LoginURL));
-           
+
             Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=success");
-        }
-        else
-        {
+
+        } else {
             Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=fail");
             //Response.Write(LoginAPIResult.Message);
         }

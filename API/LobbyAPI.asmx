@@ -322,29 +322,29 @@ public class LobbyAPI : System.Web.Services.WebService {
         return RetValue;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.Lobby.APIResult GetUserAccountProperty(string GUID, string SID, string PropertyName) {
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.Lobby.APIResult GetUserAccountProperty(string GUID, string SID, string PropertyName) {
 
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.APIResult RetValue = null;
+    //    EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+    //    EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), GUID,EWin.Lobby.enumUserTypeParam.BySID ,SID, PropertyName);
+    //    RetValue = lobbyAPI.GetUserAccountProperty(GetToken(), SID, GUID, PropertyName);
 
-        return RetValue;
-    }
+    //    return RetValue;
+    //}
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.Lobby.APIResult SetUserAccountProperty(string GUID, string SID, string PropertyName,string PropertyValue) {
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.Lobby.APIResult SetUserAccountProperty(string GUID, string SID, string PropertyName,string PropertyValue) {
 
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        EWin.Lobby.APIResult RetValue = null;
+    //    EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+    //    EWin.Lobby.APIResult RetValue = null;
 
-        RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),GUID,EWin.Lobby.enumUserTypeParam.BySID,SID, PropertyName, PropertyValue);
+    //    RetValue = lobbyAPI.SetUserAccountProperty(GetToken(),SID, GUID, PropertyName, PropertyValue);
 
-        return RetValue;
-    }
+    //    return RetValue;
+    //}
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -645,6 +645,15 @@ public class LobbyAPI : System.Web.Services.WebService {
         RetValue = lobbyAPI.GetPaymentHistory(GetToken(), SID, GUID, BeginDate, EndDate);
 
         return RetValue;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.CompanyGameCodeResult GetCompanyGameCodeByUpdateTimestamp(string GUID, long UpdateTimestamp, int GameID) {
+
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        return lobbyAPI.GetCompanyGameCodeByUpdateTimestamp(GetToken(), GUID, UpdateTimestamp, GameID);
+
     }
     #endregion
 

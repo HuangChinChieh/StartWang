@@ -385,8 +385,7 @@ public static class RedisCache
             return iList.ToArray();
         }
 
-        public static SIDInfo GetSIDInfo(string SID)
-        {
+        public static SIDInfo GetSIDInfo(string SID) {
             SIDInfo RetValue = null;
 
             if (string.IsNullOrEmpty(SID) == false)
