@@ -606,7 +606,7 @@
         var PointInfo = API_GetSelCurrencyType();
 
         if (PointInfo.PointValue > 0) {
-            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + EWinWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + EWinWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + EWinWebInfo.UserInfo.LoginAccount);
+            var gameWindow = window.open("OpenGame.aspx?Type=0&Token=" + EWinWebInfo.Token + "&GameCode=" + GameCode + "&CurrencyType=" + PointInfo.CurrencyType + "&SID=" + EWinWebInfo.SID + "&Lang=" + lang + "&GameLobbyExist=" + GameLobbyExist + "&WalletType=" + WalletType + "&LoginAccount=" + EWinWebInfo.UserInfo.LoginAccount + "&CT=" + EWinWebInfo.CT);
             //gameWindow.GameCode = GameCode;
             //gameWindow.CurrencyType = PointInfo.CurrencyType;
             //gameWindow.onbeforeunload = function () {
@@ -1672,7 +1672,7 @@
             });
 
             if (gameBrand.toUpperCase() == "EWin".toUpperCase() || gameBrand.toUpperCase() == "YS".toUpperCase()) {
-                gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
+                window.open(EWinWebInfo.EWinUrl + "/Game/Login.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CT=" + encodeURIComponent(EWinWebInfo.CT))
             } else {
                 if (EWinWebInfo.DeviceType == 1) {
                     gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
@@ -1746,8 +1746,8 @@
                 <div id="idUserNotLogin" class="header-tit_none">
                     <div class="header-tit-con">
                         <div class="box btnTypeA loginBrn_div">
-                            <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
-                            <%--<button type="button" class="btn btn-customerservice btn-icon-round icon-service" id="" role="button" data-toggle="modal" data-target="" onclick="">客服</button>--%>
+                            <%--<button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
+                            <button type="button" class="btn btn-customerservice btn-icon-round icon-service" id="" role="button" data-toggle="modal" data-target="" onclick="">客服</button>--%>
                             <%--<button type="button" class="box btn btn-gradient-golden" id="tryitBtn" role="button" data-toggle="modal" data-target="" onclick="onBtnTryIt();"><i class="icon icon12one-ico-poker icon-large" aria-hidden="true"></i><span class="language_replace">搶先試玩</span></button>--%>
                             <button type="button" class="box btn btn-default" id="loginBtn" role="button" data-toggle="modal" data-target="#idLoginImage" onclick="onBtnLoginShow();"><i class="fa fa-sign-out fa-1x" aria-hidden="true"></i><span class="language_replace">登入</span></button>
                             <button type="button" class="btn btn-info" id="signinBtn" role="button" data-toggle="modal" data-target="#myModal" onclick="onBtnUserRegisterShow();"><i class="fa fa-address-card fa-1x" aria-hidden="true"></i><span class="language_replace">註冊</span></button>
@@ -1757,8 +1757,8 @@
                 <!--  已登入版頭 -->
                 <div id="idUserLogined" class="header-tit" style="display: none;">
                     <div class="header-tit-info">
-                        <div id="idUserLevel" class="user-level">VIP 9</div>
-                        <div id="idNickName" class="user-ID">SeanYu888 </div>
+                        <div id="idUserLevel" class="user-level" style="display:none">VIP 9</div>
+                        <div id="idNickName" class="user-ID" style="margin-top:15px">SeanYu888 </div>
                     </div>
                     <div class="header-tit-point-wrapper">
                         <div class="header-tit-point">
@@ -1784,8 +1784,8 @@
                                 6.越南文：ico-before-flag-vn
                                 7.印度文：ico-before-flag-in
                          -->
-                        <button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="">語系</button>
-                        <%--<button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>--%>
+                         <%--<button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="" >語系</button>
+                       <button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>--%>
 
 
                         <div onclick="btnConfirmLogout();" class="box btn-logout btnTypeA">
@@ -1797,7 +1797,7 @@
                 </div>
                 <div class="header-nav clearfix">
                     <div class="box header-nav-logo">
-                        <img src="images/logo.png" alt="99play_logo">
+                        <img src="images/logo.png" alt="99play_logo"  onclick="API_LoadPage('home.aspx')" style="cursor:pointer">
                     </div>
                     <div class="box header-nav-menu" id="dropdownDiv">
                         <div onclick="dropdownFunction()" id="dropdownDiv-btn" class="dropdown-btn"><a class="fa fa-bars" aria-hidden="true"></a></div>
@@ -1806,10 +1806,10 @@
                                 <br>
                                 <div class="language_replace">回首頁</div>
                             </a></li>
-                            <li><a onclick=" API_Home()"><span class="icon icon-icon-poker" aria-hidden="true"></span>
+                            <%--<li><a onclick=" API_Home()"><span class="icon icon-icon-poker" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
-                            </a></li>
+                            </a></li>--%>
                             <li><a onclick="openPaymentDeposit(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">充值</div>
