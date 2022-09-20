@@ -1318,7 +1318,7 @@
     .lob_gameListWrapper{
         position: relative;
         box-sizing: border-box;
-        height: calc(100vh - 50px);
+        height: calc(100% - 50px);
         /*margin-top: -60px;*/
     }
     .lob_gameListBrand{
@@ -1328,7 +1328,8 @@
     }
     .lob_gameListMain{
       
-        height: calc(100vh - 220px);
+        /* height: calc(100vh - 220px); */
+        /* height: calc(100% - 220px); */
         /* padding: 60px 30px 30px 30px; */
        
         
@@ -1385,7 +1386,8 @@
     }
     .lob_gameListMain{
      
-        height: calc(100vh - 80px);
+        /* height: calc(100vh - 80px); */
+        height: calc(100% - 80px);
         /* padding: 50px 15px 30px 15px; */
        
         
@@ -1433,7 +1435,8 @@
 @media screen and (max-width: 340px) and (orientation: portrait) {
 	.lob_gameListWrapper {/*margin-top: -13px;*/}
 	.lob_gameListMain{
-        height: calc(100vh - 117px);
+        /* height: calc(100vh - 117px); */
+        height: calc(100% - 117px);
     }
 }
 
@@ -1458,7 +1461,7 @@
     }
     .lob_gameListMain{
        
-        height: calc(100vh - 80px);
+        height: calc(100% - 80px);
         /* padding: 50px 15px 30px 15px; */
        
         
@@ -1585,7 +1588,7 @@
 	.lob_gameTypeWrapper{/*height: 60px;margin-top: 65px;*/}
 	.lob_gameBrandImg img{height: 120px; width: auto;}
 	.lob_gameListWrapper{/*margin-top: -50px;*/}
-	.lob_gameListMain{height: calc(100vh - 75px);}
+	.lob_gameListMain{height: calc(100% - 75px);}
 	.lob_gameListTit #idGameItemTitle{opacity: 0;}
 	.lob_gameBrandName {font-size: 10px;padding: 5px 0px;text-indent: 10px;}
 	.lob_gameBrandStart {padding: 4px 8px;}
@@ -1751,7 +1754,7 @@
 		top: 20px;
 		left: 100px;
 		width:calc(100% - 200px);
-		height: calc(100% - 200px);
+		/* height: calc(100% - 200px); */
         margin-left:auto;
         margin-top: auto;
         z-index: 10;
@@ -1764,7 +1767,7 @@
 		top: 20px;
 		left: 20px;
 		width:calc(100% - 40px);
-		height: calc(100% - 80px);
+		height: calc(100% - 50px);
         margin-left:auto;
         margin-top: auto;
         z-index: 10;

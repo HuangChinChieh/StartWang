@@ -115,57 +115,7 @@
             min-width: 100%;
         }*/
 
-        .divGameFrameBody {
-    z-index: 5;
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    background-color: rgba(0,0,0,0.95);
-    position: relative
-}
-
-    .divGameFrameBody .btn {
-        background-color: #036EB7
-    }
-
-        .divGameFrameBody .btn, .divGameFrameBody .btn * {
-            -webkit-transition: all 0.15s ease-in-out;
-            transition: all 0.15s ease-in-out
-        }
-
-            .divGameFrameBody .btn:hover {
-                background-color: #00497A
-            }
-
-                .divGameFrameBody .btn:hover .icon {
-                    -webkit-transform: scale(1.2,1.2);
-                    transform: scale(1.2,1.2)
-                }
-
-    .divGameFrameBody .btn-game-close {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 0 5px 5px 0;
-        right: -50px;
-        top: 0
-    }
-
-        .divGameFrameBody .btn-game-close .icon {
-            width: 50px;
-            height: 50px
-        }
-
-            .divGameFrameBody .btn-game-close .icon:before {
-                background-color: #fff
-            }
+      
     </style>
 </head>
 <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
@@ -1727,9 +1677,9 @@
         // class="divGameFrame"
         let tmp = `<div class="divGameFrameWrapper">
             <div class="btn-wrapper">
-                <div class="btn btn-game-close" onclick="CloseGameFrame()"><i class="icon icon-mask icon-error"></i></div>
+                <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
             </div>
-            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#09f" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
+            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#000" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
         </div>`;
         $("#divGameFrame").append(tmp);
     }
@@ -1845,7 +1795,7 @@
     <div id="divGameFrame" class="divGameFrameBody">
         <div class="divGameFrameWrapper">
             <div class="btn-wrapper">
-                <div class="btn btn-game-close" onclick="CloseGameFrame()"><i class="icon icon-mask icon-error"></i></div>
+                <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
             </div>
             <iframe id="GameIFramePage" class="divGameFrame" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
         </div>
