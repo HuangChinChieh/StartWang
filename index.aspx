@@ -525,7 +525,8 @@
     }
 
     function API_LoadPage(url) {
-        var IFramePage = document.getElementById("IFramePage");
+        // var IFramePage = document.getElementById("IFramePage");
+        var IFramePage = document.getElementById("idFrameContent");
 
         if (IFramePage != null) {
             if (IFramePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
