@@ -526,18 +526,13 @@
 
     function API_LoadPage(url) {
         var IFramePage = document.getElementById("IFramePage");
-        var iFrame = document.createElement("IFRAME");
 
-        iFrame.scrolling = "auto";
-        iFrame.border = "0";
-        iFrame.frameBorder = "0";
-        iFrame.marginWidth = "0";
-        iFrame.marginHeight = "0";
-        iFrame.src = url;
-        iFrame.style.height = '100%';
-        iFrame.id = "IFramePage1";
-        c.clearChildren(IFramePage);
-        IFramePage.appendChild(iFrame);
+        if (IFramePage != null) {
+            if (IFramePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+                IFramePage.src = url;
+                IFramePage.onload = null;
+            }
+        }
 
         //mobile remove
         document.getElementById("dropdownDiv").classList.remove("dropdownDiv-down");
