@@ -21,6 +21,27 @@
         });
     };
 
+    this.GetEPaySetting = function (GUID, cb) {
+        var url = APIUrl + "/GetEPaySetting";
+        var postData;
+
+        postData = {
+            GUID: GUID
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
     this.GetClosePayment = function (WebSID, GUID, startDate, endDate, cb) {
         var url = APIUrl + "/GetClosePayment";
         var postData;
@@ -450,15 +471,65 @@
         });
     };
 
-    this.CreateEPayDeposit = function (WebSID, GUID, Amount, PaymentMethodID, cb) {
+    this.CreateEPayDeposit = function (SID, GUID, Amount, UserName, cb) {
         var url = APIUrl + "/CreateEPayDeposit";
         var postData;
 
         postData = {
-            WebSID: WebSID,
+            SID: SID,
             GUID: GUID,
             Amount: Amount,
-            PaymentMethodID: PaymentMethodID
+            UserName: UserName
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.GetEPayBankSelect = function (SID, GUID, ProviderCode, cb) {
+        var url = APIUrl + "/GetEPayBankSelect";
+        var postData;
+
+        postData = {
+            SID: SID,
+            GUID: GUID,
+            ProviderCode: ProviderCode
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.CreateEPayWithdrawal = function (SID, GUID, BankCard, BankCardName, BankName, BankBranchCode, Amount,cb) {
+        var url = APIUrl + "/CreateEPayWithdrawal";
+        var postData;
+
+        postData = {
+            SID: SID,
+            GUID: GUID,
+            BankCard: BankCard,
+            BankCardName: BankCardName,
+            BankName: BankName,
+            BankBranchCode: BankBranchCode,
+            Amount: Amount
         };
 
         callService(url, postData, 10000, function (success, text) {

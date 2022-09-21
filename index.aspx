@@ -1495,7 +1495,7 @@
             //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
             switch (dt) {
                 case 0:
-                    window.open(EWinWebInfo.EWinUrl + "/Payment/VPay/VPayDeposit.aspx?SID=" + EWinWebInfo.SID, "_blank");
+                    API_LoadPage("/Payment/EPay/EPayDeposite.aspx");
                     break;
                 case 1:
                     //openBitCoinAddress();
@@ -1520,7 +1520,7 @@
         if (EWinWebInfo.UserLogined) {
             switch (wt) {
                 case 0:
-                    window.open(EWinWebInfo.EWinUrl + "/Payment/GPay/GPayWithdraw.aspx?SID=" + EWinWebInfo.SID);
+                    API_LoadPage("/Payment/EPay/EPayWithdraw.aspx");
                     break;
                 case 1:
                     //openBitCoinAddress();
@@ -1755,11 +1755,11 @@
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
                             </a></li>--%>
-                            <li><a onclick="openPaymentDeposit(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                            <li><a onclick="openPaymentDeposit(0);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">充值</div>
                             </a></li>
-                            <li><a onclick="openPaymentWithdrawal(2);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                            <li><a onclick="openPaymentWithdrawal(0);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">取款</div>
                             </a></li>
@@ -1798,7 +1798,7 @@
 
         <!-- Content -->
         <%--    <div id="IFramePage" class="DivContent">
-            <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
+            <iframe id="idFrameContent" class="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>--%>
         <div id="IFramePage" class="DivContent" style="">
             <iframe id="idFrameContent" class="idFrameContent"></iframe>

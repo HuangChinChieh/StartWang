@@ -2,7 +2,6 @@
 
 <%
 
-    RedisCache.SessionContext.SIDInfo SI;
     string GameBrand = Request["GameBrand"];
     string SID = Request["SID"];
     string CT = Request["CT"];

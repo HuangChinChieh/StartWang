@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 /// </summary>
 public static class EWinWeb
 {
-    public static string DBConnStr = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
+   
     public static DateTime DateTimeNull = Convert.ToDateTime("1900/1/1");
     public static bool IsTestSite = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["IsTestSite"]);
     public static string EWinUrl = System.Configuration.ConfigurationManager.AppSettings["EWinUrl"];
@@ -30,14 +30,12 @@ public static class EWinWeb
     public static string AllowAksoWithDrawal = System.Configuration.ConfigurationManager.AppSettings["AllowAksoWithDrawal"];
     public static string AksoWithDrawalLimit = System.Configuration.ConfigurationManager.AppSettings["AksoWithDrawalLimit"];
     public static string SharedFolder = System.Configuration.ConfigurationManager.AppSettings["SharedFolder"];
-    public static string WebRedisConnStr = System.Configuration.ConfigurationManager.AppSettings["WebRedisConnStr"];
     public static string Key3DES = "onoeTs39aHfAATKGxYmyJ3Nf";
     public static string DirSplit = "\\";
     public static string Version = System.Configuration.ConfigurationManager.AppSettings["Version"];
     public static string EWinGameUrl = System.Configuration.ConfigurationManager.AppSettings["EWinGameUrl"];
-    public static string CasinoWorldUrl = System.Configuration.ConfigurationManager.AppSettings["CasinoWorldUrl"];
     public static string StartWangUrl = System.Configuration.ConfigurationManager.AppSettings["StartWangUrl"];
-
+  
     public static string EPayToken = System.Configuration.ConfigurationManager.AppSettings["EPayToken"];
 
 
@@ -225,20 +223,6 @@ public static class EWinWeb
         return Token;
     }
 
-    public static StackExchange.Redis.IDatabase GetRedisClient(int db = -1) {
-        StackExchange.Redis.IDatabase RetValue;
-
-        RedisPrepare();
-
-        if (db == -1) {
-            RetValue = RedisClient.GetDatabase();
-        } else {
-            RetValue = RedisClient.GetDatabase(db);
-        }
-
-        return RetValue;
-    }
-
     public static IList<T> ToList<T>(this DataTable table) where T : new()
     {
         IList<PropertyInfo> properties = typeof(T).GetProperties().ToList();
@@ -304,10 +288,4 @@ public static class EWinWeb
         return item;
     }
 
-
-    private static void RedisPrepare() {
-        if (RedisClient == null) {
-            RedisClient = StackExchange.Redis.ConnectionMultiplexer.Connect(WebRedisConnStr);
-        }
-    }
 }

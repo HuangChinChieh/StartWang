@@ -130,7 +130,7 @@
         else if (Tag == 'BankCard') {
             divUserPage.style.display = "none";
             divBankCard.style.display = "block";
-        }       
+        }
     }
 
     function cancelWalletPassword() {
@@ -257,7 +257,7 @@
         p.GetUserBankCard(postObj, function (success, o) {
             if (success) {
                 if (o.Result == 0) {
-                    BackCardInfo = o.BankCardList;          
+                    BackCardInfo = o.BankCardList;
                     cb();
                 } else {
                     window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
@@ -274,8 +274,8 @@
 
     function backMainPage() {
         var idMainPage = document.getElementById("idMainPage");
-        var idMaintainBankCard = document.getElementById("idMaintainBankCard");      
-        
+        var idMaintainBankCard = document.getElementById("idMaintainBankCard");
+
         idMainPage.style.display = "block";
         idMaintainBankCard.style.display = "none";
     }
@@ -283,7 +283,7 @@
     function addBankCard() {
         var retValue = true;
         var CurrencyType = $("#idBankCardCurrency").text();
-        var PaymentType=0;
+        var PaymentType = 0;
         var BankName = document.getElementById("txtBankName");
         var BranchName = document.getElementById("txtBranchName");
         var BankNumber = document.getElementById("txtBankNumber");
@@ -368,7 +368,7 @@
             if (success) {
                 if (o.Result == 0) {
                     window.parent.showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("成功"), function () {
-                        getBankCardList(updateBaseInfo);                    
+                        getBankCardList(updateBaseInfo);
                     });
                 } else {
                     window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
@@ -384,10 +384,10 @@
     }
 
     function updateBaseInfo() {
-        
+
         var CurrencyType = document.getElementById("idCurrencyType");
         var RealName = document.getElementById("idRealName");
-        var NickName = document.getElementById("idNickName");
+        //var NickName = document.getElementById("idNickName");
         var Country = document.getElementById("idCountry");
         //var NickName = document.getElementById("idNickName");
         var ContactPhonePrefix = document.getElementById("idContactPhonePrefix");
@@ -399,7 +399,7 @@
         var divBankCardCurrencyList = document.getElementById("tabCurrencyList");
 
         RealName.innerText = WebInfo.UserInfo.RealName;
-        NickName.innerText = WebInfo.UserInfo.NickName;
+        //NickName.innerText = WebInfo.UserInfo.NickName;
         Country.innerText = WebInfo.UserInfo.Country;
 
         var ExtraData = JSON.parse(WebInfo.UserInfo.ExtraData);
@@ -576,7 +576,7 @@
                     BankCardGUID: bankCardGUID,
                     BankCardState: state
                 }
-                
+
                 p.SetUserBankCardState(postObj, function (success, o) {
                     if (success) {
                         if (o.Result == 0) {
@@ -644,17 +644,17 @@
             <div>
                 <div class="switchTagDiv">
                     <div class="switchTagBtn active" onclick="changeTag(this,'UserPage')"><span class="language_replace">會員資料</span></div>
-                    <div class="switchTagBtn" onclick="changeTag(this,'BankCard')"><span class="language_replace">銀行卡</span></div>
+                    <%--<div class="switchTagBtn" onclick="changeTag(this,'BankCard')"><span class="language_replace">銀行卡</span></div>--%>
                 </div>
                 <div id="idMainPage">
                     <!-- 會員資料 -->
                     <div class="pageMainCon" id="divUserPage">
                         <div class="rowHalf">
                             <div class="rowTitle"><span class="language_replace">個人資料</span></div>
-                            <div class="rowElm">
+                        <%--    <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">暱稱</span></div>
                                 <div class="rowRight"><span id="idNickName">[NickName]</span></div>
-                            </div>
+                            </div>--%>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">可用幣別</span></div>
                                 <div class="rowRight"><span id="idCurrencyType">[CurrencyType]</span></div>
