@@ -18,97 +18,6 @@ using System.Linq;
 [System.Web.Script.Services.ScriptService]
 public class MgmtAPI : System.Web.Services.WebService {
 
-    //[WebMethod]
-    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //public string GetUserAccountSummary2(string a) {
-    //    return EWinWeb.GetToken();
-    //}
-
-    [WebMethod]
-    public void RefreshRedis(string password) {
-        if (CheckPassword(password)) {
-            System.Data.DataTable DT;
-            RedisCache.PaymentCategory.UpdatePaymentCategory();
-            RedisCache.PaymentMethod.UpdatePaymentMethodByCategory("Paypal");
-            RedisCache.PaymentMethod.UpdatePaymentMethodByCategory("Crypto");
-
-            DT = EWinWebDB.PaymentMethod.GetPaymentMethod();
-
-            if (DT != null) {
-                if (DT.Rows.Count > 0) {
-                    for (int i = 0; i < DT.Rows.Count; i++) {
-                        RedisCache.PaymentMethod.UpdatePaymentMethodByID((int)DT.Rows[i]["PaymentMethodID"]);
-                    }
-                }
-            }
-
-
-            EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-            var R = lobbyAPI.GetCompanyGameCode(EWinWeb.GetToken(), System.Guid.NewGuid().ToString()); 
-            RedisCache.Company.UpdateCompanyGameCode(Newtonsoft.Json.JsonConvert.SerializeObject(R.GameCodeList));
-        }
-    }
-
-
-    [WebMethod]
-    public UserAccountSummaryResult GetUserAccountSummary(string password, string LoginAccount, DateTime SummaryDate) {
-
-        UserAccountSummaryResult R = new UserAccountSummaryResult() { Result = enumResult.ERR };
-        System.Data.DataTable DT;
-        if (CheckPassword(password)) {
-            DT = RedisCache.UserAccountSummary.GetUserAccountSummary(LoginAccount, SummaryDate);
-            if (DT != null && DT.Rows.Count > 0) {
-                R.SummaryGUID = (string)DT.Rows[0]["SummaryGUID"];
-                R.SummaryDate = (DateTime)DT.Rows[0]["SummaryDate"];
-                R.LoginAccount = (string)DT.Rows[0]["LoginAccount"];
-                R.DepositCount = (int)DT.Rows[0]["DepositCount"];
-                R.DepositRealAmount = (decimal)DT.Rows[0]["DepositRealAmount"];
-                R.DepositAmount = (decimal)DT.Rows[0]["DepositAmount"];
-                R.WithdrawalCount = (int)DT.Rows[0]["WithdrawalCount"];
-                R.WithdrawalRealAmount = (decimal)DT.Rows[0]["WithdrawalRealAmount"];
-                R.WithdrawalAmount = (decimal)DT.Rows[0]["WithdrawalAmount"];
-                R.Result = enumResult.OK;
-            } else {
-                SetResultException(R, "NoData");
-            }
-        } else {
-            SetResultException(R, "InvalidPassword");
-        }
-
-        return R;
-    }
-
-
-    [WebMethod]
-    public UserAccountTotalSummaryResult GetUserAccountTotalSummary(string password, string LoginAccount) {
-
-        UserAccountTotalSummaryResult R = new UserAccountTotalSummaryResult() { Result = enumResult.ERR };
-        System.Data.DataTable DT;
-        if (CheckPassword(password)) {
-            DT = RedisCache.UserAccountTotalSummary.GetUserAccountTotalSummaryByLoginAccount(LoginAccount);
-            if (DT != null && DT.Rows.Count > 0) {
-                R.LoginAccount = (string)DT.Rows[0]["LoginAccount"];
-                R.LastDepositDate = (DateTime)DT.Rows[0]["LastDepositDate"];
-                R.LastWithdrawalDate = (DateTime)DT.Rows[0]["LastWithdrawalDate"];
-                R.LoginAccount = (string)DT.Rows[0]["LoginAccount"];
-                R.DepositCount = (int)DT.Rows[0]["DepositCount"];
-                R.DepositRealAmount = (decimal)DT.Rows[0]["DepositRealAmount"];
-                R.DepositAmount = (decimal)DT.Rows[0]["DepositAmount"];
-                R.WithdrawalCount = (int)DT.Rows[0]["WithdrawalCount"];
-                R.WithdrawalRealAmount = (decimal)DT.Rows[0]["WithdrawalRealAmount"];
-                R.WithdrawalAmount = (decimal)DT.Rows[0]["WithdrawalAmount"];
-                R.FingerPrint = (string)DT.Rows[0]["FingerPrint"];
-                R.Result = enumResult.OK;
-            } else {
-                SetResultException(R, "NoData");
-            }
-        } else {
-            SetResultException(R, "InvalidPassword");
-        }
-
-        return R;
-    }
-
     [WebMethod]
     public APIResult OpenSite(string Password) {
         APIResult R = new APIResult() { Result = enumResult.ERR };
@@ -279,64 +188,6 @@ public class MgmtAPI : System.Web.Services.WebService {
         return R;
     }
 
-    [WebMethod]
-    public PaymentValueReslut CalculatePaymentValue(string Password, string PaymentSerial) {
-        PaymentValueReslut R = new PaymentValueReslut() { Result = enumResult.ERR };
-
-        if (CheckPassword(Password)) {
-            System.Data.DataTable DT = EWinWebDB.UserAccountPayment.GetPaymentByPaymentSerial(PaymentSerial);
-
-
-            if (DT != null && DT.Rows.Count > 0) {
-                var row = DT.Rows[0];
-
-                if ((int)row["FlowStatus"] != 0) {
-                    decimal totalThresholdValue = 0;
-                    decimal totalPointValue = 0;
-                    string paymentDesc = "";
-                    List<string> activityStrs = new List<string>();
-                    string activityDataStr = (string)row["ActivityData"];
-
-                    if (!string.IsNullOrEmpty(activityDataStr)) {
-                        Newtonsoft.Json.Linq.JArray activityDatas = Newtonsoft.Json.Linq.JArray.Parse(activityDataStr);
-
-                        foreach (var item in activityDatas) {
-                            string desc = item["ActivityName"].ToString() + "_BnousValue_" + ((decimal)item["BonusValue"]).ToString() + "_ThresholdValue_" + ((decimal)item["ThresholdValue"]).ToString();
-                            totalThresholdValue += (decimal)item["ThresholdValue"];
-                            //totalPointValue += (decimal)item["BonusValue"];
-                            activityStrs.Add(desc);
-                        }
-                    }
-
-
-
-                    paymentDesc = "ThresholdValue=" + ((decimal)row["ThresholdValue"]).ToString() + ",ThresholdRate=" + ((decimal)row["ThresholdRate"]).ToString();
-
-                    totalThresholdValue += (decimal)row["ThresholdValue"];
-                    totalPointValue = (decimal)row["PointValue"];
-
-                    R.TotalThresholdValue = totalThresholdValue;
-                    R.TotalPointValue = totalPointValue;
-                    R.LoginAccount = (string)row["LoginAccount"];
-                    R.Amount = (decimal)row["Amount"];
-                    R.PaymentSerial = (string)row["PaymentSerial"];
-                    R.PaymentCode = (string)row["PaymentCode"];
-                    R.PaymentDescription = paymentDesc;
-                    R.ActivityDescription = activityStrs;
-                    R.Result = enumResult.OK;
-                } else {
-                    SetResultException(R, "StatusError");
-                }
-            } else {
-                SetResultException(R, "NoData");
-            }
-        } else {
-            SetResultException(R, "InvalidPassword");
-        }
-
-        return R;
-    }
-
     private bool CheckPassword(string Hash) {
         string key = EWinWeb.PrivateKey;
 
@@ -374,63 +225,8 @@ public class MgmtAPI : System.Web.Services.WebService {
         }
     }
 
-    [WebMethod]
-    public APIResult UpdateBulletinBoardState(string Password, int BulletinBoardID, int State) {
-        APIResult R = new APIResult() { Result = enumResult.ERR };
-        string SS;
-        System.Data.SqlClient.SqlCommand DBCmd;
-        int RetValue = 0;
 
-        if (CheckPassword(Password)) {
-
-            SS = " UPDATE BulletinBoard WITH (ROWLOCK) SET State=@State " +
-                      " WHERE BulletinBoardID=@BulletinBoardID";
-            DBCmd = new System.Data.SqlClient.SqlCommand();
-            DBCmd.CommandText = SS;
-            DBCmd.CommandType = System.Data.CommandType.Text;
-            DBCmd.Parameters.Add("@State", System.Data.SqlDbType.Int).Value = State;
-            DBCmd.Parameters.Add("@BulletinBoardID", System.Data.SqlDbType.Int).Value = BulletinBoardID;
-            RetValue = DBAccess.ExecuteDB(EWinWeb.DBConnStr, DBCmd);
-
-            if (RetValue > 0) {
-                RedisCache.BulletinBoard.UpdateBulletinBoard();
-                R.Result = enumResult.OK;
-            }
-        } else {
-            SetResultException(R, "InvalidPassword");
-        }
-
-        return R;
-    }
-
-    [WebMethod]
-    public APIResult InsertBulletinBoard(string Password, string BulletinTitle, string BulletinContent) {
-        APIResult R = new APIResult() { Result = enumResult.ERR };
-        string SS;
-        System.Data.SqlClient.SqlCommand DBCmd;
-        int RetValue = 0;
-
-        if (CheckPassword(Password)) {
-
-            SS = " INSERT INTO BulletinBoard (BulletinTitle, BulletinContent) " +
-                      " VALUES (@BulletinTitle, @BulletinContent) ";
-            DBCmd = new System.Data.SqlClient.SqlCommand();
-            DBCmd.CommandText = SS;
-            DBCmd.CommandType = System.Data.CommandType.Text;
-            DBCmd.Parameters.Add("@BulletinTitle", System.Data.SqlDbType.NVarChar).Value = BulletinTitle;
-            DBCmd.Parameters.Add("@BulletinContent", System.Data.SqlDbType.NVarChar).Value = BulletinContent;
-            RetValue = DBAccess.ExecuteDB(EWinWeb.DBConnStr, DBCmd);
-
-            if (RetValue > 0) {
-                RedisCache.BulletinBoard.UpdateBulletinBoard();
-                R.Result = enumResult.OK;
-            }
-        } else {
-            SetResultException(R, "InvalidPassword");
-        }
-
-        return R;
-    }
+   
 
 
     public class APIResult {
