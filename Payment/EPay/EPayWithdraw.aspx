@@ -357,7 +357,6 @@
             } else {
                 c.setElementText("idThrehold", null, 0);
             }
-            c.setElementText("idThrehold", null, decimalToString(wallet.PointValue));
         } else {
             c.setElementText("idThrehold", null,0);
         }
