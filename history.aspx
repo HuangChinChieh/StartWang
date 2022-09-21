@@ -243,7 +243,10 @@
                                             break;
                                     }
 
-                                    c.setClassText(gameRowOneDom, "GameName", null,  "<sapn>" + GameName + "</span>");
+                                    window.parent.API_GetGameLang(EWinWebInfo.Lang, o.DetailList[i].GameCode, (function (langText) {
+                                        c.setClassText(gameRowOneDom, "GameName", null, "<sapn>" + langText + "</span>");
+                                    }));
+
                                     c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);
                                     c.setClassText(gameRowOneDom, "RewardValue", null, o.DetailList[i].RewardValue);
 
