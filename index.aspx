@@ -12,6 +12,7 @@
     int RegisterType = 0;
     int RegisterParentPersonCode = 0;
     string LoginStatus = Request["LoginStatus"];
+    string LoginErrMsg = Request["LoginErrMsg"];
     string Bulletin = string.Empty;
     string FileData = string.Empty;
     string isModify = "0";
@@ -19,7 +20,6 @@
     string[] Separators;
     int AllowLobby = 0;
     int AllowMemberCenter = 0;
-    string GameCodeListStr = string.Empty;
     string b = Request["b"];
     string c = Request["c"];
     string cSub = Request["cSub"];
@@ -65,10 +65,7 @@
     RegisterType = CompanySite.RegisterType;
     RegisterParentPersonCode = CompanySite.RegisterParentPersonCode;
     AllowMemberCenter = CompanySite.Company.AllowMemberCenter;
-
-    dynamic GameCodeList = lobbyAPI.GetCompanyGameCode(Token, Guid.NewGuid().ToString());
-    GameCodeListStr = Newtonsoft.Json.JsonConvert.SerializeObject(GameCodeList);
-
+    
     if (string.IsNullOrEmpty(Request["Lang"])) {
         string userLang = CodingControl.GetDefaultLanguage();
 
@@ -114,8 +111,6 @@
             width: 1px;
             min-width: 100%;
         }*/
-
-      
     </style>
 </head>
 <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
@@ -162,12 +157,12 @@
     var lang = "<%=Lang%>";
     var page = "<%=Page%>";
     var LoginStatus = "<%=LoginStatus%>";
+    var LoginErrMsg = "<%=LoginErrMsg%>";
     var CompanyCode = "<%=CompanyCode%>";
     var needCheckLogin = false;
     var lastWalletList = null; // 記錄最後一次同步的錢包, 用來分析是否錢包有變動
     var ID = 0;
     var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
-    var GameCodeList = <%=GameCodeListStr%>;
     var postObj = null;
     var apiURL = "/index.aspx";
     var lobbyClient;
@@ -192,11 +187,6 @@
         RegisterParentPersonCode: "<%=RegisterParentPersonCode%>",
         DeviceType: getOS(),
         IsOpenGame: false,
-        GameCodeList: {
-            CategoryList: [],
-            GameBrandList: [],
-            GameList: null
-        }
     }
     var SiteInfo;
     var selectedCurrency = '';
@@ -545,6 +535,7 @@
         iFrame.marginHeight = "0";
         iFrame.src = url;
         iFrame.style.height = '100%';
+        iFrame.id = "IFramePage1";
         c.clearChildren(IFramePage);
         IFramePage.appendChild(iFrame);
 
@@ -1012,14 +1003,18 @@
                 notifyWindowEvent("GameLoadEnd", null);
             }
         );
+        appendGameFrame();
+        getCompanyGameCategoryCode();
 
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
             paymentClient = new PaymentAPI("/API/PaymentAPI.asmx");
 
-            appendGameFrame();
-            getCompanyGameCategoryCode();
+
+            if (LoginErrMsg != "" && LoginErrMsg != null) {
+                showMessageOK('', mlp.getLanguageKey(LoginErrMsg));
+            }
 
             if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
                 initLobbyClient();
@@ -1035,11 +1030,7 @@
             else {
                 API_Home();
             }
-
-            try {
-                EWinWebInfo.GameCodeList = GameCodeList.GameCodeList;
-            }
-            catch (e) { }
+            
         });
 
         //API_ShowMessageOK("錯誤", "請輸入登入帳號");
@@ -1085,26 +1076,7 @@
             //是否允許大廳
             if (EWinWebInfo.SiteInfo != null) {
                 if (EWinWebInfo.SiteInfo.Company.AllowLobby == 1) {
-                    //是否有多遊戲
-                    postObj = {
-                        GUID: Math.uuid()
-                    }
-
-                    lobbyClient.GetCompanyGameCode(postObj, function (success, o) {
-                        if (success) {
-                            if (o.Result == 0) {
-                                EWinWebInfo.GameCodeList = o.GameCodeList;
-                                if (o.GameCodeList.length > 0) {
-                                    //API_Lobby();
-                                    API_Home();
-                                }
-                                else {
-                                    API_Home();
-                                }
-                            }
-                        }
-
-                    })
+           
                 }
                 else {
                     API_Home();
@@ -1609,7 +1581,7 @@
                 CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
             }
         }, () => {
-            //console.log("done");
+            
         })
     }
 
@@ -1696,6 +1668,22 @@
         $("#divGameFrame").append(tmp);
     }
 
+    function notifyWindowEvent(eventName, o) {
+        var IFramePage = document.getElementById("IFramePage1");
+
+        if (IFramePage != null) {
+            isDisplay = true;
+
+            if (IFramePage.contentWindow && IFramePage.contentWindow.EWinEventNotify) {
+                try {
+                    IFramePage.contentWindow.EWinEventNotify(eventName, isDisplay, o)
+                } catch (e) {
+
+                }
+            }
+        }
+    }
+
     window.onload = init;
 </script>
 <body>
@@ -1719,8 +1707,8 @@
                 <!--  已登入版頭 -->
                 <div id="idUserLogined" class="header-tit" style="display: none;">
                     <div class="header-tit-info">
-                        <div id="idUserLevel" class="user-level" style="display:none">VIP 9</div>
-                        <div id="idNickName" class="user-ID" style="margin-top:15px">SeanYu888 </div>
+                        <div id="idUserLevel" class="user-level" style="display: none">VIP 9</div>
+                        <div id="idNickName" class="user-ID" style="margin-top: 15px">SeanYu888 </div>
                     </div>
                     <div class="header-tit-point-wrapper">
                         <div class="header-tit-point">
@@ -1746,7 +1734,7 @@
                                 6.越南文：ico-before-flag-vn
                                 7.印度文：ico-before-flag-in
                          -->
-                         <%--<button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="" >語系</button>
+                        <%--<button onclick="openSelLanguage()" type="button" class="btn btn-icon-round ico-before-flag-hk SwitchLang" role="button" data-toggle="modal" data-target="" >語系</button>
                        <button type="button" class="btn btn-customerservice btn-icon-round icon-service language_replace" id="" role="button" data-toggle="modal" data-target="" onclick="onBtnChat()">客服</button>--%>
 
 
@@ -1759,7 +1747,7 @@
                 </div>
                 <div class="header-nav clearfix">
                     <div class="box header-nav-logo">
-                        <img src="images/logo.png" alt="99play_logo"  onclick="API_LoadPage('home.aspx')" style="cursor:pointer">
+                        <img src="images/logo.png" alt="99play_logo" onclick="API_LoadPage('home.aspx')" style="cursor: pointer">
                     </div>
                     <div class="box header-nav-menu" id="dropdownDiv">
                         <div onclick="dropdownFunction()" id="dropdownDiv-btn" class="dropdown-btn"><a class="fa fa-bars" aria-hidden="true"></a></div>
@@ -1801,17 +1789,17 @@
             </div>
         </div>
 
-        
-    
+
+
         <!-- 滿版遊戲介面 -->
-    <div id="divGameFrame" class="divGameFrameBody">
-        <div class="divGameFrameWrapper">
-            <div class="btn-wrapper">
-                <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
+        <div id="divGameFrame" class="divGameFrameBody">
+            <div class="divGameFrameWrapper">
+                <div class="btn-wrapper">
+                    <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
+                </div>
+                <iframe id="GameIFramePage" class="divGameFrame" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
             </div>
-            <iframe id="GameIFramePage" class="divGameFrame" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
         </div>
-    </div>
 
         <!-- Content -->
         <%--    <div id="IFramePage" class="DivContent">
@@ -1821,7 +1809,7 @@
             <iframe id="idFrameContent" class="idFrameContent"></iframe>
         </div>
         <!-- 頁尾 -->
-       <%-- <div class="main-footer">.</div>--%>
+        <%-- <div class="main-footer">.</div>--%>
     </div>
     <!-- wrapper END -->
     <!-- 滿版遊戲介面 end-->
