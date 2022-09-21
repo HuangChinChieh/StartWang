@@ -656,6 +656,18 @@
         openGame(GameBrand, GameName, LangName);
     }
 
+    function API_GetGameLang(lang, GameCode, cb) {
+        GCB.GetByGameCode(GameCode, (GameCodeItem) => {
+            var langText = null;
+
+            if (GameCodeItem) {
+                langText = GameCodeItem.Language.find(x => x.LanguageCode == lang) ? GameCodeItem.Language.find(x => x.LanguageCode == lang).DisplayText : "";
+            }
+
+            cb(langText);
+        })
+    }
+
     //function notifyWindowEvent(eventName, o) {
     //    var iFrameList = document.getElementsByTagName("IFRAME");
 
