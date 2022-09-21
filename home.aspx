@@ -1,12 +1,6 @@
 ﻿<%@ Page Language="C#" %>
 
 <%
-    //string Token = string.Empty;
-
-    //Token = Request["Token"];
-    //if (string.IsNullOrEmpty(Token)) {
-    //    Response.Redirect("Init.aspx");
-    //}
     int RValue;
     Random R = new Random();
     string Token;
@@ -15,9 +9,7 @@
 
     RValue = R.Next(100000, 9999999);
     Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
-
-    dynamic GameCodeList = lobbyAPI.GetCompanyGameCode(Token, Guid.NewGuid().ToString());
-    GameCodeListStr = Newtonsoft.Json.JsonConvert.SerializeObject(GameCodeList);
+    
 %>
 <!doctype html>
 <html>
@@ -103,31 +95,9 @@
     var lang;
     var webTagList;
     var nowWebTag = "fav";
-    var GameCodeList = <%=GameCodeListStr%>;
     var GameHistoryArr = new Array();
     var GameMyFavorArr = new Array();
     var GCB;
-
-    var GameHistoryInfo = function () {
-        this.gameBrand = "";
-        this.gameName = "";
-        this.imgSrc = "";
-        this.AllowDemoPlay = 0;
-    }
-
-    var LobbyGameList = {
-        CategoryList: [{
-            Categ: "All",
-            CategBrandList: []
-        }],
-        GameBrandList: [],
-        GameList: [],
-        CategorySubList: [{
-            Categ: "All",
-            CategSubList: []
-        }],
-        CategorySubBrandList: []
-    }
    
     function init() {
         lang = window.top.API_GetLang();
@@ -137,51 +107,8 @@
 
         mlp.loadLanguage(lang, function () {
             WebInfo = window.parent.API_GetWebInfo();
-            WebInfo.GameCodeList = GameCodeList.GameCodeList;
-            initGameCode(WebInfo);
-            
-        });
-    }
 
-    function getFavoGameList(PropertyName,cb) {
-        p.GetUserAccountProperty(Math.uuid(), WebInfo.SID, PropertyName, function (success, o) {
-            if (success) {
-                if (o.Result == 0) {
-                    if (cb) {
-                        cb(o.Message,true);
-                    }
-                }
-                else {
-                    if (cb) {
-                        cb(null, false);
-                    }
-                }
-            } else {
-                if (cb) {
-                    cb(null,false);
-                }
-            }
-        });
-    }
-
-    function setFavoGameList(PropertyName, PropertyValue,cb) {
-        p.SetUserAccountProperty(Math.uuid(), WebInfo.SID, PropertyName, PropertyValue ,function (success, o) {
-            if (success) {
-                if (o.Result == 0) {
-                    if (cb) {
-                        cb(true);
-                    }
-                }
-                else {
-                    if (cb) {
-                        cb(false);
-                    }
-                }
-            } else {
-                if (cb) {
-                    cb(null, false);
-                }
-            }
+            initGameCode();
         });
     }
 
@@ -201,170 +128,12 @@
         }
     }
 
-    function searchGame() {
-        var target = event.currentTarget;
-        var searchValue = target.value;
-        var gameDoms = document.getElementsByClassName("gameFigure");
-        for (var i = 0; i < gameDoms.length; i++) {
-            var gd = gameDoms[i];
-            var gameName = gd.getElementsByClassName("gameName")[0].innerText;
-            if (!searchValue) {
-                gd.style.display = "block";
-            } else {
-                if (gameName && gameName.toUpperCase().includes(searchValue.toUpperCase())) {
-                    gd.style.display = "block";
-                } else {
-                    gd.style.display = "none";
-                }
-            }
-        }
-    }
-
     function OpenBonusDepositShow() {
         window.top.API_LoadPage("Activity/OpenBonusDeposit_03312022/index.html");
     }
 
-    function initGameCode(o) {
-        o.GameCodeList.forEach(e => {
-            if (LobbyGameList.CategoryList[0].CategBrandList.find(eb => eb == e.BrandCode) == undefined)
-                LobbyGameList.CategoryList[0].CategBrandList.push(e.BrandCode);
-
-            if (LobbyGameList.CategoryList.find(eb => eb.Categ == e.GameCategoryCode) == undefined) {
-                let data = {
-                    Categ: e.GameCategoryCode,
-                    CategBrandList: [
-                        e.BrandCode
-                    ]
-                }
-                LobbyGameList.CategoryList.push(data);
-            }
-            else {
-                LobbyGameList.CategoryList.forEach(cl => {
-                    if (cl.Categ == e.GameCategoryCode) {
-                        if (cl.CategBrandList.find(cbl => cbl == e.BrandCode) == undefined)
-                            cl.CategBrandList.push(e.BrandCode)
-                    }
-                })
-            }
-
-            if (LobbyGameList.GameBrandList.find(eb => eb.BrandCode == e.BrandCode) == undefined) {
-                let Brand = {
-                    BrandCode: e.BrandCode,
-                    BrandCateg: [e.GameCategoryCode]
-                }
-                LobbyGameList.GameBrandList.push(Brand);
-            }
-            else {
-                LobbyGameList.GameBrandList.forEach(eb => {
-                    if (eb.BrandCode == e.BrandCode) {
-                        if (eb.BrandCateg.find(eb => eb == e.GameCategoryCode) == undefined) {
-                            eb.BrandCateg.push(e.GameCategoryCode);
-                        }
-                    }
-                })
-            }
-
-            if (LobbyGameList.GameList.find(eb => eb.GameBrand == e.BrandCode) == undefined) {
-                let GameData = {
-                    GameBrand: e.BrandCode,
-                    GameBrandList: [{
-                        GameCateg: e.GameCategoryCode,
-                        List: [{
-                            GameName: e.GameName,
-                            GameCode: e.GameCode,
-                            GameCategSub: e.GameCategorySubCode,
-                            Description: e.GameName,
-                            IsNew: e.IsNew,
-                            IsHot: e.IsHot,
-                            AllowDemoPlay: e.AllowDemoPlay
-                        }]
-                    }
-                    ]
-                }
-                LobbyGameList.GameList.push(GameData);
-            }
-            else {
-                LobbyGameList.GameList.forEach(eg => {
-
-                    if (eg.GameBrand == e.BrandCode) {
-                        if (eg.GameBrandList.find(eb => eb.GameCateg == e.GameCategoryCode) == undefined) {
-                            let data = {
-                                GameCateg: e.GameCategoryCode,
-                                List: [{
-                                    GameName: e.GameName,
-                                    GameCode: e.GameCode,
-                                    GameCategSub: e.GameCategorySubCode,
-                                    Description: e.GameName,
-                                    IsNew: e.IsNew,
-                                    IsHot: e.IsHot,
-                                    AllowDemoPlay: e.AllowDemoPlay
-                                }]
-                            }
-                            eg.GameBrandList.push(data);
-                        }
-                        else {
-                            eg.GameBrandList.forEach(ebl => {
-                                if (ebl.GameCateg == e.GameCategoryCode) {
-                                    let data = {
-                                        GameName: e.GameName,
-                                        GameCode: e.GameCode,
-                                        GameCategSub: e.GameCategorySubCode,
-                                        Description: e.GameName,
-                                        IsNew: e.IsNew,
-                                        IsHot: e.IsHot,
-                                        AllowDemoPlay: e.AllowDemoPlay
-                                    }
-                                    ebl.List.push(data);
-                                }
-                            })
-                        }
-                    }
-
-                })
-            }
-
-            if (LobbyGameList.CategorySubList[0].CategSubList.find(eb => eb == e.GameCategorySubCode) == undefined)
-                LobbyGameList.CategorySubList[0].CategSubList.push(e.GameCategorySubCode);
-
-            if (LobbyGameList.CategorySubList.find(eb => eb.Categ == e.GameCategoryCode) == undefined) {
-                let data = {
-                    Categ: e.GameCategoryCode,
-                    CategSubList: [
-                        e.GameCategorySubCode
-                    ]
-                }
-                LobbyGameList.CategorySubList.push(data);
-            }
-            else {
-                LobbyGameList.CategorySubList.forEach(cl => {
-                    if (cl.Categ == e.GameCategoryCode) {
-                        if (cl.CategSubList.find(cbl => cbl == e.GameCategorySubCode) == undefined)
-                            cl.CategSubList.push(e.GameCategorySubCode)
-                    }
-                })
-            }
-
-            if (LobbyGameList.CategorySubBrandList.find(eb => eb.Categ == e.GameCategoryCode && eb.Brand == e.BrandCode) == undefined) {
-                let data = {
-                    Categ: e.GameCategoryCode,
-                    Brand: e.BrandCode,
-                    CategSubList: [
-                        e.GameCategorySubCode
-                    ]
-                }
-                LobbyGameList.CategorySubBrandList.push(data);
-            }
-            else {
-                LobbyGameList.CategorySubBrandList.forEach(cl => {
-                    if (cl.Categ == e.GameCategoryCode && cl.Brand == e.BrandCode) {
-                        if (cl.CategSubList.find(cbl => cbl == e.GameCategorySubCode) == undefined)
-                            cl.CategSubList.push(e.GameCategorySubCode)
-                    }
-                })
-            }
-        });
-
-        updateGameCateg(window.parent.CompanyGameCategoryCodes);
+    function initGameCode() {
+        updateGameCateg(window.top.CompanyGameCategoryCodes);
         updateGameBrand();
     }
     //建立分類
@@ -598,6 +367,18 @@
 
     }
 
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "SetLanguage":
+                lang = param;
+
+                mlp.loadLanguage(lang, function () {
+
+                });
+                break;
+        }
+    }
+
     window.onload = init;
 </script>
 <script>
@@ -729,12 +510,6 @@
 
                 <main class="gamePanel">
                     <div class="gamePanel-inner">
-                        <%--  <div class="gameSearchBox">
-                            <div class="inner-box">
-                                <i class="fa fa-search"></i>
-                                <input onchange="searchGame()" id="searchGame" type="text" language_replace="placeholder" placeholder="搜尋">
-                            </div>
-                        </div>--%>
                         <div id="gameSection">
                         </div>
                     </div>
