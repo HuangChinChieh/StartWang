@@ -180,7 +180,8 @@ legend {
 input[type=text],
 input[type=password],
 textarea,
-textarea.form-control {
+textarea.form-control,
+select.form-control {
   box-sizing: border-box;
   margin: 10px auto;
   padding: 0 8px;
@@ -202,7 +203,8 @@ textarea.form-control {
 input[type=text]:hover,
 input[type=password]:hover,
 textarea:hover,
-textarea.form-control:hover {
+textarea.form-control:hover,
+select.form-control:hover {
   outline: 0;
   border: 1px solid #c62828;
   box-shadow: none;
@@ -211,7 +213,8 @@ textarea.form-control:hover {
 input[type=text]:focus,
 input[type=password]:focus,
 textarea:focus,
-textarea.form-control:focus {
+textarea.form-control:focus,
+select.form-control:focus {
   outline: 0;
   border: 1px solid #c62828;
   background: #222;
@@ -2722,8 +2725,9 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 .footer-container {
   padding: 0px 0 0;
-  background: #fff;
-  background: url(../images/bg_Footer.jpg) center bottom no-repeat;
+  background-color: rgba(0, 0, 0, 0.25);
+  /* background: url(../images/bg_Footer.jpg) center bottom no-repeat; */
+
   background-size: cover;
   color: #fff;
 }
@@ -2785,13 +2789,15 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 .footer-inner .partner .logo-item img {
   width: 100%;
-  -webkit-filter: grayscale(100%) brightness(1);
-  filter: grayscale(100%) brightness(1);
+  -webkit-filter: grayscale(100%) brightness(50);
+  filter: grayscale(100%) brightness(10);
+  opacity: 0.35;
 }
 
 .footer-inner .partner .logo-item:hover img {
   -webkit-filter: unset;
   filter: unset;
+  opacity: 1;
 }
 
 .footer-inner .company-info {
@@ -3010,14 +3016,20 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 /* 網站特點 */
 .web-spec{
-  background: url(../images/web-spec_bg.png) center top no-repeat;
+  /* background: url(../images/web-spec_bg.png) center top no-repeat; */  
   color: rgba(255, 255, 255, 0.85);
-  padding: 10px 15px;
   line-height: 1.65;
+  /* background-size: cover; */
 }
 
 .web-spec *{
   box-sizing: border-box;
+}
+
+.web-spec .container{
+  background: url(../images/web-spec_bg.png) right top no-repeat;
+  padding: 20px 15px;
+
 }
 
 .web-spec-list{
@@ -3036,9 +3048,10 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   padding-left: 10px;
 }
 .spec-item .title{
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0.5rem;
+  color: #d1c193;
 }
 
 .spec-item-inner{
@@ -3075,6 +3088,17 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 @media screen and (min-width:768px) {
   .web-spec-list .spec-item{
     width: 50%;  
+  }
+
+  .web-spec .container{
+    padding: 40px 15px;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .web-spec .container{
+    background: url(../images/web-spec_bg-m.png) right top no-repeat;
+    background-size: cover;
   }
 }
 

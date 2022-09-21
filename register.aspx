@@ -312,7 +312,7 @@
                             <%--<div id="idQRCodeResult" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span>Decode failure</span></div>--%>
                         </div>
                         <input id="idEMail" type="text" language_replace="placeholder" placeholder="信箱" name="EMail">
-                        <div class="popupBtn_red" onclick="onBtnSendValidateCode()" id="btnSendValidateCode"><span class="language_replace">傳送驗證碼</span></div>
+                        <div class="btn popupBtn_red" onclick="onBtnSendValidateCode()" id="btnSendValidateCode"><span class="language_replace">傳送驗證碼</span></div>
                         <input id="idValidateCode" name="ValidateCode" type="text" language_replace="placeholder" placeholder="驗證碼" onkeyup="CheckValidateCode()">
                         <div class="optionInput">
                             <div class="dropdownMenu">
@@ -601,7 +601,7 @@
                             <input id="idRealName" type="text" language_replace="placeholder" placeholder="設定真實姓名" name="RealName">
 
                             <div class="popup_notice" style="display: inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入與銀行卡相同之真實姓名以確保您的權益</span></div>
-                            <div class="popupBtn_red" onclick="formSubmitCheck()"><span class="language_replace">註冊</span></div>
+                            <div class="btn popupBtn_red" onclick="formSubmitCheck()"><span class="language_replace">註冊</span></div>
                             <%-- <input id="idNickName" maxlength="16" type="text" language_replace="placeholder" placeholder="設定暱稱" name="NickName" autocomplete="off">
                             <input id="idRealName" maxlength="50" type="text" language_replace="placeholder" placeholder="設定真實姓名" name="RealName">
                             <div class="popup_notice" style="display:inline;"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入與銀行卡相同之真實姓名以確保您的權益</span></div>
@@ -609,7 +609,7 @@
                             <div id="idLoginPasswordDeniedText" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">請輸入英文或數字8-16位數</span></div>
                             <input id="idLoginPassword2" type="password" class="" language_replace="placeholder" placeholder="確認密碼" name="password" onblur="CheckPasswordAvailable()">
                             <div id="idLoginPassword2DeniedText" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">輸入錯誤</span></div>
-                            <div class="popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>--%>
+                            <div class="btn popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>--%>
                         </div>
                     </div>
                 </div>
