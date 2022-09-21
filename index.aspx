@@ -12,6 +12,7 @@
     int RegisterType = 0;
     int RegisterParentPersonCode = 0;
     string LoginStatus = Request["LoginStatus"];
+    string LoginErrMsg = Request["LoginErrMsg"];
     string Bulletin = string.Empty;
     string FileData = string.Empty;
     string isModify = "0";
@@ -162,6 +163,7 @@
     var lang = "<%=Lang%>";
     var page = "<%=Page%>";
     var LoginStatus = "<%=LoginStatus%>";
+    var LoginErrMsg = "<%=LoginErrMsg%>";
     var CompanyCode = "<%=CompanyCode%>";
     var needCheckLogin = false;
     var lastWalletList = null; // 記錄最後一次同步的錢包, 用來分析是否錢包有變動
@@ -1021,6 +1023,10 @@
             appendGameFrame();
             getCompanyGameCategoryCode();
 
+            if (LoginErrMsg != "" && LoginErrMsg != null) {
+                 showMessageOK('', mlp.getLanguageKey(LoginErrMsg));
+            } 
+
             if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
                 initLobbyClient();
 
@@ -1035,7 +1041,7 @@
             else {
                 API_Home();
             }
-
+            
             try {
                 EWinWebInfo.GameCodeList = GameCodeList.GameCodeList;
             }

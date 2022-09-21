@@ -653,7 +653,7 @@
                 <span class="language_replace lob_categorySubName">--</span>
             </div>
         </div>
-        <div id="TemplateGameCategorySubGameItem" style="display: none">
+<%--        <div id="TemplateGameCategorySubGameItem" style="display: none">
             <div class="lob_gameListDiv">
                 <div class="lob_gameListBtn">
                     <div class="lob_gameListImg">
@@ -663,7 +663,7 @@
                 </div>
                 <div class="myFavorBtn"></div>
             </div>
-        </div>
+        </div>--%>
         <div id="TemplateGameCategorySubBtn" style="display: none">
             <div class="lob_gamesListBtn">
                 <div class="displayType_switch_Btn_icon2"></div>

@@ -1,3 +1,11 @@
-{
-  
+﻿{
+  "UserNotExist": "帳號不存在",
+  "InvalidImageCode": "驗證錯誤",
+  "InvalidAccountOrPassword": "帳號或密碼錯誤",
+  "AccountLock": "帳號鎖定",
+  "AccountDisable": "帳號停用",
+  "InvalidCompanyCode": "公司代碼錯誤",
+  "InvalidToken": "驗證錯誤",
+  "InvalidHash": "驗證錯誤",
+  "Other": "其他"
 }

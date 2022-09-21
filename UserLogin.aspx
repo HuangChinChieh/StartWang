@@ -14,7 +14,7 @@
         string ValidImg = Request["LoginValidateCode"];
         EWin.LoginResult LoginAPIResult;
         EWin.LoginAPI LoginAPI = new EWin.LoginAPI();
-        
+
         RValue = R.Next(100000, 9999999);
         Token = EWinWeb.CreateToken(EWinWeb.PrivateKey, EWinWeb.APIKey, RValue.ToString());
 
@@ -28,7 +28,7 @@
             Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=success");
 
         } else {
-            Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=fail");
+            Response.Redirect("RefreshParent.aspx?index.aspx?LoginStatus=fail&LoginErrMsg=" + LoginAPIResult.Message);
             //Response.Write(LoginAPIResult.Message);
         }
     }
