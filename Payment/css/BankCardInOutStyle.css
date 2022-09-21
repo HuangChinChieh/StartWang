@@ -66,7 +66,8 @@ body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;
 input[type="text"], 
 input[type="password"], 
 textarea, 
-textarea.form-control
+textarea.form-control,
+select.form-control
  {
 	 box-sizing: border-box;
 	margin: 6px auto;
@@ -90,7 +91,8 @@ textarea.form-control
 input[type="text"]:hover, 
 input[type="password"]:hover, 
 textarea:hover, 
-textarea.form-control:hover {
+textarea.form-control:hover,
+select.form-control:hover {
 	outline: 0;
 	border: 1px solid var(--main-color);
 	-moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
@@ -101,7 +103,8 @@ textarea.form-control:hover {
 input[type="text"]:focus, 
 input[type="password"]:focus, 
 textarea:focus, 
-textarea.form-control:focus {
+textarea.form-control:focus,
+select.form-control:focus  {
 	outline: 0;
 	border: 1px solid var(--main-color);
 	background:#000;
