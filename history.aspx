@@ -62,7 +62,7 @@
                 var date = new Date();
                 document.getElementById('idPageStartData').value = getDateString(date);
                 document.getElementById('idPageEndData').value = getDateString(date);
-
+                changeSwitchTag("Game");
             });
         });
 
