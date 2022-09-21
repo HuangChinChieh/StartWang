@@ -441,7 +441,7 @@
 </script>
 
 <body>
-    <div class="pageWrapper" style="margin-top:110px">
+    <div class="pageWrapper">
         <div class="pageMain">
             <div class="pageHeader">
                 <div class="backBtn" style="display: none;"><span class="fa fa-arrow-left"></span></div>
