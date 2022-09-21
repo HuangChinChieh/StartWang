@@ -1803,7 +1803,7 @@
 
         <!-- Content -->
         <%--    <div id="IFramePage" class="DivContent">
-            <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
+            <iframe id="idFrameContent" class="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
         </div>--%>
         <div id="IFramePage" class="DivContent" style="">
             <iframe id="idFrameContent" class="idFrameContent"></iframe>
