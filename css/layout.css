@@ -2725,8 +2725,9 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 .footer-container {
   padding: 0px 0 0;
-  background: #fff;
-  background: url(../images/bg_Footer.jpg) center bottom no-repeat;
+  background-color: rgba(0, 0, 0, 0.25);
+  /* background: url(../images/bg_Footer.jpg) center bottom no-repeat; */
+
   background-size: cover;
   color: #fff;
 }
@@ -3015,10 +3016,8 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 /* 網站特點 */
 .web-spec{
-  /* background: url(../images/web-spec_bg.png) center top no-repeat; */
-  
+  /* background: url(../images/web-spec_bg.png) center top no-repeat; */  
   color: rgba(255, 255, 255, 0.85);
-  padding: 10px 15px;
   line-height: 1.65;
   /* background-size: cover; */
 }
@@ -3029,6 +3028,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 .web-spec .container{
   background: url(../images/web-spec_bg.png) right top no-repeat;
+  padding: 20px 15px;
 
 }
 
@@ -3089,13 +3089,16 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   .web-spec-list .spec-item{
     width: 50%;  
   }
+
+  .web-spec .container{
+    padding: 40px 15px;
+  }
 }
 
 @media screen and (max-width:640px) {
   .web-spec .container{
     background: url(../images/web-spec_bg-m.png) right top no-repeat;
     background-size: cover;
-   
   }
 }
 
