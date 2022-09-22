@@ -508,7 +508,9 @@
                         <div class="rowElm">
                             <div class="rowLeft"><span class="language_replace">選擇銀行</span></div>
                             <div class="rowRight">
-                                  <select class="form-control custom-select mb-4" id="SearchBank" style=""></select> 
+                                <div class="dropdownMenu">
+                                    <select class="form-control custom-select mb-4" id="SearchBank"></select>
+                                </div>
                             </div>
                         </div>
                         <div class="rowElm">

@@ -189,25 +189,25 @@ input[type="radio"]:checked ~ .radioBoxBtn .radioBoxicon, input[type="checkbox"]
     transition: all .3s;
     overflow:hidden;
 }
-    .dropdownMenu select {
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        width: 90px;
-        line-height: 50px;
-        background: transparent;
-        color:#fff;
-        border: none;
+.dropdownMenu select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 90px;
+    // line-height: 50px;
+    background: transparent;
+    color:#fff;
+    border: none;
 
-    }
-    .dropdownMenu option {
-        color:#999;
-    }
+}
+.dropdownMenu option {
+    color:#999;
+}
 /* Style the arrow inside the select element: */
 .dropdownMenu :after {
     position: absolute;
     content: "";
-    top: 14px;
+    top: 18px;
     right: 10px;
     width: 0;
     height: 0;
