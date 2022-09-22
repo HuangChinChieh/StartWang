@@ -110,7 +110,7 @@
             if (success) {
                 if (o.Result == 0) {
                     window.parent.API_ShowMessageOK("", mlp.getLanguageKey("已成功修改密碼！"), function () {
-                        location.reload();
+                        window.parent.onBtnLoginShow();
                     });
                 }
                 else {
