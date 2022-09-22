@@ -80,8 +80,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
-    <meta name="Description" content="99PLAY">
-    <title>12万娱乐城</title>
+    <meta name="Description" content="StarWang">
+    <title>星旺娛樂城</title>
     <!-- Favicon and touch icons -->
 
     <link rel="shortcut icon" href="/images/12wlogo.png">
