@@ -316,7 +316,7 @@
                     p.CreateEPayWithdrawal(webInfo.SID, Math.uuid(), txtBankCard.value.trim(), txtRealName.value.trim(), SearchBank.value, txtBankBranch.value.trim(), txtAmount.value.trim(), function (success, o) {
                         ui.hideMask();
                         if (success) {
-                            if (o.ResultState == 0) {
+                            if (o.Result == 0) {
                                 oBankCardWithdrawal = o.Data;
                                 showStep2();
                             } else {
@@ -388,14 +388,10 @@
             c.setElementText("idStep2Date", null, oBankCardWithdrawal.CreateDate.split('T')[0]);
             c.setElementText("idStep2Time", null, oBankCardWithdrawal.CreateDate.split('T')[1]);
 
-            if (oBankCardWithdrawal.BankCardInfo != null) {
-                if (oBankCardWithdrawal.BankCardInfo.length > 0) {
-                    c.setElementText("idStep2BankName", null, $('#SearchBank').val());
-                    c.setElementText("idStep2BranchName", null, $('#txtBankCard').val());
-                    c.setElementText("idStep2BankNumber", null, $('#txtBankBranch').val());
-                    c.setElementText("idStep2AccountName", null, $('#txtRealName').val());
-                }
-            }
+            c.setElementText("idStep2BankName", null, $('#SearchBank').val());
+            c.setElementText("idStep2BranchName", null, $('#txtBankCard').val());
+            c.setElementText("idStep2BankNumber", null, $('#txtBankBranch').val());
+            c.setElementText("idStep2AccountName", null, $('#txtRealName').val());
         }
 
         window.document.body.scrollTop = 0;
