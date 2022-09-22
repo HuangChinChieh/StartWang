@@ -211,54 +211,56 @@
                                 });
 
                                 for (var i = 0; i < o.DetailList.length; i++) {
-                                    var status = "lose";
-
-                                    numGameTotalValidBetValue = numGameTotalValidBetValue.plus(o.DetailList[i].ValidBetValue);
-                                    numGameTotalRewardValue = numGameTotalRewardValue.plus(o.DetailList[i].RewardValue);
-
-                                    if (o.DetailList[i].RewardValue >= 0) {
-                                        status = "win";
-                                    }
-
-                                    var DateDom = c.getTemplate("templateRowTitle");
-                                    c.setClassText(DateDom, "rowDate", null, o.DetailList[i].GameDate + " " + o.DetailList[i].GameTime);
-                                    ParentMain.appendChild(DateDom);
-
-                                    var gameRowOneDom = c.getTemplate("templateGameOrderRow");
-                                    var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
-                                    var GameName;
-
-                                    switch (o.DetailList[i].GameAccountingCode) {
-                                        case "EWin.BAC.0":
-                                            GameName = "傳統電投";
-                                            break;
-                                        case "EWin.BAC.1":
-                                            GameName = "快速電投";
-                                            break;
-                                        case "EWin.BAC.2":
-                                            GameName = "網投";
-                                            break;
-                                        default:
-                                            GameName = o.DetailList[i].GameAccountingCode;
-                                            break;
-                                    }
-
+                                    var record = o.DetailList[i];
                                     window.parent.API_GetGameLang(EWinWebInfo.Lang, o.DetailList[i].GameCode, (function (langText) {
+                                        var status = "lose";
+
+                                        numGameTotalValidBetValue = numGameTotalValidBetValue.plus(record.ValidBetValue);
+                                        numGameTotalRewardValue = numGameTotalRewardValue.plus(record.RewardValue);
+
+                                        if (record.RewardValue >= 0) {
+                                            status = "win";
+                                        }
+
+                                        var DateDom = c.getTemplate("templateRowTitle");
+                                        c.setClassText(DateDom, "rowDate", null, record.GameDate + " " + record.GameTime);
+                                        ParentMain.appendChild(DateDom);
+
+                                        var gameRowOneDom = c.getTemplate("templateGameOrderRow");
+                                        var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
+                                        var GameName;
+
+                                        switch (record.GameAccountingCode) {
+                                            case "EWin.BAC.0":
+                                                GameName = "傳統電投";
+                                                break;
+                                            case "EWin.BAC.1":
+                                                GameName = "快速電投";
+                                                break;
+                                            case "EWin.BAC.2":
+                                                GameName = "網投";
+                                                break;
+                                            default:
+                                                GameName = record.GameAccountingCode;
+                                                break;
+                                        }
+
+
+                                        c.setClassText(gameRowOneDom, "CurrencyType", null, record.CurrencyType);
+                                        c.setClassText(gameRowOneDom, "RewardValue", null, record.RewardValue);
+
+                                        c.setClassText(gameRowOneDom, "ValidBetValue", null, record.ValidBetValue);
+
+                                        if (record.RewardValue >= 0) {
+                                            statusDom.classList.add("win");
+                                        } else if (record.RewardValue < 0) {
+                                            statusDom.classList.add("lose");
+                                        }
+
+                                        ParentMain.appendChild(gameRowOneDom);
+
                                         c.setClassText(gameRowOneDom, "GameName", null, "<sapn>" + langText + "</span>");
-                                    }));
-
-                                    c.setClassText(gameRowOneDom, "CurrencyType", null, o.DetailList[i].CurrencyType);
-                                    c.setClassText(gameRowOneDom, "RewardValue", null, o.DetailList[i].RewardValue);
-
-                                    c.setClassText(gameRowOneDom, "ValidBetValue", null, o.DetailList[i].ValidBetValue);
-
-                                    if (o.DetailList[i].RewardValue >= 0) {
-                                        statusDom.classList.add("win");
-                                    } else if (o.DetailList[i].RewardValue < 0) {
-                                        statusDom.classList.add("lose");
-                                    }
-
-                                    ParentMain.appendChild(gameRowOneDom);
+                                    }).bind(record));
 
                                 }
 
