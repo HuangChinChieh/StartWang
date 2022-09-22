@@ -13,7 +13,7 @@
     <title>eWin Gaming</title>
 
     <!-- CSS -->
-    <link href="../css/BankCardInOutStyle.css" rel="stylesheet" />
+    <link href="../css/BankCardInOutStyle.css?0921" rel="stylesheet" />
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">

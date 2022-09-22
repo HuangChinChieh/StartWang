@@ -1577,7 +1577,7 @@
                 CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
             }
         }, () => {
-            
+                notifyWindowEvent("GetGameCategoryCodeDone");
         })
     }
 
@@ -1659,13 +1659,13 @@
             <div class="btn-wrapper">
                 <div class="btn btn-game-close" onclick="CloseGameFrame()"><span class="fa fa-close fa-1x"></span></div>
             </div>
-            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;background-color:#000" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
+            <iframe id="GameIFramePage" style="width:${w}px;height:${vh}px;" name="mainiframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-pointer-lock"></iframe>
         </div>`;
         $("#divGameFrame").append(tmp);
     }
 
     function notifyWindowEvent(eventName, o) {
-        var IFramePage = document.getElementById("IFramePage1");
+        var IFramePage = document.getElementById("idFrameContent");
 
         if (IFramePage != null) {
             isDisplay = true;
