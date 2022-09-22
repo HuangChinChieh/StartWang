@@ -104,11 +104,14 @@
         p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
         GCB = window.parent.API_GetGCB();
+        WebInfo = window.parent.API_GetWebInfo();
 
         mlp.loadLanguage(lang, function () {
-            WebInfo = window.parent.API_GetWebInfo();
+            if (window.top.CompanyGameCategoryCodes.length > 1) {
+                updateGameCateg();
+            }
+            updateGameBrand();
 
-            initGameCode();
         });
     }
 
@@ -131,18 +134,14 @@
     function OpenBonusDepositShow() {
         window.top.API_LoadPage("Activity/OpenBonusDeposit_03312022/index.html");
     }
-
-    function initGameCode() {
-        if (window.top.CompanyGameCategoryCodes.length > 1) {
-            updateGameCateg();
-        }
-        updateGameBrand();
-    }
+    
     //建立分類
     function updateGameCateg() {
         var o = window.top.CompanyGameCategoryCodes;
 
         var idTags = document.getElementById("idTags");
+
+        idTags.innerHTML = "";
         
         o.forEach(e => {
             let BIcon
@@ -218,7 +217,6 @@
         })
 
         idGameBrandList.appendChild(sectionDom);
-        mlp.loadLanguage(lang);
 
     }
     //切換分類
@@ -320,6 +318,7 @@
             c.getFirstClassElement(GI, "lob_gameListBtn").onclick = new Function("window.parent.openGame('" + gameBrand + "', '" + gameName + "')");
 
             myFavorIcon = c.getFirstClassElement(GI, "myFavorBtn");
+            myFavorIcon.classList.add("gameCode_" + gameBrand + '.' + gameName);
             myFavorIcon.onclick = new Function("setMyFavor('" + gameCode + "')");
 
             idGameItemList.appendChild(GI);
@@ -354,12 +353,12 @@
             if ($(btn).parent().hasClass("myFavor")) {
                 $(btn).parent().removeClass("myFavor");
                 GCB.RemoveFavo(gameCode, function () {
-                    //window.parent.API_RefreshPersonalFavo(gameCode, false);
+                    window.parent.API_RefreshPersonalFavo(gameCode, false);
                 });
             } else {
                 $(btn).parent().addClass("myFavor");
                 GCB.AddFavo(gameCode, function () {
-                    //window.parent.API_RefreshPersonalFavo(gameCode, true);
+                    window.parent.API_RefreshPersonalFavo(gameCode, true);
                 });
             }
 
@@ -382,6 +381,15 @@
                 break;
             case "GetGameCategoryCodeDone":
                 updateGameCateg();
+                break;
+            case "RefreshPersonalFavo":
+                var selector = "." + ("gameCode_" + param.GameCode + ".btn-like").replace(".", "\\.");
+                debugger;
+                if (param.IsAdded) {
+                    $(selector).addClass("myFavor");
+                } else {
+                    $(selector).removeClass("myFavor");
+                }
                 break;
         }
     }
@@ -752,7 +760,7 @@
                         </div>
                         <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
                     </div>
-                    <div class="myFavorBtn"></div>
+                    <div class="myFavorBtn btn-like"></div>
                 </div>
             </div>
             <div class="lob_gameListBrand">
