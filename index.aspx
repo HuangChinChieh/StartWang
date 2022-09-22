@@ -1521,8 +1521,8 @@
             //dt = 0: 四方/1=區塊鏈/2=銀行轉帳/3=代理
             switch (dt) {
                 case 0:
-                   //API_ShowMessageOK(mlp.getLanguageKey(""), mlp.getLanguageKey("功能未開啟"));
-                    API_LoadPage("/Payment/EPay/EPayDeposite.aspx");
+                   API_ShowMessageOK(mlp.getLanguageKey(""), mlp.getLanguageKey("功能未開啟"));
+                   // API_LoadPage("/Payment/EPay/EPayDeposite.aspx");
                     break;
                 case 1:
                     //openBitCoinAddress();
@@ -1547,8 +1547,8 @@
         if (EWinWebInfo.UserLogined) {
             switch (wt) {
                 case 0:
-                    //API_ShowMessageOK(mlp.getLanguageKey(""), mlp.getLanguageKey("功能未開啟"));
-                    API_LoadPage("/Payment/EPay/EPayWithdraw.aspx");
+                    API_ShowMessageOK(mlp.getLanguageKey(""), mlp.getLanguageKey("功能未開啟"));
+                    //API_LoadPage("/Payment/EPay/EPayWithdraw.aspx");
                     break;
                 case 1:
                     //openBitCoinAddress();
