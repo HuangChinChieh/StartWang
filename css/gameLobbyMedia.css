@@ -1338,7 +1338,7 @@
         position: relative;
         /*float: left;*/
 		display: inline-block;
-        box-sizing: content-box;
+        /* box-sizing: content-box; */
         margin-bottom: 40px;
     }
     .lob_gameListBtn{
@@ -1396,7 +1396,7 @@
         position: relative;
         /*float: left;*/
 		display: inline-block;
-        box-sizing: content-box;
+        /* box-sizing: content-box; */
         margin-bottom: 10px;
     }
     .lob_gameListBtn{
@@ -1470,7 +1470,7 @@
         position: relative;
         /*float: left;*/
 		display: inline-block;
-        box-sizing: content-box;
+        /* box-sizing: content-box; */
         margin-bottom: 10px;
     }
     .lob_gameListBtn{

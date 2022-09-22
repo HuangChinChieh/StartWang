@@ -16,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <meta name="Description" content="99PLAY">
     <title>12万娱乐城</title>
     <!-- Favicon and touch icons -->
@@ -104,11 +104,12 @@
         p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
         GCB = window.parent.API_GetGCB();
+        WebInfo = window.parent.API_GetWebInfo();
 
         mlp.loadLanguage(lang, function () {
-            WebInfo = window.parent.API_GetWebInfo();
+            updateGameCateg();
+            updateGameBrand();
 
-            initGameCode();
         });
     }
 
@@ -131,15 +132,23 @@
     function OpenBonusDepositShow() {
         window.top.API_LoadPage("Activity/OpenBonusDeposit_03312022/index.html");
     }
-
-    function initGameCode() {
-        updateGameCateg(window.top.CompanyGameCategoryCodes);
-        updateGameBrand();
-    }
+    
     //建立分類
-    function updateGameCateg(o) {
+    function updateGameCateg() {
+
+        var o = window.top.CompanyGameCategoryCodes;
+
         var idTags = document.getElementById("idTags");
-        
+        idTags.innerHTML = "";
+        var strFav = `<div>
+                        <a onclick="changeGameCateg(this,'myFavor')" class="a_click tags">
+                            <div class="lob_gameTypeIcon">
+                                <img class="gameTypeIcon" src="images/lobby/icon_gametype_Favicon.svg" />
+                            </div>
+                            <span class="tagName language_replace">${mlp.getLanguageKey("最愛")}</span></a>
+                    </div>`;
+        $("#idTags").append(strFav);
+
         o.forEach(e => {
             let BIcon
 
@@ -214,7 +223,6 @@
         })
 
         idGameBrandList.appendChild(sectionDom);
-        mlp.loadLanguage(lang);
 
     }
     //切換分類
@@ -267,8 +275,8 @@
             if (divGamePage != null) {
                 var idGameItemList = document.getElementById("idGameItemList");
                 idGameItemList.innerHTML = "";
-
-                GCB.CursorGetByGameBrand(brandCode, (gameItem) => {
+                
+                GCB.CursorGetByMultiSearch(brandCode, brandCateg, null, "", (gameItem) => {
                     updateGameCode(gameItem);
                 }, () => {
                     //console.log("done");
@@ -316,6 +324,7 @@
             c.getFirstClassElement(GI, "lob_gameListBtn").onclick = new Function("window.parent.openGame('" + gameBrand + "', '" + gameName + "')");
 
             myFavorIcon = c.getFirstClassElement(GI, "myFavorBtn");
+            myFavorIcon.classList.add("gameCode_" + gameBrand + '.' + gameName);
             myFavorIcon.onclick = new Function("setMyFavor('" + gameCode + "')");
 
             idGameItemList.appendChild(GI);
@@ -350,12 +359,12 @@
             if ($(btn).parent().hasClass("myFavor")) {
                 $(btn).parent().removeClass("myFavor");
                 GCB.RemoveFavo(gameCode, function () {
-                    //window.parent.API_RefreshPersonalFavo(gameCode, false);
+                    window.parent.API_RefreshPersonalFavo(gameCode, false);
                 });
             } else {
                 $(btn).parent().addClass("myFavor");
                 GCB.AddFavo(gameCode, function () {
-                    //window.parent.API_RefreshPersonalFavo(gameCode, true);
+                    window.parent.API_RefreshPersonalFavo(gameCode, true);
                 });
             }
 
@@ -375,6 +384,18 @@
                 mlp.loadLanguage(lang, function () {
 
                 });
+                break;
+            case "GetGameCategoryCodeDone":
+                updateGameCateg();
+                break;
+            case "RefreshPersonalFavo":
+                var selector = "." + ("gameCode_" + param.GameCode + ".btn-like").replace(".", "\\.");
+ 
+                if (param.IsAdded) {
+                    $(selector).parent().addClass("myFavor");
+                } else {
+                    $(selector).parent().removeClass("myFavor");
+                }
                 break;
         }
     }
@@ -745,7 +766,7 @@
                         </div>
                         <div class="lob_gameListName"><span class="idGameName">GameName</span></div>
                     </div>
-                    <div class="myFavorBtn"></div>
+                    <div class="myFavorBtn btn-like"></div>
                 </div>
             </div>
             <div class="lob_gameListBrand">

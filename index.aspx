@@ -79,7 +79,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <meta name="Description" content="99PLAY">
     <title>12万娱乐城</title>
     <!-- Favicon and touch icons -->
@@ -170,6 +170,7 @@
     var GCB;
     var CompanyGameCategoryCodes = ["All"];
     var gameWindow;
+    var Favos = [];
     var EWinWebInfo = {
         EWinUrl: "<%=EWinWeb.EWinUrl %>",
         EWinGameUrl: "<%=EWinWeb.EWinGameUrl %>",
@@ -652,6 +653,31 @@
 
             cb(langText);
         })
+    }
+
+     function API_RefreshPersonalFavo(gameCode, isAdded) {
+        if (!isAdded) {
+            var index = Favos.indexOf(gameCode);
+
+            if (index > -1) {
+                Favos.splice(index, 1);
+            }
+        } else if (isAdded) {
+            var index = Favos.indexOf(gameCode);
+
+            if (index == -1) {
+                Favos.push(gameCode);
+            }
+        }
+
+        //lobbyClient.SetUserAccountProperty(EWinWebInfo.SID, Math.uuid(), "Favo", JSON.stringify(Favos), function (success, o) {
+        //    if (success) {
+        //        if (o.Result == 0) {
+        //        }
+        //    }
+        //});
+
+        notifyWindowEvent("RefreshPersonalFavo", { GameCode: gameCode, IsAdded: isAdded });
     }
 
     //function notifyWindowEvent(eventName, o) {
@@ -1576,7 +1602,7 @@
                 CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
             }
         }, () => {
-            
+                notifyWindowEvent("GetGameCategoryCodeDone");
         })
     }
 
@@ -1664,7 +1690,7 @@
     }
 
     function notifyWindowEvent(eventName, o) {
-        var IFramePage = document.getElementById("IFramePage1");
+        var IFramePage = document.getElementById("idFrameContent");
 
         if (IFramePage != null) {
             isDisplay = true;
