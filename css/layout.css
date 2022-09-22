@@ -1525,9 +1525,12 @@ button.btn-customerservice {
 .rowElm2L {
   position: relative;
   width: 100%;
-  line-height: 28px;
+  line-height: 1.5;
   padding: 8px 0px 8px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 }
 
 .rowElm2L~.rowTitle {
@@ -1584,6 +1587,11 @@ button.btn-customerservice {
   width: 60%;
 }
 
+/* 上下數 */
+.Status{
+  text-align: right;  
+}
+
 @media (min-width: 900px) {
 
   .row3XL1A,
@@ -1611,6 +1619,10 @@ button.btn-customerservice {
   .row3XL1C {
     font-size: 1.3em;
   }
+
+  .row3XL1B{
+    /* text-align: right; */
+  }
 }
 
 @media (max-width: 899px) {
@@ -1630,10 +1642,33 @@ button.btn-customerservice {
     /* width: 100%; */
   }
 
+
   .row3XL1C,
   .row3XL2A {
     /* width: 100%; */
   }
+
+   /* 遊戲名稱 */
+  .row3XL1A{
+    width: 65%;
+  }
+  /* 幣值 */
+  .row3XL1B{
+    width: 35%;
+  }
+  /* 有效投注 */
+  .row3XL2B{
+    width: 35%;
+    order: 3;
+  }
+ /* 上下數 */
+  .row3XL1C{
+    order: 4;
+    width: 65%;
+    /* flex: 1; */
+  }
+
+  
 
   .row3XL1A {
     font-size: 1.3em;
@@ -1652,7 +1687,21 @@ button.btn-customerservice {
   }
 
   .row3XL1C {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
+  }
+
+  /* 上下數 */
+  .Status{    
+    font-size: 0.75rem;
+    display: flex;
+    flex-flow: column wrap;
+  }
+  .Status .title{
+    opacity: 0.75;
+    
+  }
+  .Status .RewardValue{
+    font-size: 1.4rem;
   }
 }
 
@@ -2042,7 +2091,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 }
 
 .win {
-  text-align: right;
+  /* text-align: right; */
   color: #2ecf8a;
 }
 
@@ -2052,7 +2101,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 
 @media (max-width: 899px) {
   .win {
-    text-align: left;
+    /* text-align: left; */
     color: #2ecf8a;
   }
 }

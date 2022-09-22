@@ -412,7 +412,7 @@
             <div class="rowElm2L">
                 <div class="row3XL1A"><span class="GameName language_replace">99Play</span></div>
                 <div class="row3XL1B"><span class="CurrencyType" style="color: black; margin-right: 5px">CNY</span></div>
-                <div class="Status row3XL1C win"><span class="language_replace">上下數</span> : <span class="RewardValue">6,523</span></div>
+                <div class="Status row3XL1C"><span class="title language_replace">上下數</span><span class="RewardValue">6,523</span></div>
                 <div class="row3XL2B"><span class="language_replace">有效投注</span>:<span class="ValidBetValue">7,300</span></div>
                 <div class="row3XL2C"><span></span></div>
             </div>
