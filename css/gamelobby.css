@@ -703,7 +703,7 @@ input[type="radio"]+label .lob_gameTypeIcon,
 
 
 
-
+/* 加入最愛 ==============*/
 .myFavorBtn {
   right: 10%;
   top: 10px;
@@ -748,39 +748,8 @@ input[type="radio"]+label .lob_gameTypeIcon,
   transition: all 0.10s ease-out;
 }
 
-.myFavorBtn:hover {
-  /* background: rgba(255,255,255,0.7); */
-  background: rgba(0, 0, 0, 0.7);
-}
 
 
-
-
-
-.myFavorBtn:hover::after {
-  content: "";
-  position: absolute;
-  background: var(--main-color);
-  border-radius: 12px 0px 0px 12px;
-  transform: rotate(45deg);
-  /* background: rgba(255,255,255,0.7) */
-  background: rgba(255, 0, 0, 0.7);
-}
-
-.myFavorBtn:hover::before {
-  content: "";
-  position: absolute;
-  background: var(--main-color);
-  border-radius: 0px 12px 12px 0px;
-  transform: rotate(-45deg);
-  background: rgba(255, 0, 0, 0.7);
-}
-
-/* .myFavor .myFavorBtn:hover::before,
-  .myFavor .myFavorBtn:hover::after{
-     
-      background: rgba(255,0,0,0.7);
-  } */
 
 
 .myFavor .myFavorBtn {
@@ -799,12 +768,6 @@ input[type="radio"]+label .lob_gameTypeIcon,
   background: rgba(255, 0, 0, 0.7);
 }
 
-.myFavor .myFavorBtn:hover {
-  background: var(--main-color);
-  /* background: rgba(255,0,0,0.7); */
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: inset 0px 0px 0px 2px rgba(255, 255, 255, 0.3);
-}
 
 /* .lob_gameListName {
   text-align: center;
@@ -813,6 +776,45 @@ input[type="radio"]+label .lob_gameTypeIcon,
 } */
 
 
+@media (hover: hover) {
+  .myFavorBtn:hover {
+    /* background: rgba(255,255,255,0.7); */
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .myFavorBtn:hover::after {
+    content: "";
+    position: absolute;
+    background: var(--main-color);
+    border-radius: 12px 0px 0px 12px;
+    transform: rotate(45deg);
+    /* background: rgba(255,255,255,0.7) */
+    background: rgba(255, 0, 0, 0.7);
+  }
+
+  .myFavorBtn:hover::before {
+    content: "";
+    position: absolute;
+    background: var(--main-color);
+    border-radius: 0px 12px 12px 0px;
+    transform: rotate(-45deg);
+    background: rgba(255, 0, 0, 0.7);
+  }
+  
+  /* .myFavor .myFavorBtn:hover::before,
+    .myFavor .myFavorBtn:hover::after{
+       
+        background: rgba(255,0,0,0.7);
+    } */
+
+    .myFavor .myFavorBtn:hover {
+      background: var(--main-color);
+      /* background: rgba(255,0,0,0.7); */
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: inset 0px 0px 0px 2px rgba(255, 255, 255, 0.3);
+    }  
+  
+}
 
 
 
