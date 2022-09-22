@@ -182,8 +182,8 @@
                     if (success) {
                         if (o.Result == 0) {
                             if (o.DetailList.length > 0) {
-                                var numGameTotalValidBetValue = new BigNumber(0);
-                                var numGameTotalRewardValue = new BigNumber(0);
+                                var numGameTotalValidBetValue = 0;
+                                var numGameTotalRewardValue =0;
                                 var ParentMain = document.getElementById("gamePageMainCon").getElementsByClassName("rowOne")[0];
 
                                 //排序
@@ -222,9 +222,11 @@
                                     window.parent.API_GetGameLang(EWinWebInfo.Lang, gameCode, (function (langText) {
                                         var record = this;
                                         var status = "lose";
-
-                                        numGameTotalValidBetValue = numGameTotalValidBetValue.plus(record.ValidBetValue);
-                                        numGameTotalRewardValue = numGameTotalRewardValue.plus(record.RewardValue);
+                                        var rewardValue = parseFloat(new BigNumber(record.RewardValue).toFixed(2));
+                                        var validBetValue = parseFloat(new BigNumber(record.ValidBetValue).toFixed(2));
+                                        
+                                        numGameTotalValidBetValue += validBetValue;
+                                        numGameTotalRewardValue += rewardValue;
 
                                         if (record.RewardValue >= 0) {
                                             status = "win";
@@ -238,9 +240,9 @@
                                         var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
 
                                         c.setClassText(gameRowOneDom, "CurrencyType", null, record.CurrencyType);
-                                        c.setClassText(gameRowOneDom, "RewardValue", null, record.RewardValue);
+                                        c.setClassText(gameRowOneDom, "RewardValue", null, rewardValue);
 
-                                        c.setClassText(gameRowOneDom, "ValidBetValue", null, record.ValidBetValue);
+                                        c.setClassText(gameRowOneDom, "ValidBetValue", null, validBetValue);
 
                                         if (record.RewardValue >= 0) {
                                             statusDom.classList.add("win");
@@ -251,17 +253,18 @@
                                         ParentMain.appendChild(gameRowOneDom);
 
                                         c.setClassText(gameRowOneDom, "GameName", null, "<sapn>" + langText + "</span>");
+                                        document.getElementById('gameTotalValidBetValue').textContent = new BigNumber(numGameTotalValidBetValue).toFixed(2);
+                                        document.getElementById('gameTotalRewardValue').textContent = new BigNumber(numGameTotalRewardValue).toFixed(2);
+
+                                        if (numGameTotalRewardValue < 0) {
+                                            document.getElementById('gameTotalRewardValue').style.color = "#FF0000";
+                                        }
+                                        else {
+                                            document.getElementById('gameTotalRewardValue').style.color = "#999"
+                                        }
+
                                     }).bind(record));
 
-                                }
-
-                                document.getElementById('gameTotalValidBetValue').textContent = numGameTotalValidBetValue;
-                                document.getElementById('gameTotalRewardValue').textContent = numGameTotalRewardValue;
-                                if (numGameTotalRewardValue < 0) {
-                                    document.getElementById('gameTotalRewardValue').style.color = "#FF0000";
-                                }
-                                else {
-                                    document.getElementById('gameTotalRewardValue').style.color = "#999"
                                 }
 
                                 mlp.loadLanguage(EWinWebInfo.Lang);
@@ -462,7 +465,7 @@
                             </label>
                             <label class="">
                                 <input type="radio" name="DData" id="radioYesterday">
-                                <div class="pageDDataBtn"><span class="language_replace">前日</span></div>
+                                <div class="pageDDataBtn"><span class="language_replace">昨日</span></div>
                             </label>
                             <label class="">
                                 <input type="radio" name="DData" id="radioWeek">
