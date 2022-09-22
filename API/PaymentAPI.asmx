@@ -838,7 +838,7 @@ public class PaymentAPI : System.Web.Services.WebService
                     }
                     else
                     {
-                        SetResultException(R, "CurrencyNotFound");
+                        SetResultException(R, "ThresholdLimit");
                     }
                 }
                 else

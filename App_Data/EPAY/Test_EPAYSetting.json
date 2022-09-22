@@ -7,7 +7,7 @@
   "ProviderIP": [ "172.16.16.34", "172.16.16.1" ],
   "MinDepositAmount": 2000,
   "MaxDepositAmount": 100000,
-  "MinWithdrawAmount": 2000,
+  "MinWithdrawAmount": 3000,
   "MaxWithdrawAmount": 100000,
   "DepositRate": 0.03,
   "WithdrawRate": 0.03,
