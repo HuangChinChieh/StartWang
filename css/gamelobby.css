@@ -619,7 +619,7 @@ input[type="radio"]+label .lob_gameTypeIcon,
   box-sizing: border-box;
   /* height: calc(100vh - 120px); */
   height: calc(100% - 120px);
-  padding: 15px 30px 30px 15px;
+  padding: 15px 12px;
   /* overflow: auto; */
   overflow-x: hidden;
   overflow-y: auto;
@@ -676,8 +676,10 @@ input[type="radio"]+label .lob_gameTypeIcon,
   position: relative;
   /*float: left;*/
   display: inline-block;
-  box-sizing: content-box;
+  /* box-sizing: content-box; */
+  box-sizing: border-box;
   margin-bottom: 40px;
+  padding: 4px;
 }
 
 .lob_gameListBtn {}
@@ -858,11 +860,12 @@ input[type="radio"]+label .lob_gameTypeIcon,
   right: 0px;
   width: 100%;
   padding: 15px 30px;
+  /* padding-bottom: 10px; */
   height: 52px;
   line-height: 40px;
   font-size: 20px;
   color: var(--main-color);
-  padding-bottom: 10px;
+ 
   display: flex;
   align-items: center;
 
@@ -882,7 +885,7 @@ input[type="radio"]+label .lob_gameTypeIcon,
   position: relative;
   width: auto;
   width: 35px;
-  /* height: 40px; */
+  height: 40px;
   margin-right: 0px;
   background: rgba(0, 0, 0, 0.15);
   padding-left: 10px;
@@ -915,7 +918,7 @@ input[type="radio"]+label .lob_gameTypeIcon,
   display: inline-block;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
   /* padding: 0px 60px 0px 10px; */
-  margin-top: 10px;
+  /* margin-top: 10px; */
   text-align: left;
   color: #fff;
   width: calc(100% - 35px);
