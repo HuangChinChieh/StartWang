@@ -370,7 +370,7 @@
 
         } else {
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
-                parent.top.API_Home();
+                parent.top.onBtnLoginShow();
             });
         }
 
