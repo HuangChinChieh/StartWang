@@ -1623,6 +1623,23 @@ button.btn-customerservice {
   .row3XL1B{
     /* text-align: right; */
   }
+
+  
+  /* 上下數 */
+  .Status{    
+    font-size: 1rem;  
+  }
+  .Status .title{
+    margin-right: 8px;
+    opacity: 0.75;    
+  }
+
+  .Status .RewardValue{
+    font-size: 1.4rem;
+  }
+
+ 
+
 }
 
 @media (max-width: 899px) {
