@@ -401,18 +401,20 @@
         RealName.innerText = WebInfo.UserInfo.RealName;
         //NickName.innerText = WebInfo.UserInfo.NickName;
         Country.innerText = WebInfo.UserInfo.Country;
+        if (WebInfo.UserInfo.ExtraData!='') {
+            var ExtraData = JSON.parse(WebInfo.UserInfo.ExtraData);
 
-        var ExtraData = JSON.parse(WebInfo.UserInfo.ExtraData);
+            for (var i = 0; i < ExtraData.length; i++) {
+                if (ExtraData[i].Name == "NickName") {
+                    NickName.innerText = ExtraData[i].Value;
+                }
 
-        for (var i = 0; i < ExtraData.length; i++) {
-            if (ExtraData[i].Name == "NickName") {
-                NickName.innerText = ExtraData[i].Value;
-            }
-
-            if (ExtraData[i].Name == "Country") {
-                Country.innerText = ExtraData[i].Value;
+                if (ExtraData[i].Name == "Country") {
+                    Country.innerText = ExtraData[i].Value;
+                }
             }
         }
+      
 
         //NickName.innerText = WebInfo.UserInfo.BindingNickname;
         ContactPhonePrefix.innerText = WebInfo.UserInfo.ContactPhonePrefix;
@@ -657,24 +659,24 @@
                             </div>--%>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">可用幣別</span></div>
-                                <div class="rowRight"><span id="idCurrencyType">[CurrencyType]</span></div>
+                                <div class="rowRight"><span id="idCurrencyType"></span></div>
                             </div>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">真實姓名</span></div>
-                                <div class="rowRight"><span id="idRealName">[RealName]</span></div>
+                                <div class="rowRight"><span id="idRealName"></span></div>
                             </div>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">國家</span></div>
-                                <div class="rowRight"><span id="idCountry">[Country]</span></div>
+                                <div class="rowRight"><span id="idCountry"></span></div>
                             </div>
                             <div class="rowElm" style="display: none;">
                                 <div class="rowLeft"><span class="language_replace">電話</span></div>
-                                <div class="rowRight"><span id="idContactPhonePrefix">[PhonePrefix]</span><span id="idContactPhoneNumber">[PhoneNumber]</span></div>
+                                <div class="rowRight"><span id="idContactPhonePrefix"></span><span id="idContactPhoneNumber"></span></div>
                             </div>
                             <div class="rowElm" style="display: none;">
                                 <div class="rowLeft"><span class="language_replace">我的推薦碼</span></div>
                                 <div class="rowRight">
-                                    <span id="idPersonCode">[PersonCode]</span>
+                                    <span id="idPersonCode"></span>
                                     <img src="images/icon_copy.svg">
                                 </div>
                                 <div class="rowBtnFull" onclick="onBtnQRCodeShow()"><span class="language_replace">顯示二維碼</span></div>
@@ -686,7 +688,7 @@
                             <div class="rowTitle"><span class="language_replace">帳號資料</span></div>
                             <div class="rowElm">
                                 <div class="rowLeft"><span class="language_replace">帳號</span></div>
-                                <div class="rowRight"><span id="idLoginAccount">[LoginAccount]</span></div>
+                                <div class="rowRight"><span id="idLoginAccount"></span></div>
                             </div>
                             <!-- -->
                             <%if (AllowChangePassword == 1) { %>

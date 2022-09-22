@@ -1520,6 +1520,8 @@ button.btn-customerservice {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+
+/* 紀錄頁 */
 .rowElm2L {
   position: relative;
   width: 100%;
@@ -1590,7 +1592,7 @@ button.btn-customerservice {
   .row3XL2A,
   .row3XL2B,
   .row3XL2C {
-    float: left;
+    /* float: left; */
     width: calc(100% / 3);
   }
 
@@ -1613,24 +1615,24 @@ button.btn-customerservice {
 
 @media (max-width: 899px) {
   .row3XL1A {
-    float: left;
-    width: 35%;
+    /* float: left; */
+    /* width: 35%; */
   }
 
   .row3XL1B {
-    float: left;
-    width: 65%;
+    /* float: left; */
+    /* width: 65%; */
   }
 
   .row3XL2B,
   .row3XL2C {
-    float: left;
-    width: 100%;
+    /* float: left; */
+    /* width: 100%; */
   }
 
   .row3XL1C,
   .row3XL2A {
-    width: 100%;
+    /* width: 100%; */
   }
 
   .row3XL1A {
@@ -1662,7 +1664,7 @@ button.btn-customerservice {
 }
 
 .row1R3X {
-  float: left;
+  /* float: left; */
   width: calc(100% / 3);
 }
 

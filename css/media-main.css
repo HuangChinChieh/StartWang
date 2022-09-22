@@ -230,6 +230,10 @@
     .header-nav {
         max-width: 1280px;
         margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row wrap;
+        align-items: center;
     }
 
     .header-nav_none {
@@ -249,7 +253,7 @@
     }
 
         .header-nav-logo img {
-            position: absolute;
+            /* position: absolute; */
         }
 
     .header-nav-menu {
@@ -944,7 +948,7 @@
 
     .header-nav img {
         padding-left: 10px;
-        width: 50%;
+        width: 36%;
         max-width: 232px;
         height: auto;
     }
