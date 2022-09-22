@@ -208,6 +208,7 @@ select.form-control:hover {
   outline: 0;
   border: 1px solid #c62828;
   box-shadow: none;
+  font-size: initial;
 }
 
 input[type=text]:focus,
@@ -220,6 +221,7 @@ select.form-control:focus {
   background: #222;
   box-shadow: none;
   box-shadow: inset 0 0 0 2px #c62828;
+  font-size: initial;
 }
 
 input[type=text]:-moz-placeholder,
@@ -903,22 +905,27 @@ button.btn-customerservice {
 
 .marquee_form {
   margin: 0 auto;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   height: 50px;
   max-width: 1280px;
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .marquee_form_left {
-  padding: 1px;
+  /* padding: 1px;
   line-height: 50px;
   float: left;
-  font-size: 40px;
+  font-size: 40px; */
+  flex: 0 0 35px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .marquee_form_left a {
-  display: block;
-  height: 40px;
-  line-height: 50px;
+  display: inline-flex;
+  align-items: center;
   font-size: 25px;
 }
 
@@ -944,15 +951,16 @@ button.btn-customerservice {
 }
 
 .navbar-Marquee {
-  width: 60%;
-  float: left;
+  /* width: 60%;
+  float: left; */
+  flex: 1;
   text-align: left;
   border-radius: 50px;
   line-height: 20px;
-  margin-top: 10px;
-  margin-left: 10px;
+  /* margin-top: 10px;
+  margin-left: 10px; */
   background: rgba(0, 0, 0, 0.5);
-  padding: 5px 20px;
+  padding: 5px 10px;
 }
 
 .ann {
