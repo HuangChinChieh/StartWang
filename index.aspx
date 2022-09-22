@@ -957,12 +957,12 @@
 
             if (selectedCurrency == '') {
                 idCurrencyType.innerText = EWinWebInfo.UserInfo.WalletList[0].CurrencyType;
-                idBalance.innerText = EWinWebInfo.UserInfo.WalletList[0].PointValue;
+                idBalance.innerText = new BigNumber(EWinWebInfo.UserInfo.WalletList[0].PointValue).toFixed(2);
                 selectedCurrency = EWinWebInfo.UserInfo.WalletList[0].CurrencyType;
             } else {
                 var indexWalletList = EWinWebInfo.UserInfo.WalletList.findIndex(function (d) { return d.CurrencyType == selectedCurrency });
                 idCurrencyType.innerText = EWinWebInfo.UserInfo.WalletList[indexWalletList].CurrencyType;
-                idBalance.innerText = EWinWebInfo.UserInfo.WalletList[indexWalletList].PointValue;
+                idBalance.innerText = new BigNumber(EWinWebInfo.UserInfo.WalletList[indexWalletList].PointValue).toFixed(2);
                 selectedCurrency = EWinWebInfo.UserInfo.WalletList[indexWalletList].CurrencyType;
             }
         } else {
@@ -1354,7 +1354,9 @@
         if (EWinWebInfo.UserLogined) {
             API_LoadPage("memberCenter.aspx");
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
     }
 
@@ -1362,7 +1364,9 @@
         if (EWinWebInfo.UserLogined) {
             API_LoadPage("history.aspx");
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
     }
 
@@ -1370,7 +1374,9 @@
         if (EWinWebInfo.UserLogined) {
             window.open("ChatMain.aspx?Token=" + EWinWebInfo.Token + "&SID=" + EWinWebInfo.SID + "&Acc=" + EWinWebInfo.UserInfo.LoginAccount);
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
     }
 
@@ -1379,7 +1385,9 @@
             //window.open(GWebUrl + "/API/Payment/GpayDeposit.aspx?Token=" + EWinWebInfo.Token + "&SID=" + EWinWebInfo.SID, "_blank");
             API_LoadPage("mywallet.aspx");
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
     }
 
@@ -1537,7 +1545,9 @@
 
             }
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
 
     }
@@ -1565,7 +1575,9 @@
 
             }
         } else {
-            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"));
+            API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                onBtnLoginShow();
+            });
         }
         //wt = 0: 四方/1=區塊鏈
     }
@@ -1617,7 +1629,7 @@
         if (!EWinWebInfo.UserLogined) {
 
             API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
-                API_Home()
+                onBtnLoginShow();
             }, null);
 
         } else {

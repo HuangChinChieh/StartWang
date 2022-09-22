@@ -401,7 +401,7 @@
 <body>
     <div id="templateGroup" style="display: none">
         <div id="templateRowTitle">
-            <div class="rowTitle"><span class="rowDate">2020/01/26</span></div>
+            <div class="rowTitle"><span class="rowDate"></span></div>
         </div>
 
         <div id="templateGameOrderRow">
@@ -501,7 +501,7 @@
                         <div class="rowNoRessult"><span class="language_replace">無資料</span></div>
                         <!-- -->
                         <!-- -->
-                        <div class="rowTitle"><span>2020/01/26</span></div>
+                        <div class="rowTitle"><span></span></div>
                         <!-- -->
                     </div>
                 </div>
