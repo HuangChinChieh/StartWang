@@ -467,7 +467,8 @@
         c.setElementText("idStep2Amount", null, decimalToString(o.Amount));
         c.setElementText("idStep2CurrencyType", null, o.ReceiveCurrencyType);
 
-
+        window.document.body.scrollTop = 0;
+        window.document.documentElement.scrollTop = 0;
     }
 
     function supplement(nn) {
