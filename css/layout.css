@@ -177,11 +177,11 @@ legend {
 }
 
 
+
 input[type=text],
 input[type=password],
 textarea,
-textarea.form-control,
-select.form-control {
+textarea.form-control{
   box-sizing: border-box;
   margin: 10px auto;
   padding: 0 8px;
@@ -198,6 +198,27 @@ select.form-control {
   border-radius: 5px;
   box-shadow: none;
   transition: all 0.3s;
+}
+
+select.form-control {
+  box-sizing: border-box;
+  padding: 0 8px;
+  /* vertical-align: middle; */
+  background: none;
+  border: 1px solid #999;
+  font-family: "微軟正黑體", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  /*max-width:350px;*/
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 5px;
+  box-shadow: none;
+  transition: all 0.3s;
+  background: transparent;
+
 }
 
 input[type=text]:hover,
@@ -350,41 +371,53 @@ input[type=checkbox]:checked~.radioBoxBtn .radioBoxicon {
 
 .optionInput {
   position: relative;
-  width: calc(100% - 120px);
-  margin-left: 120px;
+  /* width: calc(100% - 120px);
+  margin-left: 120px; */
+  display: flex;
+  align-items: center;
+}
+.optionInput .phone{
+  flex: 0 0 100px;
+  margin-right: 4px;
 }
 
+
 .dropdownMenu {
-  position: absolute;
-  left: -120px;
-  top: 10px;
-  padding: 0 8px;
+  /* position: absolute; */
+  position: relative;
+  /* left: -120px; */
+  /* top: 10px; */
+  /* padding: 0 8px; */
   vertical-align: middle;
   background: none;
-  border: 1px solid #999;
+  
   font-family: "微軟正黑體", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #fff;
-  max-width: 90px;
-  width: 90px;
-  height: 43px;
-  line-height: 43px;
+  /* max-width: 90px; */
+  /* width: 90px; */
+  /* border: 1px solid #999; */
+  height: 45px;
+  line-height: 45px;
   border-radius: 5px;
   box-shadow: none;
   transition: all 0.3s;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .dropdownMenu select {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  width: 90px;
-  line-height: 50px;
+  width: 100%;
+  height: 100%;
+  /* line-height: 50px; */
   background: transparent;
   color: #fff;
   border: none;
+  border: 1px solid #999;
 }
 
 .dropdownMenu option {
@@ -392,10 +425,10 @@ input[type=checkbox]:checked~.radioBoxBtn .radioBoxicon {
 }
 
 /* Style the arrow inside the select element: */
-.dropdownMenu :after {
+.dropdownMenu:after {
   position: absolute;
   content: "";
-  top: 14px;
+  top: 20px;
   right: 10px;
   width: 0;
   height: 0;
