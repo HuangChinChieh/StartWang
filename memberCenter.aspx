@@ -400,7 +400,7 @@
 
         RealName.innerText = WebInfo.UserInfo.RealName;
         //NickName.innerText = WebInfo.UserInfo.NickName;
-        Country.innerText = WebInfo.UserInfo.Country;
+        //Country.innerText = WebInfo.UserInfo.Country;
         if (WebInfo.UserInfo.ExtraData!='') {
             var ExtraData = JSON.parse(WebInfo.UserInfo.ExtraData);
 
