@@ -212,7 +212,15 @@
 
                                 for (var i = 0; i < o.DetailList.length; i++) {
                                     var record = o.DetailList[i];
-                                    window.parent.API_GetGameLang(EWinWebInfo.Lang, o.DetailList[i].GameCode, (function (langText) {
+                                    var gameBrand = record.GameCode.split('.')[0];
+                                    var gameCode = record.GameCode;
+
+                                    if (gameBrand == "EWin") {
+                                        gameCode = "EWin.EWinGaming";
+                                    }
+
+                                    window.parent.API_GetGameLang(EWinWebInfo.Lang, gameCode, (function (langText) {
+                                        var record = this;
                                         var status = "lose";
 
                                         numGameTotalValidBetValue = numGameTotalValidBetValue.plus(record.ValidBetValue);
@@ -228,23 +236,6 @@
 
                                         var gameRowOneDom = c.getTemplate("templateGameOrderRow");
                                         var statusDom = gameRowOneDom.getElementsByClassName("Status")[0];
-                                        var GameName;
-
-                                        switch (record.GameAccountingCode) {
-                                            case "EWin.BAC.0":
-                                                GameName = "傳統電投";
-                                                break;
-                                            case "EWin.BAC.1":
-                                                GameName = "快速電投";
-                                                break;
-                                            case "EWin.BAC.2":
-                                                GameName = "網投";
-                                                break;
-                                            default:
-                                                GameName = record.GameAccountingCode;
-                                                break;
-                                        }
-
 
                                         c.setClassText(gameRowOneDom, "CurrencyType", null, record.CurrencyType);
                                         c.setClassText(gameRowOneDom, "RewardValue", null, record.RewardValue);
