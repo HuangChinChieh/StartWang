@@ -107,9 +107,7 @@
         WebInfo = window.parent.API_GetWebInfo();
 
         mlp.loadLanguage(lang, function () {
-            if (window.top.CompanyGameCategoryCodes.length > 1) {
-                updateGameCateg();
-            }
+            updateGameCateg();
             updateGameBrand();
 
         });
@@ -137,12 +135,20 @@
     
     //建立分類
     function updateGameCateg() {
+
         var o = window.top.CompanyGameCategoryCodes;
 
         var idTags = document.getElementById("idTags");
-
         idTags.innerHTML = "";
-        
+        var strFav = `<div>
+                        <a onclick="changeGameCateg(this,'myFavor')" class="a_click tags">
+                            <div class="lob_gameTypeIcon">
+                                <img class="gameTypeIcon" src="images/lobby/icon_gametype_Favicon.svg" />
+                            </div>
+                            <span class="tagName language_replace">${mlp.getLanguageKey("最愛")}</span></a>
+                    </div>`;
+        $("#idTags").append(strFav);
+
         o.forEach(e => {
             let BIcon
 
@@ -384,11 +390,11 @@
                 break;
             case "RefreshPersonalFavo":
                 var selector = "." + ("gameCode_" + param.GameCode + ".btn-like").replace(".", "\\.");
-                debugger;
+ 
                 if (param.IsAdded) {
-                    $(selector).addClass("myFavor");
+                    $(selector).parent().addClass("myFavor");
                 } else {
-                    $(selector).removeClass("myFavor");
+                    $(selector).parent().removeClass("myFavor");
                 }
                 break;
         }
