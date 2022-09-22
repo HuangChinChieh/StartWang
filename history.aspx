@@ -440,7 +440,7 @@
             <div>
                 <div class="switchTagDiv">
                     <div class="switchTagBtn active" id="TagGameHistory" onclick="changeSwitchTag('Game')"><span class="language_replace">遊戲紀錄</span></div>
-                    <div class="switchTagBtn" id="TagPaymentHistory" onclick="changeSwitchTag('PaymentHistory')" style="display:none"><span class="language_replace">存取款紀錄</span></div>
+                    <div class="switchTagBtn" id="TagPaymentHistory" onclick="changeSwitchTag('PaymentHistory')"><span class="language_replace">存取款紀錄</span></div>
                 </div>
                 <!-- 搜尋列 -->
                 <div class="pageDataBar">
