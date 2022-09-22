@@ -80,8 +80,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
-    <meta name="Description" content="99PLAY">
-    <title>12万娱乐城</title>
+    <title>星旺娛樂城</title>
+    <meta name="Description" content="與知名網絡遊戲品牌合作，值得信賴，隨時可以玩。現在就註冊網站開始玩吧！">
+
+    <meta property="og:title" content="星旺娛樂城" />
+    <meta property="og:description" content="與知名網絡遊戲品牌合作，值得信賴，隨時可以玩。現在就註冊網站開始玩吧！" />
+    <meta property="og:site_name" content="星旺娛樂城" />
+    <meta property="og:Keyword" content="星旺娛樂城" />
+    <meta property="og:description" content="與知名網絡遊戲品牌合作，值得信賴，隨時可以玩。現在就註冊網站開始玩吧！" />
+   
+    <!-- <meta property="og:url" content="https://casino-maharaja.com/" /> -->
+    <!--日文圖片-->
+    <meta property="og:image" content="http://new12one.dev4.mts.idv.tw/images/ic_192.png" />
+    <!--英文圖片-->
+   
+    <!-- Share image -->
+    <link rel="image_src" href="http://new12one.dev4.mts.idv.tw/images/ic_192.png">
+
     <!-- Favicon and touch icons -->
 
     <link rel="shortcut icon" href="/images/12wlogo.png">
