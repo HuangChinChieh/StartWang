@@ -742,7 +742,7 @@
                                 </div>
                             </div>
                             <div class="footer-copyright">
-                                <p class="language_replace">Copyright © 2022 亿万. All Rights Reserved.</p>
+                                <p class="language_replace">Copyright © 2022 星旺. All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>
