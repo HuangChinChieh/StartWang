@@ -170,6 +170,7 @@
     var GCB;
     var CompanyGameCategoryCodes = ["All"];
     var gameWindow;
+    var Favos = [];
     var EWinWebInfo = {
         EWinUrl: "<%=EWinWeb.EWinUrl %>",
         EWinGameUrl: "<%=EWinWeb.EWinGameUrl %>",
@@ -653,6 +654,31 @@
 
             cb(langText);
         })
+    }
+
+     function API_RefreshPersonalFavo(gameCode, isAdded) {
+        if (!isAdded) {
+            var index = Favos.indexOf(gameCode);
+
+            if (index > -1) {
+                Favos.splice(index, 1);
+            }
+        } else if (isAdded) {
+            var index = Favos.indexOf(gameCode);
+
+            if (index == -1) {
+                Favos.push(gameCode);
+            }
+        }
+
+        //lobbyClient.SetUserAccountProperty(EWinWebInfo.SID, Math.uuid(), "Favo", JSON.stringify(Favos), function (success, o) {
+        //    if (success) {
+        //        if (o.Result == 0) {
+        //        }
+        //    }
+        //});
+
+        notifyWindowEvent("RefreshPersonalFavo", { GameCode: gameCode, IsAdded: isAdded });
     }
 
     //function notifyWindowEvent(eventName, o) {

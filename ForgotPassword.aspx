@@ -71,6 +71,7 @@
         var GUID = Math.uuid();
         if (EMail != "") {
             if (validateEmail(EMail)) {
+                startCountDown(60);
                 if (isSent)
                     return;
 
@@ -78,22 +79,21 @@
                     if (success) {
                         if (o.Result == 0) {
                             isSent = true;
-                            startCountDown(60);
-                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("已寄送認證碼"));
+                            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("已寄送認證碼"));
                         } else {
-                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("帳號與信箱不符"));
+                            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("帳號與信箱不符"));
                         }
                     } else {
-                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("網路錯誤")+ o);
+                        window.parent.API_ShowMessageOK("", mlp.getLanguageKey("網路錯誤") + o);
                     }
                 });
             }
             else {
-                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
+                window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
             }
         }
         else {
-                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
         }
     }
 
