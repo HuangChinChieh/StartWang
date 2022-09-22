@@ -347,13 +347,13 @@
 
         idStepPage1.style.display = "block";
         idStepPage2.style.display = "none";
-        c.setElementText("idStep1BalanceValue", null, decimalToString(wallet.PointValue));
+        c.setElementText("idStep1BalanceValue", null,new BigNumber(wallet.PointValue).toFixed(2));
 
         var ThresholdInfos = webInfo.UserInfo.ThresholdInfo;
         if (ThresholdInfos && ThresholdInfos.length > 0) {
             let thresholdInfo = ThresholdInfos.find(x => x.CurrencyType.toLocaleUpperCase() == webInfo.MainCurrencyType);
             if (thresholdInfo) {
-                c.setElementText("idThrehold", null, decimalToString(thresholdInfo.ThresholdValue));
+                c.setElementText("idThrehold", null, BigNumber(thresholdInfo.ThresholdValue).toFixed(2));
             } else {
                 c.setElementText("idThrehold", null, 0);
             }
