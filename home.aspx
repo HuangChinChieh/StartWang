@@ -133,11 +133,15 @@
     }
 
     function initGameCode() {
-        updateGameCateg(window.top.CompanyGameCategoryCodes);
+        if (window.top.CompanyGameCategoryCodes.length > 1) {
+            updateGameCateg();
+        }
         updateGameBrand();
     }
     //建立分類
-    function updateGameCateg(o) {
+    function updateGameCateg() {
+        var o = window.top.CompanyGameCategoryCodes;
+
         var idTags = document.getElementById("idTags");
         
         o.forEach(e => {
@@ -267,8 +271,8 @@
             if (divGamePage != null) {
                 var idGameItemList = document.getElementById("idGameItemList");
                 idGameItemList.innerHTML = "";
-
-                GCB.CursorGetByGameBrand(brandCode, (gameItem) => {
+                
+                GCB.CursorGetByMultiSearch(brandCode, brandCateg, null, "", (gameItem) => {
                     updateGameCode(gameItem);
                 }, () => {
                     //console.log("done");
@@ -375,6 +379,9 @@
                 mlp.loadLanguage(lang, function () {
 
                 });
+                break;
+            case "GetGameCategoryCodeDone":
+                updateGameCateg();
                 break;
         }
     }

@@ -1577,7 +1577,7 @@
                 CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
             }
         }, () => {
-            
+                notifyWindowEvent("GetGameCategoryCodeDone");
         })
     }
 
@@ -1665,7 +1665,7 @@
     }
 
     function notifyWindowEvent(eventName, o) {
-        var IFramePage = document.getElementById("IFramePage1");
+        var IFramePage = document.getElementById("idFrameContent");
 
         if (IFramePage != null) {
             isDisplay = true;

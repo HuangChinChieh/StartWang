@@ -65,7 +65,7 @@
         var GUID = Math.uuid();
         var ValidateType = 0;
         var EMail = document.getElementById("idEMail").value;
-        var LoginAccount = document.getElementById("idLoginAccount").value;
+        //var LoginAccount = document.getElementById("idLoginAccount").value;
         var ContactPhonePrefix = '';
         var ContactPhoneNumber = '';
         var GUID = Math.uuid();
@@ -74,26 +74,26 @@
                 if (isSent)
                     return;
 
-                p.SetUserMail(GUID, 0, 1, EMail, ContactPhonePrefix, ContactPhoneNumber, "", LoginAccount, function (success, o) {
+                p.SetUserMail(GUID, 0, 1, EMail, ContactPhonePrefix, ContactPhoneNumber, "", function (success, o) {
                     if (success) {
                         if (o.Result == 0) {
                             isSent = true;
                             startCountDown(60);
-                            alert(mlp.getLanguageKey("已寄送認證碼"));
+                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("已寄送認證碼"));
                         } else {
-                            alert(mlp.getLanguageKey("帳號與信箱不符"));
+                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("帳號與信箱不符"));
                         }
                     } else {
-                        alert(mlp.getLanguageKey("網路錯誤:") + o);
+                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("網路錯誤")+ o);
                     }
                 });
             }
             else {
-                alert(mlp.getLanguageKey("錯誤, 請輸入信箱"));
+                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
             }
         }
         else {
-            alert(mlp.getLanguageKey("錯誤, 請輸入信箱"));
+                             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
         }
     }
 
@@ -109,14 +109,15 @@
         p.SetUserPasswordByValidateCode(GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber, ValidateCode, NewPassword, function (success, o) {
             if (success) {
                 if (o.Result == 0) {
-                    alert(mlp.getLanguageKey("已成功修改密碼！"));
-                    location.reload();
+                    window.parent.API_ShowMessageOK("", mlp.getLanguageKey("已成功修改密碼！"), function () {
+                        location.reload();
+                    });
                 }
                 else {
-                    alert(mlp.getLanguageKey("Email或驗證碼錯誤！"));
+                    window.parent.API_ShowMessageOK("", mlp.getLanguageKey("Email或驗證碼錯誤！"));
                 }
             } else {
-                alert(mlp.getLanguageKey("網路錯誤:") + o);
+                window.parent.API_ShowMessageOK("", mlp.getLanguageKey("網路錯誤:") + o);
             }
         });
     }
@@ -128,13 +129,13 @@
         let retValue = false;
 
         if (ValidCode.value == "")
-            alert(mlp.getLanguageKey("錯誤, 請輸入認證碼"));
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入認證碼"));
         else if (Password.value == "")
-            alert(mlp.getLanguageKey("錯誤, 請輸入新密碼"));
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入新密碼"));
         else if (Password.value.length != 4)
-            alert(mlp.getLanguageKey("請輸入4位數密碼"));
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入4位數密碼"));
         else if (EMail.value == "")
-            alert(mlp.getLanguageKey("錯誤, 請輸入信箱"));
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
         else
             retValue = true;
 
@@ -215,8 +216,8 @@
                     </div>
                     <div id="idForgotPasswordStep1">
                         <div>
-                           <input id="idLoginAccount" type="text" language_replace="placeholder" placeholder="帳號" name="LoginAccount">
-                           <input id="idEMail" type="text" language_replace="placeholder" placeholder="信箱" name="EMail">
+                           <%--<input id="idLoginAccount" type="text" language_replace="placeholder" placeholder="帳號" name="LoginAccount">--%>
+                           <input id="idEMail" type="text" language_replace="placeholder" placeholder="帳號" name="EMail">
                            <div class="popupBtn_red" onclick="SendMail()"><span id="btnSend" class="language_replace">發送認證信</span></div>
                            <input id="idValidCode" type="text" language_replace="placeholder" placeholder="請輸入認證碼">
                            <input id="idNewPassword" type="password" language_replace="placeholder" maxlength="4" placeholder="請輸入新密碼">
