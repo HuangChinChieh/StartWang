@@ -3272,6 +3272,9 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   background-color: rgb(36, 36, 36, 0.95);
 }
 
+
+
+
 .loader-backdrop{
   width: 100%;
   height: 100%;
@@ -3313,6 +3316,27 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.loader-container-home {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 9999;  
+  text-align: center;
+
+  backdrop-filter: blur(25px);
+  background-color: rgb(36, 36, 36, 0.95);
+}
+
+.loader-container-home .loader-logo{
+  
+  
 }
 
 .sk-fading-circle {
@@ -3585,5 +3609,11 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   }
   87% {
     box-shadow: .2em -.2em 0 0 currentcolor;
+  }
+}
+
+@media (min-width: 900px) {
+  .loader-container-home {
+    border-radius: 10px;
   }
 }

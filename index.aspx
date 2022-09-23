@@ -1736,14 +1736,9 @@
 <body>
     <!-- HTML START -->
     <!-- LOADER -->
-    
     <div class="loader-container" style="display: none;">
         <div class="loader-box">
-            
-
             <div class="loader-spinner">
-                <!-- <span class="loader"></span>
-                <div class="loader-logo"></div> -->
                 <div class="sk-fading-circle">
                     <div class="loader-logo"></div>
                     <div class="sk-circle1 sk-circle"></div>

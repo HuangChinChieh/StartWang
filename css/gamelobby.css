@@ -33,9 +33,11 @@
   position: relative;
   z-index: 2;
   margin: 0 auto;
-  padding: 10px 0;
-  width: 96%;
+  /* padding: 10px 0; */
+  /* width: 96%; */
+  width: 100%;
   max-width: 1200px;
+  min-height: 400px;
 }
 
 .gamePageBox:after {
@@ -261,6 +263,10 @@
 
 .gamePanel section.cur {
   display: block;
+}
+
+.main-game-list{
+  position: relative;
 }
 
 .gameList {

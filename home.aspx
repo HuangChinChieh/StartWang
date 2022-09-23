@@ -100,7 +100,7 @@
     var GCB;
    
     function init() {
-        window.parent.API_LoadingStart();
+        LoadingStart();
         lang = window.top.API_GetLang();
         p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
@@ -114,7 +114,6 @@
     }
 
     function switchWebTag(tag) {
-
         if (!tag) {
             tag = event.currentTarget;
         }
@@ -219,7 +218,7 @@
 
             sectionDom.getElementsByClassName("gameList")[0].appendChild(tempGB);
         }, () => {
-            window.parent.API_LoadingEnd();
+            LoadingEnd();
         })
 
         idGameBrandList.appendChild(sectionDom);
@@ -231,7 +230,9 @@
 
         nowCateg = Categ;
 
-        $("#gameSection .title").text(mlp.getLanguageKey(Categ));
+        if (Categ != "myFavor") {
+            $("#gameSection .title").text(mlp.getLanguageKey(Categ));
+        }
         //chgGameBtn(null, nowGameType);
 
         if (Categ == 'All') {
@@ -375,6 +376,20 @@
 
     }
 
+    function LoadingStart() {
+        $('.loader-container-home').show();
+        $('.loader-backdrop').removeClass('is-show');
+    }
+
+    function LoadingEnd() {
+        if ($('.loader-container-home').is(':visible')) {
+            $('.loader-backdrop').addClass('is-show');
+            $('.loader-container-home').fadeOut(250, function () {
+                $('.iframe-container').addClass('is-show');
+            });
+        }
+    }
+
     function EWinEventNotify(eventName, isDisplay, param) {
         switch (eventName) {
             case "SetLanguage":
@@ -513,9 +528,32 @@
                 <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
             </div>
         </div>--%>
-
         <div class="main-game-list">
+           
             <div class="gamePageBox">
+                 <!-- LOADER ===============-->
+            <div class="loader-container-home" style="display: block;">
+                <div class="loader-box">
+                    <div class="loader-spinner">
+                        <div class="sk-fading-circle">
+                            <div class="loader-logo"></div>
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loader-backdrop is-show"></div>
+            </div>
                 <aside class="gameTabs" id="idTags">
                     <!-- 當前頁籤 要在<A> 加上class="cur" -->
                     <%--<a data-tagid="fav" onclick="switchWebTag()" class="cur tags"><i class="icon-tab-fav"></i><span class="language_replace">最愛</span></a>--%>
