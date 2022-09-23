@@ -377,14 +377,14 @@
     }
 
     function LoadingStart() {
-        $('.loader-container').show();
+        $('.loader-container-home').show();
         $('.loader-backdrop').removeClass('is-show');
     }
 
     function LoadingEnd() {
-        if ($('.loader-container').is(':visible')) {
+        if ($('.loader-container-home').is(':visible')) {
             $('.loader-backdrop').addClass('is-show');
-            $('.loader-container').fadeOut(250, function () {
+            $('.loader-container-home').fadeOut(250, function () {
                 $('.iframe-container').addClass('is-show');
             });
         }
