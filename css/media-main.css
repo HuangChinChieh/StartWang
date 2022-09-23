@@ -533,7 +533,7 @@
 @media (max-width: 899px) {
     /***** 網站內容介紹 *****/
     .main-game-list {
-        padding-top: 10px;
+        /* padding-top: 10px; */
         width: 100%;
         height: auto;
         background: rgba(255, 255, 255, 0.3);
