@@ -3604,3 +3604,9 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
     box-shadow: .2em -.2em 0 0 currentcolor;
   }
 }
+
+@media (min-width: 900px) {
+  .loader-container-home {
+    border-radius: 10px;
+  }
+}

@@ -37,6 +37,7 @@
   /* width: 96%; */
   width: 100%;
   max-width: 1200px;
+  min-height: 400px;
 }
 
 .gamePageBox:after {
