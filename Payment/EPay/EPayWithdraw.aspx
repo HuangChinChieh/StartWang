@@ -311,6 +311,8 @@
             } else if (Number(txtAmount.value) > oPaymentBankCard.MaxWithdrawAmount) {
                 showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("提款金額大於最高申請金額"));
             } else {
+                window.document.body.scrollTop = 0;
+                window.document.documentElement.scrollTop = 0;
                 showMessage(mlp.getLanguageKey("確認提款"), mlp.getLanguageKey("請確認是否要申請提款") + " " + decimalToString(txtAmount.value) + " " + mlp.getLanguageKey("元") + "?", function () {
                     ui.showMask(null, "Wait...");
                     p.CreateEPayWithdrawal(webInfo.SID, Math.uuid(), txtBankCard.value.trim(), txtRealName.value.trim(), SearchBank.value, txtBankBranch.value.trim(), txtAmount.value.trim(), function (success, o) {
