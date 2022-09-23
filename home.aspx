@@ -718,7 +718,7 @@
                                                 <img src="/images/logo/footer/logo-zeus.png" alt="">
                                             </div>
                                         </div>
-                                        <div class="logo-item">
+                                        <div class="logo-item biggaming">
                                             <div class="img-crop">
                                                 <img src="/images/logo/footer/logo-biggaming.png" alt="">
                                             </div>
