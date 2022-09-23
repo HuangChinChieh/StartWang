@@ -23,7 +23,6 @@ public static class EWinWeb
     public static string APIKey = System.Configuration.ConfigurationManager.AppSettings["Key"];
     public static string PrivateKey = System.Configuration.ConfigurationManager.AppSettings["PrivateKey"];
     public static string CompanyCode = System.Configuration.ConfigurationManager.AppSettings["CompanyCode"];
-    public static string EWinWebUrl = System.Configuration.ConfigurationManager.AppSettings["EWinWebUrl"];
     public static string TimeZone = System.Configuration.ConfigurationManager.AppSettings["TimeZone"];
     public static string AllowAksoDeposit = System.Configuration.ConfigurationManager.AppSettings["AllowAksoDeposit"];
     public static string AksoDepositLimit = System.Configuration.ConfigurationManager.AppSettings["AksoDepositLimit"];
