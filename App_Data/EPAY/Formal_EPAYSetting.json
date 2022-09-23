@@ -1,8 +1,20 @@
 {
-  "ApiUrl": "https://ewin-pay.com/api/Gate/",
-  "CompanyCode": "OCW_JPY",
-  "ApiKey": "2cef3173aaeb421993e29ff36b3824c0",
-  "ServiceType": "JOOB01",
-  "CyrrencyType": "JPY",
-  "ProviderIP": [ "43.132.149.133" ]
+  "ApiUrl": "http://epay.dev4.mts.idv.tw/api/Gate/",
+  "CompanyCode": "new12one",
+  "ApiKey": "8178c4f95f70448caebabc565b303989",
+  "ServiceType": "TWOB001",
+  "CyrrencyType": "TWD",
+  "ProviderIP": [ "172.16.16.34", "172.16.16.1" ],
+  "MinDepositAmount": 2000,
+  "MaxDepositAmount": 100000,
+  "MinWithdrawAmount": 3000,
+  "MaxWithdrawAmount": 100000,
+  "DepositRate": 0.03,
+  "WithdrawRate": 0.03,
+  "WithdrawHandlingFee": 0,
+  "ExpireSecond": 86400,
+  "ThresholdRate": 8,
+  "WithdrawType": 0,
+  "DepositType": 0,
+  "PaymentCode": "EwinPay"
 }
