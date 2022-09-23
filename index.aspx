@@ -1657,7 +1657,7 @@
             if (gameBrand.toUpperCase() == "EWin".toUpperCase() || gameBrand.toUpperCase() == "YS".toUpperCase()) {
                 window.open(EWinWebInfo.EWinUrl + "/Game/Login.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CT=" + encodeURIComponent(EWinWebInfo.CT))
             } else {
-                if (EWinWebInfo.DeviceType == 1) {
+                if (EWinWebInfo.DeviceType == 1 || gameBrand.toUpperCase() == "BTG".toUpperCase()) {
                     gameWindow = window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx", "StartWang Game");
                 } else {
                     GameLoadPage("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&CT=" + EWinWebInfo.CT + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + selectedCurrency + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + "<%=EWinWeb.StartWangUrl%>/CloseGame.aspx");
