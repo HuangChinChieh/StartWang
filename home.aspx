@@ -299,36 +299,38 @@
         var isFavo = 0;
 
         if (gameItem != null) {
-            var GI = c.getTemplate("templateGameItem");
-            var GIcon;
-            var myFavorIcon;
+            if (gameItem.GameStatus == 0) {
+                var GI = c.getTemplate("templateGameItem");
+                var GIcon;
+                var myFavorIcon;
 
-            gameBrand = gameItem.GameBrand;
-            gameName = gameItem.GameName;
-            gameCode = gameItem.GameCode;
-            isFavo = gameItem.IsFavo;
-            gameName_show = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == lang).DisplayText : "";
+                gameBrand = gameItem.GameBrand;
+                gameName = gameItem.GameName;
+                gameCode = gameItem.GameCode;
+                isFavo = gameItem.IsFavo;
+                gameName_show = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == lang).DisplayText : "";
 
-            GI.setAttribute("GameCode", gameBrand + '.' + gameName);
-            GI.classList.add(gameBrand + '.' + gameName);
-            c.setClassText(GI, "idGameName", null, "<span class='language_replace'>" + gameName_show + "</span>");
+                GI.setAttribute("GameCode", gameBrand + '.' + gameName);
+                GI.classList.add(gameBrand + '.' + gameName);
+                c.setClassText(GI, "idGameName", null, "<span class='language_replace'>" + gameName_show + "</span>");
 
-            if (isFavo != 0) {
-                GI.classList.add("myFavor");
+                if (isFavo != 0) {
+                    GI.classList.add("myFavor");
+                }
+
+                GIcon = c.getFirstClassElement(GI, "idGameIcon");
+                if (GIcon != null) {
+                    GIcon.src = WebInfo.EWinUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameName + ".png";
+                }
+                c.getFirstClassElement(GI, "lob_gameListBtn").onclick = new Function("window.parent.openGame('" + gameBrand + "', '" + gameName + "')");
+
+                myFavorIcon = c.getFirstClassElement(GI, "myFavorBtn");
+                myFavorIcon.classList.add("gameCode_" + gameBrand + '.' + gameName);
+                myFavorIcon.onclick = new Function("setMyFavor('" + gameCode + "')");
+
+                idGameItemList.appendChild(GI);
+
             }
-
-            GIcon = c.getFirstClassElement(GI, "idGameIcon");
-            if (GIcon != null) {
-                GIcon.src = WebInfo.EWinUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameName + ".png";
-            }
-            c.getFirstClassElement(GI, "lob_gameListBtn").onclick = new Function("window.parent.openGame('" + gameBrand + "', '" + gameName + "')");
-
-            myFavorIcon = c.getFirstClassElement(GI, "myFavorBtn");
-            myFavorIcon.classList.add("gameCode_" + gameBrand + '.' + gameName);
-            myFavorIcon.onclick = new Function("setMyFavor('" + gameCode + "')");
-
-            idGameItemList.appendChild(GI);
-
         }
     }
     //將廠商所有遊戲加入彈出的遊戲列表
