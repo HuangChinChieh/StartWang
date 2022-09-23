@@ -1737,7 +1737,7 @@
     <!-- HTML START -->
     <!-- LOADER -->
     
-    <div class="loader-container" style="display: block;">
+    <div class="loader-container" style="display: none;">
         <div class="loader-box">
             
 
