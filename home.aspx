@@ -528,9 +528,11 @@
                 <iframe id="idFrameContent" scrolling="auto" border="0" frameborder="0" marginwidth="0" marginheight="0"></iframe>
             </div>
         </div>--%>
-        <!-- LOADER ===============-->
         <div class="main-game-list">
-            <div class="loader-container homePage" style="display: block;">
+           
+            <div class="gamePageBox">
+                 <!-- LOADER ===============-->
+            <div class="loader-container-home" style="display: block;">
                 <div class="loader-box">
                     <div class="loader-spinner">
                         <div class="sk-fading-circle">
@@ -552,7 +554,6 @@
                 </div>
                 <div class="loader-backdrop is-show"></div>
             </div>
-            <div class="gamePageBox">
                 <aside class="gameTabs" id="idTags">
                     <!-- 當前頁籤 要在<A> 加上class="cur" -->
                     <%--<a data-tagid="fav" onclick="switchWebTag()" class="cur tags"><i class="icon-tab-fav"></i><span class="language_replace">最愛</span></a>--%>
