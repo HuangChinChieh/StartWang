@@ -46,6 +46,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
+<script src="Scripts/jquery.min.1.7.js"></script>
 <script>
     var c = new common();
     //var LobbyAPIUrl = "<%=EWinWeb.EWinUrl %>" + "/API/LobbyAPI.asmx";
@@ -155,11 +156,12 @@
     function SetBtnSend() {
         let BtnSend = document.getElementById("btnSend");
         BtnSend.innerText = mlp.getLanguageKey("發送認證信");
+        $("#divSendMail").attr("onclick", "SendMail()");
         isSent = false;
     }
 
     function startCountDown(duration) {
-
+        $("#divSendMail").removeAttr("onclick");
         let secondsRemaining = duration;
         let min = 0;
         let sec = 0;
@@ -226,7 +228,7 @@
                         <div>
                            <%--<input id="idLoginAccount" type="text" language_replace="placeholder" placeholder="帳號" name="LoginAccount">--%>
                            <input id="idEMail" type="text" language_replace="placeholder" placeholder="帳號" name="EMail">
-                           <div class="popupBtn_red" onclick="SendMail()"><span id="btnSend" class="language_replace">發送認證信</span></div>
+                           <div class="popupBtn_red" onclick="SendMail()" id="divSendMail"><span id="btnSend" class="language_replace">發送認證信</span></div>
                            <input id="idValidCode" type="text" language_replace="placeholder" placeholder="請輸入認證碼">
                            <input id="idNewPassword" type="password" language_replace="placeholder" maxlength="20" placeholder="確認新密碼 (請輸入4-20英數字元)">
                            <div class="popupBtn_red" onclick="formSubmitCheck()"><span class="language_replace">確認</span></div>
