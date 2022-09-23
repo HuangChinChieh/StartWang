@@ -103,125 +103,125 @@ public class PaymentAPI : System.Web.Services.WebService
         return R;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.BankCardDepositResult BankCardDepostit(string CT, string GUID, string CurrencyType, int PaymentMethod, decimal Amount, string Description)
-    {
-        EWin.EWinWeb.EWinWeb EWinWebAPI = new EWin.EWinWeb.EWinWeb();
-        EWin.EWinWeb.BankCardDepositResult RetValue = null;
-        string DownOrderNumber = Guid.NewGuid().ToString("N");
-        RetValue = EWinWebAPI.BankCardDepostit(CT, GUID, CurrencyType, PaymentMethod, Amount, Description, DownOrderNumber);
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.BankCardDepositResult BankCardDepostit(string CT, string GUID, string CurrencyType, int PaymentMethod, decimal Amount, string Description)
+    //{
+    //    EWin.EWinWeb.EWinWeb EWinWebAPI = new EWin.EWinWeb.EWinWeb();
+    //    EWin.EWinWeb.BankCardDepositResult RetValue = null;
+    //    string DownOrderNumber = Guid.NewGuid().ToString("N");
+    //    RetValue = EWinWebAPI.BankCardDepostit(CT, GUID, CurrencyType, PaymentMethod, Amount, Description, DownOrderNumber);
 
-        return RetValue;
-    }
+    //    return RetValue;
+    //}
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult CompleteReceiptFile(string CT, string GUID, string UploadId)
-    {
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult CompleteReceiptFile(string CT, string GUID, string UploadId)
+    //{
 
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
 
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.CompleteReceiptFile(CT, GUID, UploadId);
-
-
-        return R;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult GetCompanyPaymentBankCard(string CT, string GUID, string CurrencyType, int PaymentMethod)
-    {
-
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
-
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.GetCompanyPaymentBankCard(CT, GUID, CurrencyType, PaymentMethod);
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.CompleteReceiptFile(CT, GUID, UploadId);
 
 
-        return R;
-    }
+    //    return R;
+    //}
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.UploadInfoResult CreateReceiptFIleUpload(string CT, string GUID, string PaymentSerial, string ExtName)
-    {
-        EWin.EWinWeb.UploadInfoResult R = new EWin.EWinWeb.UploadInfoResult();
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult GetCompanyPaymentBankCard(string CT, string GUID, string CurrencyType, int PaymentMethod)
+    //{
 
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.CreateReceiptFIleUpload(CT, GUID, PaymentSerial, ExtName);
-        return R;
-    }
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult UploadReceiptFIle(string CT, string GUID, string UploadId, int ChunkIndex, string ContentB64)
-    {
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
-
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.UploadReceiptFIle(CT, GUID, UploadId, ChunkIndex, ContentB64);
-
-        return R;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult CheckBankCardDepostit(string CT, string GUID)
-    {
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
-
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.CheckBankCardDepostit(CT, GUID);
-
-        return R;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult BankCardDepostitCancel(string CT, string GUID, string PaymentSerial)
-    {
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
-
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.BankCardDepostitCancel(CT, GUID, PaymentSerial);
-
-        return R;
-    }
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.GetCompanyPaymentBankCard(CT, GUID, CurrencyType, PaymentMethod);
 
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult GetUserAccountBankCard(string CT, string GUID, string CurrencyType, int PaymentMethod)
-    {
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+    //    return R;
+    //}
 
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.GetUserAccountBankCard(CT, GUID, CurrencyType, PaymentMethod);
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.UploadInfoResult CreateReceiptFIleUpload(string CT, string GUID, string PaymentSerial, string ExtName)
+    //{
+    //    EWin.EWinWeb.UploadInfoResult R = new EWin.EWinWeb.UploadInfoResult();
 
-        return R;
-    }
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.CreateReceiptFIleUpload(CT, GUID, PaymentSerial, ExtName);
+    //    return R;
+    //}
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.EWinWeb.APIResult BankCardWithdrawal(string CT, string GUID, string CurrencyType, int PaymentMethod, decimal Amount, string WalletPassword, string[] BankCardGUID)
-    {
-        EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult UploadReceiptFIle(string CT, string GUID, string UploadId, int ChunkIndex, string ContentB64)
+    //{
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
 
-        EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
-        //PaymentMethod 0=上分/1=下分
-        R = CASINO3651API.BankCardWithdrawal(CT, GUID, CurrencyType, PaymentMethod, Amount, WalletPassword, BankCardGUID);
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.UploadReceiptFIle(CT, GUID, UploadId, ChunkIndex, ContentB64);
 
-        return R;
-    }
+    //    return R;
+    //}
+
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult CheckBankCardDepostit(string CT, string GUID)
+    //{
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.CheckBankCardDepostit(CT, GUID);
+
+    //    return R;
+    //}
+
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult BankCardDepostitCancel(string CT, string GUID, string PaymentSerial)
+    //{
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.BankCardDepostitCancel(CT, GUID, PaymentSerial);
+
+    //    return R;
+    //}
+
+
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult GetUserAccountBankCard(string CT, string GUID, string CurrencyType, int PaymentMethod)
+    //{
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.GetUserAccountBankCard(CT, GUID, CurrencyType, PaymentMethod);
+
+    //    return R;
+    //}
+
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public EWin.EWinWeb.APIResult BankCardWithdrawal(string CT, string GUID, string CurrencyType, int PaymentMethod, decimal Amount, string WalletPassword, string[] BankCardGUID)
+    //{
+    //    EWin.EWinWeb.APIResult R = new EWin.EWinWeb.APIResult();
+
+    //    EWin.EWinWeb.EWinWeb CASINO3651API = new EWin.EWinWeb.EWinWeb();
+    //    //PaymentMethod 0=上分/1=下分
+    //    R = CASINO3651API.BankCardWithdrawal(CT, GUID, CurrencyType, PaymentMethod, Amount, WalletPassword, BankCardGUID);
+
+    //    return R;
+    //}
 
 
     //[WebMethod]
