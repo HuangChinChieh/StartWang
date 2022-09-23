@@ -113,7 +113,7 @@
             ReceiveRegisterRewardURL: ReceiveRegisterRewardURL
         };
 
-        callService(url, postData, 10000, function (success, text) {
+        callService(url, postData, 60000, function (success, text) {
             if (success == true) {
                 var obj = getJSON(text);
 
