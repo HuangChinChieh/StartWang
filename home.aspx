@@ -100,7 +100,7 @@
     var GCB;
    
     function init() {
-        window.parent.API_LoadingStart();
+        LoadingStart();
         lang = window.top.API_GetLang();
         p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
@@ -114,7 +114,6 @@
     }
 
     function switchWebTag(tag) {
-
         if (!tag) {
             tag = event.currentTarget;
         }
@@ -219,7 +218,7 @@
 
             sectionDom.getElementsByClassName("gameList")[0].appendChild(tempGB);
         }, () => {
-            window.parent.API_LoadingEnd();
+            LoadingEnd();
         })
 
         idGameBrandList.appendChild(sectionDom);
@@ -231,7 +230,9 @@
 
         nowCateg = Categ;
 
-        $("#gameSection .title").text(mlp.getLanguageKey(Categ));
+        if (Categ != "myFavor") {
+            $("#gameSection .title").text(mlp.getLanguageKey(Categ));
+        }
         //chgGameBtn(null, nowGameType);
 
         if (Categ == 'All') {
@@ -373,6 +374,20 @@
             });
         }
 
+    }
+
+    function LoadingStart() {
+        $('.loader-container').show();
+        $('.loader-backdrop').removeClass('is-show');
+    }
+
+    function LoadingEnd() {
+        if ($('.loader-container').is(':visible')) {
+            $('.loader-backdrop').addClass('is-show');
+            $('.loader-container').fadeOut(250, function () {
+                $('.iframe-container').addClass('is-show');
+            });
+        }
     }
 
     function EWinEventNotify(eventName, isDisplay, param) {
