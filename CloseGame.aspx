@@ -33,7 +33,12 @@
     function closeGame(DeviceType) {
         switch (DeviceType) {
             case 0:
-                window.top.CloseGameFrame();
+                if (self == top) {
+                    window.location.href = "about:blank";
+                    window.close();
+                } else {
+                    window.top.CloseGameFrame();
+                }
                 break;
             case 1:
                 window.location.href = "about:blank";
