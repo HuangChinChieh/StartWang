@@ -3265,7 +3265,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   text-align: center;
 
   backdrop-filter: blur(25px);
-  background-color: rgb(36, 36, 36, 0.9);
+  background-color: rgb(36, 36, 36, 0.95);
 }
 
 .loader-backdrop{
@@ -3292,7 +3292,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
   background: url(../images/loader.png) center center no-repeat;
   background-size: calc(100% - 50px);
 
-  /* animation: loader-logo-anim 1.2s infinite ease-in-out both; */
+  animation: loader-logo-anim 1.2s infinite ease-in-out both;
 
 }
 
@@ -3495,16 +3495,16 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
     transform: rotate(0deg);
   }
 
-  25% {
+  /* 25% {
     transform: rotate(30deg);
   }
 
   75% {
     transform: rotate(-30deg);
-  }
+  } */
 
   100% {
-    transform: rotate(0deg);
+    transform: rotate(360deg);
   }
 
 }
