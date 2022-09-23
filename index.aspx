@@ -695,22 +695,19 @@
         notifyWindowEvent("RefreshPersonalFavo", { GameCode: gameCode, IsAdded: isAdded });
     }
 
-    //function notifyWindowEvent(eventName, o) {
-    //    var iFrameList = document.getElementsByTagName("IFRAME");
+    function API_LoadingStart() {
+        $('.loader-container').show();
+        $('.loader-backdrop').removeClass('is-show');
+    }
 
-    //    for (i = 0; i < iFrameList.length; i++) {
-    //        var divInnerFrame = iFrameList[i];
-
-    //        if (divInnerFrame) {
-    //            if (divInnerFrame.contentWindow) {
-    //                if (divInnerFrame.contentWindow.GWebEventNotify) {
-    //                    try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
-    //                    catch (ex) { }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    function API_LoadingEnd() {
+        if ($('.loader-container').is(':visible')) {
+            $('.loader-backdrop').addClass('is-show');
+            $('.loader-container').fadeOut(250, function () {
+                $('.iframe-container').addClass('is-show');
+            });
+        }
+    }
 
     function notifyWindowEvent(eventName, o) {
         var IFramePage = document.getElementById("IFramePage");
