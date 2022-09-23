@@ -1046,7 +1046,9 @@
 
 
             if (LoginErrMsg != "" && LoginErrMsg != null) {
-                showMessageOK('', mlp.getLanguageKey(LoginErrMsg));
+                showMessageOK('', mlp.getLanguageKey(LoginErrMsg), function () {
+                    onBtnLoginShow();
+                });
             }
 
             if (EWinWebInfo.CT != "" && EWinWebInfo.CT != null) {
@@ -1831,14 +1833,14 @@
                                 <br>
                                 <div class="language_replace">遊戲大廳</div>
                             </a></li>--%>
-                            <li><a onclick="openPaymentDeposit(0);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
+                            <%--<li><a onclick="openPaymentDeposit(0);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">充值</div>
                             </a></li>
                             <li><a onclick="openPaymentWithdrawal(0);"><span class="icon icon-icon-topup" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">取款</div>
-                            </a></li>
+                            </a></li>--%>
                             <li><a onclick="onBtnHistory();"><span class="icon icon-icon-map" aria-hidden="true"></span>
                                 <br>
                                 <div class="language_replace">紀錄查詢</div>
