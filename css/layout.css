@@ -1181,6 +1181,7 @@ button.btn-customerservice {
   line-height: 30px;
   text-align: center;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .popupBtn_red {
@@ -1193,6 +1194,7 @@ button.btn-customerservice {
   color: #fff;
   line-height: 40px;
   text-align: center;
+  cursor: pointer;
 }
 
 .popupBtn_redOL {
@@ -1205,6 +1207,7 @@ button.btn-customerservice {
   color: #c62828;
   line-height: 40px;
   text-align: center;
+  cursor: pointer;
 }
 
 .popupBtn_gray {
@@ -1217,6 +1220,7 @@ button.btn-customerservice {
   color: rgba(255, 255, 255, 0.2);
   line-height: 40px;
   text-align: center;
+  cursor: pointer;
 }
 
 .popup_notice {
