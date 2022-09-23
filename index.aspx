@@ -1735,6 +1735,35 @@
 </script>
 <body>
     <!-- HTML START -->
+    <!-- LOADER -->
+    
+    <div class="loader-container" style="display: block;">
+        <div class="loader-box">
+            
+
+            <div class="loader-spinner">
+                <!-- <span class="loader"></span>
+                <div class="loader-logo"></div> -->
+                <div class="sk-fading-circle">
+                    <div class="loader-logo"></div>
+                    <div class="sk-circle1 sk-circle"></div>
+                    <div class="sk-circle2 sk-circle"></div>
+                    <div class="sk-circle3 sk-circle"></div>
+                    <div class="sk-circle4 sk-circle"></div>
+                    <div class="sk-circle5 sk-circle"></div>
+                    <div class="sk-circle6 sk-circle"></div>
+                    <div class="sk-circle7 sk-circle"></div>
+                    <div class="sk-circle8 sk-circle"></div>
+                    <div class="sk-circle9 sk-circle"></div>
+                    <div class="sk-circle10 sk-circle"></div>
+                    <div class="sk-circle11 sk-circle"></div>
+                    <div class="sk-circle12 sk-circle"></div>
+                </div>
+                <%--<div class="loader-text language_replace">正在加載...</div>--%>
+            </div>
+        </div>
+        <div class="loader-backdrop is-show"></div>
+    </div>
     <div class="wrapper">
         <!-- wrapper -->
         <div class="header-con" id="header-con">
@@ -1835,9 +1864,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <!-- 滿版遊戲介面 -->
         <div id="divGameFrame" class="divGameFrameBody">
             <div class="divGameFrameWrapper">
