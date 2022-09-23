@@ -210,10 +210,12 @@
 
         if (idAccountPasswordSrc.value == "") {
             window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳戶原始密碼"));
-        } else if (idAccountPasswordNew1.value == "") {
+        } else if (idAccountPasswordNew1.value.trim() == "") {
             window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳戶新密碼"));
-        } else if (idAccountPasswordNew1.value.length < 4) {
-            window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入4位數密碼"));
+        } else if (idAccountPasswordNew1.value.trim().length < 4) {
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
+        } else if (idAccountPasswordNew1.value.trim().length > 20) {
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
         } else if (idAccountPasswordNew1.value != idAccountPasswordNew2.value) {
             window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("驗證密碼失敗"));
         } else {
@@ -702,8 +704,8 @@
                                 <div class="rowLeft"><span class="language_replace">修改帳號密碼</span></div>
                                 <div class="rowRight">
                                     <input type="password" id="idAccountPasswordSrc" language_replace="placeholder" placeholder="輸入舊密碼">
-                                    <input type="password" id="idAccountPasswordNew1" language_replace="placeholder" maxlength="4" placeholder="設定新密碼">
-                                    <input type="password" id="idAccountPasswordNew2" language_replace="placeholder" maxlength="4" placeholder="確認新密碼">
+                                    <input type="password" id="idAccountPasswordNew1" maxlength="20" language_replace="placeholder" placeholder="設定新密碼 (請輸入4-20英數字元)">
+                                    <input type="password" id="idAccountPasswordNew2" maxlength="20" language_replace="placeholder" placeholder="確認新密碼 (請輸入4-20英數字元)">
                                     <div class="rowBtnCon">
                                         <div class="sBtnOutline" onclick="cancelAccountPassword()"><span class="language_replace">取消</span></div>
                                         <div class="sBtnFull" onclick="setAccountPassword()"><span class="language_replace">確定修改</span></div>

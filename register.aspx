@@ -214,25 +214,29 @@
         var NickName = form.NickName;
         var LoginPassword = form.LoginPassword;
         var retValue = false;
-      
+
         if (ContactPhonePrefix.selectedIndex == -1)
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請選擇聯繫電話國碼"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請選擇聯繫電話國碼"));
         else if (ContactPhoneNumber.value == "")
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請輸入聯繫電話"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入聯繫電話"));
         else if (EMail.value == "")
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請輸入E-mail"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入E-mail"));
         else if (ValidateCode.value == "")
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入驗證碼"));
-        else if (LoginPassword.value == "")
+        else if (LoginPassword.value.trim() == "")
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
+        else if (LoginPassword.value.trim().length < 4)
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
+        else if (LoginPassword.value.trim().length > 20)
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
         else if (NickName.value == "")
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請輸入暱稱"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入暱稱"));
         else if (NickName.value.trim().length > 12)
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("暱稱請輸入英文與數字，長度12位元以內"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("暱稱請輸入英文與數字，長度12位元以內"));
         else if (RealName.value == "")
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請輸入真實姓名"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入真實姓名"));
         else if (RegisterParentPersonCode == 2 && PCode.value == "")
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),mlp.getLanguageKey("請輸入推薦碼"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入推薦碼"));
         else
             retValue = true;
 
@@ -338,7 +342,7 @@
                             <input id="idContactPhoneNumber" type="text" language_replace="placeholder" placeholder="輸入電話" name="ContactPhoneNumber">
                             <div id="idContactPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
                         </div>
-                       <input id="idLoginPassword" name="LoginPassword" type="password" language_replace="placeholder" placeholder="請輸入密碼">
+                       <input id="idLoginPassword" name="LoginPassword" type="password" language_replace="placeholder" maxlength="20" placeholder="請輸入密碼 (4-20英數字元)">
                         <div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
                             <div class="form-group">
