@@ -1623,6 +1623,23 @@ button.btn-customerservice {
   .row3XL1B{
     /* text-align: right; */
   }
+
+  
+  /* 上下數 */
+  .Status{    
+    font-size: 1rem;  
+  }
+  .Status .title{
+    margin-right: 8px;
+    opacity: 0.75;    
+  }
+
+  .Status .RewardValue{
+    font-size: 1.4rem;
+  }
+
+ 
+
 }
 
 @media (max-width: 899px) {
@@ -2839,7 +2856,7 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 }
 
 .footer-container .container {
-  border-top: 1px solid rgba(228, 228, 228, 0.314);
+  /* border-top: 1px solid rgba(228, 228, 228, 0.314); */
   padding-top: 1.2rem;
 }
 
@@ -2901,6 +2918,17 @@ input[type=checkbox]:checked~.pageDDataBtn::after {
 }
 
 .footer-inner .partner .logo-item:hover img {
+  -webkit-filter: unset;
+  filter: unset;
+  opacity: 1;
+}
+
+.footer-inner .partner .logo-item.graylight img{
+  filter: grayscale(100%) brightness(1);
+  opacity: 0.55;
+}
+
+.footer-inner .partner .logo-item.graylight:hover img {
   -webkit-filter: unset;
   filter: unset;
   opacity: 1;

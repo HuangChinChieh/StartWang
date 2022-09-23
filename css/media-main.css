@@ -279,6 +279,7 @@
                 line-height: 20px;
                 padding: 20px 20px;
                 /* padding-top:20px; */
+                min-width: 60px;
             }
 
                 .header-nav-menu ol li a:hover {
@@ -948,7 +949,7 @@
 
     .header-nav img {
         padding-left: 10px;
-        width: 36%;
+        width: 28%;
         max-width: 232px;
         height: auto;
     }
