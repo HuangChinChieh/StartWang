@@ -143,6 +143,8 @@
 
         if (retValue == true) {
             if (txtAmount.value != "") {
+                window.document.body.scrollTop = 0;
+                window.document.documentElement.scrollTop = 0;
                 showMessage(mlp.getLanguageKey("存款確認"), mlp.getLanguageKey("確認要存款") + " " + decimalToString(txtAmount.value) + " " + mlp.getLanguageKey("元") + "?", function () {
                     ui.showMask(null, "Wait...");
                     p.CreateEPayDeposit(webInfo.SID, Math.uuid(), txtAmount.value, txtRealName.value, function (success, o) {
@@ -696,7 +698,7 @@
                         </div>
                     </div>
                     <div class="pageFooter" id="idDepositDescription">
-                        <div class="rowTitle"><span class="language_replace">注意事項</span></div>
+                     <%--   <div class="rowTitle"><span class="language_replace">注意事項</span></div>--%>
                         <div class="rowList" id="idDepositDescriptionText">
                         </div>
 
