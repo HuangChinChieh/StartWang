@@ -128,16 +128,24 @@
         let Password = document.getElementById("idNewPassword");
         let retValue = false;
 
-        if (ValidCode.value == "")
+        if (ValidCode.value == "") {
             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入認證碼"));
-        else if (Password.value == "")
+        }
+        else if (Password.value.trim() == "") {
             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入新密碼"));
-        else if (Password.value.length != 4)
-            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入4位數密碼"));
-        else if (EMail.value == "")
+        }
+        else if (Password.value.trim().length < 4) {
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
+        }
+        else if (Password.value.trim().length > 20) {
+            window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入密碼 (4-20英數字元)"));
+        }
+        else if (EMail.value == "") {
             window.parent.API_ShowMessageOK("", mlp.getLanguageKey("錯誤, 請輸入信箱"));
-        else
+        }
+        else {
             retValue = true;
+        }
 
         if (retValue) {
             SetNewPassword(ValidCode.value, Password.value);
@@ -220,7 +228,7 @@
                            <input id="idEMail" type="text" language_replace="placeholder" placeholder="帳號" name="EMail">
                            <div class="popupBtn_red" onclick="SendMail()"><span id="btnSend" class="language_replace">發送認證信</span></div>
                            <input id="idValidCode" type="text" language_replace="placeholder" placeholder="請輸入認證碼">
-                           <input id="idNewPassword" type="password" language_replace="placeholder" maxlength="4" placeholder="請輸入新密碼">
+                           <input id="idNewPassword" type="password" language_replace="placeholder" maxlength="20" placeholder="確認新密碼 (請輸入4-20英數字元)">
                            <div class="popupBtn_red" onclick="formSubmitCheck()"><span class="language_replace">確認</span></div>
                         </div>
                     </div>

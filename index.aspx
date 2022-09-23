@@ -1932,8 +1932,8 @@
                 <!-- 第一步 -->
                 <div id="idUserRegStep1">
                     <input type="text" class="" language_replace="placeholder" placeholder="輸入帳號" id="idNewAccount">
-                    <input type="password" class="" language_replace="placeholder" placeholder="輸入密碼" id="idNewPassword">
-                    <input type="password" class="" language_replace="placeholder" placeholder="確認密碼" id="idNewPassword2">
+                    <input type="password" class="" language_replace="placeholder" maxlength="20" placeholder="設定新密碼 (請輸入4-20英數字元)" id="idNewPassword">
+                    <input type="password" class="" language_replace="placeholder" maxlength="20" placeholder="確認新密碼 (請輸入4-20英數字元)" id="idNewPassword2">
                     <div class="popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>
                 </div>
                 <!-- 第二步 -->
