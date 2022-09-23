@@ -695,22 +695,19 @@
         notifyWindowEvent("RefreshPersonalFavo", { GameCode: gameCode, IsAdded: isAdded });
     }
 
-    //function notifyWindowEvent(eventName, o) {
-    //    var iFrameList = document.getElementsByTagName("IFRAME");
+    function API_LoadingStart() {
+        $('.loader-container').show();
+        $('.loader-backdrop').removeClass('is-show');
+    }
 
-    //    for (i = 0; i < iFrameList.length; i++) {
-    //        var divInnerFrame = iFrameList[i];
-
-    //        if (divInnerFrame) {
-    //            if (divInnerFrame.contentWindow) {
-    //                if (divInnerFrame.contentWindow.GWebEventNotify) {
-    //                    try { divInnerFrame.contentWindow.GWebEventNotify(eventName, true, o); }
-    //                    catch (ex) { }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    function API_LoadingEnd() {
+        if ($('.loader-container').is(':visible')) {
+            $('.loader-backdrop').addClass('is-show');
+            $('.loader-container').fadeOut(250, function () {
+                $('.iframe-container').addClass('is-show');
+            });
+        }
+    }
 
     function notifyWindowEvent(eventName, o) {
         var IFramePage = document.getElementById("IFramePage");
@@ -1738,6 +1735,35 @@
 </script>
 <body>
     <!-- HTML START -->
+    <!-- LOADER -->
+    
+    <div class="loader-container" style="display: block;">
+        <div class="loader-box">
+            
+
+            <div class="loader-spinner">
+                <!-- <span class="loader"></span>
+                <div class="loader-logo"></div> -->
+                <div class="sk-fading-circle">
+                    <div class="loader-logo"></div>
+                    <div class="sk-circle1 sk-circle"></div>
+                    <div class="sk-circle2 sk-circle"></div>
+                    <div class="sk-circle3 sk-circle"></div>
+                    <div class="sk-circle4 sk-circle"></div>
+                    <div class="sk-circle5 sk-circle"></div>
+                    <div class="sk-circle6 sk-circle"></div>
+                    <div class="sk-circle7 sk-circle"></div>
+                    <div class="sk-circle8 sk-circle"></div>
+                    <div class="sk-circle9 sk-circle"></div>
+                    <div class="sk-circle10 sk-circle"></div>
+                    <div class="sk-circle11 sk-circle"></div>
+                    <div class="sk-circle12 sk-circle"></div>
+                </div>
+                <%--<div class="loader-text language_replace">正在加載...</div>--%>
+            </div>
+        </div>
+        <div class="loader-backdrop is-show"></div>
+    </div>
     <div class="wrapper">
         <!-- wrapper -->
         <div class="header-con" id="header-con">
@@ -1838,9 +1864,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <!-- 滿版遊戲介面 -->
         <div id="divGameFrame" class="divGameFrameBody">
             <div class="divGameFrameWrapper">
@@ -1906,8 +1929,8 @@
                 <!-- 第一步 -->
                 <div id="idUserRegStep1">
                     <input type="text" class="" language_replace="placeholder" placeholder="輸入帳號" id="idNewAccount">
-                    <input type="password" class="" language_replace="placeholder" placeholder="輸入密碼" id="idNewPassword">
-                    <input type="password" class="" language_replace="placeholder" placeholder="確認密碼" id="idNewPassword2">
+                    <input type="password" class="" language_replace="placeholder" maxlength="20" placeholder="設定新密碼 (請輸入4-20英數字元)" id="idNewPassword">
+                    <input type="password" class="" language_replace="placeholder" maxlength="20" placeholder="確認新密碼 (請輸入4-20英數字元)" id="idNewPassword2">
                     <div class="popupBtn_red" onclick="onBtnUserRegisterStep1()"><span class="language_replace">註冊</span></div>
                 </div>
                 <!-- 第二步 -->

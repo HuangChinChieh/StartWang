@@ -100,6 +100,7 @@
     var GCB;
    
     function init() {
+        window.parent.API_LoadingStart();
         lang = window.top.API_GetLang();
         p = window.parent.API_GetLobbyAPI();
         mlp = new multiLanguage();
@@ -109,7 +110,6 @@
         mlp.loadLanguage(lang, function () {
             updateGameCateg();
             updateGameBrand();
-
         });
     }
 
@@ -219,11 +219,10 @@
 
             sectionDom.getElementsByClassName("gameList")[0].appendChild(tempGB);
         }, () => {
-            //console.log("done");
+            window.parent.API_LoadingEnd();
         })
 
         idGameBrandList.appendChild(sectionDom);
-
     }
     //切換分類
     function changeGameCateg(e, Categ) {
@@ -683,7 +682,7 @@
                                                 <img src="/images/logo/footer/logo-cg.png" alt="">
                                             </div>
                                         </div>
-                                        <div class="logo-item">
+                                        <div class="logo-item graylight">
                                             <div class="img-crop">
                                                 <img src="/images/logo/footer/logo-playngo.png" alt="">
                                             </div>
@@ -718,7 +717,7 @@
                                                 <img src="/images/logo/footer/logo-zeus.png" alt="">
                                             </div>
                                         </div>
-                                        <div class="logo-item">
+                                        <div class="logo-item graylight">
                                             <div class="img-crop">
                                                 <img src="/images/logo/footer/logo-biggaming.png" alt="">
                                             </div>
